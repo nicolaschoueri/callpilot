@@ -257,24 +257,24 @@ footer{border-top:1px solid var(--line);padding:28px 0 38px;color:#8f8579;font-s
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 const prompts = [
   'CallPilot Trades, this is Ava, your virtual receptionist. How can I help you today?',
-  'I can help with that. Is this an emergency, or can it wait for a regular appointment?',
+  'Of course. I can help with that. Is this an emergency, or can it wait for a regular appointment?',
   'What city are you located in?',
-  'And what name should I put on the service request?',
+  'And may I have your name for the service request?',
   'I have Friday at 10:30 A.M. or 2 P.M., and Saturday at 9 A.M. Which time works best for you?'
 ];
 
 const audioFiles=[
-  'audio/ava1.mp3',
-  'audio/ava2.mp3',
-  'audio/ava3.mp3',
-  'audio/ava4.mp3',
-  'audio/ava5.mp3'
+  'audio/lux1.mp3',
+  'audio/lux2.mp3',
+  'audio/lux3.mp3',
+  'audio/lux4.mp3',
+  'audio/lux5.mp3'
 ];
 const finalAudioFiles={
-  'Friday, Oct 2 • 10:30 AM':'audio/ava6.mp3',
-  'Friday, Oct 2 • 2:00 PM':'audio/ava7.mp3',
-  'Saturday, Oct 3 • 9:00 AM':'audio/ava8.mp3',
-  generic:'audio/ava9.mp3'
+  'Friday, Oct 2 • 10:30 AM':'audio/lux6.mp3',
+  'Friday, Oct 2 • 2:00 PM':'audio/lux7.mp3',
+  'Saturday, Oct 3 • 9:00 AM':'audio/lux8.mp3',
+  generic:'audio/lux9.mp3'
 };
 
 let step=-1, active=false, startTime=0, timerInt=null, recognition=null, isListening=false;
