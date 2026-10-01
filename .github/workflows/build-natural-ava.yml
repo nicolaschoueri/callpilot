@@ -1,0 +1,52 @@
+name: Build Natural Ava Voice
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/build-natural-ava.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  build-natural-ava:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install neural voice generator
+        run: |
+          python -m pip install --upgrade pip
+          pip install edge-tts
+          mkdir -p audio
+
+      - name: Generate warmer Ava voice
+        shell: bash
+        run: |
+          set -e
+          voice="en-US-JennyNeural"
+
+          speak () {
+            n="$1"
+            text="$2"
+            edge-tts --voice "$voice" --rate="-8%" --pitch="-4Hz" --text "$text" --write-media "audio/ava${n}.mp3"
+          }
+
+          speak 1 "CallPilot Trades, this is Ava, your virtual receptionist. How can I help you today?"
+          speak 2 "I can help with that. Is this an emergency, or can it wait for a regular appointment?"
+          speak 3 "What city are you located in?"
+          speak 4 "And what name should I put on the service request?"
+          speak 5 "I have Friday, October 2 at 10:30 A.M. or 2 P.M., and Saturday, October 3 at 9 A.M. Which time works best for you?"
+          speak 6 "Perfect. You're booked for Friday, October 2 at 10:30 A.M. Your appointment is confirmed, and you'll receive a confirmation message with the details. Thank you for calling CallPilot Trades."
+          speak 7 "Perfect. You're booked for Friday, October 2 at 2 P.M. Your appointment is confirmed, and you'll receive a confirmation message with the details. Thank you for calling CallPilot Trades."
+          speak 8 "Perfect. You're booked for Saturday, October 3 at 9 A.M. Your appointment is confirmed, and you'll receive a confirmation message with the details. Thank you for calling CallPilot Trades."
+          speak 9 "Perfect. Your appointment is booked and confirmed. You'll receive a confirmation message with the appointment details. Thank you for calling CallPilot Trades."
+
+      - name: Commit natural voice clips
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add audio/ava*.mp3
+          git commit -m "Add natural Ava neural voice clips" || exit 0
+          git push
