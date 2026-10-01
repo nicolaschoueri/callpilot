@@ -286,6 +286,33 @@ const finalAudioFiles={
   generic:'audio/lux9.mp3'
 };
 
+const frAudioFiles=[
+  'audio/fr1.mp3',
+  'audio/fr2.mp3',
+  'audio/fr3.mp3',
+  'audio/fr4.mp3',
+  'audio/fr5.mp3'
+];
+const frEmergencyAudio='audio/fr-emergency.mp3';
+const frFinalAudioFiles={
+  'Vendredi 2 oct. • 10 h 30':'audio/fr-final-1030.mp3',
+  'Vendredi 2 oct. • 14 h':'audio/fr-final-1400.mp3',
+  'Samedi 3 oct. • 9 h':'audio/fr-final-sat9.mp3',
+  'Aujourd’hui • 13 h–15 h':'audio/fr-final-emg-1315.mp3',
+  'Aujourd’hui • 15 h–17 h':'audio/fr-final-emg-1517.mp3',
+  'Premier technicien disponible aujourd’hui':'audio/fr-final-emg-first.mp3',
+  generic:'audio/fr-final-generic.mp3'
+};
+const frFinalTexts={
+  'Vendredi 2 oct. • 10 h 30':'Parfait. Votre rendez-vous est confirmé pour vendredi 2 octobre à 10 h 30. Vous recevrez un message de confirmation avec les détails. Merci d’avoir appelé CallPilot Trades.',
+  'Vendredi 2 oct. • 14 h':'Parfait. Votre rendez-vous est confirmé pour vendredi 2 octobre à 14 h. Vous recevrez un message de confirmation avec les détails. Merci d’avoir appelé CallPilot Trades.',
+  'Samedi 3 oct. • 9 h':'Parfait. Votre rendez-vous est confirmé pour samedi 3 octobre à 9 h. Vous recevrez un message de confirmation avec les détails. Merci d’avoir appelé CallPilot Trades.',
+  'Aujourd’hui • 13 h–15 h':'Parfait. Votre intervention d’urgence est confirmée aujourd’hui entre 13 h et 15 h. Vous recevrez un message de confirmation avec les détails. Merci d’avoir appelé CallPilot Trades.',
+  'Aujourd’hui • 15 h–17 h':'Parfait. Votre intervention d’urgence est confirmée aujourd’hui entre 15 h et 17 h. Vous recevrez un message de confirmation avec les détails. Merci d’avoir appelé CallPilot Trades.',
+  'Premier technicien disponible aujourd’hui':'Parfait. Le premier technicien disponible sera envoyé aujourd’hui. Vous recevrez un message de confirmation avec les détails. Merci d’avoir appelé CallPilot Trades.',
+  generic:'Parfait. Votre rendez-vous est confirmé. Vous recevrez un message de confirmation avec les détails. Merci d’avoir appelé CallPilot Trades.'
+};
+
 let step=-1, active=false, selectedLang=null, startTime=0, timerInt=null, recognition=null, isListening=false;
 let lastSpoken='', lastAudioSrc='', lastSpokenLang='en-CA';
 const data={issue:'—',urgency:'—',city:'—',name:'—',appt:'—'};
@@ -343,12 +370,24 @@ function playLanguageMenu(){
   const b1=document.createElement('button'); b1.className='choice'; b1.textContent='1 — Français'; b1.onclick=()=>chooseLanguage('fr');
   const b2=document.createElement('button'); b2.className='choice'; b2.textContent='2 — English'; b2.onclick=()=>chooseLanguage('en');
   quick.appendChild(b1); quick.appendChild(b2);
-  if('speechSynthesis' in window){
-    try{speechSynthesis.cancel();}catch(e){}
-    const u1=new SpeechSynthesisUtterance(textFr); u1.lang='fr-CA'; const v1=pickVoiceFor('fr-CA'); if(v1)u1.voice=v1; u1.rate=.92;
-    const u2=new SpeechSynthesisUtterance(textEn); u2.lang='en-CA'; const v2=pickVoiceFor('en-CA'); if(v2)u2.voice=v2; u2.rate=.94;
-    speechSynthesis.speak(u1); speechSynthesis.speak(u2);
-  }
+
+  const a=$('avaAudio');
+  $('audioPanel').style.display='block';
+  lastSpoken=textFr; lastAudioSrc='audio/fr-menu.mp3'; lastSpokenLang='fr-CA';
+  try{
+    a.pause(); a.currentTime=0; a.src='audio/fr-menu.mp3'; a.muted=false; a.volume=1; a.load();
+    a.onended=()=>{
+      if(!active || selectedLang) return;
+      if('speechSynthesis' in window){
+        try{speechSynthesis.cancel();}catch(e){}
+        const u2=new SpeechSynthesisUtterance(textEn);
+        u2.lang='en-CA'; const v2=pickVoiceFor('en-CA'); if(v2)u2.voice=v2; u2.rate=.94;
+        speechSynthesis.speak(u2);
+      }
+    };
+    const p=a.play();
+    if(p&&p.catch)p.catch(()=>{ if('speechSynthesis' in window) speakSystem(textEn,'en-CA',null,false); });
+  }catch(e){}
 }
 
 function chooseLanguage(lang){
@@ -366,7 +405,7 @@ function playAvaAudio(src,text,onDone){
   $('audioPanel').style.display='block';
   lastSpoken=text; lastAudioSrc=src; lastSpokenLang='en-CA';
   add('AVA',text);
-  status.textContent='🔊 Ava is speaking…';
+  status.textContent=selectedLang==='fr'?'🔊 Ava parle…':'🔊 Ava is speaking…';
   try{a.pause();a.currentTime=0;a.src=src;a.muted=false;a.volume=1;a.load();}catch(e){}
   let finished=false;
   const done=()=>{if(finished)return;finished=true;if(typeof onDone==='function')onDone();};
@@ -379,18 +418,14 @@ function playAvaAudio(src,text,onDone){
 function speak(text, after=true){
   if(!active && after) return;
   const prompts=selectedLang==='fr'?promptsFr:promptsEn;
-  if(selectedLang==='fr'){
-    status.textContent='🔊 Ava parle…';
-    speakSystem(text,'fr-CA',()=>{
-      if(!active)return;
-      if(after){status.textContent='À vous — choisissez une réponse ou écrivez';showChoices(step);}
-    });
-    return;
-  }
   const i=Math.max(0,prompts.indexOf(text));
-  playAvaAudio(audioFiles[i],text,()=>{
+  const src=selectedLang==='fr'?frAudioFiles[i]:audioFiles[i];
+  playAvaAudio(src,text,()=>{
     if(!active)return;
-    if(after){status.textContent='Your turn — tap a choice or type';showChoices(step);}
+    if(after){
+      status.textContent=selectedLang==='fr'?'À vous — choisissez une réponse ou écrivez':'Your turn — tap a choice or type';
+      showChoices(step);
+    }
   });
 }
 
@@ -464,8 +499,14 @@ function reply(text){
     const emergencyText=selectedLang==='fr'
       ?'Je comprends. Comme il s’agit d’une urgence, je peux envoyer un technicien aujourd’hui. J’ai une plage de 13 h à 15 h, de 15 h à 17 h, ou je peux envoyer le premier technicien disponible. Que préférez-vous?'
       :'I understand. Since this is an emergency, I can dispatch a technician today. I have a 1 to 3 P.M. window, a 3 to 5 P.M. window, or I can send the first available technician. Which would you prefer?';
-    if(selectedLang==='fr'){status.textContent='Intervention d’urgence disponible aujourd’hui';speakSystem(emergencyText,'fr-CA',()=>showChoices(5));}
-    else{lastSpoken=emergencyText;lastAudioSrc='';add('AVA',emergencyText);status.textContent='Emergency dispatch available today';showChoices(5);}
+    if(selectedLang==='fr'){
+      status.textContent='🔊 Ava parle…';
+      playAvaAudio(frEmergencyAudio,emergencyText,()=>{
+        if(active){status.textContent='Intervention d’urgence disponible aujourd’hui';showChoices(5);}
+      });
+    }else{
+      lastSpoken=emergencyText;lastAudioSrc='';add('AVA',emergencyText);status.textContent='Emergency dispatch available today';showChoices(5);
+    }
     return;
   }
   step++; speak((selectedLang==='fr'?promptsFr:promptsEn)[step]);
@@ -473,10 +514,10 @@ function reply(text){
 
 function playFinal(){
   if(selectedLang==='fr'){
-    const appt=data.appt==='—'?'l’heure sélectionnée':data.appt.replace('•','à');
-    const txt='Parfait'+(data.name==='—'?'':', '+data.name)+'. Votre rendez-vous est confirmé pour '+appt+'. Vous recevrez un message de confirmation avec les détails. Merci d’avoir appelé CallPilot Trades.';
+    const txt=frFinalTexts[data.appt]||frFinalTexts.generic;
+    const src=frFinalAudioFiles[data.appt]||frFinalAudioFiles.generic;
     status.textContent='🔊 Ava confirme votre rendez-vous…';
-    speakSystem(txt,'fr-CA',finish);
+    playAvaAudio(src,txt,finish);
     return;
   }
   const appt=data.appt==='—'?'the selected time':data.appt.replace('•','at');
