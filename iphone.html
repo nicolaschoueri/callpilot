@@ -252,7 +252,7 @@ footer{border-top:1px solid var(--line);padding:28px 0 38px;color:#8f8579;font-s
     <h2>Try Ava booking the job herself.</h2>
     <p class="lede">This is a free sales simulator. Tap the phone button, hear Ava, choose the customer's answers, and watch her book the appointment without handing the caller off.</p>
     <div class="ava-demo-shell">
-      <div class="wrap"><div class="notice">LIVE VOICE DEMO • No real phone number or charge</div><div class="phone"><div class="top">Incoming test call<div class="number">+1 (514) 555-0142</div><div class="fake">FICTIONAL NUMBER</div></div><div class="hero"><div class="avatar"><img class="ava-approved" src="" alt="Ava"></div><div class="ava">Ava</div><div class="role">CallPilot Trades • AI receptionist</div><div id="status" class="status">Ready to test</div><div id="timer" class="timer">00:00</div></div><div class="screen"><div id="transcript" class="transcript"><div class="line avaLine"><span class="speaker">CallPilot</span>Tap START CALL, choose 1 for French or 2 for English, then continue with Ava.</div></div><div id="quick" class="quick"></div><div class="inputrow"><input id="answer" placeholder="Or type your answer…"><button class="send" id="send">Send</button></div></div><div id="summary" class="summary"><h3>Appointment booked</h3><div class="grid"><div class="cell"><span>Issue</span><b id="sIssue">—</b></div><div class="cell"><span>Urgency</span><b id="sUrgency">—</b></div><div class="cell"><span>City</span><b id="sCity">—</b></div><div class="cell"><span>Address</span><b id="sAddress">—</b></div><div class="cell"><span>Name</span><b id="sName">—</b></div><div class="cell"><span>Appointment</span><b id="sAppt">—</b></div><div class="cell"><span>Status</span><b id="sStatus">Confirmed</b></div></div></div><div id="audioPanel" style="display:block;margin:0 16px 10px;padding:10px 12px;border:1px solid rgba(213,173,99,.25);border-radius:14px;background:rgba(213,173,99,.06)"><div style="font-size:12px;color:#e6ce9a;font-weight:800;margin-bottom:6px">AVA VOICE</div><audio id="avaAudio" controls preload="auto" playsinline style="width:100%"></audio></div><div class="controls"><button class="round replay" id="replay" title="Replay Ava"><span>↻</span><span>REPLAY</span></button><button class="round start" id="start" title="Start call"><span>☎</span><span>START CALL</span></button><button class="round end" id="end" title="End call"><span>✕</span><span>END CALL</span></button></div><div class="hint">Tap START CALL. Choose 1 for French or 2 for English. Then use the answer buttons or type your reply.</div></div></div>
+      <div class="wrap"><div class="notice">LIVE VOICE DEMO • No real phone number or charge</div><div class="phone"><div class="top">Incoming test call<div class="number">+1 (514) 555-0142</div><div class="fake">FICTIONAL NUMBER</div></div><div class="hero"><div class="avatar"><img class="ava-approved" src="" alt="Ava"></div><div class="ava">Ava</div><div class="role">CallPilot Trades • AI receptionist</div><div id="status" class="status">Ready to test</div><div id="timer" class="timer">00:00</div></div><div class="screen"><div id="transcript" class="transcript"><div class="line avaLine"><span class="speaker">CallPilot</span>Tap START CALL, choose 1 for French or 2 for English, then continue with Ava.</div></div><div id="quick" class="quick"></div><div class="inputrow"><input id="answer" placeholder="Or type your answer…"><button class="send" id="send">Send</button></div></div><div id="summary" class="summary"><h3>Appointment booked</h3><div class="grid"><div class="cell"><span>Issue</span><b id="sIssue">—</b></div><div class="cell"><span>Urgency</span><b id="sUrgency">—</b></div><div class="cell"><span>City</span><b id="sCity">—</b></div><div class="cell"><span>Address</span><b id="sAddress">—</b></div><div class="cell"><span>Phone</span><b id="sPhone">—</b></div><div class="cell"><span>Name</span><b id="sName">—</b></div><div class="cell"><span>Appointment</span><b id="sAppt">—</b></div><div class="cell"><span>Status</span><b id="sStatus">Confirmed</b></div></div></div><div id="audioPanel" style="display:block;margin:0 16px 10px;padding:10px 12px;border:1px solid rgba(213,173,99,.25);border-radius:14px;background:rgba(213,173,99,.06)"><div style="font-size:12px;color:#e6ce9a;font-weight:800;margin-bottom:6px">AVA VOICE</div><audio id="avaAudio" controls preload="auto" playsinline style="width:100%"></audio></div><div class="controls"><button class="round replay" id="replay" title="Replay Ava"><span>↻</span><span>REPLAY</span></button><button class="round start" id="start" title="Start call"><span>☎</span><span>START CALL</span></button><button class="round end" id="end" title="End call"><span>✕</span><span>END CALL</span></button></div><div class="hint">Tap START CALL. Choose 1 for French or 2 for English. Then use the answer buttons or type your reply.</div></div></div>
 <script>
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
@@ -261,6 +261,7 @@ const promptsEn = [
   'Absolutely, I can help with that. Is this an emergency, or would a regular appointment work for you?',
   'Perfect. What city are you located in?',
   'Thanks. What is the service address, including the street number and street name?',
+  "Perfect. And what's the best phone number to reach you?",
   'Great. And may I have your name for the service request?',
   'I have Friday at 10:30 A.M. or 2 P.M., and Saturday at 9 A.M. Which time works best for you?'
 ];
@@ -270,6 +271,7 @@ const promptsFr = [
   'Bien sûr, je peux vous aider. Est-ce une urgence ou préférez-vous un rendez-vous régulier?',
   'Parfait. Dans quelle ville êtes-vous situé?',
   'Merci. Quelle est l’adresse de service, incluant le numéro civique et le nom de la rue?',
+  'Parfait. Et quel est le meilleur numéro de téléphone pour vous joindre?',
   'Très bien. Puis-je avoir votre nom pour la demande de service?',
   'J’ai une disponibilité vendredi à 10 h 30 ou à 14 h, ainsi que samedi à 9 h. Quelle heure vous convient le mieux?'
 ];
@@ -279,6 +281,7 @@ const audioFiles=[
   'audio/lux2.mp3',
   'audio/lux3.mp3',
   'audio/lux-address.mp3',
+  'audio/lux-phone.mp3?v=20261001p',
   'audio/lux4.mp3',
   'audio/lux5.mp3'
 ];
@@ -294,6 +297,7 @@ const frAudioFiles=[
   'audio/fr2.mp3?v=20261001u',
   'audio/fr3.mp3?v=20261001u',
   'audio/fr-address.mp3?v=20261001u',
+  'audio/fr-phone.mp3?v=20261001p',
   'audio/fr4.mp3?v=20261001u',
   'audio/fr5.mp3?v=20261001u'
 ];
@@ -319,7 +323,7 @@ const frFinalTexts={
 
 let step=-1, active=false, selectedLang=null, startTime=0, timerInt=null, recognition=null, isListening=false;
 let lastSpoken='', lastAudioSrc='', lastSpokenLang='en-CA';
-const data={issue:'—',urgency:'—',city:'—',address:'—',name:'—',appt:'—'};
+const data={issue:'—',urgency:'—',city:'—',address:'—',phone:'—',name:'—',appt:'—'};
 const $=x=>document.getElementById(x);
 const tr=$('transcript'), quick=$('quick'), status=$('status');
 
@@ -483,17 +487,19 @@ function showChoices(i){
     if(i===1)arr=['C’est une urgence','Rendez-vous régulier'];
     if(i===2)arr=['Kirkland','Laval','Pointe-Claire','Montréal'];
     if(i===3)arr=['123 rue Main','45 boulevard Saint-Charles','789 avenue des Pins'];
-    if(i===4)arr=['Nicolas','Jean','Marie','Alex'];
-    if(i===5)arr=['Vendredi 2 oct. • 10 h 30','Vendredi 2 oct. • 14 h','Samedi 3 oct. • 9 h'];
-    if(i===6)arr=['Aujourd’hui • 13 h–15 h','Aujourd’hui • 15 h–17 h','Premier technicien disponible aujourd’hui'];
+    if(i===4)arr=['514-555-0123','438-555-0177','450-555-0199'];
+    if(i===5)arr=['Nicolas','Jean','Marie','Alex'];
+    if(i===6)arr=['Vendredi 2 oct. • 10 h 30','Vendredi 2 oct. • 14 h','Samedi 3 oct. • 9 h'];
+    if(i===7)arr=['Aujourd’hui • 13 h–15 h','Aujourd’hui • 15 h–17 h','Premier technicien disponible aujourd’hui'];
   }else{
     if(i===0)arr=['My furnace stopped working','I have a plumbing leak','Electrical problem','Roof leak'];
     if(i===1)arr=['It’s an emergency','Regular appointment'];
     if(i===2)arr=['Kirkland','Laval','Pointe-Claire','Montréal'];
     if(i===3)arr=['123 Main Street','45 Saint-Charles Boulevard','789 Pine Avenue'];
-    if(i===4)arr=['Nicolas','John','Marie','Alex'];
-    if(i===5)arr=['Friday, Oct 2 • 10:30 AM','Friday, Oct 2 • 2:00 PM','Saturday, Oct 3 • 9:00 AM'];
-    if(i===6)arr=['Dispatch today • 1–3 PM','Dispatch today • 3–5 PM','First available technician today'];
+    if(i===4)arr=['514-555-0123','438-555-0177','450-555-0199'];
+    if(i===5)arr=['Nicolas','John','Marie','Alex'];
+    if(i===6)arr=['Friday, Oct 2 • 10:30 AM','Friday, Oct 2 • 2:00 PM','Saturday, Oct 3 • 9:00 AM'];
+    if(i===7)arr=['Dispatch today • 1–3 PM','Dispatch today • 3–5 PM','First available technician today'];
   }
   arr.forEach(t=>{const b=document.createElement('button');b.className='choice';b.textContent=t;b.onclick=()=>reply(t);quick.appendChild(b);});
 }
@@ -522,23 +528,24 @@ function reply(text){
   }
   if(step===2)data.city=text;
   if(step===3)data.address=text;
-  if(step===4)data.name=text.replace(/^(my name is|it is|it's|je m'appelle|mon nom est)\s+/i,'');
-  if(step===5)data.appt=normalizeAppointment(text);
-  if(step===6)data.appt=text;
+  if(step===4)data.phone=text;
+  if(step===5)data.name=text.replace(/^(my name is|it is|it's|je m'appelle|mon nom est)\s+/i,'');
+  if(step===6)data.appt=normalizeAppointment(text);
+  if(step===7)data.appt=text;
   quick.innerHTML=''; $('answer').value='';
-  if(step===5||step===6){playFinal();return;}
-  if(step===4&&data.urgency==='Emergency'){
-    step=6;
+  if(step===6||step===7){playFinal();return;}
+  if(step===5&&data.urgency==='Emergency'){
+    step=7;
     const emergencyText=selectedLang==='fr'
       ?'Je comprends. Comme il s’agit d’une urgence, je peux envoyer un technicien aujourd’hui. J’ai une plage de 13 h à 15 h, de 15 h à 17 h, ou je peux envoyer le premier technicien disponible. Que préférez-vous?'
       :'I understand. Since this is an emergency, I can dispatch a technician today. I have a 1 to 3 P.M. window, a 3 to 5 P.M. window, or I can send the first available technician. Which would you prefer?';
     if(selectedLang==='fr'){
       status.textContent='🔊 Ava parle…';
       playAvaAudio(frEmergencyAudio,emergencyText,()=>{
-        if(active){status.textContent='Intervention d’urgence disponible aujourd’hui';showChoices(6);}
+        if(active){status.textContent='Intervention d’urgence disponible aujourd’hui';showChoices(7);}
       });
     }else{
-      lastSpoken=emergencyText;lastAudioSrc='';add('AVA',emergencyText);status.textContent='Emergency dispatch available today';showChoices(6);
+      lastSpoken=emergencyText;lastAudioSrc='';add('AVA',emergencyText);status.textContent='Emergency dispatch available today';showChoices(7);
     }
     return;
   }
@@ -585,7 +592,7 @@ function finish(){
   active=false; stopListening(); clearInterval(timerInt); quick.innerHTML='';
   $('summary').style.display='block';
   $('sIssue').textContent=data.issue; $('sUrgency').textContent=data.urgency; $('sCity').textContent=data.city;
-  $('sAddress').textContent=data.address; $('sName').textContent=data.name; $('sAppt').textContent=data.appt;
+  $('sAddress').textContent=data.address; $('sPhone').textContent=data.phone; $('sName').textContent=data.name; $('sAppt').textContent=data.appt;
   $('sStatus').textContent=data.urgency==='Emergency'?(selectedLang==='fr'?'Intervention prioritaire confirmée':'Priority dispatch confirmed'):(selectedLang==='fr'?'Rendez-vous confirmé':'Booked & confirmed');
   status.textContent=data.urgency==='Emergency'?(selectedLang==='fr'?'Technicien d’urgence envoyé aujourd’hui ✓':'Emergency technician dispatched today ✓'):(selectedLang==='fr'?'Rendez-vous confirmé ✓':'Appointment booked ✓');
   tr.scrollTop=tr.scrollHeight;
