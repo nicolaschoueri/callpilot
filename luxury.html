@@ -364,29 +364,19 @@ function speakSystem(text,lang,onDone,addLine=true){
 function playLanguageMenu(){
   quick.innerHTML='';
   status.textContent='Choose language • Choisissez la langue';
-  const textFr='Pour le français, appuyez sur 1.';
-  const textEn='For English, press 2.';
-  add('AVA',textFr+' '+textEn);
+  const menuText='Pour le français, appuyez sur 1. Pour l’anglais, appuyez sur 2.';
+  add('AVA',menuText);
   const b1=document.createElement('button'); b1.className='choice'; b1.textContent='1 — Français'; b1.onclick=()=>chooseLanguage('fr');
   const b2=document.createElement('button'); b2.className='choice'; b2.textContent='2 — English'; b2.onclick=()=>chooseLanguage('en');
   quick.appendChild(b1); quick.appendChild(b2);
 
   const a=$('avaAudio');
   $('audioPanel').style.display='block';
-  lastSpoken=textFr; lastAudioSrc='audio/fr-menu.mp3'; lastSpokenLang='fr-CA';
+  lastSpoken=menuText; lastAudioSrc='audio/fr-menu.mp3'; lastSpokenLang='fr-CA';
   try{
-    a.pause(); a.currentTime=0; a.src='audio/fr-menu.mp3'; a.muted=false; a.volume=1; a.load();
-    a.onended=()=>{
-      if(!active || selectedLang) return;
-      if('speechSynthesis' in window){
-        try{speechSynthesis.cancel();}catch(e){}
-        const u2=new SpeechSynthesisUtterance(textEn);
-        u2.lang='en-CA'; const v2=pickVoiceFor('en-CA'); if(v2)u2.voice=v2; u2.rate=.94;
-        speechSynthesis.speak(u2);
-      }
-    };
+    a.pause(); a.currentTime=0; a.src='audio/fr-menu.mp3?v=20261001c'; a.muted=false; a.volume=1; a.load();
     const p=a.play();
-    if(p&&p.catch)p.catch(()=>{ if('speechSynthesis' in window) speakSystem(textEn,'en-CA',null,false); });
+    if(p&&p.catch)p.catch(()=>{ if('speechSynthesis' in window) speakSystem(menuText,'fr-CA',null,false); });
   }catch(e){}
 }
 
