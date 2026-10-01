@@ -384,7 +384,7 @@ function playLanguageMenu(){
   $('audioPanel').style.display='block';
   lastSpoken=menuText; lastAudioSrc='audio/fr-menu.mp3'; lastSpokenLang='fr-CA';
   try{
-    a.pause(); a.currentTime=0; a.src='audio/fr-menu.mp3?v=20261001c'; a.muted=false; a.volume=1; a.load();
+    a.pause(); a.currentTime=0; a.src='audio/fr-menu.mp3?v=20261001d'; a.muted=false; a.volume=1; a.load();
     const p=a.play();
     if(p&&p.catch)p.catch(()=>{ if('speechSynthesis' in window) speakSystem(menuText,'fr-CA',null,false); });
   }catch(e){}
