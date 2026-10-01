@@ -527,23 +527,53 @@ function add(who,text){
 }
 function fmt(s){return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
 
+function speakFallback(text,onEnd){
+  if(!('speechSynthesis' in window)){
+    status.textContent='Audio is unavailable on this browser';
+    if(onEnd) onEnd();
+    return;
+  }
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang='en-CA';
+  u.rate=1.0;
+  u.pitch=1.02;
+  const voices=speechSynthesis.getVoices();
+  const preferred=voices.find(v=>/en-CA/i.test(v.lang)) || voices.find(v=>/^en/i.test(v.lang));
+  if(preferred) u.voice=preferred;
+  u.onend=()=>{ if(onEnd) onEnd(); };
+  u.onerror=()=>{ status.textContent='Tap ↻ to try Ava again'; if(onEnd) onEnd(); };
+  speechSynthesis.speak(u);
+}
+
 function playPrompt(i){
   if(lastAudio){lastAudio.pause();}
-  lastAudio=new Audio(audioUrls[i]);
+  if('speechSynthesis' in window) speechSynthesis.cancel();
   status.textContent='Ava is speaking…';
   add('AVA',prompts[i]);
-  lastAudio.play().catch(()=>{status.textContent='Tap ↻ to hear Ava';});
-  lastAudio.onended=()=>{status.textContent='Your turn';showChoices(i);};
+  const done=()=>{status.textContent='Your turn';showChoices(i);};
+  lastAudio=new Audio(audioUrls[i]);
+  let fallbackUsed=false;
+  const fallback=()=>{ if(fallbackUsed) return; fallbackUsed=true; speakFallback(prompts[i],done); };
+  lastAudio.onended=done;
+  lastAudio.onerror=fallback;
+  const p=lastAudio.play();
+  if(p && typeof p.catch==='function') p.catch(fallback);
 }
 
 function playFinal(){
   const opt=finalOptions[data.appt] || genericFinal;
   if(lastAudio){lastAudio.pause();}
-  lastAudio=new Audio(opt.audio);
+  if('speechSynthesis' in window) speechSynthesis.cancel();
   status.textContent='Ava is confirming your appointment…';
   add('AVA',opt.text);
-  lastAudio.play().catch(()=>{status.textContent='Tap ↻ to hear Ava';});
+  lastAudio=new Audio(opt.audio);
+  let fallbackUsed=false;
+  const fallback=()=>{ if(fallbackUsed) return; fallbackUsed=true; speakFallback(opt.text,finish); };
   lastAudio.onended=finish;
+  lastAudio.onerror=fallback;
+  const p=lastAudio.play();
+  if(p && typeof p.catch==='function') p.catch(fallback);
 }
 
 function showChoices(i){
@@ -603,6 +633,7 @@ function finish(){
 function endCall(){
   active=false;clearInterval(timerInt);
   if(lastAudio)lastAudio.pause();
+  if('speechSynthesis' in window) speechSynthesis.cancel();
   quick.innerHTML='';
   status.textContent='Call ended';
 }
