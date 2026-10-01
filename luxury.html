@@ -518,14 +518,16 @@ function playFinal(){
 }
 
 function startCall(){
-  active=true; selectedLang=null; step=-1;
+  active=true;
+  selectedLang=(document.documentElement.lang||'en').toLowerCase().startsWith('fr')?'fr':'en';
+  step=0;
   tr.innerHTML=''; $('summary').style.display='none'; quick.innerHTML='';
   Object.keys(data).forEach(k=>data[k]='—');
   startTime=Date.now(); clearInterval(timerInt);
   timerInt=setInterval(()=>$('timer').textContent=fmt(Math.floor((Date.now()-startTime)/1000)),1000);
   $('timer').textContent='00:00';
   try{$('avaAudio').pause();}catch(e){}
-  playLanguageMenu();
+  speak((selectedLang==='fr'?promptsFr:promptsEn)[0]);
 }
 
 function finish(){
