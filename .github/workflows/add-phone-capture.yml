@@ -188,14 +188,16 @@ jobs:
                   ("<div class=\"cell\"><span>Address</span><b id=\"sAddress\">—</b></div><div class=\"cell\"><span>Name</span><b id=\"sName\">—</b></div>",
                    "<div class=\"cell\"><span>Address</span><b id=\"sAddress\">—</b></div><div class=\"cell\"><span>Phone</span><b id=\"sPhone\">—</b></div><div class=\"cell\"><span>Name</span><b id=\"sName\">—</b></div>"),
                   ("$('sAddress').textContent=data.address; $('sName').textContent=data.name; $('sAppt').textContent=data.appt;",
-                   "$('sAddress').textContent=data.address; $('sPhone').textContent=data.phone; $('sName').textContent=data.name; $('sAppt').textContent=data.appt;"),
-                  ('"Address":"Adresse","Name":"Nom"', '"Address":"Adresse","Phone":"Téléphone","Name":"Nom"')
+                   "$('sAddress').textContent=data.address; $('sPhone').textContent=data.phone; $('sName').textContent=data.name; $('sAppt').textContent=data.appt;")
               ]
 
               for old, new in replacements:
                   if old not in s:
                       raise SystemExit(f"Expected block missing in {name}: {old[:80]}")
                   s = s.replace(old, new)
+
+              if '"Address":"Adresse","Name":"Nom"' in s:
+                  s = s.replace('"Address":"Adresse","Name":"Nom"', '"Address":"Adresse","Phone":"Téléphone","Name":"Nom"')
 
               checks = [
                   "best phone number to reach you",
