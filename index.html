@@ -296,22 +296,22 @@ const finalAudioFiles={
 };
 
 const frAudioFiles=[
-  'audio/fr1.mp3',
-  'audio/fr2.mp3',
-  'audio/fr3.mp3',
-  'https://d2ol7oe51mr4n9.cloudfront.net/user_3IoR1qS4iiGiHjjP4U9ed0eUIsB/65655bfd-c21d-45ac-ba01-a3cc0c576a9e.mp3',
-  'audio/fr4.mp3',
-  'audio/fr5.mp3'
+  'audio/fr1.mp3?v=20261001u',
+  'audio/fr2.mp3?v=20261001u',
+  'audio/fr3.mp3?v=20261001u',
+  'audio/fr-address.mp3?v=20261001u',
+  'audio/fr4.mp3?v=20261001u',
+  'audio/fr5.mp3?v=20261001u'
 ];
-const frEmergencyAudio='audio/fr-emergency.mp3';
+const frEmergencyAudio='audio/fr-emergency.mp3?v=20261001u';
 const frFinalAudioFiles={
-  'Vendredi 2 oct. • 10 h 30':'audio/fr-final-1030.mp3',
-  'Vendredi 2 oct. • 14 h':'audio/fr-final-1400.mp3',
-  'Samedi 3 oct. • 9 h':'audio/fr-final-sat9.mp3',
-  'Aujourd’hui • 13 h–15 h':'audio/fr-final-emg-1315.mp3',
-  'Aujourd’hui • 15 h–17 h':'audio/fr-final-emg-1517.mp3',
-  'Premier technicien disponible aujourd’hui':'audio/fr-final-emg-first.mp3',
-  generic:'audio/fr-final-generic.mp3'
+  'Vendredi 2 oct. • 10 h 30':'audio/fr-final-1030.mp3?v=20261001u',
+  'Vendredi 2 oct. • 14 h':'audio/fr-final-1400.mp3?v=20261001u',
+  'Samedi 3 oct. • 9 h':'audio/fr-final-sat9.mp3?v=20261001u',
+  'Aujourd’hui • 13 h–15 h':'audio/fr-final-emg-1315.mp3?v=20261001u',
+  'Aujourd’hui • 15 h–17 h':'audio/fr-final-emg-1517.mp3?v=20261001u',
+  'Premier technicien disponible aujourd’hui':'audio/fr-final-emg-first.mp3?v=20261001u',
+  generic:'audio/fr-final-generic.mp3?v=20261001u'
 };
 const frFinalTexts={
   'Vendredi 2 oct. • 10 h 30':'Parfait. Votre rendez-vous est confirmé pour vendredi 2 octobre à 10 h 30. Vous recevrez un message de confirmation avec les détails. Merci d’avoir appelé CallPilot Trades.',
@@ -388,7 +388,7 @@ function playLanguageMenu(){
   try{
     a.pause();
     a.currentTime=0;
-    a.src='audio/fr-menu.mp3?v=20261001f';
+    a.src='audio/fr-menu.mp3?v=20261001u';
     a.muted=false;
     a.volume=1;
     a.load();
@@ -408,7 +408,7 @@ function playLanguageMenu(){
       }catch(e){status.textContent='Touchez RÉÉCOUTER pour entendre Ava';}
     };
 
-    lastAudioSrc='audio/fr-menu.mp3?v=20261001f';
+    lastAudioSrc='audio/fr-menu.mp3?v=20261001u';
     const p=a.play();
     if(p&&p.catch)p.catch(()=>{status.textContent='Touchez RÉÉCOUTER pour entendre Ava';});
   }catch(e){status.textContent='Touchez RÉÉCOUTER pour entendre Ava';}
