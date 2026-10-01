@@ -1,0 +1,32 @@
+name: Test CallPilot Voice Backend
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "voice-backend/**"
+      - ".github/workflows/test-voice-backend.yml"
+  pull_request:
+    paths:
+      - "voice-backend/**"
+      - ".github/workflows/test-voice-backend.yml"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: voice-backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: voice-backend/package.json
+      - name: Install
+        run: npm install
+      - name: TypeScript build
+        run: npm run build
+      - name: Tests
+        run: npm test
