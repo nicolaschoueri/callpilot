@@ -1,0 +1,47 @@
+name: Import French Ava audio
+
+on:
+  push:
+    paths:
+      - '.github/workflows/import-french-ava.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  import-audio:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Download approved French Ava audio
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p audio
+          curl -L --fail --retry 3 'https://dnznrvs05pmza.cloudfront.net/text_to_speech/62a47e67-78e8-4378-97e3-14cdaa7a0323/fr_menu.mp3?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiODA3NGNiNWJkN2E1NmVmMCIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTA0ODI4M30.68kKINQIXKrmdGJkfk0i4pZpS0lJShgg9FhdyP6KTkI' -o audio/fr-menu.mp3
+          curl -L --fail --retry 3 'https://dnznrvs05pmza.cloudfront.net/text_to_speech/cf655371-a39f-4139-8109-c81744d54e00/fr1.mp3?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiMjY5NDU5NTE2ODUwMGJlNiIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTAxOTYwMX0.8FKvNBtK2IjD5lN62irWg8rpTpB6QpV5GiyVgIf0xmc' -o audio/fr1.mp3
+          curl -L --fail --retry 3 'https://dnznrvs05pmza.cloudfront.net/text_to_speech/c29c84e2-33b6-4af3-891c-c7d6e53f6c7a/fr2.mp3?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiZmQ4OWEzNDQ4ZjJjMGVmOSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MDk5NjY3Nn0.kBAMU1NatJtVShzoitl4GjsmRbCAkhBhR1EBLJQu73w' -o audio/fr2.mp3
+          curl -L --fail --retry 3 'https://dnznrvs05pmza.cloudfront.net/text_to_speech/aa012b57-1f86-42bc-bb9c-481e0b7ee4a5/fr3.mp3?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiNmM4ZWE4MjQ0MmRmZDVhMCIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTA0ODQ4NH0.rh6lMC530xRFuf_7A_ExEbIOEGj4_Qxq4NLH9XNZbpI' -o audio/fr3.mp3
+          curl -L --fail --retry 3 'https://dnznrvs05pmza.cloudfront.net/text_to_speech/885100c7-01cb-45b7-bd6d-93e416c437d3/fr4.mp3?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiZGQ2ZDVmMzVlZDJiYTQ2MiIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MDk3NzMzM30.gMDIifRG9t6Tewh9DdRx4Ayf1qWTVVhes6FvVKt-hlw' -o audio/fr4.mp3
+          curl -L --fail --retry 3 'https://dnznrvs05pmza.cloudfront.net/text_to_speech/adeff4f4-7028-42b1-9ada-8c5ff2ba71d1/fr5.mp3?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiMjJkMTJjZTE1NjUxMDU1NCIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MDk2OTA1N30.Uycs7pN6V5jglxvErDLbgl1yKZ66UC93r5jvpMWEl9U' -o audio/fr5.mp3
+          curl -L --fail --retry 3 'https://dnznrvs05pmza.cloudfront.net/text_to_speech/e23a7af8-02ab-42bf-a94e-6dd43f41e25a/fr_emergency.mp3?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiNmIxYTBhYjg2ZDRkZDQ0NyIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MDk5MzU5Mn0.RiDmBGrsKNLaHOiWAB1qtYthbYCU4sU6E_1UP7BVVgc' -o audio/fr-emergency.mp3
+          curl -L --fail --retry 3 'https://dnznrvs05pmza.cloudfront.net/text_to_speech/86dbec69-6991-48e6-baa1-57389a791895/fr_final_1030.mp3?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiMDYwYzUwZDlmZDUzYjc3MiIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTAyMjQyNX0.1MAfI5I8-wC6XETWnNPvWdyp3q1fugUGIQ8EFpmyGWI' -o audio/fr-final-1030.mp3
+          curl -L --fail --retry 3 'https://dnznrvs05pmza.cloudfront.net/text_to_speech/54a4fe00-c63e-463d-8e5e-d6b3aaa1fd44/fr_final_1400.mp3?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiNWVkOTAwYTVkNjhkNjMzMyIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTAzNjU4MX0.Wvd6oQf_pQcoTr9mEJktKvUGXBd0b67fr-0vDMbGOuw' -o audio/fr-final-1400.mp3
+          curl -L --fail --retry 3 'https://dnznrvs05pmza.cloudfront.net/text_to_speech/f89e1a0f-5f6e-4519-bc1c-4054af22618d/fr_final_sat9.mp3?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiYzkwM2RkMGM0Y2RhMjI3NSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTAwODAxMn0.FERnu3KADpwED-KNwVaEfgDjCLZ-V9yNOyNlypYy4GA' -o audio/fr-final-sat9.mp3
+          curl -L --fail --retry 3 'https://dnznrvs05pmza.cloudfront.net/text_to_speech/eace0b6e-a786-49b7-94aa-a5ee5d575699/fr_final_emg_1315.mp3?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiNDNlNjE3MWI3OGE4OGY5NyIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTA0MDY2N30.ZF7XPGq8G0zNCVaHetQebO-03eaJjhgeJfoYPXUAop8' -o audio/fr-final-emg-1315.mp3
+          curl -L --fail --retry 3 'https://dnznrvs05pmza.cloudfront.net/text_to_speech/3bbc1aff-d241-4b1b-b6fa-fef354344eb2/fr_final_emg_1517.mp3?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiNTVmMGFkOGFjZmExYzk0OCIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MDk3ODgyNn0.fUmWFES_uYotUrlDN-X_FQEuEyZtIzNcnMn72Y1DFXs' -o audio/fr-final-emg-1517.mp3
+          curl -L --fail --retry 3 'https://dnznrvs05pmza.cloudfront.net/text_to_speech/3d9f720f-28f2-493b-9310-c99246db35f9/fr_final_emg_first.mp3?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiY2RmODc0YzNjZDUxYmZmYSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTAyOTY5OX0.Y9fb6OWu4SuMTrVrVKrKCX6HTbkv0gedOdurchXnCak' -o audio/fr-final-emg-first.mp3
+          curl -L --fail --retry 3 'https://dnznrvs05pmza.cloudfront.net/text_to_speech/3fd995d4-3c68-4db9-a252-35f5ebd599a1/fr_final_generic.mp3?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiYWZlMmEwNGVlZDU2MDVhZCIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTAzMTM3NH0.7dV5O4hq2_kUHr55bZ3GMtZtTTlY3fqAszYQuIwSMaw' -o audio/fr-final-generic.mp3
+      - name: Commit audio into CallPilot
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          rm -f .github/workflows/import-french-ava.yml
+          git add -A
+          git commit -m "Add natural French Ava audio"
+          git push
