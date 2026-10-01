@@ -546,18 +546,41 @@ function speakFallback(text,onEnd){
   speechSynthesis.speak(u);
 }
 
+function isIOSDevice(){
+  return /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+    (navigator.platform==='MacIntel' && navigator.maxTouchPoints>1);
+}
+
 function playPrompt(i){
   if(lastAudio){lastAudio.pause();}
   if('speechSynthesis' in window) speechSynthesis.cancel();
   status.textContent='Ava is speaking…';
   add('AVA',prompts[i]);
   const done=()=>{status.textContent='Your turn';showChoices(i);};
+
+  // iPhone/iPad Safari can report external WAV playback as started while staying silent.
+  // Use the device's built-in speech engine there so Ava is always audible.
+  if(isIOSDevice()){
+    speakFallback(prompts[i],done);
+    return;
+  }
+
   lastAudio=new Audio(audioUrls[i]);
   let fallbackUsed=false;
-  const fallback=()=>{ if(fallbackUsed) return; fallbackUsed=true; speakFallback(prompts[i],done); };
-  lastAudio.onended=done;
+  let watchdog=null;
+  const fallback=()=>{
+    if(fallbackUsed) return;
+    fallbackUsed=true;
+    if(watchdog) clearTimeout(watchdog);
+    try{ lastAudio.pause(); }catch(e){}
+    speakFallback(prompts[i],done);
+  };
+  lastAudio.onended=()=>{ if(watchdog) clearTimeout(watchdog); done(); };
   lastAudio.onerror=fallback;
   const p=lastAudio.play();
+  watchdog=setTimeout(()=>{
+    if(!lastAudio || lastAudio.paused || lastAudio.currentTime<0.2) fallback();
+  },1800);
   if(p && typeof p.catch==='function') p.catch(fallback);
 }
 
@@ -567,12 +590,28 @@ function playFinal(){
   if('speechSynthesis' in window) speechSynthesis.cancel();
   status.textContent='Ava is confirming your appointment…';
   add('AVA',opt.text);
+
+  if(isIOSDevice()){
+    speakFallback(opt.text,finish);
+    return;
+  }
+
   lastAudio=new Audio(opt.audio);
   let fallbackUsed=false;
-  const fallback=()=>{ if(fallbackUsed) return; fallbackUsed=true; speakFallback(opt.text,finish); };
-  lastAudio.onended=finish;
+  let watchdog=null;
+  const fallback=()=>{
+    if(fallbackUsed) return;
+    fallbackUsed=true;
+    if(watchdog) clearTimeout(watchdog);
+    try{ lastAudio.pause(); }catch(e){}
+    speakFallback(opt.text,finish);
+  };
+  lastAudio.onended=()=>{ if(watchdog) clearTimeout(watchdog); finish(); };
   lastAudio.onerror=fallback;
   const p=lastAudio.play();
+  watchdog=setTimeout(()=>{
+    if(!lastAudio || lastAudio.paused || lastAudio.currentTime<0.2) fallback();
+  },1800);
   if(p && typeof p.catch==='function') p.catch(fallback);
 }
 
