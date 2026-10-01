@@ -252,7 +252,7 @@ footer{border-top:1px solid var(--line);padding:28px 0 38px;color:#8f8579;font-s
     <h2>Try Ava booking the job herself.</h2>
     <p class="lede">This is a free sales simulator. Tap the phone button, hear Ava, choose the customer's answers, and watch her book the appointment without handing the caller off.</p>
     <div class="ava-demo-shell">
-      <div class="wrap"><div class="notice">LIVE VOICE DEMO • No real phone number or charge</div><div class="phone"><div class="top">Incoming test call<div class="number">+1 (514) 555-0142</div><div class="fake">FICTIONAL NUMBER</div></div><div class="hero"><div class="avatar"><img src="" alt="Ava"></div><div class="ava">Ava</div><div class="role">CallPilot Trades • AI receptionist</div><div id="status" class="status">Ready to test</div><div id="timer" class="timer">00:00</div></div><div class="screen"><div id="transcript" class="transcript"><div class="line avaLine"><span class="speaker">CallPilot</span>Tap the gold START CALL button, allow microphone access, and speak naturally to Ava.</div></div><div id="quick" class="quick"></div><div class="inputrow"><input id="answer" placeholder="Or type your answer…"><button class="send" id="send">Send</button></div></div><div id="summary" class="summary"><h3>Appointment booked</h3><div class="grid"><div class="cell"><span>Issue</span><b id="sIssue">—</b></div><div class="cell"><span>Urgency</span><b id="sUrgency">—</b></div><div class="cell"><span>City</span><b id="sCity">—</b></div><div class="cell"><span>Name</span><b id="sName">—</b></div><div class="cell"><span>Appointment</span><b id="sAppt">—</b></div><div class="cell"><span>Status</span><b id="sStatus">Confirmed</b></div></div></div><div class="controls"><button class="round replay" id="replay" title="Replay Ava"><span>↻</span><span>REPLAY</span></button><button class="round start" id="start" title="Start call"><span>☎</span><span>START CALL</span></button><button class="round end" id="end" title="End call"><span>✕</span><span>END CALL</span></button></div><div class="hint">Live voice requires microphone permission. For best results, open the public HTTPS link in Safari or Chrome, tap START CALL, then speak when Ava says “Your turn.”</div></div></div>
+      <div class="wrap"><div class="notice">LIVE VOICE DEMO • No real phone number or charge</div><div class="phone"><div class="top">Incoming test call<div class="number">+1 (514) 555-0142</div><div class="fake">FICTIONAL NUMBER</div></div><div class="hero"><div class="avatar"><img src="" alt="Ava"></div><div class="ava">Ava</div><div class="role">CallPilot Trades • AI receptionist</div><div id="status" class="status">Ready to test</div><div id="timer" class="timer">00:00</div></div><div class="screen"><div id="transcript" class="transcript"><div class="line avaLine"><span class="speaker">CallPilot</span>Tap the gold START CALL button, allow microphone access, and speak naturally to Ava.</div></div><div id="quick" class="quick"></div><div class="inputrow"><input id="answer" placeholder="Or type your answer…"><button class="send" id="send">Send</button></div></div><div id="summary" class="summary"><h3>Appointment booked</h3><div class="grid"><div class="cell"><span>Issue</span><b id="sIssue">—</b></div><div class="cell"><span>Urgency</span><b id="sUrgency">—</b></div><div class="cell"><span>City</span><b id="sCity">—</b></div><div class="cell"><span>Name</span><b id="sName">—</b></div><div class="cell"><span>Appointment</span><b id="sAppt">—</b></div><div class="cell"><span>Status</span><b id="sStatus">Confirmed</b></div></div></div><audio id="avaAudio" preload="auto" playsinline style="display:none"></audio><div class="controls"><button class="round replay" id="replay" title="Replay Ava"><span>↻</span><span>REPLAY</span></button><button class="round start" id="start" title="Start call"><span>☎</span><span>START CALL</span></button><button class="round end" id="end" title="End call"><span>✕</span><span>END CALL</span></button></div><div class="hint">Tap START CALL to hear Ava. Then use the answer buttons or type your reply. No microphone is required for this demo.</div></div></div>
 <script>
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 const prompts = [
@@ -263,8 +263,23 @@ const prompts = [
   'I have Friday at 10:30 A.M. or 2 P.M., and Saturday at 9 A.M. Which time works best for you?'
 ];
 
+const audioFiles=[
+  'audio/a1.mp3',
+  'audio/a2.mp3',
+  'audio/a3.mp3',
+  'audio/a4.mp3',
+  'audio/a5.mp3'
+];
+const finalAudioFiles={
+  'Friday, Oct 2 • 10:30 AM':'audio/a6.mp3',
+  'Friday, Oct 2 • 2:00 PM':'audio/a7.mp3',
+  'Saturday, Oct 3 • 9:00 AM':'audio/a8.mp3',
+  generic:'audio/a9.mp3'
+};
+
 let step=-1, active=false, startTime=0, timerInt=null, recognition=null, isListening=false;
 let lastSpoken='';
+let lastAudioSrc='';
 const data={issue:'—',urgency:'—',city:'—',name:'—',appt:'—'};
 const $=x=>document.getElementById(x);
 const tr=$('transcript'), quick=$('quick'), status=$('status');
@@ -288,21 +303,52 @@ function pickVoice(){
   return voices.find(x=>/^en-CA/i.test(x.lang)) || voices.find(x=>/^en-US/i.test(x.lang)) || voices.find(x=>/^en/i.test(x.lang)) || voices[0];
 }
 
+function playAvaAudio(src,text,onDone){
+  const a=$('avaAudio');
+  lastSpoken=text;
+  lastAudioSrc=src;
+  add('AVA',text);
+  status.textContent='🔊 Ava is speaking…';
+
+  try{
+    a.pause();
+    a.currentTime=0;
+    a.src=src;
+    a.muted=false;
+    a.volume=1;
+    a.load();
+  }catch(e){}
+
+  let finished=false;
+  const done=()=>{
+    if(finished) return;
+    finished=true;
+    if(typeof onDone==='function') onDone();
+  };
+  a.onended=done;
+  a.onerror=()=>{
+    status.textContent='Audio could not load — tap REPLAY';
+    done();
+  };
+  const p=a.play();
+  if(p && typeof p.catch==='function'){
+    p.catch(()=>{
+      status.textContent='Tap REPLAY to hear Ava';
+      done();
+    });
+  }
+}
+
 function speak(text, after=true){
   if(!active && after) return;
-  speechSynthesis.cancel();
-  lastSpoken=text;
-  add('AVA',text);
-  status.textContent='Ava is speaking…';
-  const u=new SpeechSynthesisUtterance(text);
-  const v=pickVoice(); if(v)u.voice=v;
-  u.lang=(v&&v.lang)||'en-CA'; u.rate=1.02; u.pitch=1.03;
-  u.onend=()=>{
+  const i=Math.max(0,prompts.indexOf(text));
+  playAvaAudio(audioFiles[i],text,()=>{
     if(!active) return;
-    if(after){ status.textContent='Your turn — listening…'; showChoices(step); startListening(); }
-  };
-  u.onerror=()=>{ if(active && after){ status.textContent='Your turn — tap a choice or type'; showChoices(step); } };
-  speechSynthesis.speak(u);
+    if(after){
+      status.textContent='Your turn — tap a choice or type';
+      showChoices(step);
+    }
+  });
 }
 
 function startListening(){
@@ -356,7 +402,7 @@ function normalizeAppointment(text){
 
 function reply(text){
   if(!active || !String(text).trim()) return;
-  stopListening(); speechSynthesis.cancel();
+  stopListening();
   text=String(text).trim(); add('YOU',text);
   if(step===0)data.issue=text;
   if(step===1){
@@ -368,37 +414,25 @@ function reply(text){
   if(step===4)data.appt=normalizeAppointment(text);
   quick.innerHTML=''; $('answer').value='';
   if(step===4){ playFinal(); return; }
-  step++; setTimeout(()=>speak(prompts[step]),250);
+  step++; speak(prompts[step]);
 }
 
 function playFinal(){
   const appt=data.appt==='—'?'the selected time':data.appt.replace('•','at');
   const txt=`Perfect, ${data.name==='—'?'you are':data.name+', you are'} booked for ${appt}. Your appointment is confirmed. You will receive a confirmation message with the details. Thank you for calling CallPilot Trades.`;
-  speechSynthesis.cancel(); lastSpoken=txt; add('AVA',txt); status.textContent='Ava is confirming your appointment…';
-  const u=new SpeechSynthesisUtterance(txt); const v=pickVoice(); if(v)u.voice=v; u.lang=(v&&v.lang)||'en-CA'; u.rate=1.02; u.pitch=1.03;
-  u.onend=finish; u.onerror=finish; speechSynthesis.speak(u);
+  const src=finalAudioFiles[data.appt] || finalAudioFiles.generic;
+  status.textContent='🔊 Ava is confirming your appointment…';
+  playAvaAudio(src,txt,finish);
 }
 
-async function startCall(){
+function startCall(){
   active=true; step=0; tr.innerHTML=''; $('summary').style.display='none'; quick.innerHTML='';
   Object.keys(data).forEach(k=>data[k]='—');
   startTime=Date.now(); clearInterval(timerInt);
   timerInt=setInterval(()=>$('timer').textContent=fmt(Math.floor((Date.now()-startTime)/1000)),1000);
   $('timer').textContent='00:00';
-  status.textContent='Connecting microphone…';
-  if(!SpeechRecognition){
-    status.textContent='Voice recognition is not supported here — open in Safari or Chrome';
-    speak(prompts[0],false); showChoices(0); return;
-  }
-  try{
-    if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia){
-      const stream=await navigator.mediaDevices.getUserMedia({audio:true});
-      stream.getTracks().forEach(t=>t.stop());
-    }
-  }catch(e){
-    status.textContent='Microphone permission is needed for live Ava';
-  }
-  setTimeout(()=>speak(prompts[0]),150);
+  status.textContent='Connecting…';
+  speak(prompts[0]);
 }
 
 function finish(){
@@ -408,11 +442,11 @@ function finish(){
   $('sName').textContent=data.name; $('sAppt').textContent=data.appt; $('sStatus').textContent='Booked & confirmed';
   status.textContent='Appointment booked ✓'; tr.scrollTop=tr.scrollHeight;
 }
-function endCall(){ active=false; stopListening(); speechSynthesis.cancel(); clearInterval(timerInt); quick.innerHTML=''; status.textContent='Call ended'; }
+function endCall(){ active=false; stopListening(); clearInterval(timerInt); const a=$('avaAudio'); try{a.pause();}catch(e){} quick.innerHTML=''; status.textContent='Call ended'; }
 
 $('start').onclick=startCall;
 $('end').onclick=endCall;
-$('replay').onclick=()=>{ if(lastSpoken){ stopListening(); speak(lastSpoken); } };
+$('replay').onclick=()=>{ if(lastAudioSrc){ const a=$('avaAudio'); try{a.pause();a.currentTime=0;a.src=lastAudioSrc;a.muted=false;a.volume=1;a.load();const p=a.play();if(p&&p.catch)p.catch(()=>{});status.textContent='🔊 Replaying Ava…';}catch(e){} } };
 $('send').onclick=()=>reply($('answer').value);
 $('answer').addEventListener('keydown',e=>{if(e.key==='Enter')reply($('answer').value)});
 if('speechSynthesis' in window) speechSynthesis.onvoiceschanged=()=>speechSynthesis.getVoices();
@@ -476,269 +510,6 @@ if('speechSynthesis' in window) speechSynthesis.onvoiceschanged=()=>speechSynthe
 <footer>
   <div class="container">CallPilot Trades • Demo concept • Contractor AI receptionist</div>
 </footer>
-<script>
-const audioUrls=[
-'audio/a1.mp3',
-'audio/a2.mp3',
-'audio/a3.mp3',
-'audio/a4.mp3',
-'audio/a5.mp3'
-];
 
-const prompts=[
-'CallPilot Trades, this is Ava, the virtual receptionist. How can I help you today?',
-'I can help with that. Is this an emergency, or can it wait for a regular appointment?',
-'What city are you located in?',
-'And what name should I put on the service request?',
-'I have Friday, October 2 at 10:30 A.M. or 2 P.M., and Saturday, October 3 at 9 A.M. Which time works best for you?'
-];
-
-const finalOptions={
-'Friday, Oct 2 • 10:30 AM':{
-  audio:'audio/a6.mp3',
-  text:"Perfect. You're booked for Friday, October 2 at 10:30 A.M. Your appointment is confirmed, and you'll receive a confirmation message with the details. Thank you for calling CallPilot Trades."
-},
-'Friday, Oct 2 • 2:00 PM':{
-  audio:'audio/a7.mp3',
-  text:"Perfect. You're booked for Friday, October 2 at 2 P.M. Your appointment is confirmed, and you'll receive a confirmation message with the details. Thank you for calling CallPilot Trades."
-},
-'Saturday, Oct 3 • 9:00 AM':{
-  audio:'audio/a8.mp3',
-  text:"Perfect. You're booked for Saturday, October 3 at 9 A.M. Your appointment is confirmed, and you'll receive a confirmation message with the details. Thank you for calling CallPilot Trades."
-}
-};
-
-const genericFinal={
-  audio:'audio/a9.mp3',
-  text:"Perfect. Your appointment is booked and confirmed. You'll receive a confirmation message with the appointment details. Thank you for calling CallPilot Trades."
-};
-
-let step=-1,active=false,startTime=0,timerInt=null,lastAudio=null;
-const data={issue:'—',urgency:'—',city:'—',name:'—',appt:'—'};
-const $=x=>document.getElementById(x);
-const tr=$('transcript'), quick=$('quick'), status=$('status');
-
-function add(who,text){
-  const d=document.createElement('div');
-  d.className='line '+(who==='AVA'?'avaLine':'you');
-  d.innerHTML='<span class="speaker">'+who+'</span><span></span>';
-  d.querySelector('span:last-child').textContent=text;
-  tr.appendChild(d); tr.scrollTop=tr.scrollHeight;
-}
-function fmt(s){return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
-
-function speakFallback(text,onEnd){
-  if(!('speechSynthesis' in window)){
-    status.textContent='Audio is unavailable on this browser';
-    if(onEnd) onEnd();
-    return;
-  }
-
-  speechSynthesis.cancel();
-  const u=new SpeechSynthesisUtterance(text);
-  u.lang='en-CA';
-  u.rate=0.98;
-  u.pitch=1.03;
-  u.volume=1;
-
-  const voices=speechSynthesis.getVoices();
-  const preferred=
-    voices.find(v=>/Samantha|Ava|Karen/i.test(v.name) && /^en/i.test(v.lang)) ||
-    voices.find(v=>/en-CA/i.test(v.lang)) ||
-    voices.find(v=>/^en/i.test(v.lang));
-  if(preferred) u.voice=preferred;
-
-  let completed=false;
-  const finishSpeech=()=>{
-    if(completed) return;
-    completed=true;
-    if(onEnd) onEnd();
-  };
-
-  // iOS Safari occasionally fails to fire onend; never let the demo get stuck.
-  const failSafe=setTimeout(()=>{
-    if(!completed){
-      status.textContent='Your turn';
-      finishSpeech();
-    }
-  }, Math.max(4500, Math.min(12000, text.length*75)));
-
-  u.onstart=()=>{
-    status.textContent='🔊 Ava is speaking — turn up your media volume';
-    try{ speechSynthesis.resume(); }catch(e){}
-  };
-  u.onend=()=>{
-    clearTimeout(failSafe);
-    finishSpeech();
-  };
-  u.onerror=()=>{
-    clearTimeout(failSafe);
-    status.textContent='Your turn';
-    finishSpeech();
-  };
-
-  speechSynthesis.speak(u);
-
-  // Kick iPhone Safari's speech engine if it starts in a paused state.
-  setTimeout(()=>{ try{ speechSynthesis.resume(); }catch(e){} },80);
-  setTimeout(()=>{ try{ speechSynthesis.resume(); }catch(e){} },500);
-}
-
-function isIOSDevice(){
-  return /iPad|iPhone|iPod/.test(navigator.userAgent) ||
-    (navigator.platform==='MacIntel' && navigator.maxTouchPoints>1);
-}
-
-function prepareAudioSession(){
-  try{
-    if(navigator.audioSession){
-      // Work around an iOS Safari bug where a tab can report audio playback
-      // while output is silently routed through the ringer-muted session.
-      navigator.audioSession.type='ambient';
-      setTimeout(()=>{ try{ navigator.audioSession.type='playback'; }catch(e){} },0);
-    }
-  }catch(e){}
-}
-
-function playPrompt(i){
-  if(lastAudio){lastAudio.pause();}
-  if('speechSynthesis' in window) speechSynthesis.cancel();
-  prepareAudioSession();
-  status.textContent='🔊 Ava is speaking…';
-  add('AVA',prompts[i]);
-  const done=()=>{status.textContent='Your turn';showChoices(i);};
-
-  lastAudio=new Audio();
-  lastAudio.src=audioUrls[i];
-  lastAudio.preload='auto';
-  lastAudio.volume=1;
-  lastAudio.muted=false;
-  lastAudio.setAttribute('playsinline','');
-  let fallbackUsed=false;
-  let watchdog=null;
-  const fallback=()=>{
-    if(fallbackUsed) return;
-    fallbackUsed=true;
-    if(watchdog) clearTimeout(watchdog);
-    try{ lastAudio.pause(); }catch(e){}
-    speakFallback(prompts[i],done);
-  };
-  lastAudio.onended=()=>{ if(watchdog) clearTimeout(watchdog); done(); };
-  lastAudio.onerror=fallback;
-  try{ lastAudio.load(); }catch(e){}
-  const p=lastAudio.play();
-  watchdog=setTimeout(()=>{
-    if(!lastAudio || lastAudio.paused || lastAudio.currentTime<0.2) fallback();
-  },2200);
-  if(p && typeof p.catch==='function') p.catch(fallback);
-}
-
-function playFinal(){
-  const opt=finalOptions[data.appt] || genericFinal;
-  if(lastAudio){lastAudio.pause();}
-  if('speechSynthesis' in window) speechSynthesis.cancel();
-  prepareAudioSession();
-  status.textContent='🔊 Ava is confirming your appointment…';
-  add('AVA',opt.text);
-
-  lastAudio=new Audio();
-  lastAudio.src=opt.audio;
-  lastAudio.preload='auto';
-  lastAudio.volume=1;
-  lastAudio.muted=false;
-  lastAudio.setAttribute('playsinline','');
-  let fallbackUsed=false;
-  let watchdog=null;
-  const fallback=()=>{
-    if(fallbackUsed) return;
-    fallbackUsed=true;
-    if(watchdog) clearTimeout(watchdog);
-    try{ lastAudio.pause(); }catch(e){}
-    speakFallback(opt.text,finish);
-  };
-  lastAudio.onended=()=>{ if(watchdog) clearTimeout(watchdog); finish(); };
-  lastAudio.onerror=fallback;
-  try{ lastAudio.load(); }catch(e){}
-  const p=lastAudio.play();
-  watchdog=setTimeout(()=>{
-    if(!lastAudio || lastAudio.paused || lastAudio.currentTime<0.2) fallback();
-  },2200);
-  if(p && typeof p.catch==='function') p.catch(fallback);
-}
-
-function showChoices(i){
-  quick.innerHTML='';
-  let arr=[];
-  if(i===0)arr=['My furnace stopped working','I have a plumbing leak','Electrical problem','Roof leak'];
-  if(i===1)arr=['It’s an emergency','Regular appointment'];
-  if(i===2)arr=['Kirkland','Laval','Pointe-Claire','Montréal'];
-  if(i===3)arr=['Nicolas','John','Marie','Alex'];
-  if(i===4)arr=['Friday, Oct 2 • 10:30 AM','Friday, Oct 2 • 2:00 PM','Saturday, Oct 3 • 9:00 AM'];
-  arr.forEach(t=>{
-    const b=document.createElement('button');
-    b.className='choice';
-    b.textContent=t;
-    b.onclick=()=>reply(t);
-    quick.appendChild(b);
-  });
-}
-
-function reply(text){
-  if(!active||!text.trim())return;
-  add('YOU',text);
-  if(step===0)data.issue=text;
-  if(step===1)data.urgency=text.toLowerCase().includes('emergency')?'Emergency':'Regular';
-  if(step===2)data.city=text;
-  if(step===3)data.name=text;
-  if(step===4)data.appt=text;
-  quick.innerHTML=''; $('answer').value='';
-  if(step===4){playFinal();return;}
-  step++;
-  playPrompt(step);
-}
-
-function startCall(){
-  prepareAudioSession();
-  active=true;step=0;tr.innerHTML='';$('summary').style.display='none';
-  Object.keys(data).forEach(k=>data[k]='—');
-  startTime=Date.now();clearInterval(timerInt);
-  timerInt=setInterval(()=>$('timer').textContent=fmt(Math.floor((Date.now()-startTime)/1000)),1000);
-  $('timer').textContent='00:00';
-  status.textContent='Connected';
-  playPrompt(0);
-}
-
-function finish(){
-  active=false;clearInterval(timerInt);quick.innerHTML='';
-  $('summary').style.display='block';
-  $('sIssue').textContent=data.issue;
-  $('sUrgency').textContent=data.urgency;
-  $('sCity').textContent=data.city;
-  $('sName').textContent=data.name;
-  $('sAppt').textContent=data.appt;
-  $('sStatus').textContent='Booked & confirmed';
-  status.textContent='Appointment booked ✓';
-  tr.scrollTop=tr.scrollHeight;
-}
-
-function endCall(){
-  active=false;clearInterval(timerInt);
-  if(lastAudio)lastAudio.pause();
-  if('speechSynthesis' in window) speechSynthesis.cancel();
-  quick.innerHTML='';
-  status.textContent='Call ended';
-}
-
-$('start').onclick=startCall;
-$('end').onclick=endCall;
-$('replay').onclick=()=>{
-  if(step>=0 && step<=4){
-    if(step===4 && data.appt!=='—') playFinal();
-    else playPrompt(step);
-  }
-};
-$('send').onclick=()=>reply($('answer').value);
-$('answer').addEventListener('keydown',e=>{if(e.key==='Enter')reply($('answer').value)});
-</script>
 </body>
 </html>
