@@ -269,7 +269,7 @@ const promptsEn = [
   'Thanks. What is the service address, including the street number and street name?',
   "Perfect. And what's the best phone number to reach you?",
   'Great. And may I have your name for the service request?',
-  'I have Friday at 10:30 A.M. or 2 P.M., and Saturday at 9 A.M. Which time works best for you?'
+  'Great. What day and time would you prefer for the service? I have Friday at 10:30 A.M. or 2 P.M., and Saturday at 9 A.M.'
 ];
 
 const promptsFr = [
@@ -279,7 +279,7 @@ const promptsFr = [
   'Merci. Quelle est l’adresse de service, incluant le numéro civique et le nom de la rue?',
   'Parfait. Et quel est le meilleur numéro de téléphone pour vous joindre?',
   'Très bien. Puis-je avoir votre nom pour la demande de service?',
-  'J’ai une disponibilité vendredi à 10 h 30 ou à 14 h, ainsi que samedi à 9 h. Quelle heure vous convient le mieux?'
+  'Très bien. Quel jour et quelle heure préférez-vous pour le service? J’ai une disponibilité vendredi à 10 h 30 ou à 14 h, ainsi que samedi à 9 h.'
 ];
 
 const audioFiles=[
@@ -289,7 +289,7 @@ const audioFiles=[
   'audio/lux-address.mp3',
   'audio/lux-phone.mp3?v=20261001p',
   'audio/lux4.mp3',
-  'audio/lux5.mp3'
+  'audio/lux-time.mp3?v=20261001t'
 ];
 const finalAudioFiles={
   'Friday, Oct 2 • 10:30 AM':'audio/lux6.mp3',
@@ -305,7 +305,7 @@ const frAudioFiles=[
   'audio/fr-address.mp3?v=20261001u',
   'audio/fr-phone.mp3?v=20261001p',
   'audio/fr4.mp3?v=20261001u',
-  'audio/fr5.mp3?v=20261001u'
+  'audio/fr-time.mp3?v=20261001t'
 ];
 const frEmergencyAudio='audio/fr-emergency.mp3?v=20261001u';
 const frFinalAudioFiles={
@@ -555,7 +555,13 @@ function reply(text){
     }
     return;
   }
-  step++; speak((selectedLang==='fr'?promptsFr:promptsEn)[step]);
+  if(step===5){
+    step=6;
+    speak((selectedLang==='fr'?promptsFr:promptsEn)[6]);
+    return;
+  }
+  step++;
+  speak((selectedLang==='fr'?promptsFr:promptsEn)[step]);
 }
 
 function playFinal(){
