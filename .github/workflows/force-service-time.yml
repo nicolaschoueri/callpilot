@@ -1,0 +1,131 @@
+name: Force service-time question
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/force-service-time.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Install voice generator
+        run: |
+          python -m pip install --upgrade pip
+          pip install edge-tts
+
+      - name: Generate clear service-time prompts
+        run: |
+          python - <<'PY'
+          import asyncio, os
+          import edge_tts
+
+          async def main():
+              os.makedirs("audio", exist_ok=True)
+
+              en_text = "Great. What day and time would you prefer for the service? I have Friday at 10:30 A.M. or 2 P.M., and Saturday at 9 A.M."
+              fr_text = "Très bien. Quel jour et quelle heure préférez-vous pour le service? J’ai une disponibilité vendredi à 10 h 30 ou à 14 h, ainsi que samedi à 9 h."
+
+              await edge_tts.Communicate(
+                  en_text,
+                  "en-US-AriaNeural",
+                  rate="-12%",
+                  pitch="-6Hz"
+              ).save("audio/lux-time.mp3")
+
+              await edge_tts.Communicate(
+                  fr_text,
+                  "fr-CA-SylvieNeural",
+                  rate="-5%",
+                  pitch="-2Hz"
+              ).save("audio/fr-time.mp3")
+
+          asyncio.run(main())
+          PY
+
+      - name: Force the regular booking path to ask for time
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          pages = ["index.html", "iphone.html", "luxury.html", "friendly.html"]
+
+          old_en = "'I have Friday at 10:30 A.M. or 2 P.M., and Saturday at 9 A.M. Which time works best for you?'"
+          new_en = "'Great. What day and time would you prefer for the service? I have Friday at 10:30 A.M. or 2 P.M., and Saturday at 9 A.M.'"
+
+          old_fr = "'J’ai une disponibilité vendredi à 10 h 30 ou à 14 h, ainsi que samedi à 9 h. Quelle heure vous convient le mieux?'"
+          new_fr = "'Très bien. Quel jour et quelle heure préférez-vous pour le service? J’ai une disponibilité vendredi à 10 h 30 ou à 14 h, ainsi que samedi à 9 h.'"
+
+          old_audio_en = "  'audio/lux5.mp3'\n];"
+          new_audio_en = "  'audio/lux-time.mp3?v=20261001t'\n];"
+
+          old_audio_fr = "  'audio/fr5.mp3?v=20261001u'\n];"
+          new_audio_fr = "  'audio/fr-time.mp3?v=20261001t'\n];"
+
+          old_tail = """    }
+              return;
+            }
+            step++; speak((selectedLang==='fr'?promptsFr:promptsEn)[step]);
+          }"""
+
+          new_tail = """    }
+              return;
+            }
+            if(step===5){
+              step=6;
+              speak((selectedLang==='fr'?promptsFr:promptsEn)[6]);
+              return;
+            }
+            step++;
+            speak((selectedLang==='fr'?promptsFr:promptsEn)[step]);
+          }"""
+
+          for name in pages:
+              p=Path(name)
+              s=p.read_text(encoding="utf-8")
+
+              reps=[
+                  (old_en,new_en),
+                  (old_fr,new_fr),
+                  (old_audio_en,new_audio_en),
+                  (old_audio_fr,new_audio_fr),
+                  (old_tail,new_tail),
+              ]
+
+              for old,new in reps:
+                  if old not in s:
+                      raise SystemExit(f"Expected block missing in {name}: {old[:100]}")
+                  s=s.replace(old,new)
+
+              checks=[
+                  "What day and time would you prefer for the service?",
+                  "Quel jour et quelle heure préférez-vous pour le service?",
+                  "audio/lux-time.mp3?v=20261001t",
+                  "audio/fr-time.mp3?v=20261001t",
+                  "if(step===5){",
+                  "speak((selectedLang==='fr'?promptsFr:promptsEn)[6]);"
+              ]
+              for check in checks:
+                  if check not in s:
+                      raise SystemExit(f"Validation failed in {name}: {check}")
+
+              p.write_text(s,encoding="utf-8")
+          PY
+
+      - name: Commit service-time fix
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          rm -f .github/workflows/force-service-time.yml
+          git add -A
+          git commit -m "Force Ava to ask preferred service time" || exit 0
+          git push
