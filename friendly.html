@@ -371,35 +371,54 @@ function speakSystem(text,lang,onDone,addLine=true){
   speechSynthesis.speak(u);
 }
 
-function playLanguageMenu(audioAlreadyStarted=false){
+function playLanguageMenu(){
   quick.innerHTML='';
-  status.textContent='Choose language • Choisissez la langue';
+  status.textContent='Choisissez la langue';
   const menuText='Pour le français, appuyez sur 1. Pour l’anglais, appuyez sur 2.';
   add('AVA',menuText);
   const b1=document.createElement('button'); b1.className='choice'; b1.textContent='1 — Français'; b1.onclick=()=>chooseLanguage('fr');
   const b2=document.createElement('button'); b2.className='choice'; b2.textContent='2 — English'; b2.onclick=()=>chooseLanguage('en');
   quick.appendChild(b1); quick.appendChild(b2);
 
-  $('audioPanel').style.display='block';
-  lastSpoken=menuText; lastAudioSrc='audio/fr-menu.mp3?v=20261001e'; lastSpokenLang='fr-CA';
-  if(audioAlreadyStarted) return;
-
   const a=$('avaAudio');
+  $('audioPanel').style.display='block';
+  lastSpoken=menuText;
+  lastSpokenLang='fr-CA';
+
   try{
     a.pause();
-    a.src='audio/fr-menu.mp3?v=20261001e';
     a.currentTime=0;
+    a.src='audio/fr-menu.mp3?v=20261001f';
     a.muted=false;
     a.volume=1;
+    a.load();
+
+    a.onended=()=>{
+      if(!active || selectedLang) return;
+      try{
+        a.pause();
+        a.currentTime=0;
+        a.src='audio/fr-menu-english.mp3?v=20261001f';
+        a.muted=false;
+        a.volume=1;
+        a.load();
+        lastAudioSrc='audio/fr-menu-english.mp3?v=20261001f';
+        const p2=a.play();
+        if(p2&&p2.catch)p2.catch(()=>{status.textContent='Touchez RÉÉCOUTER pour entendre Ava';});
+      }catch(e){status.textContent='Touchez RÉÉCOUTER pour entendre Ava';}
+    };
+
+    lastAudioSrc='audio/fr-menu.mp3?v=20261001f';
     const p=a.play();
-    if(p&&p.catch)p.catch(()=>{status.textContent='Tap REPLAY to hear Ava';});
-  }catch(e){status.textContent='Tap REPLAY to hear Ava';}
+    if(p&&p.catch)p.catch(()=>{status.textContent='Touchez RÉÉCOUTER pour entendre Ava';});
+  }catch(e){status.textContent='Touchez RÉÉCOUTER pour entendre Ava';}
 }
 
 function chooseLanguage(lang){
   if(!active || selectedLang) return;
   selectedLang=lang;
   try{speechSynthesis.cancel();}catch(e){}
+  try{$('avaAudio').pause();}catch(e){}
   add('YOU',lang==='fr'?'1 — Français':'2 — English');
   quick.innerHTML='';
   step=0;
@@ -535,33 +554,20 @@ function playFinal(){
 
 function startCall(){
   const siteLang=(document.documentElement.lang||'en').toLowerCase().startsWith('fr')?'fr':'en';
-  const a=$('avaAudio');
 
   active=true;
   selectedLang=siteLang==='fr'?null:'en';
   step=siteLang==='fr'?-1:0;
-
-  if(siteLang==='fr'){
-    try{
-      $('audioPanel').style.display='block';
-      a.pause();
-      a.src='audio/fr-menu.mp3?v=20261001e';
-      a.currentTime=0;
-      a.muted=false;
-      a.volume=1;
-      const p=a.play();
-      if(p&&p.catch)p.catch(()=>{status.textContent='Tap REPLAY to hear Ava';});
-    }catch(e){status.textContent='Tap REPLAY to hear Ava';}
-  }
 
   tr.innerHTML=''; $('summary').style.display='none'; quick.innerHTML='';
   Object.keys(data).forEach(k=>data[k]='—');
   startTime=Date.now(); clearInterval(timerInt);
   timerInt=setInterval(()=>$('timer').textContent=fmt(Math.floor((Date.now()-startTime)/1000)),1000);
   $('timer').textContent='00:00';
+  try{$('avaAudio').pause();}catch(e){}
 
   if(siteLang==='fr'){
-    playLanguageMenu(true);
+    playLanguageMenu();
   }else{
     speak(promptsEn[0]);
   }
