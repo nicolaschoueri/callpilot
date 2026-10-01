@@ -388,6 +388,7 @@ function showChoices(i){
   if(i===2)arr=['Kirkland','Laval','Pointe-Claire','Montréal'];
   if(i===3)arr=['Nicolas','John','Marie','Alex'];
   if(i===4)arr=['Friday, Oct 2 • 10:30 AM','Friday, Oct 2 • 2:00 PM','Saturday, Oct 3 • 9:00 AM'];
+  if(i===5)arr=['Dispatch today • 1–3 PM','Dispatch today • 3–5 PM','First available technician today'];
   arr.forEach(t=>{
     const b=document.createElement('button'); b.className='choice'; b.textContent=t; b.onclick=()=>reply(t); quick.appendChild(b);
   });
@@ -413,8 +414,18 @@ function reply(text){
   if(step===2)data.city=text;
   if(step===3)data.name=text.replace(/^(my name is|it is|it's)\s+/i,'');
   if(step===4)data.appt=normalizeAppointment(text);
+  if(step===5)data.appt=text;
   quick.innerHTML=''; $('answer').value='';
-  if(step===4){ playFinal(); return; }
+  if(step===4 || step===5){ playFinal(); return; }
+  if(step===3 && data.urgency==='Emergency'){
+    step=5;
+    const emergencyText='I understand. Since this is an emergency, I can dispatch a technician today. I have a 1 to 3 P.M. window, a 3 to 5 P.M. window, or I can send the first available technician. Which would you prefer?';
+    lastSpoken=emergencyText;
+    add('AVA',emergencyText);
+    status.textContent='Emergency dispatch available today';
+    showChoices(5);
+    return;
+  }
   step++; speak(prompts[step]);
 }
 
@@ -466,8 +477,8 @@ function finish(){
   active=false; stopListening(); clearInterval(timerInt); quick.innerHTML='';
   $('summary').style.display='block';
   $('sIssue').textContent=data.issue; $('sUrgency').textContent=data.urgency; $('sCity').textContent=data.city;
-  $('sName').textContent=data.name; $('sAppt').textContent=data.appt; $('sStatus').textContent='Booked & confirmed';
-  status.textContent='Appointment booked ✓'; tr.scrollTop=tr.scrollHeight;
+  $('sName').textContent=data.name; $('sAppt').textContent=data.appt; $('sStatus').textContent=data.urgency==='Emergency'?'Priority dispatch confirmed':'Booked & confirmed';
+  status.textContent=data.urgency==='Emergency'?'Emergency technician dispatched today ✓':'Appointment booked ✓'; tr.scrollTop=tr.scrollHeight;
 }
 function endCall(){ active=false; stopListening(); clearInterval(timerInt); const a=$('avaAudio'); try{a.pause();}catch(e){} quick.innerHTML=''; status.textContent='Call ended'; }
 
