@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>CallPilot Trades — AI Receptionist for Contractors</title>
+<title>CallPilot Friendly Ava Demo</title>
 <style>
 :root {
   --bg:#08101b; --bg2:#0b1420; --panel:#101a27; --panel2:#162131;
@@ -256,25 +256,25 @@ footer{border-top:1px solid var(--line);padding:28px 0 38px;color:#8f8579;font-s
 <script>
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 const prompts = [
-  'CallPilot Trades, this is Ava, your virtual receptionist. How can I help you today?',
-  'Of course. I can help with that. Is this an emergency, or can it wait for a regular appointment?',
-  'What city are you located in?',
-  'And may I have your name for the service request?',
+  'Hi, thanks for calling CallPilot Trades. This is Ava. How can I help you today?',
+  'Absolutely, I can help with that. Is this an emergency, or would a regular appointment work for you?',
+  'Perfect. What city are you located in?',
+  'Great. And may I have your name for the service request?',
   'I have Friday at 10:30 A.M. or 2 P.M., and Saturday at 9 A.M. Which time works best for you?'
 ];
 
 const audioFiles=[
-  'audio/lux1.mp3',
-  'audio/lux2.mp3',
-  'audio/lux3.mp3',
-  'audio/lux4.mp3',
-  'audio/lux5.mp3'
+  'audio/friendly1.mp3',
+  'audio/friendly2.mp3',
+  'audio/friendly3.mp3',
+  'audio/friendly4.mp3',
+  'audio/friendly5.mp3'
 ];
 const finalAudioFiles={
-  'Friday, Oct 2 • 10:30 AM':'audio/lux6.mp3',
-  'Friday, Oct 2 • 2:00 PM':'audio/lux7.mp3',
-  'Saturday, Oct 3 • 9:00 AM':'audio/lux8.mp3',
-  generic:'audio/lux9.mp3'
+  'Friday, Oct 2 • 10:30 AM':'audio/friendly6.mp3',
+  'Friday, Oct 2 • 2:00 PM':'audio/friendly7.mp3',
+  'Saturday, Oct 3 • 9:00 AM':'audio/friendly8.mp3',
+  generic:'audio/friendly9.mp3'
 };
 
 let step=-1, active=false, startTime=0, timerInt=null, recognition=null, isListening=false;
