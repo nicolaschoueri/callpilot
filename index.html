@@ -533,17 +533,55 @@ function speakFallback(text,onEnd){
     if(onEnd) onEnd();
     return;
   }
+
   speechSynthesis.cancel();
   const u=new SpeechSynthesisUtterance(text);
   u.lang='en-CA';
-  u.rate=1.0;
-  u.pitch=1.02;
+  u.rate=0.98;
+  u.pitch=1.03;
+  u.volume=1;
+
   const voices=speechSynthesis.getVoices();
-  const preferred=voices.find(v=>/en-CA/i.test(v.lang)) || voices.find(v=>/^en/i.test(v.lang));
+  const preferred=
+    voices.find(v=>/Samantha|Ava|Karen/i.test(v.name) && /^en/i.test(v.lang)) ||
+    voices.find(v=>/en-CA/i.test(v.lang)) ||
+    voices.find(v=>/^en/i.test(v.lang));
   if(preferred) u.voice=preferred;
-  u.onend=()=>{ if(onEnd) onEnd(); };
-  u.onerror=()=>{ status.textContent='Tap ↻ to try Ava again'; if(onEnd) onEnd(); };
+
+  let completed=false;
+  const finishSpeech=()=>{
+    if(completed) return;
+    completed=true;
+    if(onEnd) onEnd();
+  };
+
+  // iOS Safari occasionally fails to fire onend; never let the demo get stuck.
+  const failSafe=setTimeout(()=>{
+    if(!completed){
+      status.textContent='Your turn';
+      finishSpeech();
+    }
+  }, Math.max(4500, Math.min(12000, text.length*75)));
+
+  u.onstart=()=>{
+    status.textContent='🔊 Ava is speaking — turn up your media volume';
+    try{ speechSynthesis.resume(); }catch(e){}
+  };
+  u.onend=()=>{
+    clearTimeout(failSafe);
+    finishSpeech();
+  };
+  u.onerror=()=>{
+    clearTimeout(failSafe);
+    status.textContent='Your turn';
+    finishSpeech();
+  };
+
   speechSynthesis.speak(u);
+
+  // Kick iPhone Safari's speech engine if it starts in a paused state.
+  setTimeout(()=>{ try{ speechSynthesis.resume(); }catch(e){} },80);
+  setTimeout(()=>{ try{ speechSynthesis.resume(); }catch(e){} },500);
 }
 
 function isIOSDevice(){
