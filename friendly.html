@@ -391,7 +391,7 @@ function playLanguageMenu(){
     a.src='audio/fr-menu.mp3?v=20261001f';
     a.muted=false;
     a.volume=1;
-    a.load();
+    
 
     a.onended=()=>{
       if(!active || selectedLang) return;
@@ -401,7 +401,7 @@ function playLanguageMenu(){
         a.src='audio/fr-menu-english.mp3?v=20261001f';
         a.muted=false;
         a.volume=1;
-        a.load();
+        
         lastAudioSrc='audio/fr-menu-english.mp3?v=20261001f';
         const p2=a.play();
         if(p2&&p2.catch)p2.catch(()=>{status.textContent='Touchez RÉÉCOUTER pour entendre Ava';});
@@ -431,7 +431,7 @@ function playAvaAudio(src,text,onDone){
   lastSpoken=text; lastAudioSrc=src; lastSpokenLang='en-CA';
   add('AVA',text);
   status.textContent=selectedLang==='fr'?'🔊 Ava parle…':'🔊 Ava is speaking…';
-  try{a.pause();a.currentTime=0;a.src=src;a.muted=false;a.volume=1;a.load();}catch(e){}
+  try{a.pause();a.currentTime=0;a.src=src;a.muted=false;a.volume=1;}catch(e){}
   let finished=false;
   const done=()=>{if(finished)return;finished=true;if(typeof onDone==='function')onDone();};
   a.onended=done;
@@ -588,7 +588,7 @@ $('start').onclick=startCall;
 $('end').onclick=endCall;
 $('replay').onclick=()=>{
   if(lastAudioSrc){
-    const a=$('avaAudio');try{a.pause();a.currentTime=0;a.src=lastAudioSrc;a.muted=false;a.volume=1;a.load();const p=a.play();if(p&&p.catch)p.catch(()=>{});status.textContent='🔊 Replaying Ava…';}catch(e){}
+    const a=$('avaAudio');try{a.pause();a.currentTime=0;a.src=lastAudioSrc;a.muted=false;a.volume=1;const p=a.play();if(p&&p.catch)p.catch(()=>{});status.textContent='🔊 Replaying Ava…';}catch(e){}
   }else if(lastSpoken){speakSystem(lastSpoken,lastSpokenLang,null,false);}
 };
 $('send').onclick=()=>{
