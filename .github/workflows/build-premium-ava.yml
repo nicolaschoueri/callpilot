@@ -1,0 +1,38 @@
+name: Build Premium Ava Voice
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/build-premium-ava.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  build-premium-ava:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download premium Ava voice clips
+        run: |
+          set -e
+          mkdir -p audio
+          curl -L --fail --retry 3 -o audio/ava1.wav "https://resource2.heygen.ai/text_to_speech/41c7f7673e3446989ca7d697467a23f2/660022d4c7ff428cbb5787685e8df571/id=7e4d6cd2-ce06-44fe-9a1d-0acadf4d576d.wav"
+          curl -L --fail --retry 3 -o audio/ava2.wav "https://resource2.heygen.ai/text_to_speech/41c7f7673e3446989ca7d697467a23f2/660022d4c7ff428cbb5787685e8df571/id=6484fda8-29a6-4a47-90dd-a1314da5a1e5.wav"
+          curl -L --fail --retry 3 -o audio/ava3.wav "https://resource2.heygen.ai/text_to_speech/41c7f7673e3446989ca7d697467a23f2/660022d4c7ff428cbb5787685e8df571/id=8bfbdd25-11c0-42c4-8f42-bc405442605d.wav"
+          curl -L --fail --retry 3 -o audio/ava4.wav "https://resource2.heygen.ai/text_to_speech/41c7f7673e3446989ca7d697467a23f2/660022d4c7ff428cbb5787685e8df571/id=a4046a8f-9e93-4280-b198-c240d9124100.wav"
+          curl -L --fail --retry 3 -o audio/ava5.wav "https://resource2.heygen.ai/text_to_speech/41c7f7673e3446989ca7d697467a23f2/660022d4c7ff428cbb5787685e8df571/id=caaa41a5-1814-4d13-9851-a0c936159a23.wav"
+          curl -L --fail --retry 3 -o audio/ava6.wav "https://resource2.heygen.ai/text_to_speech/41c7f7673e3446989ca7d697467a23f2/660022d4c7ff428cbb5787685e8df571/id=7916a31e-0f16-4e01-9623-f0d0c065fbe0.wav"
+          curl -L --fail --retry 3 -o audio/ava7.wav "https://resource2.heygen.ai/text_to_speech/41c7f7673e3446989ca7d697467a23f2/660022d4c7ff428cbb5787685e8df571/id=ebce663f-0cd8-4b0e-8f98-bdc838ba1280.wav"
+          curl -L --fail --retry 3 -o audio/ava8.wav "https://resource2.heygen.ai/text_to_speech/41c7f7673e3446989ca7d697467a23f2/660022d4c7ff428cbb5787685e8df571/id=d1059548-22e4-4275-a03e-8b18b5fdd770.wav"
+          curl -L --fail --retry 3 -o audio/ava9.wav "https://resource2.heygen.ai/text_to_speech/41c7f7673e3446989ca7d697467a23f2/660022d4c7ff428cbb5787685e8df571/id=2dcd6b62-33ba-4bcd-b1f4-f8a191d3ba1d.wav"
+
+      - name: Commit premium voice clips
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add audio/ava*.wav
+          git commit -m "Add premium Ava voice clips" || exit 0
+          git push
