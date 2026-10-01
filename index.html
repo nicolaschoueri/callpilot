@@ -519,15 +519,23 @@ function playFinal(){
 
 function startCall(){
   active=true;
-  selectedLang=(document.documentElement.lang||'en').toLowerCase().startsWith('fr')?'fr':'en';
-  step=0;
+  const siteLang=(document.documentElement.lang||'en').toLowerCase().startsWith('fr')?'fr':'en';
   tr.innerHTML=''; $('summary').style.display='none'; quick.innerHTML='';
   Object.keys(data).forEach(k=>data[k]='—');
   startTime=Date.now(); clearInterval(timerInt);
   timerInt=setInterval(()=>$('timer').textContent=fmt(Math.floor((Date.now()-startTime)/1000)),1000);
   $('timer').textContent='00:00';
   try{$('avaAudio').pause();}catch(e){}
-  speak((selectedLang==='fr'?promptsFr:promptsEn)[0]);
+
+  if(siteLang==='fr'){
+    selectedLang=null;
+    step=-1;
+    playLanguageMenu();
+  }else{
+    selectedLang='en';
+    step=0;
+    speak(promptsEn[0]);
+  }
 }
 
 function finish(){
