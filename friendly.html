@@ -305,7 +305,12 @@ function pickVoiceFor(lang){
   if(!('speechSynthesis' in window)) return null;
   const voices=speechSynthesis.getVoices();
   if(/^fr/i.test(lang)){
-    return voices.find(v=>/^fr-CA/i.test(v.lang)) || voices.find(v=>/^fr/i.test(v.lang)) || voices[0];
+    const preferredFr=['Amélie','Amelie','Marie','Audrey'];
+    for(const name of preferredFr){
+      const v=voices.find(x=>x.name.includes(name) && /^fr-CA/i.test(x.lang));
+      if(v) return v;
+    }
+    return voices.find(v=>/^fr-CA/i.test(v.lang) && !/Thomas/i.test(v.name)) || voices.find(v=>/^fr-CA/i.test(v.lang)) || voices.find(v=>/^fr/i.test(v.lang)) || voices[0];
   }
   const preferred=['Samantha','Ava','Serena','Karen','Moira','Tessa','Siri'];
   for(const name of preferred){
@@ -323,7 +328,7 @@ function speakSystem(text,lang,onDone,addLine=true){
   const u=new SpeechSynthesisUtterance(text);
   u.lang=lang;
   const v=pickVoiceFor(lang); if(v) u.voice=v;
-  u.rate=0.94; u.pitch=1.0;
+  u.rate=0.92; u.pitch=1.0;
   u.onend=()=>{ if(onDone) onDone(); };
   u.onerror=()=>{ if(onDone) onDone(); };
   speechSynthesis.speak(u);
@@ -340,7 +345,7 @@ function playLanguageMenu(){
   quick.appendChild(b1); quick.appendChild(b2);
   if('speechSynthesis' in window){
     try{speechSynthesis.cancel();}catch(e){}
-    const u1=new SpeechSynthesisUtterance(textFr); u1.lang='fr-CA'; const v1=pickVoiceFor('fr-CA'); if(v1)u1.voice=v1; u1.rate=.94;
+    const u1=new SpeechSynthesisUtterance(textFr); u1.lang='fr-CA'; const v1=pickVoiceFor('fr-CA'); if(v1)u1.voice=v1; u1.rate=.92;
     const u2=new SpeechSynthesisUtterance(textEn); u2.lang='en-CA'; const v2=pickVoiceFor('en-CA'); if(v2)u2.voice=v2; u2.rate=.94;
     speechSynthesis.speak(u1); speechSynthesis.speak(u2);
   }
