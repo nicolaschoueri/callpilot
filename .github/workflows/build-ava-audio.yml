@@ -1,0 +1,52 @@
+name: Build Ava Audio
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/build-ava-audio.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  build-audio:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install speech tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y espeak-ng ffmpeg
+          mkdir -p audio
+
+      - name: Generate Ava audio
+        shell: bash
+        run: |
+          set -e
+          synth () {
+            n="$1"
+            text="$2"
+            espeak-ng -v en-us+f3 -s 165 -p 60 -a 180 -w "/tmp/a${n}.wav" "$text"
+            ffmpeg -loglevel error -y -i "/tmp/a${n}.wav" -ac 1 -ar 22050 -codec:a libmp3lame -b:a 32k "audio/a${n}.mp3"
+          }
+
+          synth 1 "CallPilot Trades, this is Ava, the virtual receptionist. How can I help you today?"
+          synth 2 "I can help with that. Is this an emergency, or can it wait for a regular appointment?"
+          synth 3 "What city are you located in?"
+          synth 4 "And what name should I put on the service request?"
+          synth 5 "I have Friday, October 2 at 10:30 A.M. or 2 P.M., and Saturday, October 3 at 9 A.M. Which time works best for you?"
+          synth 6 "Perfect. You're booked for Friday, October 2 at 10:30 A.M. Your appointment is confirmed, and you'll receive a confirmation message with the details. Thank you for calling CallPilot Trades."
+          synth 7 "Perfect. You're booked for Friday, October 2 at 2 P.M. Your appointment is confirmed, and you'll receive a confirmation message with the details. Thank you for calling CallPilot Trades."
+          synth 8 "Perfect. You're booked for Saturday, October 3 at 9 A.M. Your appointment is confirmed, and you'll receive a confirmation message with the details. Thank you for calling CallPilot Trades."
+          synth 9 "Perfect. Your appointment is booked and confirmed. You'll receive a confirmation message with the appointment details. Thank you for calling CallPilot Trades."
+
+      - name: Commit audio files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add audio/*.mp3
+          git commit -m "Add embedded Ava audio" || exit 0
+          git push
