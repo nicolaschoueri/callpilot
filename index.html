@@ -589,21 +589,31 @@ function isIOSDevice(){
     (navigator.platform==='MacIntel' && navigator.maxTouchPoints>1);
 }
 
+function prepareAudioSession(){
+  try{
+    if(navigator.audioSession){
+      // Work around an iOS Safari bug where a tab can report audio playback
+      // while output is silently routed through the ringer-muted session.
+      navigator.audioSession.type='ambient';
+      setTimeout(()=>{ try{ navigator.audioSession.type='playback'; }catch(e){} },0);
+    }
+  }catch(e){}
+}
+
 function playPrompt(i){
   if(lastAudio){lastAudio.pause();}
   if('speechSynthesis' in window) speechSynthesis.cancel();
-  status.textContent='Ava is speaking…';
+  prepareAudioSession();
+  status.textContent='🔊 Ava is speaking…';
   add('AVA',prompts[i]);
   const done=()=>{status.textContent='Your turn';showChoices(i);};
 
-  // iPhone/iPad Safari can report external WAV playback as started while staying silent.
-  // Use the device's built-in speech engine there so Ava is always audible.
-  if(isIOSDevice()){
-    speakFallback(prompts[i],done);
-    return;
-  }
-
-  lastAudio=new Audio(audioUrls[i]);
+  lastAudio=new Audio();
+  lastAudio.src=audioUrls[i];
+  lastAudio.preload='auto';
+  lastAudio.volume=1;
+  lastAudio.muted=false;
+  lastAudio.setAttribute('playsinline','');
   let fallbackUsed=false;
   let watchdog=null;
   const fallback=()=>{
@@ -615,10 +625,11 @@ function playPrompt(i){
   };
   lastAudio.onended=()=>{ if(watchdog) clearTimeout(watchdog); done(); };
   lastAudio.onerror=fallback;
+  try{ lastAudio.load(); }catch(e){}
   const p=lastAudio.play();
   watchdog=setTimeout(()=>{
     if(!lastAudio || lastAudio.paused || lastAudio.currentTime<0.2) fallback();
-  },1800);
+  },2200);
   if(p && typeof p.catch==='function') p.catch(fallback);
 }
 
@@ -626,15 +637,16 @@ function playFinal(){
   const opt=finalOptions[data.appt] || genericFinal;
   if(lastAudio){lastAudio.pause();}
   if('speechSynthesis' in window) speechSynthesis.cancel();
-  status.textContent='Ava is confirming your appointment…';
+  prepareAudioSession();
+  status.textContent='🔊 Ava is confirming your appointment…';
   add('AVA',opt.text);
 
-  if(isIOSDevice()){
-    speakFallback(opt.text,finish);
-    return;
-  }
-
-  lastAudio=new Audio(opt.audio);
+  lastAudio=new Audio();
+  lastAudio.src=opt.audio;
+  lastAudio.preload='auto';
+  lastAudio.volume=1;
+  lastAudio.muted=false;
+  lastAudio.setAttribute('playsinline','');
   let fallbackUsed=false;
   let watchdog=null;
   const fallback=()=>{
@@ -646,10 +658,11 @@ function playFinal(){
   };
   lastAudio.onended=()=>{ if(watchdog) clearTimeout(watchdog); finish(); };
   lastAudio.onerror=fallback;
+  try{ lastAudio.load(); }catch(e){}
   const p=lastAudio.play();
   watchdog=setTimeout(()=>{
     if(!lastAudio || lastAudio.paused || lastAudio.currentTime<0.2) fallback();
-  },1800);
+  },2200);
   if(p && typeof p.catch==='function') p.catch(fallback);
 }
 
@@ -681,10 +694,11 @@ function reply(text){
   quick.innerHTML=''; $('answer').value='';
   if(step===4){playFinal();return;}
   step++;
-  setTimeout(()=>playPrompt(step),220);
+  playPrompt(step);
 }
 
 function startCall(){
+  prepareAudioSession();
   active=true;step=0;tr.innerHTML='';$('summary').style.display='none';
   Object.keys(data).forEach(k=>data[k]='—');
   startTime=Date.now();clearInterval(timerInt);
