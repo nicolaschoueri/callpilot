@@ -170,6 +170,18 @@ export class CallPilotLive {
 
     ws.on("open", () => {
       this.config.store.setCallStatus(sessionId, "connected");
+
+      // Always begin the call with the bilingual keypad menu.
+      ws.send(
+        JSON.stringify({
+          type: "response.create",
+          event_id: "language_menu_" + sessionId,
+          response: {
+            instructions:
+              'Say exactly: "Pour le français, appuyez sur 1. For English, press 2." Then stop speaking and wait for the caller to choose a language.'
+          }
+        })
+      );
     });
 
     ws.on("message", async (raw) => {
@@ -177,6 +189,41 @@ export class CallPilotLive {
       try {
         envelope = JSON.parse(raw.toString());
       } catch {
+        return;
+      }
+
+      if (envelope.type === "input_audio_buffer.dtmf_event_received") {
+        const key = String(envelope.event || "");
+        if (key === "1" || key === "2") {
+          const french = key === "1";
+          const languageInstruction = french
+            ? "The caller selected French with keypad 1. From now on, speak only natural Canadian French unless the caller explicitly asks to switch languages."
+            : "The caller selected English with keypad 2. From now on, speak only English unless the caller explicitly asks to switch languages.";
+
+          ws.send(
+            JSON.stringify({
+              type: "conversation.item.create",
+              event_id: "language_choice_" + sessionId + "_" + key,
+              item: {
+                type: "message",
+                role: "system",
+                content: [{ type: "input_text", text: languageInstruction }]
+              }
+            })
+          );
+
+          ws.send(
+            JSON.stringify({
+              type: "response.create",
+              event_id: "language_ack_" + sessionId + "_" + key,
+              response: {
+                instructions: french
+                  ? `The caller selected French. Say exactly: "Merci d'avoir appelé ${business.name}. Je suis Ava. Comment puis-je vous aider aujourd'hui?" Then continue the call naturally in Canadian French.`
+                  : `The caller selected English. Say exactly: "Thank you for calling ${business.name}. I'm Ava. How can I help you today?" Then continue the call naturally in English.`
+              }
+            })
+          );
+        }
         return;
       }
 
