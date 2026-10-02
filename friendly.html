@@ -156,6 +156,32 @@ footer{border-top:1px solid var(--line);padding:28px 0 38px;color:#8f8579;font-s
 
 </style>
 
+
+<style id="business-demo-styles">
+.cp-business{padding:86px 0;background:linear-gradient(180deg,#09131f,#0d1723)}
+.cp-business *{box-sizing:border-box}
+.cp-owner-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:18px;margin-top:30px;align-items:start}
+.cp-card{background:linear-gradient(155deg,#142131,#0d1723);border:1px solid rgba(213,173,99,.18);border-radius:24px;padding:22px;box-shadow:0 22px 60px rgba(0,0,0,.18)}
+.cp-card h3{margin:0 0 6px;font-size:22px}.cp-muted{color:#9f9588;font-size:13px;line-height:1.5}
+.cp-label{display:block;color:#d7cfc2;font-size:12px;font-weight:800;margin:16px 0 7px}
+.cp-input{width:100%;border:1px solid rgba(255,255,255,.09);background:#08121e;color:#f7f1e6;border-radius:12px;padding:12px 13px;font:inherit}
+.cp-pills{display:flex;flex-wrap:wrap;gap:8px}.cp-pill{border:1px solid rgba(213,173,99,.22);background:#101c2b;color:#d9d1c4;border-radius:999px;padding:9px 12px;font-size:12px;font-weight:800;cursor:pointer}
+.cp-pill.active{background:linear-gradient(135deg,#d5ad63,#f0d79c);color:#1b140b;border-color:transparent}
+.cp-toggle{display:flex;justify-content:space-between;gap:14px;align-items:center;padding:13px 0;border-top:1px solid rgba(255,255,255,.06);margin-top:14px}
+.cp-switch{position:relative;width:48px;height:28px;flex:0 0 auto}.cp-switch input{opacity:0;width:0;height:0}.cp-slider{position:absolute;inset:0;background:#273347;border-radius:999px;cursor:pointer;transition:.2s}.cp-slider:after{content:"";position:absolute;width:20px;height:20px;left:4px;top:4px;background:#fff;border-radius:50%;transition:.2s}.cp-switch input:checked+.cp-slider{background:#b88746}.cp-switch input:checked+.cp-slider:after{transform:translateX(20px)}
+.cp-preview{border:1px solid rgba(213,173,99,.18);background:#091522;border-radius:18px;padding:16px;margin-top:16px}
+.cp-preview .cp-script{font-size:15px;line-height:1.55;color:#eee2cf;margin:10px 0 0}
+.cp-flow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}
+.cp-flow-step{position:relative;background:#101b29;border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:16px;min-height:130px}
+.cp-flow-step b{display:block;margin:8px 0 6px}.cp-flow-step p{margin:0;color:#968d82;font-size:12px;line-height:1.45}.cp-flow-num{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;background:#2d2518;color:#e4c983;font-weight:900}
+.cp-flow-step:not(:last-child):after{content:"→";position:absolute;right:-10px;top:51px;color:#d5ad63;font-weight:900;z-index:3}
+.cp-note-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}.cp-note{padding:14px;border-radius:15px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.06)}.cp-note strong{display:block;font-size:13px}.cp-note span{display:block;color:#90877b;font-size:11px;line-height:1.4;margin-top:4px}
+.cp-dash{margin-top:18px}.cp-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.cp-stat{background:#0b1522;border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:15px}.cp-stat b{display:block;font-size:25px}.cp-stat span{color:#8f877c;font-size:11px}
+.cp-leads{margin-top:12px;border:1px solid rgba(255,255,255,.07);border-radius:16px;overflow:hidden}.cp-lead{display:grid;grid-template-columns:1.05fr .8fr .75fr 1.25fr;gap:8px;padding:12px 14px;border-top:1px solid rgba(255,255,255,.06);align-items:center;font-size:12px}.cp-lead:first-child{border-top:0;background:rgba(213,173,99,.06)}.cp-tag{display:inline-flex;width:max-content;padding:5px 8px;border-radius:999px;background:rgba(213,173,99,.10);color:#e5ca8c;font-weight:800;font-size:10px}.cp-tag.urgent{background:rgba(183,55,72,.16);color:#f2a5af}
+.cp-statusline{margin-top:12px;padding:12px 14px;border-radius:14px;background:rgba(213,173,99,.07);border:1px solid rgba(213,173,99,.16);font-size:12px;color:#d9cfbf}
+@media(max-width:900px){.cp-owner-grid{grid-template-columns:1fr}.cp-flow,.cp-note-grid,.cp-stats{grid-template-columns:1fr 1fr}.cp-flow-step:nth-child(2):after{display:none}}
+@media(max-width:560px){.cp-business{padding:64px 0}.cp-flow,.cp-note-grid,.cp-stats{grid-template-columns:1fr}.cp-flow-step:after{display:none}.cp-lead{grid-template-columns:1fr 1fr}.cp-lead .cp-outcome{grid-column:1/-1}}
+</style>
 </head>
 <body>
 <nav>
@@ -164,7 +190,7 @@ footer{border-top:1px solid var(--line);padding:28px 0 38px;color:#8f8579;font-s
     <div class="navlinks">
       <a href="#how">How it works</a>
       <a href="#demo">Demo</a>
-      <a href="#live-demo">Try Ava</a><a href="#pricing">Pricing</a>
+      <a href="#live-demo">Try Ava</a><a href="#owner-demo">Owner demo</a><a href="#pricing">Pricing</a>
       <a class="navcta" href="#live-demo">Try Ava live</a>
       <div class="lang-switch" aria-label="Website language">
         <button type="button" id="siteEn" class="active" aria-pressed="true">EN</button>
@@ -641,6 +667,92 @@ if('speechSynthesis' in window)speechSynthesis.onvoiceschanged=()=>speechSynthes
   </div>
 </section>
 
+
+<section id="owner-demo" class="cp-business">
+  <div class="container">
+    <div class="kicker" data-cp-en="Business owner demo" data-cp-fr="Démo propriétaire">Business owner demo</div>
+    <h2 data-cp-en="Set up Ava for any service business." data-cp-fr="Configurez Ava pour n’importe quelle entreprise de service.">Set up Ava for any service business.</h2>
+    <p class="lede" data-cp-en="This is the missing piece: the contractor keeps the phone number customers already know. Calls can forward to Ava only when unanswered, after hours, or whenever the owner chooses." data-cp-fr="Voici la pièce manquante : l’entrepreneur conserve le numéro que ses clients connaissent déjà. Les appels peuvent être transférés à Ava seulement lorsqu’ils restent sans réponse, après les heures d’ouverture ou selon les règles choisies par le propriétaire.">This is the missing piece: the contractor keeps the phone number customers already know. Calls can forward to Ava only when unanswered, after hours, or whenever the owner chooses.</p>
+
+    <div class="cp-owner-grid">
+      <div class="cp-card">
+        <h3 data-cp-en="1. Configure the business" data-cp-fr="1. Configurez l’entreprise">1. Configure the business</h3>
+        <div class="cp-muted" data-cp-en="A sales-demo version of the onboarding screen a paying customer would use." data-cp-fr="Une version démo de l’écran d’intégration qu’utiliserait un client payant.">A sales-demo version of the onboarding screen a paying customer would use.</div>
+
+        <label class="cp-label" data-cp-en="Business name" data-cp-fr="Nom de l’entreprise">Business name</label>
+        <input id="cpBusinessName" class="cp-input" value="West Island Home Services">
+
+        <label class="cp-label" data-cp-en="Business type" data-cp-fr="Type d’entreprise">Business type</label>
+        <div class="cp-pills" id="cpTrades">
+          <button type="button" class="cp-pill active" data-trade="hvac">HVAC</button>
+          <button type="button" class="cp-pill" data-trade="plumbing" data-cp-en="Plumbing" data-cp-fr="Plomberie">Plumbing</button>
+          <button type="button" class="cp-pill" data-trade="electrical" data-cp-en="Electrical" data-cp-fr="Électricité">Electrical</button>
+          <button type="button" class="cp-pill" data-trade="roofing" data-cp-en="Roofing" data-cp-fr="Toiture">Roofing</button>
+        </div>
+
+        <label class="cp-label" data-cp-en="When should Ava answer?" data-cp-fr="Quand Ava doit-elle répondre?">When should Ava answer?</label>
+        <div class="cp-pills" id="cpRouting">
+          <button type="button" class="cp-pill active" data-mode="missed" data-cp-en="When I don't answer" data-cp-fr="Quand je ne réponds pas">When I don't answer</button>
+          <button type="button" class="cp-pill" data-mode="after" data-cp-en="After hours" data-cp-fr="Après les heures">After hours</button>
+          <button type="button" class="cp-pill" data-mode="overflow" data-cp-en="Overflow / busy" data-cp-fr="Débordement / occupé">Overflow / busy</button>
+        </div>
+
+        <label class="cp-label" data-cp-en="Service area" data-cp-fr="Zone de service">Service area</label>
+        <input id="cpServiceArea" class="cp-input" value="Kirkland, Pointe-Claire, Beaconsfield, DDO">
+
+        <div class="cp-toggle">
+          <div><strong data-cp-en="Connect a calendar" data-cp-fr="Connecter un calendrier">Connect a calendar</strong><div class="cp-muted" data-cp-en="Optional — Ava can still take the request without one." data-cp-fr="Optionnel — Ava peut quand même prendre la demande sans calendrier.">Optional — Ava can still take the request without one.</div></div>
+          <label class="cp-switch"><input id="cpCalendar" type="checkbox"><span class="cp-slider"></span></label>
+        </div>
+        <div class="cp-toggle">
+          <div><strong data-cp-en="Urgent-call transfer" data-cp-fr="Transfert des appels urgents">Urgent-call transfer</strong><div class="cp-muted" data-cp-en="Let Ava offer the owner an immediate transfer for true emergencies." data-cp-fr="Permettre à Ava d’offrir un transfert immédiat au propriétaire pour une vraie urgence.">Let Ava offer the owner an immediate transfer for true emergencies.</div></div>
+          <label class="cp-switch"><input id="cpTransfer" type="checkbox" checked><span class="cp-slider"></span></label>
+        </div>
+      </div>
+
+      <div class="cp-card">
+        <h3 data-cp-en="2. Ava adapts automatically" data-cp-fr="2. Ava s’adapte automatiquement">2. Ava adapts automatically</h3>
+        <div class="cp-muted" id="cpConfigSummary">HVAC • unanswered calls • calendar optional</div>
+        <div class="cp-preview">
+          <div class="smallcap" data-cp-en="Ava's opening script" data-cp-fr="Script d’accueil d’Ava">Ava's opening script</div>
+          <div id="cpScript" class="cp-script"></div>
+        </div>
+        <div class="cp-statusline" id="cpOutcome"></div>
+
+        <div class="cp-flow">
+          <div class="cp-flow-step"><div class="cp-flow-num">1</div><b data-cp-en="Customer calls" data-cp-fr="Le client appelle">Customer calls</b><p data-cp-en="They dial the contractor's existing business number." data-cp-fr="Il compose le numéro d’entreprise existant de l’entrepreneur.">They dial the contractor's existing business number.</p></div>
+          <div class="cp-flow-step"><div class="cp-flow-num">2</div><b data-cp-en="Call forwards" data-cp-fr="L’appel est transféré">Call forwards</b><p id="cpRouteText">If the owner does not answer, the carrier forwards the call.</p></div>
+          <div class="cp-flow-step"><div class="cp-flow-num">3</div><b data-cp-en="Ava answers" data-cp-fr="Ava répond">Ava answers</b><p data-cp-en="A dedicated CallPilot routing number identifies the business and loads its rules." data-cp-fr="Un numéro de routage CallPilot dédié identifie l’entreprise et charge ses règles.">A dedicated CallPilot routing number identifies the business and loads its rules.</p></div>
+          <div class="cp-flow-step"><div class="cp-flow-num">4</div><b data-cp-en="Book or notify" data-cp-fr="Réserver ou aviser">Book or notify</b><p id="cpCalendarText">Without a calendar, Ava captures the preferred time and sends the owner the complete request.</p></div>
+        </div>
+
+        <div class="cp-note-grid">
+          <div class="cp-note"><strong data-cp-en="Existing number stays" data-cp-fr="Le numéro existant reste">Existing number stays</strong><span data-cp-en="No need to advertise a new customer-facing number." data-cp-fr="Pas besoin d’annoncer un nouveau numéro aux clients.">No need to advertise a new customer-facing number.</span></div>
+          <div class="cp-note"><strong data-cp-en="No website required" data-cp-fr="Aucun site requis">No website required</strong><span data-cp-en="CallPilot works from the phone flow; a website is optional." data-cp-fr="CallPilot fonctionne avec le parcours téléphonique; un site web est optionnel.">CallPilot works from the phone flow; a website is optional.</span></div>
+          <div class="cp-note"><strong data-cp-en="Calendar optional" data-cp-fr="Calendrier optionnel">Calendar optional</strong><span data-cp-en="Connect one for live booking, or simply receive the lead." data-cp-fr="Connectez-en un pour réserver en direct, ou recevez simplement le prospect.">Connect one for live booking, or simply receive the lead.</span></div>
+          <div class="cp-note"><strong data-cp-en="One profile per business" data-cp-fr="Un profil par entreprise">One profile per business</strong><span data-cp-en="Each paying customer gets separate greetings, rules and routing." data-cp-fr="Chaque client payant a ses propres messages d’accueil, règles et routage.">Each paying customer gets separate greetings, rules and routing.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cp-card cp-dash">
+      <h3 data-cp-en="3. Owner dashboard demo" data-cp-fr="3. Démo du tableau de bord">3. Owner dashboard demo</h3>
+      <div class="cp-muted" data-cp-en="What the contractor could see after Ava handles calls." data-cp-fr="Ce que l’entrepreneur pourrait voir après qu’Ava a traité les appels.">What the contractor could see after Ava handles calls.</div>
+      <div class="cp-stats">
+        <div class="cp-stat"><b>12</b><span data-cp-en="calls handled today" data-cp-fr="appels traités aujourd’hui">calls handled today</span></div>
+        <div class="cp-stat"><b>5</b><span data-cp-en="appointments booked" data-cp-fr="rendez-vous réservés">appointments booked</span></div>
+        <div class="cp-stat"><b>2</b><span data-cp-en="urgent calls" data-cp-fr="appels urgents">urgent calls</span></div>
+        <div class="cp-stat"><b>7</b><span data-cp-en="missed calls recovered" data-cp-fr="appels manqués récupérés">missed calls recovered</span></div>
+      </div>
+      <div class="cp-leads">
+        <div class="cp-lead"><strong>Marie L.</strong><span>Kirkland</span><span class="cp-tag urgent" data-cp-en="Emergency" data-cp-fr="Urgence">Emergency</span><span class="cp-outcome" data-cp-en="No heat — same-day dispatch requested" data-cp-fr="Pas de chauffage — intervention le jour même demandée">No heat — same-day dispatch requested</span></div>
+        <div class="cp-lead"><strong>John P.</strong><span>Pointe-Claire</span><span class="cp-tag" data-cp-en="Booked" data-cp-fr="Réservé">Booked</span><span class="cp-outcome" data-cp-en="Service appointment captured by Ava" data-cp-fr="Rendez-vous de service pris par Ava">Service appointment captured by Ava</span></div>
+        <div class="cp-lead"><strong>Alex R.</strong><span>Beaconsfield</span><span class="cp-tag" data-cp-en="New lead" data-cp-fr="Nouveau prospect">New lead</span><span class="cp-outcome" data-cp-en="Owner notified by SMS with full call summary" data-cp-fr="Propriétaire avisé par SMS avec le résumé complet">Owner notified by SMS with full call summary</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="pricing" class="section light">
   <div class="container">
     <div class="kicker">Packages</div>
@@ -698,6 +810,72 @@ if('speechSynthesis' in window)speechSynthesis.onvoiceschanged=()=>speechSynthes
 </footer>
 
 
+
+
+<script id="business-demo-script">
+(function(){
+  const tradeCopy={
+    hvac:{
+      en:"Thank you for calling {business}. I'm Ava. I can help with heating, cooling or service requests. Are you calling about an urgent problem or would you like to schedule service?",
+      fr:"Merci d'avoir appelé {business}. Je suis Ava. Je peux vous aider pour le chauffage, la climatisation ou une demande de service. Est-ce une urgence ou souhaitez-vous prendre rendez-vous?"
+    },
+    plumbing:{
+      en:"Thank you for calling {business}. I'm Ava. I can help with leaks, blocked drains, flooding or regular plumbing service. First, is there active flooding or an immediate danger?",
+      fr:"Merci d'avoir appelé {business}. Je suis Ava. Je peux vous aider pour une fuite, un drain bloqué, une inondation ou un service de plomberie. D'abord, y a-t-il une inondation active ou un danger immédiat?"
+    },
+    electrical:{
+      en:"Thank you for calling {business}. I'm Ava. I can help with outages, breakers, outlets or electrical service. Before we continue, are there sparks, smoke or any immediate safety concern?",
+      fr:"Merci d'avoir appelé {business}. Je suis Ava. Je peux vous aider pour une panne, un disjoncteur, une prise ou un service électrique. Avant de continuer, y a-t-il des étincelles, de la fumée ou un danger immédiat?"
+    },
+    roofing:{
+      en:"Thank you for calling {business}. I'm Ava. I can help with roof leaks, storm damage, missing shingles or inspections. Is water actively entering the property right now?",
+      fr:"Merci d'avoir appelé {business}. Je suis Ava. Je peux vous aider pour une fuite de toiture, des dommages de tempête, des bardeaux manquants ou une inspection. Est-ce que l'eau entre activement dans la propriété en ce moment?"
+    }
+  };
+  const labels={
+    hvac:{en:"HVAC",fr:"CVAC"}, plumbing:{en:"Plumbing",fr:"Plomberie"},
+    electrical:{en:"Electrical",fr:"Électricité"}, roofing:{en:"Roofing",fr:"Toiture"}
+  };
+  let trade="hvac", mode="missed";
+  const $=id=>document.getElementById(id);
+  function lang(){return (document.documentElement.lang||"en").toLowerCase().startsWith("fr")?"fr":"en";}
+  function copyElements(){
+    const l=lang();
+    document.querySelectorAll("[data-cp-en][data-cp-fr]").forEach(el=>{el.textContent=el.getAttribute("data-cp-"+l);});
+  }
+  function render(){
+    copyElements();
+    const l=lang(), business=$("cpBusinessName").value.trim()||"your business";
+    $("cpScript").textContent=tradeCopy[trade][l].replace("{business}",business);
+    const modeText={
+      missed:{en:"unanswered calls",fr:"appels sans réponse"},
+      after:{en:"after-hours calls",fr:"appels après les heures"},
+      overflow:{en:"busy / overflow calls",fr:"appels en débordement"}
+    }[mode][l];
+    $("cpConfigSummary").textContent=labels[trade][l]+" • "+modeText+" • "+($("cpCalendar").checked?(l==="fr"?"calendrier connecté":"calendar connected"):(l==="fr"?"calendrier optionnel":"calendar optional"));
+    const route={
+      missed:{en:"If the owner does not answer, the carrier forwards the call to Ava.",fr:"Si le propriétaire ne répond pas, le fournisseur téléphonique transfère l'appel à Ava."},
+      after:{en:"After business hours, calls forward to Ava automatically.",fr:"Après les heures d'ouverture, les appels sont transférés automatiquement à Ava."},
+      overflow:{en:"When the line is busy or the team cannot answer, overflow calls route to Ava.",fr:"Lorsque la ligne est occupée ou que l'équipe ne peut pas répondre, les appels en débordement sont acheminés vers Ava."}
+    }[mode][l];
+    $("cpRouteText").textContent=route;
+    const cal=$("cpCalendar").checked;
+    $("cpCalendarText").textContent=cal
+      ?(l==="fr"?"Avec un calendrier connecté, Ava peut voir les disponibilités et confirmer le rendez-vous pendant l'appel.":"With a connected calendar, Ava can see availability and confirm the appointment during the call.")
+      :(l==="fr"?"Sans calendrier, Ava recueille l'heure préférée et envoie la demande complète au propriétaire.":"Without a calendar, Ava captures the preferred time and sends the owner the complete request.");
+    const transfer=$("cpTransfer").checked;
+    $("cpOutcome").textContent=(l==="fr"
+      ?(cal?"✓ Réservation en direct activée. ":"✓ Demande et préférence d'heure captées. ")+(transfer?"Les urgences peuvent être transférées immédiatement au propriétaire.":"Les urgences suivent les règles de répartition sans transfert direct.")
+      :(cal?"✓ Live booking enabled. ":"✓ Request and preferred time captured. ")+(transfer?"Urgent calls can be transferred immediately to the owner.":"Urgent calls follow dispatch rules without a direct transfer."));
+  }
+  document.querySelectorAll("#cpTrades .cp-pill").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll("#cpTrades .cp-pill").forEach(x=>x.classList.remove("active"));b.classList.add("active");trade=b.dataset.trade;render();}));
+  document.querySelectorAll("#cpRouting .cp-pill").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll("#cpRouting .cp-pill").forEach(x=>x.classList.remove("active"));b.classList.add("active");mode=b.dataset.mode;render();}));
+  ["cpBusinessName","cpServiceArea"].forEach(id=>$(id).addEventListener("input",render));
+  ["cpCalendar","cpTransfer"].forEach(id=>$(id).addEventListener("change",render));
+  ["siteEn","siteFr"].forEach(id=>$(id)?.addEventListener("click",()=>setTimeout(render,0)));
+  render();
+})();
+</script>
 
 <script id="site-i18n">
 (function(){
