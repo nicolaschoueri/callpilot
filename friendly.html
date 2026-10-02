@@ -214,6 +214,20 @@ footer{border-top:1px solid var(--line);padding:28px 0 38px;color:#8f8579;font-s
 @media(max-width:900px){.cp-proof-grid{grid-template-columns:1fr}.cp-setup-grid,.cp-integrations,.cp-pilot-metrics{grid-template-columns:1fr 1fr}}
 @media(max-width:560px){.cp-setup-grid,.cp-integrations,.cp-pilot-metrics{grid-template-columns:1fr}}
 </style>
+
+<style id="missing-proof-demo-styles">
+.cp-proof-demo-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:28px}
+.cp-proof-demo-card{background:linear-gradient(155deg,#142131,#0d1723);border:1px solid var(--line);border-radius:24px;padding:22px;box-shadow:0 22px 60px rgba(0,0,0,.18)}
+.cp-demo-badge{display:inline-flex;padding:6px 9px;border-radius:999px;background:rgba(213,173,99,.1);border:1px solid rgba(213,173,99,.22);color:#e6ca8c;font-size:10px;font-weight:900;letter-spacing:.08em}
+.cp-phone-sim{margin-top:16px;background:#08121e;border:1px solid rgba(255,255,255,.07);border-radius:22px;padding:18px}
+.cp-phone-row{display:flex;justify-content:space-between;gap:14px;align-items:center}.cp-phone-number{font-size:18px;font-weight:900}.cp-phone-status{font-size:12px;color:#9f9588;margin-top:4px}
+.cp-stage-list{display:grid;gap:9px;margin-top:16px}.cp-stage{display:flex;gap:10px;align-items:center;padding:11px 12px;border-radius:14px;background:#0d1826;border:1px solid rgba(255,255,255,.06);opacity:.55}.cp-stage.active{opacity:1;border-color:rgba(213,173,99,.35);background:rgba(213,173,99,.07)}.cp-stage.done{opacity:1}.cp-stage-dot{width:10px;height:10px;border-radius:50%;background:#526172;flex:0 0 auto}.cp-stage.active .cp-stage-dot,.cp-stage.done .cp-stage-dot{background:#d5ad63}.cp-stage b{font-size:13px}.cp-stage span{display:block;color:#91877b;font-size:11px;margin-top:2px}
+.cp-sim-btn{width:100%;margin-top:14px;border:0;border-radius:14px;background:linear-gradient(135deg,#d5ad63,#f0d79c);color:#1b140a;padding:13px 15px;font-weight:950;cursor:pointer}
+.cp-case-metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:16px}.cp-case-metric{padding:15px;border-radius:15px;background:#0b1522;border:1px solid rgba(255,255,255,.07)}.cp-case-metric b{display:block;font-size:24px}.cp-case-metric span{display:block;color:#8f877c;font-size:11px;margin-top:3px}
+.cp-quote-demo{margin-top:14px;padding:15px;border-radius:15px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.06);font-size:13px;line-height:1.55;color:#c8bdad}.cp-quote-demo strong{display:block;color:#e4c984;margin-bottom:5px}
+.cp-disclaimer{margin-top:13px;color:#8f877c;font-size:11px;line-height:1.5}
+@media(max-width:900px){.cp-proof-demo-grid{grid-template-columns:1fr}}@media(max-width:560px){.cp-case-metrics{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
 <nav>
@@ -923,6 +937,49 @@ if('speechSynthesis' in window)speechSynthesis.onvoiceschanged=()=>speechSynthes
   </div>
 </section>
 
+
+<section id="proof-demo" class="section">
+  <div class="container">
+    <div class="kicker" data-cp-en="Proof demo" data-cp-fr="Démo de preuve">Proof demo</div>
+    <h2 data-cp-en="See what the missing live proof will look like." data-cp-fr="Voyez à quoi ressemblera la preuve en production.">See what the missing live proof will look like.</h2>
+    <p class="lede" data-cp-en="Until the real phone line and first customer pilots are activated, these two demos show the exact experience CallPilot is designed to prove." data-cp-fr="Jusqu'à l'activation de la vraie ligne téléphonique et des premiers pilotes clients, ces deux démos montrent exactement l'expérience que CallPilot est conçu pour démontrer.">Until the real phone line and first customer pilots are activated, these two demos show the exact experience CallPilot is designed to prove.</p>
+
+    <div class="cp-proof-demo-grid">
+      <div class="cp-proof-demo-card" id="call-proof-demo">
+        <div class="cp-demo-badge" data-cp-en="SIMULATED PHONE DEMO" data-cp-fr="DÉMO TÉLÉPHONIQUE SIMULÉE">SIMULATED PHONE DEMO</div>
+        <h3 style="font-size:24px;margin:12px 0 6px" data-cp-en="What happens when the owner misses the call" data-cp-fr="Ce qui se passe lorsque le propriétaire manque l'appel">What happens when the owner misses the call</h3>
+        <div class="cp-muted" data-cp-en="Run the sequence to demonstrate the real-world routing flow." data-cp-fr="Lancez la séquence pour démontrer le routage réel prévu.">Run the sequence to demonstrate the real-world routing flow.</div>
+        <div class="cp-phone-sim">
+          <div class="cp-phone-row"><div><div class="cp-phone-number">West Island Home Services</div><div class="cp-phone-status" id="cpSimStatus" data-cp-en="Ready for simulated call" data-cp-fr="Prêt pour l'appel simulé">Ready for simulated call</div></div><div style="font-size:30px">☎</div></div>
+          <div class="cp-stage-list">
+            <div class="cp-stage" data-stage="0"><div class="cp-stage-dot"></div><div><b data-cp-en="Customer calls the normal business number" data-cp-fr="Le client appelle le numéro habituel">Customer calls the normal business number</b><span data-cp-en="The public number does not change." data-cp-fr="Le numéro public ne change pas.">The public number does not change.</span></div></div>
+            <div class="cp-stage" data-stage="1"><div class="cp-stage-dot"></div><div><b data-cp-en="Owner gets the first chance to answer" data-cp-fr="Le propriétaire a la première chance de répondre">Owner gets the first chance to answer</b><span data-cp-en="No answer / busy / after-hours rule is triggered." data-cp-fr="La règle sans réponse / occupé / hors heures est déclenchée.">No answer / busy / after-hours rule is triggered.</span></div></div>
+            <div class="cp-stage" data-stage="2"><div class="cp-stage-dot"></div><div><b data-cp-en="Call forwards to Ava" data-cp-fr="L'appel est transféré à Ava">Call forwards to Ava</b><span data-cp-en="Ava loads the correct business profile automatically." data-cp-fr="Ava charge automatiquement le bon profil d'entreprise.">Ava loads the correct business profile automatically.</span></div></div>
+            <div class="cp-stage" data-stage="3"><div class="cp-stage-dot"></div><div><b data-cp-en="Ava qualifies the caller" data-cp-fr="Ava qualifie l'appelant">Ava qualifies the caller</b><span data-cp-en="Name, callback, issue, urgency, city/address, preferred date and time." data-cp-fr="Nom, rappel, problème, urgence, ville/adresse, date et heure préférées.">Name, callback, issue, urgency, city/address, preferred date and time.</span></div></div>
+            <div class="cp-stage" data-stage="4"><div class="cp-stage-dot"></div><div><b data-cp-en="Owner receives the result" data-cp-fr="Le propriétaire reçoit le résultat">Owner receives the result</b><span data-cp-en="Booked appointment or clean pending lead, depending on calendar setup." data-cp-fr="Rendez-vous confirmé ou prospect en attente, selon la configuration du calendrier.">Booked appointment or clean pending lead, depending on calendar setup.</span></div></div>
+          </div>
+          <button class="cp-sim-btn" id="cpRunPhoneDemo" data-cp-en="Run simulated missed call" data-cp-fr="Lancer l'appel manqué simulé">Run simulated missed call</button>
+        </div>
+        <div class="cp-disclaimer" data-cp-en="This demonstrates the intended live phone experience. It is not a real telephone call." data-cp-fr="Ceci démontre l'expérience téléphonique prévue en production. Il ne s'agit pas d'un vrai appel téléphonique.">This demonstrates the intended live phone experience. It is not a real telephone call.</div>
+      </div>
+
+      <div class="cp-proof-demo-card">
+        <div class="cp-demo-badge" data-cp-en="ILLUSTRATIVE PILOT" data-cp-fr="PILOTE ILLUSTRATIF">ILLUSTRATIVE PILOT</div>
+        <h3 style="font-size:24px;margin:12px 0 6px" data-cp-en="What a future customer case study could show" data-cp-fr="Ce qu'une future étude de cas client pourrait montrer">What a future customer case study could show</h3>
+        <div class="cp-muted" data-cp-en="Fictional example using a sample contractor. These are not actual customer results." data-cp-fr="Exemple fictif utilisant un entrepreneur fictif. Il ne s'agit pas de vrais résultats clients.">Fictional example using a sample contractor. These are not actual customer results.</div>
+        <div class="cp-case-metrics">
+          <div class="cp-case-metric"><b>37</b><span data-cp-en="eligible calls handled" data-cp-fr="appels admissibles traités">eligible calls handled</span></div>
+          <div class="cp-case-metric"><b>11</b><span data-cp-en="missed leads recovered" data-cp-fr="prospects manqués récupérés">missed leads recovered</span></div>
+          <div class="cp-case-metric"><b>7</b><span data-cp-en="appointments created" data-cp-fr="rendez-vous créés">appointments created</span></div>
+          <div class="cp-case-metric"><b>4</b><span data-cp-en="urgent same-day requests" data-cp-fr="demandes urgentes le jour même">urgent same-day requests</span></div>
+        </div>
+        <div class="cp-quote-demo"><strong data-cp-en="Example testimonial format — not a real testimonial" data-cp-fr="Format de témoignage exemple — ce n'est pas un vrai témoignage">Example testimonial format — not a real testimonial</strong><span data-cp-en="“We used to send missed calls to voicemail. The pilot showed us how quickly those calls could become complete service requests for our team.”" data-cp-fr="« Nous envoyions auparavant les appels manqués à la boîte vocale. Le pilote nous a montré à quelle vitesse ces appels pouvaient devenir des demandes de service complètes pour notre équipe. »">“We used to send missed calls to voicemail. The pilot showed us how quickly those calls could become complete service requests for our team.”</span></div>
+        <div class="cp-disclaimer" data-cp-en="When real pilots are completed, this area should be replaced with verified customer names, dates and actual measured results." data-cp-fr="Lorsque de vrais pilotes seront terminés, cette section devra être remplacée par des noms de clients vérifiés, des dates et de vrais résultats mesurés.">When real pilots are completed, this area should be replaced with verified customer names, dates and actual measured results.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="pilot-proof" class="section light">
   <div class="container">
     <div class="kicker" data-cp-en="Pilot proof" data-cp-fr="Preuves du pilote">Pilot proof</div>
@@ -1311,6 +1368,36 @@ if('speechSynthesis' in window)speechSynthesis.onvoiceschanged=()=>speechSynthes
   document.getElementById("siteEn")?.addEventListener("click",()=>setTimeout(calc,0));
   document.getElementById("siteFr")?.addEventListener("click",()=>setTimeout(calc,0));
   calc();
+})();
+</script>
+
+<script id="missing-proof-demo-script">
+(function(){
+  const btn=document.getElementById("cpRunPhoneDemo");
+  if(!btn) return;
+  const stages=[...document.querySelectorAll(".cp-stage")];
+  const status=document.getElementById("cpSimStatus");
+  let running=false;
+  const en=["Incoming call…","Owner phone ringing…","Forwarding to Ava…","Ava is qualifying the caller…","Lead sent to owner ✓"];
+  const fr=["Appel entrant…","Téléphone du propriétaire en sonnerie…","Transfert vers Ava…","Ava qualifie l'appelant…","Prospect envoyé au propriétaire ✓"];
+  btn.addEventListener("click",()=>{
+    if(running) return;
+    running=true; stages.forEach(s=>s.classList.remove("active","done"));
+    const isFr=(document.documentElement.lang||"en").startsWith("fr");
+    let i=0;
+    const step=()=>{
+      if(i>0){stages[i-1].classList.remove("active");stages[i-1].classList.add("done")}
+      if(i<stages.length){
+        stages[i].classList.add("active");
+        if(status) status.textContent=(isFr?fr:en)[i];
+        i++; setTimeout(step,700);
+      }else{
+        if(status) status.textContent=isFr?"Démo terminée — Ava a capté l'appel.":"Demo complete — Ava captured the call.";
+        running=false;
+      }
+    };
+    step();
+  });
 })();
 </script>
 </body>
