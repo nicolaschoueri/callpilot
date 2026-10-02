@@ -25,6 +25,17 @@ main{padding:26px 28px 60px;min-width:0}.topbar{display:flex;justify-content:spa
 @media(max-width:980px){.app{grid-template-columns:82px 1fr}.brand{font-size:0;justify-content:center;padding-inline:0}.demo-badge{display:none}.nav button{font-size:0;text-align:center}.nav button:before{font-size:18px}.nav button[data-page="overview"]:before{content:"⌂"}.nav button[data-page="calls"]:before{content:"☎"}.nav button[data-page="appointments"]:before{content:"▣"}.nav button[data-page="ava"]:before{content:"✦"}.nav button[data-page="routing"]:before{content:"↪"}.side-bottom .back{font-size:0}.side-bottom .back:before{content:"←";font-size:18px}.grid4{grid-template-columns:1fr 1fr}.route-map{grid-template-columns:1fr 1fr}.route:nth-child(2):after{display:none}}
 @media(max-width:680px){.app{display:block}.app aside{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:12px}.brand{justify-content:flex-start;font-size:18px;padding:0 0 10px}.demo-badge{display:inline-block;margin:0 0 10px}.nav{grid-template-columns:repeat(5,1fr);gap:5px}.nav button{font-size:0;padding:10px}.side-bottom{display:none}main{padding:18px 12px 42px}.topbar{align-items:flex-start}.topbar h1{font-size:24px}.grid4,.split,.call-detail,.route-map{grid-template-columns:1fr}.route:after{display:none}.row{grid-template-columns:1fr 1fr}.row.head{display:none}.row .wide{grid-column:1/-1}}
 </style>
+
+<style id="competitive-portal-styles">
+.money-card{margin-top:14px;display:grid;grid-template-columns:1.05fr .95fr;gap:14px}
+.money-panel{background:linear-gradient(155deg,rgba(29,44,61,.98),rgba(10,19,30,.98));border:1px solid rgba(213,173,99,.18);border-radius:20px;padding:18px}
+.money-hero{font-size:42px;font-weight:950;letter-spacing:-.05em;margin:5px 0}.money-sub{color:#9c9386;font-size:11px;line-height:1.5}
+.money-inputs{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:15px}.money-input label{display:block;font-size:9px;text-transform:uppercase;letter-spacing:.06em;color:#8c8377;margin-bottom:5px}.money-input input,.money-input select{width:100%;background:#07111c;border:1px solid rgba(255,255,255,.09);color:white;padding:9px;border-radius:10px}
+.money-breakdown{display:grid;gap:9px}.money-row{display:flex;justify-content:space-between;gap:12px;padding:11px 12px;border-radius:12px;background:#0a1521;border:1px solid rgba(255,255,255,.055);font-size:12px}.money-row span{color:#958c80}.money-row b.good{color:var(--ok)}
+.teach-card{margin-top:14px}.teach-grid{display:grid;grid-template-columns:1fr .9fr;gap:14px}.teach-card textarea{width:100%;min-height:95px;resize:vertical;background:#07111c;border:1px solid rgba(255,255,255,.09);color:#fff;padding:11px 12px;border-radius:11px;font:inherit}.quick-rules{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}.quick-rule{border:1px solid rgba(255,255,255,.08);background:#111f30;color:#ddd1c0;border-radius:999px;padding:7px 9px;font-size:10px;font-weight:800;cursor:pointer}.rule-list{display:grid;gap:8px;margin-top:10px}.saved-rule{padding:10px 11px;border-radius:11px;background:#0a1521;border:1px solid rgba(255,255,255,.06);font-size:11px;color:#c6bbaa}.saved-rule:before{content:"✓ ";color:var(--ok);font-weight:950}
+.ready-card{margin-top:14px}.ready-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:12px}.ready-step{padding:12px;border-radius:12px;background:#0a1521;border:1px solid rgba(255,255,255,.06);font-size:11px}.ready-step b{display:block;font-size:12px;margin-bottom:4px}.ready-step span{color:#8f867a}.ready-step.done b:before{content:"✓ ";color:var(--ok)}.ready-step.pending b:before{content:"○ ";color:#e4c789}
+@media(max-width:820px){.money-card,.teach-grid{grid-template-columns:1fr}.money-inputs,.ready-grid{grid-template-columns:1fr 1fr}}@media(max-width:560px){.money-inputs,.ready-grid{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
 <div class="app">
@@ -55,7 +66,30 @@ main{padding:26px 28px 60px;min-width:0}.topbar{display:flex;justify-content:spa
     <div class="card metric"><div class="label" data-en="Calls handled today" data-fr="Appels traités aujourd’hui">Calls handled today</div><div class="value">12</div><div class="delta good" data-en="+7 recovered missed calls" data-fr="+7 appels manqués récupérés">+7 recovered missed calls</div></div>
     <div class="card metric"><div class="label" data-en="Appointments booked" data-fr="Rendez-vous réservés">Appointments booked</div><div class="value">5</div><div class="delta" data-en="Calendar currently optional" data-fr="Calendrier actuellement optionnel">Calendar currently optional</div></div>
     <div class="card metric"><div class="label" data-en="Urgent calls" data-fr="Appels urgents">Urgent calls</div><div class="value">2</div><div class="delta" data-en="Owner transfer enabled" data-fr="Transfert au propriétaire activé">Owner transfer enabled</div></div>
-    <div class="card metric"><div class="label" data-en="Estimated recovered revenue" data-fr="Revenus récupérés estimés">Estimated recovered revenue</div><div class="value">$2,940</div><div class="delta good" data-en="Demo estimate" data-fr="Estimation démo">Demo estimate</div></div>
+    <div class="card metric"><div class="label" data-en="Estimated recovered revenue" data-fr="Revenus récupérés estimés">Estimated recovered revenue</div><div class="value" id="revenueMetric">$2,940</div><div class="delta good" data-en="Demo estimate" data-fr="Estimation démo">Demo estimate</div></div>
+  </div>
+
+  <div class="money-card">
+    <div class="money-panel">
+      <div class="smallcap" style="color:#e4c789" data-en="MONEY AVA RECOVERED • DEMO" data-fr="ARGENT RÉCUPÉRÉ PAR AVA • DÉMO">MONEY AVA RECOVERED • DEMO</div>
+      <div class="money-hero" id="moneyRecovered">$2,940</div>
+      <div class="money-sub" data-en="Estimated opportunity value captured from calls the business may otherwise have missed. This is a demo calculation, not guaranteed revenue." data-fr="Valeur estimée des occasions captées à partir d'appels que l'entreprise aurait pu manquer. Il s'agit d'un calcul démo, et non d'un revenu garanti.">Estimated opportunity value captured from calls the business may otherwise have missed. This is a demo calculation, not guaranteed revenue.</div>
+      <div class="money-inputs">
+        <div class="money-input"><label data-en="Recovered leads" data-fr="Prospects récupérés">Recovered leads</label><input id="mrLeads" type="number" min="0" value="7"></div>
+        <div class="money-input"><label data-en="Avg. job value" data-fr="Valeur moy. travail">Avg. job value</label><input id="mrJob" type="number" min="0" value="420"></div>
+        <div class="money-input"><label data-en="Monthly plan" data-fr="Forfait mensuel">Monthly plan</label><select id="mrPlan"><option value="199">Starter $199</option><option value="349" selected>Growth $349</option><option value="599">Multi-Tech $599</option></select></div>
+      </div>
+    </div>
+    <div class="money-panel">
+      <h2 style="margin:0 0 11px" data-en="Monthly opportunity summary" data-fr="Résumé mensuel des occasions">Monthly opportunity summary</h2>
+      <div class="money-breakdown">
+        <div class="money-row"><span data-en="Opportunity captured" data-fr="Occasions captées">Opportunity captured</span><b id="mrGross">$2,940</b></div>
+        <div class="money-row"><span data-en="CallPilot plan" data-fr="Forfait CallPilot">CallPilot plan</span><b id="mrCost">$349</b></div>
+        <div class="money-row"><span data-en="Difference" data-fr="Différence">Difference</span><b class="good" id="mrNet">$2,591</b></div>
+        <div class="money-row"><span data-en="Break-even jobs" data-fr="Travaux pour rentabiliser">Break-even jobs</span><b id="mrBreakEven">0.9</b></div>
+      </div>
+      <div class="notice" style="margin-bottom:0" data-en="Use the contractor's own average job value. Completed revenue should only be reported once the business confirms the job was actually won and completed." data-fr="Utilisez la valeur moyenne des travaux de l'entrepreneur. Le revenu réalisé ne devrait être déclaré qu'une fois le travail réellement gagné et complété confirmé par l'entreprise.">Use the contractor's own average job value. Completed revenue should only be reported once the business confirms the job was actually won and completed.</div>
+    </div>
   </div>
   <div class="section-title"><div><h2 data-en="Recent Ava calls" data-fr="Appels récents d’Ava">Recent Ava calls</h2><p data-en="Every call becomes a structured lead." data-fr="Chaque appel devient un prospect structuré.">Every call becomes a structured lead.</p></div></div>
   <div class="table">
@@ -83,6 +117,28 @@ main{padding:26px 28px 60px;min-width:0}.topbar{display:flex;justify-content:spa
         <div class="bubble ava"><small>AVA</small><span data-en="I can help. Is there any smell of gas, smoke, fire, or another immediate danger?" data-fr="Je peux vous aider. Y a-t-il une odeur de gaz, de la fumée, un incendie ou un autre danger immédiat?">I can help. Is there any smell of gas, smoke, fire, or another immediate danger?</span></div>
         <div class="bubble"><small data-en="CUSTOMER" data-fr="CLIENT">CUSTOMER</small><span data-en="No, but I need someone today." data-fr="Non, mais j’ai besoin de quelqu’un aujourd’hui.">No, but I need someone today.</span></div>
         <div class="bubble ava"><small>AVA</small><span data-en="Understood. I’ll capture your address and phone number and offer the first same-day dispatch option." data-fr="Compris. Je vais prendre votre adresse et votre numéro de téléphone et proposer la première option d’intervention le jour même.">Understood. I’ll capture your address and phone number and offer the first same-day dispatch option.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card teach-card">
+    <div class="section-title" style="margin:0 0 12px"><div><h2 data-en="Teach Ava from this call" data-fr="Apprendre à Ava à partir de cet appel">Teach Ava from this call</h2><p data-en="Turn a correction into a business rule without rewriting scripts." data-fr="Transformez une correction en règle d'entreprise sans réécrire les scénarios.">Turn a correction into a business rule without rewriting scripts.</p></div></div>
+    <div class="teach-grid">
+      <div>
+        <textarea id="teachRule" data-placeholder-en="Example: We do not service Laval. Never quote prices over the phone." data-placeholder-fr="Exemple : Nous ne desservons pas Laval. Ne jamais donner de prix au téléphone." placeholder="Example: We do not service Laval. Never quote prices over the phone."></textarea>
+        <div class="quick-rules">
+          <button class="quick-rule" data-rule-en="We do not service Laval." data-rule-fr="Nous ne desservons pas Laval." data-en="Exclude Laval" data-fr="Exclure Laval">Exclude Laval</button>
+          <button class="quick-rule" data-rule-en="Never quote prices over the phone." data-rule-fr="Ne jamais donner de prix au téléphone." data-en="No phone pricing" data-fr="Pas de prix au téléphone">No phone pricing</button>
+          <button class="quick-rule" data-rule-en="Emergency calls after 8 PM should alert the owner immediately." data-rule-fr="Les appels urgents après 20 h doivent alerter immédiatement le propriétaire." data-en="After-hours emergency" data-fr="Urgence hors heures">After-hours emergency</button>
+        </div>
+        <div style="margin-top:10px"><button class="save" id="teachSave" data-en="Save rule to Ava" data-fr="Enregistrer la règle dans Ava">Save rule to Ava</button></div>
+      </div>
+      <div>
+        <b style="font-size:12px" data-en="Active learned rules" data-fr="Règles apprises actives">Active learned rules</b>
+        <div class="rule-list" id="ruleList">
+          <div class="saved-rule" data-en="Do not promise technician arrival times that are not confirmed." data-fr="Ne pas promettre une heure d'arrivée du technicien qui n'est pas confirmée.">Do not promise technician arrival times that are not confirmed.</div>
+          <div class="saved-rule" data-en="If there is a gas smell, tell the caller to leave the area and contact emergency services." data-fr="S'il y a une odeur de gaz, demander à l'appelant de quitter les lieux et de contacter les services d'urgence.">If there is a gas smell, tell the caller to leave the area and contact emergency services.</div>
+        </div>
       </div>
     </div>
   </div>
@@ -115,6 +171,19 @@ main{padding:26px 28px 60px;min-width:0}.topbar{display:flex;justify-content:spa
       <div class="toggle-row"><div><b data-en="Emergency triage" data-fr="Triage des urgences">Emergency triage</b><span data-en="Ask safety questions before dispatch." data-fr="Poser les questions de sécurité avant l’intervention.">Ask safety questions before dispatch.</span></div><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
       <div class="toggle-row"><div><b data-en="Urgent owner transfer" data-fr="Transfert urgent au propriétaire">Urgent owner transfer</b><span data-en="Offer immediate transfer for defined emergencies." data-fr="Offrir un transfert immédiat pour les urgences définies.">Offer immediate transfer for defined emergencies.</span></div><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
       <div class="notice" id="scriptPreview"></div>
+    </div>
+  </div>
+
+  <div class="card ready-card">
+    <h2 style="margin:0" data-en="Go-live readiness" data-fr="Préparation à la mise en service">Go-live readiness</h2>
+    <p style="color:#948b7f;font-size:12px;line-height:1.5" data-en="The demo makes every setup step visible so the contractor always knows what remains." data-fr="La démo rend chaque étape visible afin que l'entrepreneur sache toujours ce qu'il reste à faire.">The demo makes every setup step visible so the contractor always knows what remains.</p>
+    <div class="ready-grid">
+      <div class="ready-step done"><b data-en="Business profile" data-fr="Profil d'entreprise">Business profile</b><span data-en="Name, trade, service area" data-fr="Nom, métier, territoire">Name, trade, service area</span></div>
+      <div class="ready-step done"><b data-en="Hours + emergencies" data-fr="Heures + urgences">Hours + emergencies</b><span data-en="Rules configured" data-fr="Règles configurées">Rules configured</span></div>
+      <div class="ready-step done"><b data-en="Language" data-fr="Langue">Language</b><span data-en="English + French" data-fr="Anglais + français">English + French</span></div>
+      <div class="ready-step done"><b data-en="Calendar mode" data-fr="Mode calendrier">Calendar mode</b><span data-en="Optional / lead capture" data-fr="Optionnel / capture de prospect">Optional / lead capture</span></div>
+      <div class="ready-step done"><b data-en="Test script" data-fr="Tester le scénario">Test script</b><span data-en="Demo ready" data-fr="Démo prête">Demo ready</span></div>
+      <div class="ready-step pending"><b data-en="Live phone activation" data-fr="Activation téléphonique">Live phone activation</b><span data-en="Requires production telephony" data-fr="Nécessite la téléphonie de production">Requires production telephony</span></div>
     </div>
   </div>
 </section>
@@ -175,6 +244,38 @@ main{padding:26px 28px 60px;min-width:0}.topbar{display:flex;justify-content:spa
  document.getElementById("trade").onchange=updateScript;
  document.getElementById("saveBtn").onclick=()=>{const b=document.getElementById("saveBtn");const old=b.textContent;b.textContent=currentLang==="fr"?"Enregistré ✓":"Saved ✓";setTimeout(()=>b.textContent=old,1200);};
  updateScript();
+})();
+</script>
+
+<script id="competitive-portal-script">
+(function(){
+  const money=()=>{
+    const leads=Math.max(0,+document.getElementById("mrLeads")?.value||0);
+    const job=Math.max(0,+document.getElementById("mrJob")?.value||0);
+    const plan=Math.max(0,+document.getElementById("mrPlan")?.value||0);
+    const gross=leads*job,net=gross-plan,be=job?plan/job:0;
+    const lang=(document.documentElement.lang||"en").startsWith("fr")?"fr-CA":"en-CA";
+    const fmt=n=>new Intl.NumberFormat(lang,{style:"currency",currency:"CAD",maximumFractionDigits:0}).format(n);
+    [["moneyRecovered",gross],["mrGross",gross],["mrCost",plan],["mrNet",net]].forEach(([id,v])=>{const e=document.getElementById(id);if(e)e.textContent=fmt(v)});
+    const r=document.getElementById("revenueMetric");if(r)r.textContent=fmt(gross);
+    const b=document.getElementById("mrBreakEven");if(b)b.textContent=be.toFixed(1);
+  };
+  ["mrLeads","mrJob","mrPlan"].forEach(id=>document.getElementById(id)?.addEventListener("input",money));
+  document.querySelectorAll(".quick-rule").forEach(btn=>btn.addEventListener("click",()=>{
+    const fr=(document.documentElement.lang||"en").startsWith("fr");
+    const ta=document.getElementById("teachRule");if(ta)ta.value=fr?btn.dataset.ruleFr:btn.dataset.ruleEn;
+  }));
+  document.getElementById("teachSave")?.addEventListener("click",()=>{
+    const ta=document.getElementById("teachRule"), list=document.getElementById("ruleList");
+    const val=(ta?.value||"").trim(); if(!val||!list)return;
+    const d=document.createElement("div");d.className="saved-rule";d.textContent=val;list.prepend(d);ta.value="";
+    const b=document.getElementById("teachSave"),fr=(document.documentElement.lang||"en").startsWith("fr");
+    const old=b.textContent;b.textContent=fr?"Règle enregistrée ✓":"Rule saved ✓";setTimeout(()=>b.textContent=old,1100);
+  });
+  function ph(){const ta=document.getElementById("teachRule");if(!ta)return;ta.placeholder=(document.documentElement.lang||"en").startsWith("fr")?ta.dataset.placeholderFr:ta.dataset.placeholderEn;money();}
+  document.getElementById("enBtn")?.addEventListener("click",()=>setTimeout(ph,0));
+  document.getElementById("frBtn")?.addEventListener("click",()=>setTimeout(ph,0));
+  money();ph();
 })();
 </script>
 </body>
