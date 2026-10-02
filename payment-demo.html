@@ -28,7 +28,12 @@
 </section></div></div>
 <script>
 let selected={name:"Growth",price:349};
-document.querySelectorAll(".plan").forEach(p=>p.onclick=()=>{document.querySelectorAll(".plan").forEach(x=>x.classList.remove("active"));p.classList.add("active");selected={name:p.dataset.plan,price:+p.dataset.price};document.getElementById("total").textContent="$"+selected.price+" CAD"});
+const planEls=[...document.querySelectorAll(".plan")];
+function selectPlan(el){planEls.forEach(x=>x.classList.remove("active"));el.classList.add("active");selected={name:el.dataset.plan,price:+el.dataset.price};document.getElementById("total").textContent="$"+selected.price+" CAD"}
+planEls.forEach(p=>p.onclick=()=>selectPlan(p));
+const requested=(new URLSearchParams(location.search).get("plan")||"").toLowerCase();
+const planMap={"starter":"Starter","growth":"Growth","multi-tech":"Multi-Tech","multitech":"Multi-Tech"};
+if(planMap[requested]){const el=planEls.find(p=>p.dataset.plan===planMap[requested]);if(el)selectPlan(el);}
 function lang(l){document.documentElement.lang=l;document.getElementById("en").classList.toggle("active",l==="en");document.getElementById("fr").classList.toggle("active",l==="fr");document.querySelectorAll("[data-en][data-fr]").forEach(el=>el.textContent=el.dataset[l])}
 document.getElementById("en").onclick=()=>lang("en");document.getElementById("fr").onclick=()=>lang("fr");
 document.getElementById("pay").onclick=()=>{document.getElementById("formView").style.display="none";document.getElementById("processing").style.display="block";setTimeout(()=>{document.getElementById("processing").style.display="none";document.getElementById("success").style.display="block";document.getElementById("successPlan").textContent=selected.name},900)};
