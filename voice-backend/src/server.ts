@@ -142,6 +142,11 @@ function setupStatus() {
   };
 }
 
+function routeId(req: express.Request) {
+  const value = routeId(req);
+  return Array.isArray(value) ? String(value[0] || "") : String(value || "");
+}
+
 function adminAllowed(req: express.Request) {
   if (!ADMIN_TOKEN) return DEMO_MODE;
   return req.headers.authorization === `Bearer ${ADMIN_TOKEN}`;
@@ -281,7 +286,7 @@ app.post("/api/businesses", requireAdmin, (req, res) => {
 });
 
 app.get("/api/businesses/:id", requireAdmin, (req, res) => {
-  const business = store.getBusiness(req.params.id);
+  const business = store.getBusiness(routeId(req));
   if (!business) {
     res.sendStatus(404);
     return;
@@ -290,7 +295,7 @@ app.get("/api/businesses/:id", requireAdmin, (req, res) => {
 });
 
 app.patch("/api/businesses/:id", requireAdmin, (req, res) => {
-  const existing = store.getBusiness(req.params.id);
+  const existing = store.getBusiness(routeId(req));
   if (!existing) {
     res.sendStatus(404);
     return;
@@ -308,30 +313,30 @@ app.patch("/api/businesses/:id", requireAdmin, (req, res) => {
 });
 
 app.get("/api/businesses/:id/calls", requireAdmin, (req, res) => {
-  if (!store.getBusiness(req.params.id)) {
+  if (!store.getBusiness(routeId(req))) {
     res.sendStatus(404);
     return;
   }
-  res.json({ calls: store.listCalls(req.params.id) });
+  res.json({ calls: store.listCalls(routeId(req)) });
 });
 
 app.get("/api/businesses/:id/leads", requireAdmin, (req, res) => {
-  if (!store.getBusiness(req.params.id)) {
+  if (!store.getBusiness(routeId(req))) {
     res.sendStatus(404);
     return;
   }
-  res.json({ leads: store.listLeads(req.params.id) });
+  res.json({ leads: store.listLeads(routeId(req)) });
 });
 
 app.get(
   "/api/businesses/:id/appointments",
   requireAdmin,
   (req, res) => {
-    if (!store.getBusiness(req.params.id)) {
+    if (!store.getBusiness(routeId(req))) {
       res.sendStatus(404);
       return;
     }
-    res.json({ appointments: store.listAppointments(req.params.id) });
+    res.json({ appointments: store.listAppointments(routeId(req)) });
   }
 );
 
@@ -339,7 +344,7 @@ app.get(
   "/api/businesses/:id/availability",
   requireAdmin,
   (req, res) => {
-    const business = store.getBusiness(req.params.id);
+    const business = store.getBusiness(routeId(req));
     if (!business) {
       res.sendStatus(404);
       return;
