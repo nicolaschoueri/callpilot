@@ -201,6 +201,19 @@ footer{border-top:1px solid var(--line);padding:28px 0 38px;color:#8f8579;font-s
 @media(max-width:900px){.cp-trust-grid{grid-template-columns:1fr 1fr}.cp-roi{grid-template-columns:1fr}.cp-demo-banner{grid-template-columns:1fr}.cp-faq{grid-template-columns:1fr}}
 @media(max-width:560px){.cp-trust-grid,.cp-roi-metrics{grid-template-columns:1fr}}
 </style>
+
+<style id="final-gap-styles">
+.cp-proof-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:28px}
+.cp-proof-card{background:linear-gradient(155deg,#142131,#0d1723);border:1px solid var(--line);border-radius:22px;padding:22px}
+.cp-proof-card h3{margin:0 0 8px}.cp-proof-card p{color:#9f9588;font-size:13px;line-height:1.55}
+.cp-transcript{margin-top:14px;display:grid;gap:9px}.cp-line{padding:12px 14px;border-radius:14px;background:#0b1522;border:1px solid rgba(255,255,255,.06);font-size:13px;line-height:1.45}.cp-line b{display:block;color:#e3c887;font-size:10px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}.cp-line.caller{margin-left:28px;background:rgba(255,255,255,.035)}.cp-line.caller b{color:#a8b4c6}
+.cp-setup-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:26px}.cp-setup-step{background:#111b28;border:1px solid var(--line);border-radius:18px;padding:18px}.cp-setup-step .n{width:30px;height:30px;border-radius:9px;background:#2d2518;color:#e4c983;display:grid;place-items:center;font-weight:900}.cp-setup-step h3{font-size:16px;margin:12px 0 6px}.cp-setup-step p{margin:0;color:#9d9386;font-size:12px;line-height:1.5}
+.cp-integrations{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:20px}.cp-integration{background:#111b28;border:1px solid var(--line);border-radius:18px;padding:18px}.cp-integration strong{display:block}.cp-integration span{display:block;color:#9d9386;font-size:12px;line-height:1.45;margin-top:5px}.cp-status{display:inline-flex;width:max-content;margin-top:10px;padding:5px 8px;border-radius:999px;font-size:10px;font-weight:900}.cp-status.demo{background:rgba(213,173,99,.11);color:#e5ca8c}.cp-status.ready{background:rgba(117,201,154,.10);color:#a9e5c3}.cp-status.connect{background:rgba(119,156,220,.10);color:#b4caee}
+.cp-pilot-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}.cp-pilot-metric{background:#0b1522;border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:16px}.cp-pilot-metric b{display:block;font-size:20px}.cp-pilot-metric span{display:block;color:#8f877c;font-size:11px;margin-top:5px;line-height:1.4}
+.cp-honest-note{margin-top:16px;padding:14px;border-radius:14px;background:rgba(213,173,99,.06);border:1px solid rgba(213,173,99,.18);color:#aaa092;font-size:12px;line-height:1.5}
+@media(max-width:900px){.cp-proof-grid{grid-template-columns:1fr}.cp-setup-grid,.cp-integrations,.cp-pilot-metrics{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.cp-setup-grid,.cp-integrations,.cp-pilot-metrics{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
 <nav>
@@ -210,7 +223,7 @@ footer{border-top:1px solid var(--line);padding:28px 0 38px;color:#8f8579;font-s
       <a href="#how">How it works</a><a href="#trust" data-cp-en="Trust" data-cp-fr="Confiance">Trust</a><a href="#roi">ROI</a><a href="#customer-journey" data-cp-en="Process" data-cp-fr="Processus">Process</a>
       <a href="#demo">Demo</a>
       <a href="#live-demo">Try Ava</a><a href="#owner-demo" data-cp-en="Owner demo" data-cp-fr="Démo propriétaire">Owner demo</a><a href="#pricing">Pricing</a>
-      <a class="navcta" href="#live-demo">Try Ava live</a>
+      <a href="portal.html" data-cp-en="Owner login" data-cp-fr="Connexion propriétaire">Owner login</a><a class="navcta" href="payment-demo.html?plan=growth" data-cp-en="Start demo" data-cp-fr="Démarrer la démo">Start demo</a>
       <div class="lang-switch" aria-label="Website language">
         <button type="button" id="siteEn" class="active" aria-pressed="true">EN</button>
         <button type="button" id="siteFr" aria-pressed="false">FR</button>
@@ -850,6 +863,81 @@ if('speechSynthesis' in window)speechSynthesis.onvoiceschanged=()=>speechSynthes
   </div>
 </section>
 
+
+<section id="operations" class="section">
+  <div class="container">
+    <div class="kicker" data-cp-en="See what happens after the call" data-cp-fr="Voyez ce qui se passe après l'appel">See what happens after the call</div>
+    <h2 data-cp-en="Ava talks. CallPilot organizes the result." data-cp-fr="Ava parle. CallPilot organise le résultat.">Ava talks. CallPilot organizes the result.</h2>
+    <p class="lede" data-cp-en="The caller gets a natural conversation while the owner gets a structured lead, appointment request, urgency flag and call summary." data-cp-fr="L'appelant profite d'une conversation naturelle tandis que le propriétaire reçoit un prospect structuré, une demande de rendez-vous, un niveau d'urgence et un résumé de l'appel.">The caller gets a natural conversation while the owner gets a structured lead, appointment request, urgency flag and call summary.</p>
+    <div class="cp-proof-grid">
+      <div class="cp-proof-card">
+        <h3 data-cp-en="Sample call transcript" data-cp-fr="Exemple de transcription d'appel">Sample call transcript</h3>
+        <p data-cp-en="Example only — this is not a real customer call." data-cp-fr="Exemple seulement — il ne s'agit pas d'un vrai appel client.">Example only — this is not a real customer call.</p>
+        <div class="cp-transcript">
+          <div class="cp-line"><b>Ava</b><span data-cp-en="Thanks for calling West Island Home Services. I'm Ava. Is this an urgent problem or would you like to schedule service?" data-cp-fr="Merci d'avoir appelé West Island Home Services. Je suis Ava. S'agit-il d'un problème urgent ou souhaitez-vous planifier un service?">Thanks for calling West Island Home Services. I'm Ava. Is this an urgent problem or would you like to schedule service?</span></div>
+          <div class="cp-line caller"><b data-cp-en="Caller" data-cp-fr="Client">Caller</b><span data-cp-en="My furnace stopped and the house is getting cold." data-cp-fr="Ma fournaise a arrêté et la maison devient froide.">My furnace stopped and the house is getting cold.</span></div>
+          <div class="cp-line"><b>Ava</b><span data-cp-en="I can help. Is there any smoke, gas smell or immediate danger?" data-cp-fr="Je peux vous aider. Y a-t-il de la fumée, une odeur de gaz ou un danger immédiat?">I can help. Is there any smoke, gas smell or immediate danger?</span></div>
+          <div class="cp-line caller"><b data-cp-en="Caller" data-cp-fr="Client">Caller</b><span data-cp-en="No. I just need someone today if possible." data-cp-fr="Non. J'aurais simplement besoin de quelqu'un aujourd'hui si possible.">No. I just need someone today if possible.</span></div>
+          <div class="cp-line"><b>Ava</b><span data-cp-en="Understood. I'll confirm your name, callback number, address and the best same-day time window." data-cp-fr="Compris. Je vais confirmer votre nom, votre numéro de rappel, votre adresse et la meilleure plage horaire aujourd'hui.">Understood. I'll confirm your name, callback number, address and the best same-day time window.</span></div>
+        </div>
+      </div>
+      <div class="cp-proof-card">
+        <h3 data-cp-en="What the owner receives" data-cp-fr="Ce que reçoit le propriétaire">What the owner receives</h3>
+        <div class="cp-leads" style="margin-top:14px">
+          <div class="cp-lead"><strong>Marie L.</strong><span>Kirkland</span><span class="cp-tag urgent" data-cp-en="Urgent" data-cp-fr="Urgent">Urgent</span><span class="cp-outcome" data-cp-en="No heat • prefers today 3–5 PM" data-cp-fr="Pas de chauffage • préfère aujourd'hui 15 h–17 h">No heat • prefers today 3–5 PM</span></div>
+          <div class="cp-lead"><strong data-cp-en="Callback" data-cp-fr="Rappel">Callback</strong><span>514-555-0142</span><span class="cp-tag" data-cp-en="Confirmed" data-cp-fr="Confirmé">Confirmed</span><span class="cp-outcome" data-cp-en="Address and phone confirmed by Ava" data-cp-fr="Adresse et téléphone confirmés par Ava">Address and phone confirmed by Ava</span></div>
+          <div class="cp-lead"><strong data-cp-en="Outcome" data-cp-fr="Résultat">Outcome</strong><span data-cp-en="Same day" data-cp-fr="Même jour">Same day</span><span class="cp-tag" data-cp-en="Owner alert" data-cp-fr="Alerte propriétaire">Owner alert</span><span class="cp-outcome" data-cp-en="Ready for dispatch or confirmation" data-cp-fr="Prêt pour répartition ou confirmation">Ready for dispatch or confirmation</span></div>
+        </div>
+        <div class="actions" style="margin-top:16px"><a class="btn secondary" href="portal.html" data-cp-en="Open demo owner portal" data-cp-fr="Ouvrir le portail propriétaire démo">Open demo owner portal</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="phone-setup" class="section light">
+  <div class="container">
+    <div class="kicker" data-cp-en="Phone setup" data-cp-fr="Configuration téléphonique">Phone setup</div>
+    <h2 data-cp-en="Keep your number. Forward only the calls you want Ava to answer." data-cp-fr="Gardez votre numéro. Transférez seulement les appels auxquels Ava doit répondre.">Keep your number. Forward only the calls you want Ava to answer.</h2>
+    <p class="lede" data-cp-en="The live setup is designed around conditional call forwarding. Exact activation steps vary by carrier or phone system, so CallPilot onboarding provides the instructions for that business." data-cp-fr="La configuration en production est conçue autour du transfert conditionnel des appels. Les étapes exactes varient selon le fournisseur ou le système téléphonique; l'intégration CallPilot fournit donc les instructions propres à chaque entreprise.">The live setup is designed around conditional call forwarding. Exact activation steps vary by carrier or phone system, so CallPilot onboarding provides the instructions for that business.</p>
+    <div class="cp-setup-grid">
+      <div class="cp-setup-step"><div class="n">1</div><h3 data-cp-en="Keep your current number" data-cp-fr="Gardez votre numéro actuel">Keep your current number</h3><p data-cp-en="No need to advertise a new customer-facing phone number." data-cp-fr="Aucun besoin de publier un nouveau numéro pour les clients.">No need to advertise a new customer-facing phone number.</p></div>
+      <div class="cp-setup-step"><div class="n">2</div><h3 data-cp-en="Assign CallPilot routing" data-cp-fr="Attribuer le routage CallPilot">Assign CallPilot routing</h3><p data-cp-en="Each business gets its own routing profile so Ava knows which company she represents." data-cp-fr="Chaque entreprise reçoit son propre profil de routage afin qu'Ava sache quelle entreprise elle représente.">Each business gets its own routing profile so Ava knows which company she represents.</p></div>
+      <div class="cp-setup-step"><div class="n">3</div><h3 data-cp-en="Choose forwarding rules" data-cp-fr="Choisir les règles de transfert">Choose forwarding rules</h3><p data-cp-en="Missed call, busy line, overflow, after-hours — or any combination supported by the business phone setup." data-cp-fr="Appel manqué, ligne occupée, débordement, hors heures — ou toute combinaison prise en charge par le système téléphonique.">Missed call, busy line, overflow, after-hours — or any combination supported by the business phone setup.</p></div>
+      <div class="cp-setup-step"><div class="n">4</div><h3 data-cp-en="Run a test call" data-cp-fr="Faire un appel test">Run a test call</h3><p data-cp-en="Call the normal business number, let it forward, and confirm Ava uses the correct greeting, rules and owner notifications." data-cp-fr="Appelez le numéro habituel, laissez l'appel être transféré et confirmez qu'Ava utilise le bon accueil, les bonnes règles et les bonnes alertes.">Call the normal business number, let it forward, and confirm Ava uses the correct greeting, rules and owner notifications.</p></div>
+    </div>
+    <div class="actions" style="margin-top:18px"><a class="btn secondary" href="phone-setup.html" data-cp-en="See the setup walkthrough" data-cp-fr="Voir le guide de configuration">See the setup walkthrough</a></div>
+  </div>
+</section>
+
+<section id="integrations" class="section">
+  <div class="container">
+    <div class="kicker" data-cp-en="Connections" data-cp-fr="Connexions">Connections</div>
+    <h2 data-cp-en="Built to connect to the tools a service business uses." data-cp-fr="Conçu pour se connecter aux outils utilisés par une entreprise de service.">Built to connect to the tools a service business uses.</h2>
+    <p class="lede" data-cp-en="The demo distinguishes what is already represented in CallPilot from connections that still require live production accounts." data-cp-fr="La démo distingue ce qui est déjà représenté dans CallPilot des connexions qui nécessitent encore des comptes de production.">The demo distinguishes what is already represented in CallPilot from connections that still require live production accounts.</p>
+    <div class="cp-integrations">
+      <div class="cp-integration"><strong data-cp-en="CallPilot Calendar" data-cp-fr="Calendrier CallPilot">CallPilot Calendar</strong><span data-cp-en="Built-in demo scheduling and availability logic." data-cp-fr="Logique intégrée de disponibilité et de réservation dans la démo.">Built-in demo scheduling and availability logic.</span><div class="cp-status ready" data-cp-en="DEMO READY" data-cp-fr="DÉMO PRÊTE">DEMO READY</div></div>
+      <div class="cp-integration"><strong>Google / Microsoft Calendar</strong><span data-cp-en="Live account connection required before production booking." data-cp-fr="Connexion à un vrai compte requise avant les réservations en production.">Live account connection required before production booking.</span><div class="cp-status connect" data-cp-en="CONNECT FOR LIVE" data-cp-fr="À CONNECTER">CONNECT FOR LIVE</div></div>
+      <div class="cp-integration"><strong data-cp-en="Owner SMS alerts" data-cp-fr="Alertes SMS au propriétaire">Owner SMS alerts</strong><span data-cp-en="CallPilot has the notification flow; live messaging requires the production phone provider." data-cp-fr="CallPilot possède le flux de notification; la messagerie en production nécessite le fournisseur téléphonique réel.">CallPilot has the notification flow; live messaging requires the production phone provider.</span><div class="cp-status connect" data-cp-en="CONNECT FOR LIVE" data-cp-fr="À CONNECTER">CONNECT FOR LIVE</div></div>
+      <div class="cp-integration"><strong>CRM / API</strong><span data-cp-en="Designed for future customer-specific connections and workflow automation." data-cp-fr="Conçu pour de futures connexions propres aux clients et l'automatisation des flux de travail.">Designed for future customer-specific connections and workflow automation.</span><div class="cp-status demo" data-cp-en="ROADMAP" data-cp-fr="FEUILLE DE ROUTE">ROADMAP</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="pilot-proof" class="section light">
+  <div class="container">
+    <div class="kicker" data-cp-en="Pilot proof" data-cp-fr="Preuves du pilote">Pilot proof</div>
+    <h2 data-cp-en="Real customer results will replace marketing claims." data-cp-fr="De vrais résultats clients remplaceront les promesses marketing.">Real customer results will replace marketing claims.</h2>
+    <p class="lede" data-cp-en="Rather than invent testimonials, CallPilot's first live pilots will track the metrics that matter to contractors and publish verified results when available." data-cp-fr="Plutôt que d'inventer des témoignages, les premiers pilotes en production de CallPilot mesureront les indicateurs importants pour les entrepreneurs et publieront des résultats vérifiés lorsqu'ils seront disponibles.">Rather than invent testimonials, CallPilot's first live pilots will track the metrics that matter to contractors and publish verified results when available.</p>
+    <div class="cp-pilot-metrics">
+      <div class="cp-pilot-metric"><b data-cp-en="Calls answered" data-cp-fr="Appels répondus">Calls answered</b><span data-cp-en="How many eligible calls Ava handled." data-cp-fr="Nombre d'appels admissibles traités par Ava.">How many eligible calls Ava handled.</span></div>
+      <div class="cp-pilot-metric"><b data-cp-en="Leads recovered" data-cp-fr="Prospects récupérés">Leads recovered</b><span data-cp-en="Missed calls that became usable service requests." data-cp-fr="Appels manqués transformés en demandes de service exploitables.">Missed calls that became usable service requests.</span></div>
+      <div class="cp-pilot-metric"><b data-cp-en="Appointments" data-cp-fr="Rendez-vous">Appointments</b><span data-cp-en="Bookings or pending appointment requests created." data-cp-fr="Réservations ou demandes de rendez-vous créées.">Bookings or pending appointment requests created.</span></div>
+      <div class="cp-pilot-metric"><b data-cp-en="Urgent calls" data-cp-fr="Appels urgents">Urgent calls</b><span data-cp-en="Same-day or escalated calls identified by the configured rules." data-cp-fr="Appels le jour même ou escaladés selon les règles configurées.">Same-day or escalated calls identified by the configured rules.</span></div>
+    </div>
+    <div class="cp-honest-note" data-cp-en="Current status: these are the metrics CallPilot will measure; no customer performance results or testimonials are being claimed yet." data-cp-fr="Statut actuel : ce sont les indicateurs que CallPilot mesurera; aucun résultat client ni témoignage n'est encore revendiqué.">Current status: these are the metrics CallPilot will measure; no customer performance results or testimonials are being claimed yet.</div>
+  </div>
+</section>
+
 <section id="pricing" class="section light">
   <div class="container">
     <div class="kicker">Packages</div>
@@ -966,7 +1054,7 @@ if('speechSynthesis' in window)speechSynthesis.onvoiceschanged=()=>speechSynthes
 <footer>
   <div class="container">
     <div data-cp-en="CallPilot Trades • Demo concept • Contractor AI receptionist" data-cp-fr="CallPilot Trades • Concept de démo • Réceptionniste IA pour entrepreneurs">CallPilot Trades • Demo concept • Contractor AI receptionist</div>
-    <div class="cp-footer-links"><a href="privacy.html" data-cp-en="Privacy & data handling" data-cp-fr="Confidentialité et données">Privacy & data handling</a><a href="terms.html" data-cp-en="Demo terms" data-cp-fr="Conditions de la démo">Demo terms</a></div>
+    <div class="cp-footer-links"><a href="portal.html" data-cp-en="Owner login" data-cp-fr="Connexion propriétaire">Owner login</a><a href="phone-setup.html" data-cp-en="Phone setup" data-cp-fr="Configuration téléphonique">Phone setup</a><a href="privacy.html" data-cp-en="Privacy & data handling" data-cp-fr="Confidentialité et données">Privacy & data handling</a><a href="terms.html" data-cp-en="Demo terms" data-cp-fr="Conditions de la démo">Demo terms</a></div>
   </div>
 </footer>
 
