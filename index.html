@@ -188,7 +188,7 @@ footer{border-top:1px solid var(--line);padding:28px 0 38px;color:#8f8579;font-s
   <div class="container navbar">
     <div class="brand"><div class="logo"></div>CallPilot<span>Trades</span></div>
     <div class="navlinks">
-      <a href="#how">How it works</a>
+      <a href="#how">How it works</a><a href="#customer-journey" data-cp-en="Process" data-cp-fr="Processus">Process</a>
       <a href="#demo">Demo</a>
       <a href="#live-demo">Try Ava</a><a href="#owner-demo" data-cp-en="Owner demo" data-cp-fr="Démo propriétaire">Owner demo</a><a href="#pricing">Pricing</a>
       <a class="navcta" href="#live-demo">Try Ava live</a>
@@ -749,6 +749,61 @@ if('speechSynthesis' in window)speechSynthesis.onvoiceschanged=()=>speechSynthes
         <div class="cp-lead"><strong>John P.</strong><span>Pointe-Claire</span><span class="cp-tag" data-cp-en="Booked" data-cp-fr="Réservé">Booked</span><span class="cp-outcome" data-cp-en="Service appointment captured by Ava" data-cp-fr="Rendez-vous de service pris par Ava">Service appointment captured by Ava</span></div>
         <div class="cp-lead"><strong>Alex R.</strong><span>Beaconsfield</span><span class="cp-tag" data-cp-en="New lead" data-cp-fr="Nouveau prospect">New lead</span><span class="cp-outcome" data-cp-en="Owner notified by SMS with full call summary" data-cp-fr="Propriétaire avisé par SMS avec le résumé complet">Owner notified by SMS with full call summary</span></div>
       </div>
+    </div>
+  </div>
+</section>
+
+
+<section id="customer-journey" class="section">
+  <div class="container">
+    <div class="kicker" data-cp-en="Complete customer journey" data-cp-fr="Parcours client complet">Complete customer journey</div>
+    <h2 data-cp-en="From signup to Ava answering missed calls." data-cp-fr="De l'inscription jusqu'aux appels manqués pris par Ava.">From signup to Ava answering missed calls.</h2>
+    <p class="lede" data-cp-en="The CallPilot demo now shows the full experience a service business would follow: choose a plan, complete a simulated payment, configure the business, connect call routing and let Ava handle eligible calls." data-cp-fr="La démo CallPilot présente maintenant l'expérience complète d'une entreprise de services : choisir un forfait, effectuer un paiement simulé, configurer l'entreprise, relier le routage des appels et laisser Ava répondre aux appels admissibles.">The CallPilot demo now shows the full experience a service business would follow: choose a plan, complete a simulated payment, configure the business, connect call routing and let Ava handle eligible calls.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="num">1</div>
+        <h3 data-cp-en="Choose a plan" data-cp-fr="Choisir un forfait">Choose a plan</h3>
+        <p data-cp-en="Select Starter, Growth or Multi-Tech based on call volume and the level of automation needed." data-cp-fr="Choisissez Starter, Growth ou Multi-Tech selon le volume d'appels et le niveau d'automatisation recherché.">Select Starter, Growth or Multi-Tech based on call volume and the level of automation needed.</p>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <h3 data-cp-en="Demo payment" data-cp-fr="Paiement démo">Demo payment</h3>
+        <p data-cp-en="The website simulates monthly subscription checkout and processing. This demo does not collect or charge real payment information." data-cp-fr="Le site simule le paiement et le traitement d'un abonnement mensuel. Cette démo ne recueille ni ne débite de vraies informations de paiement.">The website simulates monthly subscription checkout and processing. This demo does not collect or charge real payment information.</p>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <h3 data-cp-en="Set up the business" data-cp-fr="Configurer l'entreprise">Set up the business</h3>
+        <p data-cp-en="Enter the trade, business hours, service area, services offered, emergency rules and preferred language." data-cp-fr="Entrez le métier, les heures d'ouverture, le territoire, les services offerts, les règles d'urgence et la langue préférée.">Enter the trade, business hours, service area, services offered, emergency rules and preferred language.</p>
+      </div>
+    </div>
+
+    <div class="steps" style="margin-top:14px">
+      <div class="step">
+        <div class="num">4</div>
+        <h3 data-cp-en="Calendar is optional" data-cp-fr="Le calendrier est optionnel">Calendar is optional</h3>
+        <p data-cp-en="With a calendar, Ava can offer available times and confirm appointments. Without one, Ava captures the preferred date and time and sends the owner a pending request." data-cp-fr="Avec un calendrier, Ava peut proposer des disponibilités et confirmer les rendez-vous. Sans calendrier, Ava recueille la date et l'heure préférées et envoie une demande en attente au propriétaire.">With a calendar, Ava can offer available times and confirm appointments. Without one, Ava captures the preferred date and time and sends the owner a pending request.</p>
+      </div>
+      <div class="step">
+        <div class="num">5</div>
+        <h3 data-cp-en="Forward missed calls" data-cp-fr="Transférer les appels manqués">Forward missed calls</h3>
+        <p data-cp-en="The business keeps its existing public phone number. Calls that are unanswered, busy or after-hours can be forwarded to that business's CallPilot routing number." data-cp-fr="L'entreprise garde son numéro public actuel. Les appels sans réponse, occupés ou hors heures peuvent être transférés vers le numéro de routage CallPilot de cette entreprise.">The business keeps its existing public phone number. Calls that are unanswered, busy or after-hours can be forwarded to that business's CallPilot routing number.</p>
+      </div>
+      <div class="step">
+        <div class="num">6</div>
+        <h3 data-cp-en="Ava answers and takes action" data-cp-fr="Ava répond et agit">Ava answers and takes action</h3>
+        <p data-cp-en="Ava confirms the caller's name and callback number, understands the service request, checks urgency and location, asks for date and time, and either books or creates a clean lead for the owner." data-cp-fr="Ava confirme le nom et le numéro de rappel, comprend la demande, vérifie l'urgence et l'emplacement, demande la date et l'heure, puis réserve ou crée un prospect complet pour le propriétaire.">Ava confirms the caller's name and callback number, understands the service request, checks urgency and location, asks for date and time, and either books or creates a clean lead for the owner.</p>
+      </div>
+    </div>
+
+    <div class="cp-card" style="margin-top:22px">
+      <h3 data-cp-en="What happens on an emergency call?" data-cp-fr="Que se passe-t-il lors d'un appel urgent?">What happens on an emergency call?</h3>
+      <div class="cp-muted" data-cp-en="Ava can flag urgent jobs, offer same-day windows when configured, alert the owner and transfer a caller when the business rules allow it. If the caller describes immediate danger such as fire, smoke, a gas smell or serious electrical arcing, Ava tells them to contact local emergency services rather than pretending CallPilot is an emergency service." data-cp-fr="Ava peut signaler les demandes urgentes, proposer des plages le jour même lorsqu'elles sont configurées, alerter le propriétaire et transférer l'appel lorsque les règles de l'entreprise le permettent. Si l'appelant décrit un danger immédiat comme un incendie, de la fumée, une odeur de gaz ou un arc électrique important, Ava lui indique de communiquer avec les services d'urgence locaux plutôt que de prétendre que CallPilot est un service d'urgence.">Ava can flag urgent jobs, offer same-day windows when configured, alert the owner and transfer a caller when the business rules allow it. If the caller describes immediate danger such as fire, smoke, a gas smell or serious electrical arcing, Ava tells them to contact local emergency services rather than pretending CallPilot is an emergency service.</div>
+    </div>
+
+    <div class="actions" style="margin-top:22px">
+      <a class="btn primary" href="payment-demo.html?plan=growth" data-cp-en="Try the complete signup demo" data-cp-fr="Essayer la démo complète d'inscription">Try the complete signup demo</a>
+      <a class="btn secondary" href="platform-demo.html" data-cp-en="Open the full owner platform" data-cp-fr="Ouvrir la plateforme propriétaire">Open the full owner platform</a>
     </div>
   </div>
 </section>
