@@ -228,13 +228,34 @@ footer{border-top:1px solid var(--line);padding:28px 0 38px;color:#8f8579;font-s
 .cp-disclaimer{margin-top:13px;color:#8f877c;font-size:11px;line-height:1.5}
 @media(max-width:900px){.cp-proof-demo-grid{grid-template-columns:1fr}}@media(max-width:560px){.cp-case-metrics{grid-template-columns:1fr}}
 </style>
+
+<style id="personalized-ava-styles">
+.cp-personalize-grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:20px;margin-top:28px;align-items:start}
+.cp-builder,.cp-preview{background:linear-gradient(155deg,#142131,#0d1723);border:1px solid var(--line);border-radius:24px;padding:22px;box-shadow:0 20px 60px rgba(0,0,0,.16)}
+.cp-builder-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.cp-pfield label{display:block;color:#bfb5a6;font-size:11px;font-weight:850;margin:0 0 6px}
+.cp-pfield input,.cp-pfield select{width:100%;background:#08131f;border:1px solid rgba(255,255,255,.09);color:#f7f1e6;border-radius:12px;padding:11px 12px;font:inherit}
+.cp-pfield.full{grid-column:1/-1}
+.cp-builder-note{margin-top:12px;color:#91887c;font-size:11px;line-height:1.5}
+.cp-preview-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.cp-preview-brand{font-size:24px;font-weight:950;letter-spacing:-.03em}
+.cp-preview-meta{color:#978e82;font-size:12px;line-height:1.5;margin-top:5px}
+.cp-script-card{margin-top:16px;padding:17px;border-radius:17px;background:#08131f;border:1px solid rgba(213,173,99,.17);line-height:1.55;font-size:14px;color:#e9dfd1}
+.cp-script-card b{display:block;color:#dfc17d;font-size:10px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:7px}
+.cp-voice-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:13px}
+.cp-voice-btn{border:1px solid rgba(255,255,255,.09);background:#122033;color:#f4eadc;border-radius:12px;padding:10px 12px;font-weight:900;cursor:pointer}
+.cp-voice-btn.playing{border-color:rgba(213,173,99,.45);color:#e8cc8d}
+.cp-setup-progress{margin-top:18px}.cp-progress-top{display:flex;justify-content:space-between;gap:10px;font-size:11px;color:#aca294}.cp-progress-bar{height:8px;border-radius:999px;background:#07111c;overflow:hidden;margin-top:8px}.cp-progress-fill{height:100%;width:83%;background:linear-gradient(90deg,#b88746,#f0d79c);border-radius:999px}
+.cp-checks{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.cp-check{padding:9px 10px;border-radius:11px;background:#0a1622;border:1px solid rgba(255,255,255,.055);font-size:11px;color:#aaa093}.cp-check.ready:before{content:"✓ ";color:#91d5aa;font-weight:950}.cp-check.pending:before{content:"○ ";color:#e0bf78;font-weight:950}
+@media(max-width:900px){.cp-personalize-grid{grid-template-columns:1fr}}@media(max-width:560px){.cp-builder-grid,.cp-checks{grid-template-columns:1fr}.cp-pfield.full{grid-column:auto}}
+</style>
 </head>
 <body>
 <nav>
   <div class="container navbar">
     <div class="brand"><div class="logo"></div>CallPilot<span>Trades</span></div>
     <div class="navlinks">
-      <a href="#how">How it works</a><a href="#trust" data-cp-en="Trust" data-cp-fr="Confiance">Trust</a><a href="#roi">ROI</a><a href="#customer-journey" data-cp-en="Process" data-cp-fr="Processus">Process</a>
+      <a href="#personalize" data-cp-en="Create my Ava" data-cp-fr="Créer mon Ava">Create my Ava</a><a href="#how">How it works</a><a href="#trust" data-cp-en="Trust" data-cp-fr="Confiance">Trust</a><a href="#roi">ROI</a><a href="#customer-journey" data-cp-en="Process" data-cp-fr="Processus">Process</a>
       <a href="#demo">Demo</a>
       <a href="#live-demo">Try Ava</a><a href="#owner-demo" data-cp-en="Owner demo" data-cp-fr="Démo propriétaire">Owner demo</a><a href="#pricing">Pricing</a>
       <a href="portal.html" data-cp-en="Owner login" data-cp-fr="Connexion propriétaire">Owner login</a><a class="navcta" href="payment-demo.html?plan=growth" data-cp-en="Start demo" data-cp-fr="Démarrer la démo">Start demo</a>
@@ -277,6 +298,54 @@ footer{border-top:1px solid var(--line);padding:28px 0 38px;color:#8f8579;font-s
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+
+<section id="personalize" class="section light">
+  <div class="container">
+    <div class="kicker" data-cp-en="Build your receptionist" data-cp-fr="Créez votre réceptionniste">Build your receptionist</div>
+    <h2 data-cp-en="Create your Ava in under a minute." data-cp-fr="Créez votre Ava en moins d'une minute.">Create your Ava in under a minute.</h2>
+    <p class="lede" data-cp-en="Don't listen to a generic AI demo. Enter your own business details and see how Ava would answer for your company." data-cp-fr="N'écoutez pas une démo IA générique. Entrez les renseignements de votre entreprise et voyez comment Ava répondrait pour vous.">Don't listen to a generic AI demo. Enter your own business details and see how Ava would answer for your company.</p>
+    <div class="cp-personalize-grid">
+      <div class="cp-builder">
+        <div class="cp-builder-grid">
+          <div class="cp-pfield full"><label data-cp-en="Business name" data-cp-fr="Nom de l'entreprise">Business name</label><input id="paBusiness" value="West Island Home Services"></div>
+          <div class="cp-pfield"><label data-cp-en="Trade" data-cp-fr="Métier">Trade</label><select id="paTrade"><option value="hvac">HVAC / CVAC</option><option value="plumbing">Plumbing / Plomberie</option><option value="electrical">Electrical / Électricité</option><option value="roofing">Roofing / Toiture</option><option value="general">General service / Service général</option></select></div>
+          <div class="cp-pfield"><label data-cp-en="Calendar" data-cp-fr="Calendrier">Calendar</label><select id="paCalendar"><option value="no" data-cp-en="No calendar — capture request" data-cp-fr="Sans calendrier — capter la demande">No calendar — capture request</option><option value="yes" data-cp-en="Connected — book live" data-cp-fr="Connecté — réserver en direct">Connected — book live</option></select></div>
+          <div class="cp-pfield"><label data-cp-en="Service area" data-cp-fr="Zone de service">Service area</label><input id="paArea" value="West Island, Montreal"></div>
+          <div class="cp-pfield"><label data-cp-en="Hours" data-cp-fr="Heures">Hours</label><input id="paHours" value="Mon–Fri 8 AM–5 PM"></div>
+        </div>
+        <div class="cp-builder-note" data-cp-en="This personalization runs entirely inside the demo. It does not create a live account or change your phone service." data-cp-fr="Cette personnalisation fonctionne uniquement dans la démo. Elle ne crée pas de vrai compte et ne modifie pas votre service téléphonique.">This personalization runs entirely inside the demo. It does not create a live account or change your phone service.</div>
+      </div>
+      <div class="cp-preview">
+        <div class="cp-preview-head">
+          <div><div class="smallcap">AVA • PERSONALIZED PREVIEW</div><div class="cp-preview-brand" id="paPreviewName">West Island Home Services</div><div class="cp-preview-meta" id="paPreviewMeta">HVAC • West Island, Montreal • Mon–Fri 8 AM–5 PM</div></div>
+          <div class="cp-demo-badge" data-cp-en="DEMO" data-cp-fr="DÉMO">DEMO</div>
+        </div>
+        <div class="cp-script-card"><b data-cp-en="What Ava would say" data-cp-fr="Ce qu'Ava dirait">What Ava would say</b><span id="paScript">Thank you for calling West Island Home Services. I'm Ava. I can help with heating, cooling or service requests. Is this urgent, or would you like to schedule service?</span></div>
+        <div class="cp-voice-actions">
+          <button class="cp-voice-btn" id="paHearEn" data-cp-en="▶ Hear Ava in English" data-cp-fr="▶ Écouter Ava en anglais">▶ Hear Ava in English</button>
+          <button class="cp-voice-btn" id="paHearFr" data-cp-en="▶ Hear Ava in French" data-cp-fr="▶ Écouter Ava en français">▶ Hear Ava in French</button>
+          <a class="btn secondary" href="portal.html" data-cp-en="Open owner portal" data-cp-fr="Ouvrir le portail propriétaire">Open owner portal</a>
+        </div>
+        <div class="cp-builder-note" data-cp-en="Voice buttons play the current recorded Ava samples; the personalized wording is shown above. Live personalized telephone speech requires phone activation." data-cp-fr="Les boutons vocaux jouent les échantillons enregistrés actuels d'Ava; le texte personnalisé apparaît ci-dessus. La voix téléphonique personnalisée en direct nécessite l'activation du téléphone.">Voice buttons play the current recorded Ava samples; the personalized wording is shown above. Live personalized telephone speech requires phone activation.</div>
+        <div class="cp-setup-progress">
+          <div class="cp-progress-top"><strong data-cp-en="Your demo setup" data-cp-fr="Votre configuration démo">Your demo setup</strong><span data-cp-en="5 of 6 ready" data-cp-fr="5 sur 6 prêts">5 of 6 ready</span></div>
+          <div class="cp-progress-bar"><div class="cp-progress-fill"></div></div>
+          <div class="cp-checks">
+            <div class="cp-check ready" data-cp-en="Business profile" data-cp-fr="Profil d'entreprise">Business profile</div>
+            <div class="cp-check ready" data-cp-en="Trade playbook" data-cp-fr="Scénario métier">Trade playbook</div>
+            <div class="cp-check ready" data-cp-en="Service area + hours" data-cp-fr="Territoire + heures">Service area + hours</div>
+            <div class="cp-check ready" data-cp-en="Emergency rules" data-cp-fr="Règles d'urgence">Emergency rules</div>
+            <div class="cp-check ready" data-cp-en="Calendar mode" data-cp-fr="Mode calendrier">Calendar mode</div>
+            <div class="cp-check pending" data-cp-en="Live phone connection" data-cp-fr="Connexion téléphonique en direct">Live phone connection</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <audio id="paAudioEn" preload="none" src="audio/lux1.mp3"></audio>
+    <audio id="paAudioFr" preload="none" src="audio/fr1.mp3?v=20261001u"></audio>
   </div>
 </section>
 
@@ -1398,6 +1467,40 @@ if('speechSynthesis' in window)speechSynthesis.onvoiceschanged=()=>speechSynthes
     };
     step();
   });
+})();
+</script>
+
+<script id="personalized-ava-script">
+(function(){
+  const $=id=>document.getElementById(id);
+  if(!$("paBusiness")) return;
+  const scripts={
+    hvac:{en:"Thank you for calling {b}. I'm Ava. I can help with heating, cooling or service requests. Is this urgent, or would you like to schedule service?",fr:"Merci d'avoir appelé {b}. Je suis Ava. Je peux vous aider pour le chauffage, la climatisation ou une demande de service. Est-ce urgent ou souhaitez-vous planifier un service?"},
+    plumbing:{en:"Thank you for calling {b}. I'm Ava. I can help with leaks, drains, flooding or regular plumbing service. First, is there active flooding or another immediate danger?",fr:"Merci d'avoir appelé {b}. Je suis Ava. Je peux vous aider pour une fuite, un drain, une inondation ou un service de plomberie. D'abord, y a-t-il une inondation active ou un autre danger immédiat?"},
+    electrical:{en:"Thank you for calling {b}. I'm Ava. I can help with outages, breakers, outlets or electrical service. Before we continue, are there sparks, smoke or another immediate safety concern?",fr:"Merci d'avoir appelé {b}. Je suis Ava. Je peux vous aider pour une panne, un disjoncteur, une prise ou un service électrique. Avant de continuer, y a-t-il des étincelles, de la fumée ou un autre danger immédiat?"},
+    roofing:{en:"Thank you for calling {b}. I'm Ava. I can help with roof leaks, storm damage, missing shingles or inspections. Is water actively entering the property right now?",fr:"Merci d'avoir appelé {b}. Je suis Ava. Je peux vous aider pour une fuite de toiture, des dommages de tempête, des bardeaux manquants ou une inspection. Est-ce que l'eau entre activement dans la propriété en ce moment?"},
+    general:{en:"Thank you for calling {b}. I'm Ava. I can take your service request, check urgency and location, and help with the next available appointment.",fr:"Merci d'avoir appelé {b}. Je suis Ava. Je peux prendre votre demande de service, vérifier l'urgence et l'emplacement, puis vous aider avec le prochain rendez-vous disponible."}
+  };
+  const labels={hvac:"HVAC",plumbing:"Plumbing",electrical:"Electrical",roofing:"Roofing",general:"General service"};
+  function lang(){return (document.documentElement.lang||"en").startsWith("fr")?"fr":"en"}
+  function update(){
+    const l=lang(),b=$("paBusiness").value.trim()|| (l==="fr"?"votre entreprise":"your business");
+    $("paPreviewName").textContent=b;
+    $("paPreviewMeta").textContent=labels[$("paTrade").value]+" • "+($("paArea").value.trim()||"Service area")+" • "+($("paHours").value.trim()||"Business hours");
+    let s=scripts[$("paTrade").value][l].replace("{b}",b);
+    s+=" "+($("paCalendar").value==="yes"?(l==="fr"?"Je peux vérifier les disponibilités et confirmer le rendez-vous pendant l'appel.":"I can check availability and confirm the appointment during the call."):(l==="fr"?"Je vais recueillir votre date et heure préférées et envoyer la demande au propriétaire.":"I'll collect your preferred date and time and send the request to the owner."));
+    $("paScript").textContent=s;
+  }
+  ["paBusiness","paTrade","paCalendar","paArea","paHours"].forEach(id=>$(id).addEventListener("input",update));
+  function play(id,btnId){
+    const a=$(id),btn=$(btnId);document.querySelectorAll(".cp-voice-btn").forEach(x=>x.classList.remove("playing"));
+    document.querySelectorAll("#paAudioEn,#paAudioFr").forEach(x=>{if(x!==a){x.pause();x.currentTime=0}});
+    a.currentTime=0;a.play().then(()=>btn.classList.add("playing")).catch(()=>{});
+    a.onended=()=>btn.classList.remove("playing");
+  }
+  $("paHearEn").onclick=()=>play("paAudioEn","paHearEn"); $("paHearFr").onclick=()=>play("paAudioFr","paHearFr");
+  $("siteEn")?.addEventListener("click",()=>setTimeout(update,0));$("siteFr")?.addEventListener("click",()=>setTimeout(update,0));
+  update();
 })();
 </script>
 </body>
