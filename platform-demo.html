@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>CallPilot Platform Demo</title>
+<style>
+:root{
+  --bg:#07111b;--panel:#0d1a27;--panel2:#122233;--line:rgba(239,215,163,.13);
+  --text:#f8f3e9;--muted:#9fb0c0;--gold:#d7b36b;--gold2:#f0d99e;--green:#56cf98;
+  --red:#ff7676;--blue:#78bfff;--purple:#bca0ff;--shadow:0 24px 70px rgba(0,0,0,.28)
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:linear-gradient(180deg,#07111b,#0a1622 48%,#07111b);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Arial,sans-serif;min-height:100%}
+button,input,select,textarea{font:inherit}
+a{color:inherit}
+.app{display:grid;grid-template-columns:248px 1fr;min-height:100vh}
+.sidebar{position:sticky;top:0;height:100vh;background:rgba(6,14,23,.97);border-right:1px solid var(--line);padding:18px 14px;z-index:20}
+.brand{display:flex;align-items:center;gap:10px;font-size:22px;font-weight:950;margin:4px 8px 20px}
+.logo{width:35px;height:35px;border-radius:12px;background:linear-gradient(135deg,var(--gold),var(--gold2));display:grid;place-items:center}
+.logo:after{content:"";width:13px;height:13px;border:4px solid #071018;border-right-color:transparent;border-radius:50%}
+.brand span{color:var(--gold)}
+.demo-badge{margin:0 7px 14px;padding:9px 10px;border-radius:12px;background:rgba(215,179,107,.08);border:1px solid rgba(215,179,107,.18);color:#ebd39f;font-size:11px;font-weight:850;text-align:center}
+.nav{display:flex;flex-direction:column;gap:4px}
+.nav button{border:0;background:transparent;color:#afbdca;text-align:left;padding:10px 11px;border-radius:10px;cursor:pointer;font-weight:750;font-size:13px}
+.nav button:hover,.nav button.active{background:#122333;color:#fff}
+.sidebar-bottom{position:absolute;left:14px;right:14px;bottom:16px}
+.mode{width:100%;border:1px solid var(--line);background:#101f2e;color:#e8eef4;border-radius:11px;padding:10px;cursor:pointer;font-weight:850}
+.main{min-width:0}
+.topbar{height:68px;position:sticky;top:0;z-index:15;display:flex;align-items:center;justify-content:space-between;padding:0 26px;background:rgba(8,17,27,.82);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.top-left{display:flex;align-items:center;gap:12px}
+.mobile-nav{display:none;border:0;background:#122333;color:white;border-radius:9px;padding:8px 10px}
+.account strong{display:block;font-size:14px}.account span{display:block;color:var(--muted);font-size:11px;margin-top:2px}
+.top-actions{display:flex;align-items:center;gap:8px}
+.lang,.ghost,.primary{border-radius:10px;padding:9px 11px;cursor:pointer;font-weight:850;font-size:12px}
+.lang,.ghost{border:1px solid var(--line);background:#102030;color:#e9edf2}
+.primary{border:0;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#181106}
+.content{padding:24px 26px 40px;max-width:1500px;margin:auto}
+.page{display:none}.page.active{display:block}
+.kicker{color:#e4c987;font-size:11px;letter-spacing:.08em;font-weight:900;text-transform:uppercase}
+h1{font-size:32px;letter-spacing:-.03em;margin:5px 0 5px}h2{font-size:20px;margin:0 0 10px}h3{font-size:15px;margin:0 0 8px}
+.sub{color:var(--muted);font-size:13px;line-height:1.5}
+.grid{display:grid;gap:14px}.g4{grid-template-columns:repeat(4,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g2{grid-template-columns:repeat(2,1fr)}
+.card{background:linear-gradient(180deg,rgba(16,31,46,.96),rgba(10,21,32,.96));border:1px solid var(--line);border-radius:17px;padding:16px;box-shadow:var(--shadow)}
+.stat .v{font-size:28px;font-weight:950;margin:3px 0}.stat .delta{font-size:11px;color:var(--green);font-weight:800}.stat .label{font-size:11px;color:var(--muted)}
+.mt{margin-top:14px}.mb{margin-bottom:14px}
+.row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.pill{display:inline-flex;align-items:center;gap:5px;padding:5px 8px;border-radius:999px;font-size:10px;font-weight:900}
+.green{background:rgba(86,207,152,.10);color:#9ee9c7;border:1px solid rgba(86,207,152,.22)}
+.red{background:rgba(255,118,118,.09);color:#ffaaaa;border:1px solid rgba(255,118,118,.18)}
+.gold{background:rgba(215,179,107,.10);color:#ead091;border:1px solid rgba(215,179,107,.20)}
+.blue{background:rgba(120,191,255,.09);color:#a8d6ff;border:1px solid rgba(120,191,255,.18)}
+.purple{background:rgba(188,160,255,.09);color:#d1bbff;border:1px solid rgba(188,160,255,.18)}
+.table{width:100%;border-collapse:collapse;font-size:12px}
+.table th{color:#8294a7;text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.05em;padding:9px;border-bottom:1px solid var(--line)}
+.table td{padding:11px 9px;border-bottom:1px solid rgba(255,255,255,.045);vertical-align:middle}
+.table tr:last-child td{border-bottom:0}
+.person{display:flex;align-items:center;gap:9px}.circle{width:34px;height:34px;border-radius:50%;background:#20374e;display:grid;place-items:center;font-weight:900;font-size:11px}
+.progress{height:7px;background:#0a1520;border-radius:99px;overflow:hidden}.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:99px}
+.timeline{display:flex;flex-direction:column;gap:10px}.event{display:grid;grid-template-columns:66px 1fr auto;gap:10px;align-items:center;padding:11px;background:#0b1723;border:1px solid rgba(255,255,255,.05);border-radius:12px}.time{color:#d7c48e;font-size:12px;font-weight:900}
+.chart{height:190px;display:flex;align-items:end;gap:7px;padding-top:15px}.bar{flex:1;background:linear-gradient(180deg,#d7b36b,#806633);min-height:12px;border-radius:7px 7px 2px 2px;position:relative}.bar span{position:absolute;bottom:-19px;left:50%;transform:translateX(-50%);font-size:9px;color:#778a9d}
+.call-list{display:flex;flex-direction:column;gap:8px}.call{display:grid;grid-template-columns:42px 1fr auto;gap:10px;align-items:center;padding:11px;border:1px solid rgba(255,255,255,.055);border-radius:12px;background:#0b1723;cursor:pointer}.call:hover{border-color:rgba(215,179,107,.28)}
+.phone-icon{width:38px;height:38px;border-radius:12px;background:rgba(215,179,107,.10);display:grid;place-items:center}.call strong{font-size:12px}.call .meta{font-size:10px;color:var(--muted);margin-top:3px}
+.transcript{display:flex;flex-direction:column;gap:8px;max-height:340px;overflow:auto}.msg{max-width:85%;padding:10px 11px;border-radius:13px;font-size:12px;line-height:1.45}.msg.ava{align-self:flex-start;background:rgba(215,179,107,.10);border:1px solid rgba(215,179,107,.16)}.msg.caller{align-self:flex-end;background:#172b3d;border:1px solid rgba(255,255,255,.06)}
+.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.day{min-height:105px;border:1px solid rgba(255,255,255,.055);border-radius:11px;padding:8px;background:#0a1622;font-size:10px}.day .n{color:#8194a8;font-weight:900}.appt{margin-top:6px;padding:6px;border-radius:7px;background:rgba(86,207,152,.10);color:#b9f3d7;border:1px solid rgba(86,207,152,.14);font-size:9px}.avail{margin-top:6px;padding:6px;border-radius:7px;background:rgba(215,179,107,.08);color:#ead49f;border:1px dashed rgba(215,179,107,.18);font-size:9px}
+.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:11px}.field label{display:block;color:#93a4b5;font-size:10px;font-weight:850;margin:0 0 5px}.field input,.field select,.field textarea{width:100%;border:1px solid rgba(255,255,255,.09);background:#091520;color:white;border-radius:10px;padding:10px}.field textarea{min-height:82px;resize:vertical}
+.toggle{display:flex;align-items:center;gap:9px;font-size:12px}.switch{width:38px;height:22px;border-radius:99px;background:#284056;padding:3px;cursor:pointer}.switch i{display:block;width:16px;height:16px;background:white;border-radius:50%;transition:.2s}.switch.on{background:#3b9c72}.switch.on i{transform:translateX(16px)}
+.playbooks{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}.playbook{padding:14px;border:1px solid rgba(255,255,255,.07);border-radius:13px;background:#0a1622;cursor:pointer}.playbook.selected{border-color:rgba(215,179,107,.42);box-shadow:0 0 0 2px rgba(215,179,107,.08) inset}.playbook b{display:block;margin:4px 0;font-size:13px}.playbook span{color:var(--muted);font-size:10px}
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.flow .box{position:relative;padding:14px;text-align:center;border:1px solid rgba(255,255,255,.07);border-radius:13px;background:#0a1622;font-size:11px;font-weight:850}.flow .box:not(:last-child):after{content:"→";position:absolute;right:-10px;color:#7e91a5}
+.integration{display:flex;align-items:center;gap:11px;padding:13px;border:1px solid rgba(255,255,255,.06);border-radius:12px;background:#0a1622}.integration .ico{width:38px;height:38px;border-radius:10px;background:#162a3b;display:grid;place-items:center;font-weight:900}.integration .grow{flex:1}.integration b{display:block;font-size:12px}.integration span{color:var(--muted);font-size:10px}
+.price{position:relative}.price .amt{font-size:30px;font-weight:950}.price ul{padding-left:18px;color:#b7c4cf;font-size:11px;line-height:1.8}.featured{border-color:rgba(215,179,107,.38)}.featured:before{content:"MOST POPULAR";position:absolute;top:11px;right:11px;font-size:8px;font-weight:950;color:#ead39b}
+.board{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.col{background:#091520;border:1px solid rgba(255,255,255,.05);border-radius:13px;padding:10px}.col h3{font-size:11px;color:#9bb0c2}.lead{padding:10px;border:1px solid rgba(255,255,255,.06);border-radius:10px;background:#102031;margin-top:8px}.lead b{font-size:11px}.lead div{font-size:9px;color:var(--muted);margin-top:4px}
+.notice{padding:11px 13px;border-radius:12px;background:rgba(120,191,255,.08);border:1px solid rgba(120,191,255,.16);font-size:11px;color:#c6e4ff;line-height:1.5}
+.danger-note{background:rgba(255,118,118,.07);border-color:rgba(255,118,118,.15);color:#ffc0c0}
+.onboarding{display:grid;grid-template-columns:260px 1fr;gap:15px}.steps{display:flex;flex-direction:column;gap:7px}.step{padding:10px;border-radius:10px;background:#0a1622;border:1px solid rgba(255,255,255,.05);font-size:11px;color:#91a4b5}.step.done{color:#a9efd0;border-color:rgba(86,207,152,.18)}.step.current{color:#f2dbab;border-color:rgba(215,179,107,.3)}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.62);z-index:50;place-items:center;padding:20px}.modal.show{display:grid}.modal-card{width:min(720px,100%);background:#0c1a27;border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 30px 100px #000}
+.close{border:1px solid var(--line);background:#142536;color:white;border-radius:9px;padding:7px 9px;cursor:pointer}
+@media(max-width:1100px){.g4{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(2,1fr)}.board{grid-template-columns:repeat(2,1fr)}.playbooks{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:780px){.app{grid-template-columns:1fr}.sidebar{position:fixed;left:-260px;width:248px;transition:.2s}.sidebar.open{left:0}.mobile-nav{display:block}.topbar{padding:0 14px}.content{padding:18px 14px 34px}.g4,.g3,.g2,.form-grid,.playbooks,.board,.onboarding{grid-template-columns:1fr}.flow{grid-template-columns:1fr}.flow .box:not(:last-child):after{content:"↓";right:50%;bottom:-12px;top:auto}.calendar{grid-template-columns:repeat(2,1fr)}.day{min-height:85px}.sidebar-bottom{position:static;margin-top:20px}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar" id="sidebar">
+  <div class="brand"><div class="logo"></div>Call<span>Pilot</span></div>
+  <div class="demo-badge">DEMO MODE • NO REAL CHARGES OR CALLS</div>
+  <div class="nav" id="nav">
+    <button data-page="dashboard" class="active">Overview</button>
+    <button data-page="onboarding">Customer Onboarding</button>
+    <button data-page="calls">Missed Calls</button>
+    <button data-page="calendar">CallPilot Calendar</button>
+    <button data-page="leads">Lead Pipeline</button>
+    <button data-page="ava">Ava Settings</button>
+    <button data-page="phone">Phone Setup</button>
+    <button data-page="analytics">Analytics</button>
+    <button data-page="notifications">Notifications</button>
+    <button data-page="integrations">Integrations</button>
+    <button data-page="billing">Billing</button>
+    <button data-page="admin">CallPilot Admin</button>
+  </div>
+  <div class="sidebar-bottom">
+    <button class="mode" id="modeBtn">Switch to Admin View</button>
+  </div>
+</aside>
+
+<main class="main">
+  <header class="topbar">
+    <div class="top-left">
+      <button class="mobile-nav" id="mobileNav">☰</button>
+      <div class="account">
+        <strong id="companyName">CallPilot Trades</strong>
+        <span id="accountMeta">Kirkland, QC • Plumbing • Pro Plan</span>
+      </div>
+    </div>
+    <div class="top-actions">
+      <button class="lang" id="langBtn">FR</button>
+      <a class="ghost" href="missed-call-demo.html">Missed-call demo</a>
+      <button class="primary" id="setupBtn">Run onboarding demo</button>
+    </div>
+  </header>
+
+  <section class="content">
+
+    <div class="page active" id="dashboard">
+      <div class="kicker">Owner dashboard</div>
+      <div class="row mb"><div><h1>Good evening, John.</h1><div class="sub">Ava has been handling missed calls while you work.</div></div><span class="pill green">● Ava online</span></div>
+      <div class="grid g4">
+        <div class="card stat"><div class="label">Calls handled by Ava</div><div class="v">43</div><div class="delta">+18% this week</div></div>
+        <div class="card stat"><div class="label">Jobs booked</div><div class="v">19</div><div class="delta">44.2% conversion</div></div>
+        <div class="card stat"><div class="label">Estimated booked revenue</div><div class="v">$8,740</div><div class="delta">+$1,920 vs last week</div></div>
+        <div class="card stat"><div class="label">Emergencies captured</div><div class="v">6</div><div class="delta">100% owner notified</div></div>
+      </div>
+
+      <div class="grid g2 mt">
+        <div class="card">
+          <div class="row"><div><h2>Today</h2><div class="sub">CallPilot built-in calendar</div></div><button class="ghost" onclick="go('calendar')">Open calendar</button></div>
+          <div class="timeline mt">
+            <div class="event"><div class="time">10:30 AM</div><div><b>Furnace not heating</b><div class="sub">Marie G. • 45 Saint-Charles Blvd</div></div><span class="pill green">Booked</span></div>
+            <div class="event"><div class="time">1–3 PM</div><div><b>Emergency pipe leak</b><div class="sub">Alex R. • Kirkland</div></div><span class="pill red">Emergency</span></div>
+            <div class="event"><div class="time">2:00 PM</div><div><b>Water heater estimate</b><div class="sub">Daniel T. • Pointe-Claire</div></div><span class="pill green">Booked</span></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="row"><div><h2>Latest missed calls</h2><div class="sub">Ava answered after no response</div></div><button class="ghost" onclick="go('calls')">View all</button></div>
+          <div class="call-list mt">
+            <div class="call" onclick="go('calls')"><div class="phone-icon">☎</div><div><strong>514-555-0182 • No heat</strong><div class="meta">Kirkland • 2 min 11 sec • Booked</div></div><span class="pill green">Booked</span></div>
+            <div class="call" onclick="go('calls')"><div class="phone-icon">☎</div><div><strong>438-555-0109 • Active leak</strong><div class="meta">Laval • 1 min 46 sec • Emergency</div></div><span class="pill red">Urgent</span></div>
+            <div class="call" onclick="go('calls')"><div class="phone-icon">☎</div><div><strong>514-555-0114 • Quote request</strong><div class="meta">Pointe-Claire • 1 min 18 sec • Callback</div></div><span class="pill gold">Lead</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid g3 mt">
+        <div class="card"><h3>Daily digest</h3><div class="sub">Ava handled <b style="color:white">7 calls</b> today, booked <b style="color:white">4 jobs</b>, escalated <b style="color:white">1 emergency</b>, and filtered <b style="color:white">2 spam calls</b>.</div></div>
+        <div class="card"><h3>After-hours mode</h3><div class="row"><div class="sub">Ava answers all calls after 5 PM.</div><div class="switch on" onclick="this.classList.toggle('on')"><i></i></div></div></div>
+        <div class="card"><h3>Vacation mode</h3><div class="row"><div class="sub">Temporarily let Ava answer every call.</div><div class="switch" onclick="this.classList.toggle('on')"><i></i></div></div></div>
+      </div>
+    </div>
+
+    <div class="page" id="onboarding">
+      <div class="kicker">Self-serve setup</div>
+      <h1>Launch a new customer in minutes.</h1>
+      <div class="sub mb">CallPilot loads a starter playbook by trade, then the business customizes only what matters.</div>
+      <div class="onboarding">
+        <div class="card steps">
+          <div class="step done">✓ 1. Business profile</div>
+          <div class="step current">2. Choose trade</div>
+          <div class="step">3. Service rules</div>
+          <div class="step">4. Availability</div>
+          <div class="step">5. Ava greeting</div>
+          <div class="step">6. Phone forwarding</div>
+          <div class="step">7. Go live</div>
+        </div>
+        <div class="card">
+          <h2>Choose your trade</h2>
+          <div class="sub mb">Ava will load suggested questions, emergencies and do-not-book rules.</div>
+          <div class="playbooks" id="playbooks">
+            <div class="playbook selected" data-trade="Plumbing"><div>🔧</div><b>Plumbing</b><span>Leaks, drains, water heaters, sewer, fixtures</span></div>
+            <div class="playbook" data-trade="Electrical"><div>⚡</div><b>Electrical</b><span>Outages, breakers, sparking, panels, installations</span></div>
+            <div class="playbook" data-trade="Roofing"><div>🏠</div><b>Roofing</b><span>Leaks, storm damage, shingles, flashing, estimates</span></div>
+            <div class="playbook" data-trade="HVAC"><div>❄</div><b>HVAC</b><span>No heat, no cooling, furnaces, heat pumps</span></div>
+            <div class="playbook" data-trade="Locksmith"><div>🔑</div><b>Locksmith</b><span>Lockouts, rekeys, damaged locks, urgent access</span></div>
+            <div class="playbook" data-trade="Other"><div>＋</div><b>Other</b><span>Create a custom CallPilot playbook</span></div>
+          </div>
+          <div class="grid g2 mt">
+            <div class="field"><label>Business name</label><input value="CallPilot Trades"></div>
+            <div class="field"><label>Owner / dispatcher</label><input value="John"></div>
+            <div class="field"><label>Service area</label><input value="Kirkland, Pointe-Claire, West Island"></div>
+            <div class="field"><label>Appointment duration</label><select><option>60 minutes</option><option>90 minutes</option><option>2 hours</option></select></div>
+          </div>
+          <div class="row mt"><span class="sub">Demo saves locally only.</span><button class="primary" onclick="demoToast('Starter playbook loaded')">Continue setup</button></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page" id="calls">
+      <div class="kicker">Missed-call inbox</div><h1>Every missed call becomes usable information.</h1>
+      <div class="grid g2 mt">
+        <div class="card">
+          <div class="call-list">
+            <div class="call selectedCall" onclick="loadCall(0)"><div class="phone-icon">☎</div><div><strong>514-555-0182 • Marie G.</strong><div class="meta">No heat • Kirkland • Today 5:42 PM</div></div><span class="pill green">Booked</span></div>
+            <div class="call" onclick="loadCall(1)"><div class="phone-icon">☎</div><div><strong>438-555-0109 • Alex R.</strong><div class="meta">Active pipe leak • Laval • Today 4:58 PM</div></div><span class="pill red">Emergency</span></div>
+            <div class="call" onclick="loadCall(2)"><div class="phone-icon">☎</div><div><strong>514-555-0114 • Sarah P.</strong><div class="meta">Water heater quote • Pointe-Claire • 3:16 PM</div></div><span class="pill gold">Callback</span></div>
+            <div class="call"><div class="phone-icon">⛔</div><div><strong>Unknown caller</strong><div class="meta">Spam detected • 11:29 AM</div></div><span class="pill purple">Filtered</span></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="row"><div><h2 id="callTitle">Marie G. • No heat</h2><div class="sub" id="callMeta">Booked Friday at 10:30 AM • 2 min 11 sec</div></div><span class="pill green" id="callPill">Booked</span></div>
+          <div class="transcript mt" id="transcript">
+            <div class="msg ava">Hi, thanks for calling CallPilot Trades. John isn't available right now, but I can help you. What seems to be the problem?</div>
+            <div class="msg caller">My furnace stopped working and the house is getting cold.</div>
+            <div class="msg ava">I can help with that. Is there any smell of gas, smoke, or immediate danger?</div>
+            <div class="msg caller">No, just no heat.</div>
+            <div class="msg ava">Thanks. What city are you located in?</div>
+            <div class="msg caller">Kirkland.</div>
+            <div class="msg ava">Great. I can check availability. Would Friday at 10:30 AM work?</div>
+            <div class="msg caller">Yes.</div>
+            <div class="msg ava">Perfect. Your appointment is confirmed for Friday at 10:30 AM.</div>
+          </div>
+          <div class="notice mt">Call recording and transcript retention are configurable per business. Demo data only.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page" id="calendar">
+      <div class="kicker">Built-in scheduling</div><h1>No external calendar required.</h1>
+      <div class="row mb"><div class="sub">CallPilot can be the system of record. Google, Outlook and field-service integrations remain optional.</div><button class="primary" onclick="demoToast('New availability window added')">+ Add availability</button></div>
+      <div class="grid g3">
+        <div class="card stat"><div class="label">Available this week</div><div class="v">14</div><div class="delta">Open slots</div></div>
+        <div class="card stat"><div class="label">Booked</div><div class="v">9</div><div class="delta">64% utilized</div></div>
+        <div class="card stat"><div class="label">Emergency windows</div><div class="v">4</div><div class="delta">Same-day</div></div>
+      </div>
+      <div class="card mt">
+        <div class="row mb"><h2>October 2026</h2><span class="pill blue">America/Toronto</span></div>
+        <div class="calendar" id="calendarGrid"></div>
+      </div>
+      <div class="grid g2 mt">
+        <div class="card"><h3>Default hours</h3><div class="sub">Monday–Friday: 8:00 AM–5:00 PM<br>Saturday: 9:00 AM–1:00 PM<br>Sunday: Closed</div></div>
+        <div class="card"><h3>Emergency windows</h3><div class="sub">1:00–3:00 PM and 3:00–5:00 PM • Owner approval optional per business rule.</div></div>
+      </div>
+    </div>
+
+    <div class="page" id="leads">
+      <div class="kicker">Simple CRM</div><h1>Track what happened after the call.</h1>
+      <div class="board mt">
+        <div class="col"><h3>NEW • 4</h3><div class="lead"><b>Sarah P. • Water heater</b><div>Pointe-Claire • $650 est.</div></div><div class="lead"><b>Marc L. • Drain issue</b><div>Kirkland • $280 est.</div></div></div>
+        <div class="col"><h3>BOOKED • 7</h3><div class="lead"><b>Marie G. • No heat</b><div>Fri 10:30 AM • $489 est.</div></div><div class="lead"><b>Daniel T. • Water heater</b><div>Fri 2:00 PM • $850 est.</div></div></div>
+        <div class="col"><h3>COMPLETED • 16</h3><div class="lead"><b>Anne R. • Faucet repair</b><div>Completed • $320</div></div><div class="lead"><b>Joseph K. • Leak repair</b><div>Completed • $575</div></div></div>
+        <div class="col"><h3>LOST • 3</h3><div class="lead"><b>Outside service area</b><div>Longeuil • Not accepted</div></div><div class="lead"><b>Commercial project</b><div>Do-not-book rule</div></div></div>
+      </div>
+    </div>
+
+    <div class="page" id="ava">
+      <div class="kicker">AI receptionist configuration</div><h1>Teach Ava the business once.</h1>
+      <div class="grid g2 mt">
+        <div class="card">
+          <h2>Business profile</h2>
+          <div class="form-grid">
+            <div class="field"><label>Business name</label><input value="CallPilot Trades"></div>
+            <div class="field"><label>Owner name</label><input value="John"></div>
+            <div class="field"><label>Trade</label><select><option>Plumbing</option><option>Electrical</option><option>Roofing</option><option>HVAC</option></select></div>
+            <div class="field"><label>Languages</label><select><option>English + French</option><option>English</option><option>French</option></select></div>
+          </div>
+          <div class="field mt"><label>Custom greeting</label><textarea>Hi, thanks for calling CallPilot Trades. John isn't available right now, but I can help you.</textarea></div>
+          <div class="field mt"><label>Services accepted</label><textarea>Leaks, drain issues, water heaters, fixtures, residential plumbing emergencies.</textarea></div>
+          <div class="field mt"><label>Do-not-book rules</label><textarea>No commercial construction projects. No jobs outside West Island. Do not quote a final price over the phone.</textarea></div>
+        </div>
+        <div class="card">
+          <h2>Ava behavior</h2>
+          <div class="row mt"><div><b>Human transfer</b><div class="sub">Transfer urgent callers to owner when configured.</div></div><div class="switch on" onclick="this.classList.toggle('on')"><i></i></div></div>
+          <div class="row mt"><div><b>Spam filtering</b><div class="sub">Filter obvious robocalls before using AI minutes.</div></div><div class="switch on" onclick="this.classList.toggle('on')"><i></i></div></div>
+          <div class="row mt"><div><b>Same-day emergencies</b><div class="sub">Offer configured same-day windows.</div></div><div class="switch on" onclick="this.classList.toggle('on')"><i></i></div></div>
+          <div class="row mt"><div><b>After-hours answer all calls</b><div class="sub">Not just missed calls.</div></div><div class="switch on" onclick="this.classList.toggle('on')"><i></i></div></div>
+          <div class="field mt"><label>FAQ knowledge</label><textarea>Service area: West Island. Residential only. Minimum diagnostic visit: set by owner. Warranty questions should be escalated. Never invent pricing.</textarea></div>
+          <div class="notice mt">Ava can answer business FAQs, but should never invent availability, pricing, emergency dispatch, or booking confirmation.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page" id="phone">
+      <div class="kicker">Missed-call routing</div><h1>The owner keeps their existing number.</h1>
+      <div class="flow mt">
+        <div class="box">Customer calls<br><b>owner's normal number</b></div>
+        <div class="box">Owner doesn't answer<br><b>after ~15–20 sec</b></div>
+        <div class="box">Carrier forwards to<br><b>hidden CallPilot number</b></div>
+        <div class="box">Ava answers<br><b>and books the job</b></div>
+      </div>
+      <div class="grid g2 mt">
+        <div class="card">
+          <h2>Your hidden CallPilot number</h2>
+          <div style="font-size:30px;font-weight:950;margin:10px 0">514-555-0412</div>
+          <span class="pill gold">Demo number</span>
+          <div class="sub mt">Customers never need to know this number. It exists only as the forwarding destination for unanswered calls.</div>
+          <button class="primary mt" onclick="demoToast('Demo number copied')">Copy forwarding number</button>
+        </div>
+        <div class="card">
+          <h2>Setup checklist</h2>
+          <div class="timeline">
+            <div class="event"><div class="time">1</div><div><b>Keep public business number</b><div class="sub">No change to advertising.</div></div><span class="pill green">Done</span></div>
+            <div class="event"><div class="time">2</div><div><b>Hidden CallPilot line assigned</b><div class="sub">Unique routing for this business.</div></div><span class="pill gold">Demo</span></div>
+            <div class="event"><div class="time">3</div><div><b>Enable no-answer forwarding</b><div class="sub">Carrier-specific setup.</div></div><span class="pill blue">Customer step</span></div>
+            <div class="event"><div class="time">4</div><div><b>Test one missed call</b><div class="sub">Confirm Ava answers correctly.</div></div><span class="pill blue">Test</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="notice danger-note mt">Demo only: no real Twilio/SIP number is provisioned from this page and no forwarding change is made to any phone.</div>
+    </div>
+
+    <div class="page" id="analytics">
+      <div class="kicker">Performance</div><h1>Show the owner what CallPilot is worth.</h1>
+      <div class="grid g4 mt">
+        <div class="card stat"><div class="label">Calls answered</div><div class="v">186</div><div class="delta">This month</div></div>
+        <div class="card stat"><div class="label">Appointments booked</div><div class="v">79</div><div class="delta">42.5% conversion</div></div>
+        <div class="card stat"><div class="label">Avg. call length</div><div class="v">1:54</div><div class="delta">-12 sec vs last month</div></div>
+        <div class="card stat"><div class="label">Booked revenue est.</div><div class="v">$36.8K</div><div class="delta">Demo estimate</div></div>
+      </div>
+      <div class="grid g2 mt">
+        <div class="card"><h2>Calls by day</h2><div class="chart"><div class="bar" style="height:48%"><span>Mon</span></div><div class="bar" style="height:62%"><span>Tue</span></div><div class="bar" style="height:58%"><span>Wed</span></div><div class="bar" style="height:86%"><span>Thu</span></div><div class="bar" style="height:74%"><span>Fri</span></div><div class="bar" style="height:39%"><span>Sat</span></div><div class="bar" style="height:22%"><span>Sun</span></div></div></div>
+        <div class="card"><h2>Call outcomes</h2>
+          <div class="mt"><div class="row"><span class="sub">Booked</span><b>42%</b></div><div class="progress"><i style="width:42%"></i></div></div>
+          <div class="mt"><div class="row"><span class="sub">Callback lead</span><b>24%</b></div><div class="progress"><i style="width:24%"></i></div></div>
+          <div class="mt"><div class="row"><span class="sub">Emergency</span><b>14%</b></div><div class="progress"><i style="width:14%"></i></div></div>
+          <div class="mt"><div class="row"><span class="sub">Spam / irrelevant</span><b>11%</b></div><div class="progress"><i style="width:11%"></i></div></div>
+          <div class="mt"><div class="row"><span class="sub">Not serviceable</span><b>9%</b></div><div class="progress"><i style="width:9%"></i></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page" id="notifications">
+      <div class="kicker">Owner + customer communication</div><h1>Keep everyone informed automatically.</h1>
+      <div class="grid g2 mt">
+        <div class="card">
+          <h2>Owner alerts</h2>
+          <div class="timeline">
+            <div class="event"><div class="time">5:44 PM</div><div><b>Appointment booked</b><div class="sub">Marie G. • No heat • Fri 10:30 AM</div></div><span class="pill green">SMS</span></div>
+            <div class="event"><div class="time">4:59 PM</div><div><b>Emergency call</b><div class="sub">Active leak • Laval • same-day request</div></div><span class="pill red">Urgent</span></div>
+            <div class="event"><div class="time">3:17 PM</div><div><b>Callback requested</b><div class="sub">Water heater estimate • Pointe-Claire</div></div><span class="pill gold">Email</span></div>
+          </div>
+        </div>
+        <div class="card">
+          <h2>Customer confirmation</h2>
+          <div class="msg ava" style="max-width:100%">CallPilot Trades: Your service appointment is confirmed for Friday at 10:30 AM. Reply R to request a reschedule or C to cancel. This is a demo message.</div>
+          <div class="row mt"><div><b>SMS confirmation</b><div class="sub">Send immediately after successful booking.</div></div><div class="switch on" onclick="this.classList.toggle('on')"><i></i></div></div>
+          <div class="row mt"><div><b>Email confirmation</b><div class="sub">Optional for businesses collecting email.</div></div><div class="switch" onclick="this.classList.toggle('on')"><i></i></div></div>
+          <div class="row mt"><div><b>Morning reminder</b><div class="sub">Optional appointment reminder.</div></div><div class="switch on" onclick="this.classList.toggle('on')"><i></i></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page" id="integrations">
+      <div class="kicker">Optional integrations</div><h1>CallPilot works even without them.</h1>
+      <div class="notice mb">Built-in scheduling is available by default. These integrations are optional extensions and are not connected in this demo.</div>
+      <div class="grid g2">
+        <div class="integration"><div class="ico">G</div><div class="grow"><b>Google Calendar</b><span>Two-way availability sync</span></div><span class="pill gold">Optional</span></div>
+        <div class="integration"><div class="ico">O</div><div class="grow"><b>Microsoft Outlook</b><span>Calendar sync</span></div><span class="pill gold">Optional</span></div>
+        <div class="integration"><div class="ico">J</div><div class="grow"><b>Jobber</b><span>Jobs, customers and scheduling</span></div><span class="pill purple">Future</span></div>
+        <div class="integration"><div class="ico">H</div><div class="grow"><b>Housecall Pro</b><span>Field-service scheduling</span></div><span class="pill purple">Future</span></div>
+        <div class="integration"><div class="ico">H</div><div class="grow"><b>HubSpot</b><span>Lead + customer sync</span></div><span class="pill purple">Future</span></div>
+        <div class="integration"><div class="ico">＋</div><div class="grow"><b>Custom integration</b><span>API/webhook for larger customers</span></div><span class="pill blue">Advanced</span></div>
+      </div>
+    </div>
+
+    <div class="page" id="billing">
+      <div class="kicker">Plans & usage</div><h1>Simple contractor-friendly pricing.</h1>
+      <div class="notice mb">Demo only. No card is charged and upgrade buttons do not process payment.</div>
+      <div class="grid g3">
+        <div class="card price"><h2>Starter</h2><div class="amt">$199<span style="font-size:12px;color:var(--muted)">/mo</span></div><ul><li>Missed-call answering</li><li>English + French</li><li>Built-in calendar</li><li>100 AI minutes</li><li>Call summaries</li></ul><button class="ghost" onclick="demoToast('Demo plan selected')">Select Starter</button></div>
+        <div class="card price featured"><h2>Pro</h2><div class="amt">$349<span style="font-size:12px;color:var(--muted)">/mo</span></div><ul><li>Everything in Starter</li><li>Emergency workflows</li><li>Customer SMS confirmations</li><li>Analytics</li><li>350 AI minutes</li></ul><button class="primary" onclick="demoToast('Demo plan selected')">Current plan</button></div>
+        <div class="card price"><h2>Growth</h2><div class="amt">$599<span style="font-size:12px;color:var(--muted)">/mo</span></div><ul><li>Everything in Pro</li><li>Multi-technician routing</li><li>Advanced integrations</li><li>Priority support</li><li>750 AI minutes</li></ul><button class="ghost" onclick="demoToast('Demo upgrade selected')">Upgrade</button></div>
+      </div>
+      <div class="card mt"><div class="row"><div><h3>Monthly AI usage</h3><div class="sub">218 of 350 included minutes</div></div><b>62%</b></div><div class="progress mt"><i style="width:62%"></i></div></div>
+    </div>
+
+    <div class="page" id="admin">
+      <div class="kicker">CallPilot operator console</div><h1>Your SaaS business at a glance.</h1>
+      <div class="grid g4 mt">
+        <div class="card stat"><div class="label">Paying businesses</div><div class="v">24</div><div class="delta">Demo portfolio</div></div>
+        <div class="card stat"><div class="label">MRR</div><div class="v">$8,976</div><div class="delta">Demo revenue</div></div>
+        <div class="card stat"><div class="label">Calls this month</div><div class="v">3,481</div><div class="delta">Across all tenants</div></div>
+        <div class="card stat"><div class="label">Active hidden lines</div><div class="v">24</div><div class="delta">1 per business</div></div>
+      </div>
+      <div class="card mt">
+        <div class="row mb"><div><h2>Customers</h2><div class="sub">Sample multi-tenant view</div></div><button class="primary" onclick="go('onboarding')">+ Add business</button></div>
+        <table class="table">
+          <thead><tr><th>Business</th><th>Trade</th><th>Hidden number</th><th>Plan</th><th>Usage</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><div class="person"><div class="circle">CT</div><div><b>CallPilot Trades</b><div class="sub">Kirkland, QC</div></div></div></td><td>Plumbing</td><td>514-555-0412</td><td>Pro</td><td>218 min</td><td><span class="pill green">Active</span></td></tr>
+            <tr><td><div class="person"><div class="circle">JE</div><div><b>Joe's Electric</b><div class="sub">Laval, QC</div></div></div></td><td>Electrical</td><td>450-555-0188</td><td>Starter</td><td>71 min</td><td><span class="pill green">Active</span></td></tr>
+            <tr><td><div class="person"><div class="circle">WR</div><div><b>West Island Roofing</b><div class="sub">Pointe-Claire, QC</div></div></div></td><td>Roofing</td><td>514-555-0671</td><td>Growth</td><td>411 min</td><td><span class="pill green">Active</span></td></tr>
+            <tr><td><div class="person"><div class="circle">NH</div><div><b>North HVAC</b><div class="sub">Montréal, QC</div></div></div></td><td>HVAC</td><td>438-555-0236</td><td>Pro</td><td>183 min</td><td><span class="pill gold">Setup</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="grid g3 mt">
+        <div class="card"><h3>Onboarding funnel</h3><div class="sub">Trial created → profile complete → hidden number → forwarding tested → active.</div><div class="progress mt"><i style="width:76%"></i></div></div>
+        <div class="card"><h3>Support alerts</h3><div class="sub">2 businesses still need forwarding verification. 1 customer is nearing monthly AI minute limit.</div></div>
+        <div class="card"><h3>System status</h3><span class="pill green">Demo systems healthy</span><div class="sub mt">Real telephony/billing connections are intentionally not activated here.</div></div>
+      </div>
+    </div>
+
+  </section>
+</main>
+</div>
+
+<div class="modal" id="modal">
+  <div class="modal-card">
+    <div class="row"><div><div class="kicker">Guided demo</div><h2>New customer onboarding</h2></div><button class="close" id="closeModal">✕</button></div>
+    <div class="notice mb">This shows how a paying customer would configure CallPilot online without you programming Ava manually.</div>
+    <div class="grid g2">
+      <div class="field"><label>Business name</label><input value="ABC Plumbing"></div>
+      <div class="field"><label>Trade</label><select><option>Plumbing</option><option>Electrical</option><option>Roofing</option><option>HVAC</option></select></div>
+      <div class="field"><label>Owner</label><input value="Mike"></div>
+      <div class="field"><label>Service area</label><input value="West Island"></div>
+      <div class="field"><label>Hours</label><input value="Mon–Fri, 8 AM–5 PM"></div>
+      <div class="field"><label>Languages</label><select><option>English + French</option></select></div>
+    </div>
+    <div class="row mt"><span class="sub">Next: emergency rules → availability → greeting → forwarding number.</span><button class="primary" onclick="document.getElementById('modal').classList.remove('show');go('onboarding');demoToast('Demo business created')">Continue</button></div>
+  </div>
+</div>
+
+<div id="toast" style="position:fixed;right:18px;bottom:18px;background:#122638;border:1px solid var(--line);color:white;padding:11px 14px;border-radius:11px;display:none;z-index:80;font-size:12px;font-weight:800"></div>
+
+<script>
+const pages=[...document.querySelectorAll('.page')],navBtns=[...document.querySelectorAll('.nav button')];
+function go(id){pages.forEach(p=>p.classList.toggle('active',p.id===id));navBtns.forEach(b=>b.classList.toggle('active',b.dataset.page===id));document.getElementById('sidebar').classList.remove('open');window.scrollTo({top:0,behavior:'smooth'})}
+navBtns.forEach(b=>b.onclick=()=>go(b.dataset.page));
+document.getElementById('mobileNav').onclick=()=>document.getElementById('sidebar').classList.toggle('open');
+document.getElementById('setupBtn').onclick=()=>document.getElementById('modal').classList.add('show');
+document.getElementById('closeModal').onclick=()=>document.getElementById('modal').classList.remove('show');
+document.getElementById('modal').onclick=e=>{if(e.target.id==='modal')e.target.classList.remove('show')};
+let admin=false;document.getElementById('modeBtn').onclick=()=>{admin=!admin;go(admin?'admin':'dashboard');document.getElementById('modeBtn').textContent=admin?'Switch to Owner View':'Switch to Admin View'};
+document.querySelectorAll('.playbook').forEach(p=>p.onclick=()=>{document.querySelectorAll('.playbook').forEach(x=>x.classList.remove('selected'));p.classList.add('selected');document.getElementById('accountMeta').textContent='Kirkland, QC • '+p.dataset.trade+' • Pro Plan';demoToast(p.dataset.trade+' playbook loaded')});
+function demoToast(t){const e=document.getElementById('toast');e.textContent=t+' • Demo only';e.style.display='block';clearTimeout(window.tt);window.tt=setTimeout(()=>e.style.display='none',2300)}
+const calls=[
+{title:'Marie G. • No heat',meta:'Booked Friday at 10:30 AM • 2 min 11 sec',pill:'Booked',cls:'green',msgs:[['ava',"Hi, thanks for calling CallPilot Trades. John isn't available right now, but I can help you. What seems to be the problem?"],['caller','My furnace stopped working and the house is getting cold.'],['ava','I can help with that. Is there any smell of gas, smoke, or immediate danger?'],['caller','No, just no heat.'],['ava','Thanks. What city are you located in?'],['caller','Kirkland.'],['ava','Great. I can check availability. Would Friday at 10:30 AM work?'],['caller','Yes.'],['ava','Perfect. Your appointment is confirmed for Friday at 10:30 AM.']]},
+{title:'Alex R. • Active pipe leak',meta:'Emergency • same-day window offered • 1 min 46 sec',pill:'Emergency',cls:'red',msgs:[['ava',"Hi, thanks for calling CallPilot Trades. John isn't available, but I can help."],['caller','There is water leaking under my kitchen sink.'],['ava','Is water actively flowing right now, and can you safely shut off the local valve or main water supply?'],['caller','Yes, I shut it off.'],['ava','Thanks. I can check same-day emergency availability. What is the service address?'],['caller','88 Example Street in Laval.'],['ava','I have a same-day window from 1 to 3 PM. Would you like me to reserve it?']]},
+{title:'Sarah P. • Water heater quote',meta:'Callback requested • 1 min 18 sec',pill:'Callback',cls:'gold',msgs:[['ava',"Hi, thanks for calling CallPilot Trades. How can I help?"],['caller','I want a quote to replace my water heater.'],['ava','Absolutely. What city are you located in?'],['caller','Pointe-Claire.'],['ava','Thanks. I can capture your details and have the owner follow up. What is the best phone number to reach you?']]}
+];
+function loadCall(i){const c=calls[i];document.getElementById('callTitle').textContent=c.title;document.getElementById('callMeta').textContent=c.meta;const p=document.getElementById('callPill');p.textContent=c.pill;p.className='pill '+c.cls;document.getElementById('transcript').innerHTML=c.msgs.map(m=>'<div class="msg '+m[0]+'">'+m[1]+'</div>').join('')}
+const cal=document.getElementById('calendarGrid');for(let d=1;d<=31;d++){const e=document.createElement('div');e.className='day';let inner='<div class="n">'+d+'</div>';if([2,5,7,9,12,15,19,22,26,29].includes(d))inner+='<div class="appt">10:30 • Service job</div>';if([2,3,6,8,10,13,16,20,23,27,30].includes(d))inner+='<div class="avail">2:00 • Available</div>';e.innerHTML=inner;cal.appendChild(e)}
+let fr=false;document.getElementById('langBtn').onclick=()=>{fr=!fr;document.getElementById('langBtn').textContent=fr?'EN':'FR';demoToast(fr?'French interface preview':'English interface preview')};
+</script>
+</body>
+</html>
