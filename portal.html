@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>CallPilot Trades — Owner Portal Demo</title>
+<style>
+:root{--bg:#07101a;--panel:#0e1927;--panel2:#111f30;--text:#f7f1e6;--muted:#9e9588;--gold:#d5ad63;--gold2:#f0d79c;--line:rgba(213,173,99,.16);--ok:#83c89a;--danger:#e98291}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 80% 0,#18253a 0,#08111c 34%,#060c14 100%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Arial,sans-serif;min-height:100vh}
+button,input,select{font:inherit}.app{display:grid;grid-template-columns:248px 1fr;min-height:100vh}
+aside{border-right:1px solid var(--line);background:rgba(5,12,20,.88);backdrop-filter:blur(18px);padding:22px 14px;position:sticky;top:0;height:100vh}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:20px;padding:0 8px 24px}.logo{width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,var(--gold2),#b88746);display:grid;place-items:center}.logo:after{content:"";width:14px;height:14px;border:4px solid #081018;border-right-color:transparent;border-radius:50%}.brand span{color:var(--gold)}
+.demo-badge{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#e4c789;border:1px solid rgba(213,173,99,.25);background:rgba(213,173,99,.07);padding:7px 9px;border-radius:999px;margin:0 8px 18px;display:inline-block}
+.nav{display:grid;gap:6px}.nav button{border:0;background:transparent;color:#a99f91;text-align:left;padding:11px 12px;border-radius:12px;cursor:pointer;font-weight:750}.nav button.active{background:rgba(213,173,99,.10);color:#f2dfb8}.nav button:hover{background:rgba(255,255,255,.035)}
+.side-bottom{position:absolute;bottom:20px;left:14px;right:14px}.back{display:block;text-decoration:none;color:#ddd0bc;border:1px solid rgba(255,255,255,.08);padding:11px 12px;border-radius:12px;text-align:center;font-size:12px}
+main{padding:26px 28px 60px;min-width:0}.topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:22px}.topbar h1{font-size:30px;margin:0;letter-spacing:-.03em}.top-actions{display:flex;gap:8px;align-items:center}.lang{display:flex;padding:3px;background:#0b1521;border:1px solid var(--line);border-radius:10px}.lang button{border:0;background:transparent;color:#92897c;padding:7px 9px;border-radius:7px;font-weight:900;font-size:11px;cursor:pointer}.lang button.active{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#1a130b}
+.status-dot{display:inline-flex;align-items:center;gap:7px;color:#cfc4b3;font-size:12px;border:1px solid rgba(255,255,255,.07);padding:9px 11px;border-radius:11px;background:#0c1622}.status-dot i{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 12px var(--ok)}
+.page{display:none}.page.active{display:block}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.card{background:linear-gradient(155deg,rgba(19,32,48,.96),rgba(10,19,30,.98));border:1px solid rgba(255,255,255,.07);border-radius:20px;padding:18px;box-shadow:0 18px 55px rgba(0,0,0,.14)}.metric .label{color:#968d81;font-size:11px}.metric .value{font-size:32px;font-weight:950;margin-top:4px;letter-spacing:-.04em}.metric .delta{font-size:11px;color:#b8ae9f;margin-top:4px}.metric .delta.good{color:var(--ok)}
+.section-title{display:flex;justify-content:space-between;gap:14px;align-items:end;margin:26px 0 12px}.section-title h2{margin:0;font-size:20px}.section-title p{margin:4px 0 0;color:#948b7f;font-size:12px}
+.table{border:1px solid rgba(255,255,255,.07);border-radius:18px;overflow:hidden;background:rgba(9,17,27,.72)}.row{display:grid;grid-template-columns:1.05fr .7fr .8fr 1fr 1.15fr;gap:12px;padding:13px 15px;align-items:center;border-top:1px solid rgba(255,255,255,.06);font-size:12px}.row:first-child{border-top:0}.row.head{color:#80786e;text-transform:uppercase;letter-spacing:.08em;font-size:9px;background:rgba(255,255,255,.025)}.pill{display:inline-flex;width:max-content;padding:5px 8px;border-radius:999px;background:rgba(213,173,99,.11);color:#e5cb8f;font-weight:850;font-size:10px}.pill.red{background:rgba(204,67,84,.13);color:#f0a6af}.pill.green{background:rgba(91,168,116,.13);color:#9dd7ad}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field label{display:block;color:#bdb2a2;font-size:11px;font-weight:800;margin:14px 0 6px}.field input,.field select{width:100%;background:#07111c;border:1px solid rgba(255,255,255,.09);color:white;padding:11px 12px;border-radius:11px}.save{border:0;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#1b140b;padding:11px 14px;border-radius:11px;font-weight:900;cursor:pointer}
+.toggle-row{display:flex;justify-content:space-between;gap:14px;align-items:center;padding:15px 0;border-top:1px solid rgba(255,255,255,.06)}.toggle-row:first-of-type{border-top:0}.toggle-row b{font-size:13px}.toggle-row span{display:block;color:#8d857a;font-size:11px;margin-top:4px;line-height:1.4}.switch{position:relative;width:50px;height:29px;flex:0 0 auto}.switch input{opacity:0;width:0;height:0}.slider{position:absolute;inset:0;background:#263244;border-radius:999px;cursor:pointer;transition:.2s}.slider:after{content:"";position:absolute;width:21px;height:21px;left:4px;top:4px;background:white;border-radius:50%;transition:.2s}.switch input:checked+.slider{background:#b88746}.switch input:checked+.slider:after{transform:translateX(21px)}
+.notice{padding:13px 14px;border-radius:13px;background:rgba(213,173,99,.07);border:1px solid rgba(213,173,99,.15);font-size:12px;line-height:1.5;color:#d9cfbf;margin-top:14px}.call-detail{display:grid;grid-template-columns:.8fr 1.2fr;gap:14px}.transcript{display:grid;gap:9px}.bubble{padding:11px 12px;border-radius:13px;font-size:12px;line-height:1.45;background:#0a1623;border:1px solid rgba(255,255,255,.06)}.bubble.ava{border-color:rgba(213,173,99,.17);background:rgba(213,173,99,.06)}.bubble small{display:block;text-transform:uppercase;letter-spacing:.08em;color:#8f867a;font-size:8px;margin-bottom:4px}.calendar-box{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px;border:1px dashed rgba(213,173,99,.28);border-radius:15px;background:rgba(213,173,99,.04)}.calendar-box b{font-size:14px}.calendar-box span{display:block;color:#91887c;font-size:11px;margin-top:4px}.smallbtn{border:1px solid rgba(255,255,255,.08);background:#132033;color:#eee2cf;border-radius:10px;padding:9px 11px;font-size:11px;font-weight:850;cursor:pointer}
+.route-map{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}.route{position:relative;padding:15px;border:1px solid rgba(255,255,255,.07);border-radius:14px;background:#0a1521}.route b{font-size:12px}.route p{margin:6px 0 0;color:#8b8377;font-size:10px;line-height:1.4}.route:not(:last-child):after{content:"→";position:absolute;right:-9px;top:37px;color:#d5ad63;font-weight:900}
+@media(max-width:980px){.app{grid-template-columns:82px 1fr}.brand{font-size:0;justify-content:center;padding-inline:0}.demo-badge{display:none}.nav button{font-size:0;text-align:center}.nav button:before{font-size:18px}.nav button[data-page="overview"]:before{content:"⌂"}.nav button[data-page="calls"]:before{content:"☎"}.nav button[data-page="appointments"]:before{content:"▣"}.nav button[data-page="ava"]:before{content:"✦"}.nav button[data-page="routing"]:before{content:"↪"}.side-bottom .back{font-size:0}.side-bottom .back:before{content:"←";font-size:18px}.grid4{grid-template-columns:1fr 1fr}.route-map{grid-template-columns:1fr 1fr}.route:nth-child(2):after{display:none}}
+@media(max-width:680px){.app{display:block}.app aside{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:12px}.brand{justify-content:flex-start;font-size:18px;padding:0 0 10px}.demo-badge{display:inline-block;margin:0 0 10px}.nav{grid-template-columns:repeat(5,1fr);gap:5px}.nav button{font-size:0;padding:10px}.side-bottom{display:none}main{padding:18px 12px 42px}.topbar{align-items:flex-start}.topbar h1{font-size:24px}.grid4,.split,.call-detail,.route-map{grid-template-columns:1fr}.route:after{display:none}.row{grid-template-columns:1fr 1fr}.row.head{display:none}.row .wide{grid-column:1/-1}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside>
+  <div class="brand"><div class="logo"></div>CallPilot <span>Trades</span></div>
+  <div class="demo-badge" data-en="Owner portal demo" data-fr="Démo portail propriétaire">Owner portal demo</div>
+  <div class="nav">
+    <button class="active" data-page="overview" data-en="Overview" data-fr="Vue d’ensemble">Overview</button>
+    <button data-page="calls" data-en="Calls" data-fr="Appels">Calls</button>
+    <button data-page="appointments" data-en="Appointments" data-fr="Rendez-vous">Appointments</button>
+    <button data-page="ava" data-en="Ava setup" data-fr="Configuration Ava">Ava setup</button>
+    <button data-page="routing" data-en="Routing" data-fr="Routage">Routing</button>
+  </div>
+  <div class="side-bottom"><a class="back" href="friendly.html" data-en="← Back to CallPilot demo" data-fr="← Retour à la démo CallPilot">← Back to CallPilot demo</a></div>
+</aside>
+
+<main>
+<div class="topbar">
+  <div><h1 id="pageTitle">Overview</h1><div style="color:#8e8579;font-size:12px;margin-top:4px">West Island Home Services</div></div>
+  <div class="top-actions">
+    <div class="status-dot"><i></i><span data-en="Ava active" data-fr="Ava active">Ava active</span></div>
+    <div class="lang"><button id="enBtn" class="active">EN</button><button id="frBtn">FR</button></div>
+  </div>
+</div>
+
+<section id="overview" class="page active">
+  <div class="grid4">
+    <div class="card metric"><div class="label" data-en="Calls handled today" data-fr="Appels traités aujourd’hui">Calls handled today</div><div class="value">12</div><div class="delta good" data-en="+7 recovered missed calls" data-fr="+7 appels manqués récupérés">+7 recovered missed calls</div></div>
+    <div class="card metric"><div class="label" data-en="Appointments booked" data-fr="Rendez-vous réservés">Appointments booked</div><div class="value">5</div><div class="delta" data-en="Calendar currently optional" data-fr="Calendrier actuellement optionnel">Calendar currently optional</div></div>
+    <div class="card metric"><div class="label" data-en="Urgent calls" data-fr="Appels urgents">Urgent calls</div><div class="value">2</div><div class="delta" data-en="Owner transfer enabled" data-fr="Transfert au propriétaire activé">Owner transfer enabled</div></div>
+    <div class="card metric"><div class="label" data-en="Estimated recovered revenue" data-fr="Revenus récupérés estimés">Estimated recovered revenue</div><div class="value">$2,940</div><div class="delta good" data-en="Demo estimate" data-fr="Estimation démo">Demo estimate</div></div>
+  </div>
+  <div class="section-title"><div><h2 data-en="Recent Ava calls" data-fr="Appels récents d’Ava">Recent Ava calls</h2><p data-en="Every call becomes a structured lead." data-fr="Chaque appel devient un prospect structuré.">Every call becomes a structured lead.</p></div></div>
+  <div class="table">
+    <div class="row head"><span>Customer</span><span>City</span><span>Priority</span><span>Service</span><span>Outcome</span></div>
+    <div class="row"><strong>Marie L.</strong><span>Kirkland</span><span class="pill red" data-en="Emergency" data-fr="Urgence">Emergency</span><span data-en="No heat" data-fr="Pas de chauffage">No heat</span><span class="wide" data-en="Same-day dispatch requested" data-fr="Intervention le jour même demandée">Same-day dispatch requested</span></div>
+    <div class="row"><strong>John P.</strong><span>Pointe-Claire</span><span class="pill green" data-en="Booked" data-fr="Réservé">Booked</span><span data-en="Furnace service" data-fr="Service fournaise">Furnace service</span><span class="wide" data-en="Appointment confirmed" data-fr="Rendez-vous confirmé">Appointment confirmed</span></div>
+    <div class="row"><strong>Alex R.</strong><span>Beaconsfield</span><span class="pill" data-en="Lead" data-fr="Prospect">Lead</span><span data-en="AC issue" data-fr="Problème climatisation">AC issue</span><span class="wide" data-en="Owner notified by SMS" data-fr="Propriétaire avisé par SMS">Owner notified by SMS</span></div>
+  </div>
+</section>
+
+<section id="calls" class="page">
+  <div class="call-detail">
+    <div class="card">
+      <h2 style="margin:0 0 8px" data-en="Call details" data-fr="Détails de l’appel">Call details</h2>
+      <div class="notice"><b>Marie L. • Kirkland</b><br><span data-en="Emergency • No heat • Existing customer number captured" data-fr="Urgence • Pas de chauffage • Numéro du client capté">Emergency • No heat • Existing customer number captured</span></div>
+      <div class="field"><label data-en="Customer phone" data-fr="Téléphone du client">Customer phone</label><input value="514-555-0123"></div>
+      <div class="field"><label data-en="Address" data-fr="Adresse">Address</label><input value="123 Main Street, Kirkland"></div>
+      <div class="field"><label data-en="Preferred time" data-fr="Heure préférée">Preferred time</label><input value="Same-day / first available"></div>
+    </div>
+    <div class="card">
+      <h2 style="margin:0 0 12px" data-en="Ava transcript" data-fr="Transcription d’Ava">Ava transcript</h2>
+      <div class="transcript">
+        <div class="bubble ava"><small>AVA</small><span data-en="Thanks for calling West Island Home Services. I'm Ava. How can I help?" data-fr="Merci d’avoir appelé West Island Home Services. Je suis Ava. Comment puis-je vous aider?">Thanks for calling West Island Home Services. I'm Ava. How can I help?</span></div>
+        <div class="bubble"><small data-en="CUSTOMER" data-fr="CLIENT">CUSTOMER</small><span data-en="My furnace stopped working and the house is getting cold." data-fr="Ma fournaise ne fonctionne plus et la maison refroidit.">My furnace stopped working and the house is getting cold.</span></div>
+        <div class="bubble ava"><small>AVA</small><span data-en="I can help. Is there any smell of gas, smoke, fire, or another immediate danger?" data-fr="Je peux vous aider. Y a-t-il une odeur de gaz, de la fumée, un incendie ou un autre danger immédiat?">I can help. Is there any smell of gas, smoke, fire, or another immediate danger?</span></div>
+        <div class="bubble"><small data-en="CUSTOMER" data-fr="CLIENT">CUSTOMER</small><span data-en="No, but I need someone today." data-fr="Non, mais j’ai besoin de quelqu’un aujourd’hui.">No, but I need someone today.</span></div>
+        <div class="bubble ava"><small>AVA</small><span data-en="Understood. I’ll capture your address and phone number and offer the first same-day dispatch option." data-fr="Compris. Je vais prendre votre adresse et votre numéro de téléphone et proposer la première option d’intervention le jour même.">Understood. I’ll capture your address and phone number and offer the first same-day dispatch option.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="appointments" class="page">
+  <div class="card">
+    <div class="section-title" style="margin-top:0"><div><h2 data-en="Calendar & booking" data-fr="Calendrier et réservation">Calendar & booking</h2><p data-en="A calendar is optional. Ava can book live or simply capture the preferred time." data-fr="Un calendrier est optionnel. Ava peut réserver en direct ou simplement prendre l’heure préférée.">A calendar is optional. Ava can book live or simply capture the preferred time.</p></div></div>
+    <div class="calendar-box"><div><b id="calendarTitle" data-en="No calendar connected" data-fr="Aucun calendrier connecté">No calendar connected</b><span id="calendarDesc" data-en="Ava collects the customer's preferred time and sends the request to the owner." data-fr="Ava recueille l’heure préférée du client et envoie la demande au propriétaire.">Ava collects the customer's preferred time and sends the request to the owner.</span></div><button id="calendarBtn" class="smallbtn" data-en="Connect demo calendar" data-fr="Connecter le calendrier démo">Connect demo calendar</button></div>
+  </div>
+  <div class="section-title"><div><h2 data-en="Upcoming requests" data-fr="Demandes à venir">Upcoming requests</h2></div></div>
+  <div class="table">
+    <div class="row"><strong>John P.</strong><span>Fri 10:30</span><span class="pill green" data-en="Confirmed" data-fr="Confirmé">Confirmed</span><span data-en="Furnace service" data-fr="Service fournaise">Furnace service</span><span class="wide">Pointe-Claire</span></div>
+    <div class="row"><strong>Sarah D.</strong><span>Fri 14:00</span><span class="pill" data-en="Requested" data-fr="Demandé">Requested</span><span data-en="AC diagnostic" data-fr="Diagnostic climatisation">AC diagnostic</span><span class="wide">DDO</span></div>
+  </div>
+</section>
+
+<section id="ava" class="page">
+  <div class="split">
+    <div class="card">
+      <h2 style="margin:0" data-en="Business profile" data-fr="Profil de l’entreprise">Business profile</h2>
+      <div class="field"><label data-en="Business name" data-fr="Nom de l’entreprise">Business name</label><input id="bizName" value="West Island Home Services"></div>
+      <div class="field"><label data-en="Business type" data-fr="Type d’entreprise">Business type</label><select id="trade"><option value="hvac">HVAC</option><option value="plumbing">Plumbing</option><option value="electrical">Electrical</option><option value="roofing">Roofing</option></select></div>
+      <div class="field"><label data-en="Service area" data-fr="Zone de service">Service area</label><input value="Kirkland, Pointe-Claire, Beaconsfield, DDO"></div>
+      <div style="margin-top:15px"><button class="save" id="saveBtn" data-en="Save demo settings" data-fr="Enregistrer les paramètres démo">Save demo settings</button></div>
+    </div>
+    <div class="card">
+      <h2 style="margin:0" data-en="Ava behavior" data-fr="Comportement d’Ava">Ava behavior</h2>
+      <div class="toggle-row"><div><b data-en="English + French" data-fr="Anglais + français">English + French</b><span data-en="Ava can handle either language." data-fr="Ava peut gérer les deux langues.">Ava can handle either language.</span></div><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+      <div class="toggle-row"><div><b data-en="Emergency triage" data-fr="Triage des urgences">Emergency triage</b><span data-en="Ask safety questions before dispatch." data-fr="Poser les questions de sécurité avant l’intervention.">Ask safety questions before dispatch.</span></div><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+      <div class="toggle-row"><div><b data-en="Urgent owner transfer" data-fr="Transfert urgent au propriétaire">Urgent owner transfer</b><span data-en="Offer immediate transfer for defined emergencies." data-fr="Offrir un transfert immédiat pour les urgences définies.">Offer immediate transfer for defined emergencies.</span></div><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+      <div class="notice" id="scriptPreview"></div>
+    </div>
+  </div>
+</section>
+
+<section id="routing" class="page">
+  <div class="card">
+    <h2 style="margin:0" data-en="Phone routing" data-fr="Routage téléphonique">Phone routing</h2>
+    <p style="color:#948b7f;font-size:12px;line-height:1.5" data-en="Customers continue calling the business's normal number. The phone provider forwards eligible calls to the business's dedicated CallPilot routing number." data-fr="Les clients continuent d’appeler le numéro normal de l’entreprise. Le fournisseur téléphonique transfère les appels admissibles vers le numéro de routage CallPilot dédié à l’entreprise.">Customers continue calling the business's normal number. The phone provider forwards eligible calls to the business's dedicated CallPilot routing number.</p>
+    <div class="route-map">
+      <div class="route"><b data-en="Customer" data-fr="Client">Customer</b><p data-en="Calls your existing number" data-fr="Appelle votre numéro existant">Calls your existing number</p></div>
+      <div class="route"><b data-en="Business phone" data-fr="Téléphone d’entreprise">Business phone</b><p>(514) 555-0188</p></div>
+      <div class="route"><b data-en="CallPilot routing" data-fr="Routage CallPilot">CallPilot routing</b><p>(438) 555-0142 • <span data-en="demo number" data-fr="numéro démo">demo number</span></p></div>
+      <div class="route"><b>Ava</b><p data-en="Loads this business's greeting and rules" data-fr="Charge le message d’accueil et les règles de cette entreprise">Loads this business's greeting and rules</p></div>
+    </div>
+    <div class="toggle-row"><div><b data-en="Forward when unanswered" data-fr="Transférer si sans réponse">Forward when unanswered</b><span data-en="Ava answers only after the owner doesn't pick up." data-fr="Ava répond seulement si le propriétaire ne décroche pas.">Ava answers only after the owner doesn't pick up.</span></div><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+    <div class="toggle-row"><div><b data-en="Forward after hours" data-fr="Transférer après les heures">Forward after hours</b><span data-en="Use Ava outside the business's schedule." data-fr="Utiliser Ava en dehors des heures d’ouverture.">Use Ava outside the business's schedule.</span></div><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+    <div class="toggle-row"><div><b data-en="Forward when busy" data-fr="Transférer si occupé">Forward when busy</b><span data-en="Recover calls while the team is already on the phone." data-fr="Récupérer les appels lorsque l’équipe est déjà au téléphone.">Recover calls while the team is already on the phone.</span></div><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+    <div class="notice" data-en="Production note: the actual forwarding rule is configured with the contractor's phone carrier. The CallPilot demo does not place or receive real public phone calls yet." data-fr="Note de production : la règle de transfert réelle est configurée auprès du fournisseur téléphonique de l’entrepreneur. La démo CallPilot ne place ni ne reçoit encore de vrais appels téléphoniques publics.">Production note: the actual forwarding rule is configured with the contractor's phone carrier. The CallPilot demo does not place or receive real public phone calls yet.</div>
+  </div>
+</section>
+</main>
+</div>
+
+<script>
+(function(){
+ let currentLang="en", calendarConnected=false;
+ const titles={overview:["Overview","Vue d’ensemble"],calls:["Calls","Appels"],appointments:["Appointments","Rendez-vous"],ava:["Ava setup","Configuration Ava"],routing:["Routing","Routage"]};
+ const tradeScripts={
+  hvac:["Ava will ask about heating/cooling, identify danger, collect city, address, phone, name and preferred service time.","Ava posera des questions sur le chauffage/climatisation, vérifiera le danger et recueillera la ville, l’adresse, le téléphone, le nom et l’heure de service préférée."],
+  plumbing:["Ava will ask about leaks, flooding and shutoff safety before booking or dispatch.","Ava posera des questions sur les fuites, l’inondation et la sécurité avant de réserver ou dépêcher un technicien."],
+  electrical:["Ava will screen for sparks, smoke and outage safety before booking or dispatch.","Ava vérifiera les étincelles, la fumée et la sécurité en cas de panne avant de réserver ou dépêcher un technicien."],
+  roofing:["Ava will ask about active water entry, storm damage and inspection needs before booking.","Ava vérifiera les infiltrations actives, les dommages de tempête et les besoins d’inspection avant de réserver."]
+ };
+ function applyLang(l){
+  currentLang=l;document.documentElement.lang=l;
+  document.querySelectorAll("[data-en][data-fr]").forEach(el=>el.textContent=el.dataset[l]);
+  document.getElementById("enBtn").classList.toggle("active",l==="en");document.getElementById("frBtn").classList.toggle("active",l==="fr");
+  const active=document.querySelector(".nav button.active")?.dataset.page||"overview";document.getElementById("pageTitle").textContent=titles[active][l==="en"?0:1];
+  updateCalendar();updateScript();
+ }
+ function updateCalendar(){
+  const title=document.getElementById("calendarTitle"),desc=document.getElementById("calendarDesc"),btn=document.getElementById("calendarBtn");
+  if(!title)return;
+  if(calendarConnected){
+   title.textContent=currentLang==="fr"?"Calendrier démo connecté":"Demo calendar connected";
+   desc.textContent=currentLang==="fr"?"Ava peut maintenant afficher des plages horaires et confirmer un rendez-vous pendant l’appel.":"Ava can now show available time slots and confirm an appointment during the call.";
+   btn.textContent=currentLang==="fr"?"Déconnecter":"Disconnect";
+  }else{
+   title.textContent=currentLang==="fr"?"Aucun calendrier connecté":"No calendar connected";
+   desc.textContent=currentLang==="fr"?"Ava recueille l’heure préférée du client et envoie la demande au propriétaire.":"Ava collects the customer's preferred time and sends the request to the owner.";
+   btn.textContent=currentLang==="fr"?"Connecter le calendrier démo":"Connect demo calendar";
+  }
+ }
+ function updateScript(){const el=document.getElementById("scriptPreview");if(!el)return;const t=document.getElementById("trade").value;el.textContent=tradeScripts[t][currentLang==="en"?0:1];}
+ document.querySelectorAll(".nav button").forEach(btn=>btn.addEventListener("click",()=>{document.querySelectorAll(".nav button").forEach(b=>b.classList.remove("active"));btn.classList.add("active");document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));document.getElementById(btn.dataset.page).classList.add("active");document.getElementById("pageTitle").textContent=titles[btn.dataset.page][currentLang==="en"?0:1];window.scrollTo({top:0,behavior:"smooth"});}));
+ document.getElementById("enBtn").onclick=()=>applyLang("en");document.getElementById("frBtn").onclick=()=>applyLang("fr");
+ document.getElementById("calendarBtn").onclick=()=>{calendarConnected=!calendarConnected;updateCalendar();};
+ document.getElementById("trade").onchange=updateScript;
+ document.getElementById("saveBtn").onclick=()=>{const b=document.getElementById("saveBtn");const old=b.textContent;b.textContent=currentLang==="fr"?"Enregistré ✓":"Saved ✓";setTimeout(()=>b.textContent=old,1200);};
+ updateScript();
+})();
+</script>
+</body>
+</html>
