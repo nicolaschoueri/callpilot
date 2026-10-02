@@ -25,6 +25,9 @@ nav{position:sticky;top:0;z-index:20;backdrop-filter:blur(18px);background:rgba(
 .navlinks{display:flex;align-items:center;gap:22px;color:#d7cfc2;font-size:14px}
 .navlinks a{text-decoration:none}
 .navcta{background:linear-gradient(135deg,#d5ad63,#f0d79c);color:#1a130a;padding:11px 15px;border-radius:12px;font-weight:900}
+.lang-switch{display:flex;align-items:center;gap:3px;padding:3px;border:1px solid rgba(213,173,99,.28);border-radius:11px;background:rgba(255,255,255,.035)}
+.lang-switch button{border:0;background:transparent;color:#bfb4a4;font-weight:900;font-size:12px;padding:7px 8px;border-radius:8px;cursor:pointer}
+.lang-switch button.active{background:linear-gradient(135deg,#d5ad63,#f0d79c);color:#1a130a}
 .hero{padding:70px 0 52px;position:relative;overflow:hidden}
 .hero:before{content:"";position:absolute;inset:auto auto -260px -180px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(213,173,99,.14),transparent 65%);pointer-events:none}
 .hero-grid{display:grid;grid-template-columns:1.04fr .96fr;gap:48px;align-items:center}
@@ -111,6 +114,9 @@ footer{border-top:1px solid var(--line);padding:28px 0 38px;color:#8f8579;font-s
   .price.popular{transform:none}
 }
 @media(max-width:560px){
+  .navcta{display:none}
+  .navbar{gap:10px}
+  .brand{font-size:20px}
   .container{width:min(100% - 24px,1180px)}
   .hero{padding-top:42px}
   .hero-copy p{font-size:17px}
@@ -123,12 +129,6 @@ footer{border-top:1px solid var(--line);padding:28px 0 38px;color:#8f8579;font-s
   .section{padding:64px 0}
   .amount{font-size:42px}
 }
-
-.lang-switch{display:flex;align-items:center;gap:4px;margin-left:auto;padding:4px;border:1px solid rgba(213,173,99,.28);border-radius:999px;background:rgba(213,173,99,.06)}
-.lang-btn{border:0;background:transparent;color:#d7cfc2;font-weight:900;font-size:12px;letter-spacing:.04em;padding:7px 10px;border-radius:999px;cursor:pointer}
-.lang-btn.active{background:linear-gradient(135deg,#d5ad63,#f0d79c);color:#1a130a}
-@media(max-width:900px){.navbar{gap:10px}.lang-switch{margin-left:auto}.navlinks{gap:8px}.navcta{padding:9px 11px}}
-@media(max-width:560px){.brand{font-size:18px}.logo{width:32px;height:32px}.lang-btn{padding:6px 8px}.navcta{font-size:12px}}
 </style>
 
 <style>
@@ -156,16 +156,46 @@ footer{border-top:1px solid var(--line);padding:28px 0 38px;color:#8f8579;font-s
 
 </style>
 
+
+<style id="business-demo-styles">
+.cp-business{padding:86px 0;background:linear-gradient(180deg,#09131f,#0d1723)}
+.cp-business *{box-sizing:border-box}
+.cp-owner-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:18px;margin-top:30px;align-items:start}
+.cp-card{background:linear-gradient(155deg,#142131,#0d1723);border:1px solid rgba(213,173,99,.18);border-radius:24px;padding:22px;box-shadow:0 22px 60px rgba(0,0,0,.18)}
+.cp-card h3{margin:0 0 6px;font-size:22px}.cp-muted{color:#9f9588;font-size:13px;line-height:1.5}
+.cp-label{display:block;color:#d7cfc2;font-size:12px;font-weight:800;margin:16px 0 7px}
+.cp-input{width:100%;border:1px solid rgba(255,255,255,.09);background:#08121e;color:#f7f1e6;border-radius:12px;padding:12px 13px;font:inherit}
+.cp-pills{display:flex;flex-wrap:wrap;gap:8px}.cp-pill{border:1px solid rgba(213,173,99,.22);background:#101c2b;color:#d9d1c4;border-radius:999px;padding:9px 12px;font-size:12px;font-weight:800;cursor:pointer}
+.cp-pill.active{background:linear-gradient(135deg,#d5ad63,#f0d79c);color:#1b140b;border-color:transparent}
+.cp-toggle{display:flex;justify-content:space-between;gap:14px;align-items:center;padding:13px 0;border-top:1px solid rgba(255,255,255,.06);margin-top:14px}
+.cp-switch{position:relative;width:48px;height:28px;flex:0 0 auto}.cp-switch input{opacity:0;width:0;height:0}.cp-slider{position:absolute;inset:0;background:#273347;border-radius:999px;cursor:pointer;transition:.2s}.cp-slider:after{content:"";position:absolute;width:20px;height:20px;left:4px;top:4px;background:#fff;border-radius:50%;transition:.2s}.cp-switch input:checked+.cp-slider{background:#b88746}.cp-switch input:checked+.cp-slider:after{transform:translateX(20px)}
+.cp-preview{border:1px solid rgba(213,173,99,.18);background:#091522;border-radius:18px;padding:16px;margin-top:16px}
+.cp-preview .cp-script{font-size:15px;line-height:1.55;color:#eee2cf;margin:10px 0 0}
+.cp-flow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}
+.cp-flow-step{position:relative;background:#101b29;border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:16px;min-height:130px}
+.cp-flow-step b{display:block;margin:8px 0 6px}.cp-flow-step p{margin:0;color:#968d82;font-size:12px;line-height:1.45}.cp-flow-num{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;background:#2d2518;color:#e4c983;font-weight:900}
+.cp-flow-step:not(:last-child):after{content:"→";position:absolute;right:-10px;top:51px;color:#d5ad63;font-weight:900;z-index:3}
+.cp-note-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}.cp-note{padding:14px;border-radius:15px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.06)}.cp-note strong{display:block;font-size:13px}.cp-note span{display:block;color:#90877b;font-size:11px;line-height:1.4;margin-top:4px}
+.cp-dash{margin-top:18px}.cp-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.cp-stat{background:#0b1522;border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:15px}.cp-stat b{display:block;font-size:25px}.cp-stat span{color:#8f877c;font-size:11px}
+.cp-leads{margin-top:12px;border:1px solid rgba(255,255,255,.07);border-radius:16px;overflow:hidden}.cp-lead{display:grid;grid-template-columns:1.05fr .8fr .75fr 1.25fr;gap:8px;padding:12px 14px;border-top:1px solid rgba(255,255,255,.06);align-items:center;font-size:12px}.cp-lead:first-child{border-top:0;background:rgba(213,173,99,.06)}.cp-tag{display:inline-flex;width:max-content;padding:5px 8px;border-radius:999px;background:rgba(213,173,99,.10);color:#e5ca8c;font-weight:800;font-size:10px}.cp-tag.urgent{background:rgba(183,55,72,.16);color:#f2a5af}
+.cp-statusline{margin-top:12px;padding:12px 14px;border-radius:14px;background:rgba(213,173,99,.07);border:1px solid rgba(213,173,99,.16);font-size:12px;color:#d9cfbf}
+@media(max-width:900px){.cp-owner-grid{grid-template-columns:1fr}.cp-flow,.cp-note-grid,.cp-stats{grid-template-columns:1fr 1fr}.cp-flow-step:nth-child(2):after{display:none}}
+@media(max-width:560px){.cp-business{padding:64px 0}.cp-flow,.cp-note-grid,.cp-stats{grid-template-columns:1fr}.cp-flow-step:after{display:none}.cp-lead{grid-template-columns:1fr 1fr}.cp-lead .cp-outcome{grid-column:1/-1}}
+</style>
 </head>
 <body>
 <nav>
   <div class="container navbar">
-    <div class="brand"><div class="logo"></div>CallPilot<span>Trades</span></div><div class="lang-switch" aria-label="Language"><button type="button" id="siteEn" class="lang-btn active" aria-pressed="true">EN</button><button type="button" id="siteFr" class="lang-btn" aria-pressed="false">FR</button></div>
+    <div class="brand"><div class="logo"></div>CallPilot<span>Trades</span></div>
     <div class="navlinks">
       <a href="#how">How it works</a>
       <a href="#demo">Demo</a>
-      <a href="#live-demo">Try Ava</a><a href="#pricing">Pricing</a>
+      <a href="#live-demo">Try Ava</a><a href="#owner-demo" data-cp-en="Owner demo" data-cp-fr="Démo propriétaire">Owner demo</a><a href="#pricing">Pricing</a>
       <a class="navcta" href="#live-demo">Try Ava live</a>
+      <div class="lang-switch" aria-label="Website language">
+        <button type="button" id="siteEn" class="active" aria-pressed="true">EN</button>
+        <button type="button" id="siteFr" aria-pressed="false">FR</button>
+      </div>
     </div>
   </div>
 </nav>
@@ -258,7 +288,7 @@ footer{border-top:1px solid var(--line);padding:28px 0 38px;color:#8f8579;font-s
     <h2>Try Ava booking the job herself.</h2>
     <p class="lede">This is a free sales simulator. Tap the phone button, hear Ava, choose the customer's answers, and watch her book the appointment without handing the caller off.</p>
     <div class="ava-demo-shell">
-      <div class="wrap"><div class="notice">LIVE VOICE DEMO • No real phone number or charge</div><div class="phone"><div class="top">Incoming test call<div class="number">+1 (514) 555-0142</div><div class="fake">FICTIONAL NUMBER</div></div><div class="hero"><div class="avatar"><img class="ava-approved" src="" alt="Ava"></div><div class="ava">Ava</div><div class="role">CallPilot Trades • AI receptionist</div><div id="status" class="status">Ready to test</div><div id="timer" class="timer">00:00</div></div><div class="screen"><div id="transcript" class="transcript"><div class="line avaLine"><span class="speaker">CallPilot</span>Tap START CALL, choose 1 for French or 2 for English, then continue with Ava.</div></div><div id="quick" class="quick"></div><div class="inputrow"><input id="answer" placeholder="Or type your answer…"><button class="send" id="send">Send</button></div></div><div id="summary" class="summary"><h3>Appointment booked</h3><div class="grid"><div class="cell"><span>Issue</span><b id="sIssue">—</b></div><div class="cell"><span>Urgency</span><b id="sUrgency">—</b></div><div class="cell"><span>City</span><b id="sCity">—</b></div><div class="cell"><span>Address</span><b id="sAddress">—</b></div><div class="cell"><span>Phone</span><b id="sPhone">—</b></div><div class="cell"><span>Name</span><b id="sName">—</b></div><div class="cell"><span>Appointment</span><b id="sAppt">—</b></div><div class="cell"><span>Status</span><b id="sStatus">Confirmed</b></div></div></div><div id="audioPanel" style="display:none;margin:0 16px 10px;padding:10px 12px;border:1px solid rgba(213,173,99,.25);border-radius:14px;background:rgba(213,173,99,.06)"><div style="font-size:12px;color:#e6ce9a;font-weight:800;margin-bottom:6px">AVA VOICE</div><audio id="avaAudio" controls preload="auto" playsinline style="width:100%"></audio></div><div class="controls"><button class="round replay" id="replay" title="Replay Ava"><span>↻</span><span>REPLAY</span></button><button class="round start" id="start" title="Start call"><span>☎</span><span>START CALL</span></button><button class="round end" id="end" title="End call"><span>✕</span><span>END CALL</span></button></div><div class="hint">Tap START CALL. Choose 1 for French or 2 for English. Then use the answer buttons or type your reply.</div></div></div>
+      <div class="wrap"><div class="notice">LIVE VOICE DEMO • No real phone number or charge</div><div class="phone"><div class="top">Incoming test call<div class="number">+1 (514) 555-0142</div><div class="fake">FICTIONAL NUMBER</div></div><div class="hero"><div class="avatar"><img class="ava-approved" src="" alt="Ava"></div><div class="ava">Ava</div><div class="role">CallPilot Trades • AI receptionist</div><div id="status" class="status">Ready to test</div><div id="timer" class="timer">00:00</div></div><div class="screen"><div id="transcript" class="transcript"><div class="line avaLine"><span class="speaker">CallPilot</span>Tap START CALL to begin.</div></div><div id="quick" class="quick"></div><div class="inputrow"><input id="answer" placeholder="Or type your answer…"><button class="send" id="send">Send</button></div></div><div id="summary" class="summary"><h3>Appointment booked</h3><div class="grid"><div class="cell"><span>Issue</span><b id="sIssue">—</b></div><div class="cell"><span>Urgency</span><b id="sUrgency">—</b></div><div class="cell"><span>City</span><b id="sCity">—</b></div><div class="cell"><span>Address</span><b id="sAddress">—</b></div><div class="cell"><span>Phone</span><b id="sPhone">—</b></div><div class="cell"><span>Name</span><b id="sName">—</b></div><div class="cell"><span>Appointment</span><b id="sAppt">—</b></div><div class="cell"><span>Status</span><b id="sStatus">Confirmed</b></div></div></div><div id="audioPanel" style="display:block;margin:0 16px 10px;padding:10px 12px;border:1px solid rgba(213,173,99,.25);border-radius:14px;background:rgba(213,173,99,.06)"><div style="font-size:12px;color:#e6ce9a;font-weight:800;margin-bottom:6px">AVA VOICE</div><audio id="avaAudio" controls preload="auto" playsinline style="width:100%"></audio></div><div class="controls"><button class="round replay" id="replay" title="Replay Ava"><span>↻</span><span>REPLAY</span></button><button class="round start" id="start" title="Start call"><span>☎</span><span>START CALL</span></button><button class="round end" id="end" title="End call"><span>✕</span><span>END CALL</span></button></div><div class="hint">Tap START CALL to begin. Then use the answer buttons or type your reply.</div></div></div>
 <script>
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
@@ -637,6 +667,92 @@ if('speechSynthesis' in window)speechSynthesis.onvoiceschanged=()=>speechSynthes
   </div>
 </section>
 
+
+<section id="owner-demo" class="cp-business">
+  <div class="container">
+    <div class="kicker" data-cp-en="Business owner demo" data-cp-fr="Démo propriétaire">Business owner demo</div>
+    <h2 data-cp-en="Set up Ava for any service business." data-cp-fr="Configurez Ava pour n’importe quelle entreprise de service.">Set up Ava for any service business.</h2>
+    <p class="lede" data-cp-en="This is the missing piece: the contractor keeps the phone number customers already know. Calls can forward to Ava only when unanswered, after hours, or whenever the owner chooses." data-cp-fr="Voici la pièce manquante : l’entrepreneur conserve le numéro que ses clients connaissent déjà. Les appels peuvent être transférés à Ava seulement lorsqu’ils restent sans réponse, après les heures d’ouverture ou selon les règles choisies par le propriétaire.">This is the missing piece: the contractor keeps the phone number customers already know. Calls can forward to Ava only when unanswered, after hours, or whenever the owner chooses.</p>
+
+    <div class="actions" style="margin-top:18px"><a class="btn primary" href="portal.html" data-cp-en="Open owner portal" data-cp-fr="Ouvrir le portail propriétaire">Open owner portal</a><a class="btn secondary" href="#live-demo" data-cp-en="Try Ava live" data-cp-fr="Essayer Ava en direct">Try Ava live</a></div><div class="cp-owner-grid">
+      <div class="cp-card">
+        <h3 data-cp-en="1. Configure the business" data-cp-fr="1. Configurez l’entreprise">1. Configure the business</h3>
+        <div class="cp-muted" data-cp-en="A sales-demo version of the onboarding screen a paying customer would use." data-cp-fr="Une version démo de l’écran d’intégration qu’utiliserait un client payant.">A sales-demo version of the onboarding screen a paying customer would use.</div>
+
+        <label class="cp-label" data-cp-en="Business name" data-cp-fr="Nom de l’entreprise">Business name</label>
+        <input id="cpBusinessName" class="cp-input" value="West Island Home Services">
+
+        <label class="cp-label" data-cp-en="Business type" data-cp-fr="Type d’entreprise">Business type</label>
+        <div class="cp-pills" id="cpTrades">
+          <button type="button" class="cp-pill active" data-trade="hvac">HVAC</button>
+          <button type="button" class="cp-pill" data-trade="plumbing" data-cp-en="Plumbing" data-cp-fr="Plomberie">Plumbing</button>
+          <button type="button" class="cp-pill" data-trade="electrical" data-cp-en="Electrical" data-cp-fr="Électricité">Electrical</button>
+          <button type="button" class="cp-pill" data-trade="roofing" data-cp-en="Roofing" data-cp-fr="Toiture">Roofing</button>
+        </div>
+
+        <label class="cp-label" data-cp-en="When should Ava answer?" data-cp-fr="Quand Ava doit-elle répondre?">When should Ava answer?</label>
+        <div class="cp-pills" id="cpRouting">
+          <button type="button" class="cp-pill active" data-mode="missed" data-cp-en="When I don't answer" data-cp-fr="Quand je ne réponds pas">When I don't answer</button>
+          <button type="button" class="cp-pill" data-mode="after" data-cp-en="After hours" data-cp-fr="Après les heures">After hours</button>
+          <button type="button" class="cp-pill" data-mode="overflow" data-cp-en="Overflow / busy" data-cp-fr="Débordement / occupé">Overflow / busy</button>
+        </div>
+
+        <label class="cp-label" data-cp-en="Service area" data-cp-fr="Zone de service">Service area</label>
+        <input id="cpServiceArea" class="cp-input" value="Kirkland, Pointe-Claire, Beaconsfield, DDO">
+
+        <div class="cp-toggle">
+          <div><strong data-cp-en="Connect a calendar" data-cp-fr="Connecter un calendrier">Connect a calendar</strong><div class="cp-muted" data-cp-en="Optional — Ava can still take the request without one." data-cp-fr="Optionnel — Ava peut quand même prendre la demande sans calendrier.">Optional — Ava can still take the request without one.</div></div>
+          <label class="cp-switch"><input id="cpCalendar" type="checkbox"><span class="cp-slider"></span></label>
+        </div>
+        <div class="cp-toggle">
+          <div><strong data-cp-en="Urgent-call transfer" data-cp-fr="Transfert des appels urgents">Urgent-call transfer</strong><div class="cp-muted" data-cp-en="Let Ava offer the owner an immediate transfer for true emergencies." data-cp-fr="Permettre à Ava d’offrir un transfert immédiat au propriétaire pour une vraie urgence.">Let Ava offer the owner an immediate transfer for true emergencies.</div></div>
+          <label class="cp-switch"><input id="cpTransfer" type="checkbox" checked><span class="cp-slider"></span></label>
+        </div>
+      </div>
+
+      <div class="cp-card">
+        <h3 data-cp-en="2. Ava adapts automatically" data-cp-fr="2. Ava s’adapte automatiquement">2. Ava adapts automatically</h3>
+        <div class="cp-muted" id="cpConfigSummary">HVAC • unanswered calls • calendar optional</div>
+        <div class="cp-preview">
+          <div class="smallcap" data-cp-en="Ava's opening script" data-cp-fr="Script d’accueil d’Ava">Ava's opening script</div>
+          <div id="cpScript" class="cp-script"></div>
+        </div>
+        <div class="cp-statusline" id="cpOutcome"></div>
+
+        <div class="cp-flow">
+          <div class="cp-flow-step"><div class="cp-flow-num">1</div><b data-cp-en="Customer calls" data-cp-fr="Le client appelle">Customer calls</b><p data-cp-en="They dial the contractor's existing business number." data-cp-fr="Il compose le numéro d’entreprise existant de l’entrepreneur.">They dial the contractor's existing business number.</p></div>
+          <div class="cp-flow-step"><div class="cp-flow-num">2</div><b data-cp-en="Call forwards" data-cp-fr="L’appel est transféré">Call forwards</b><p id="cpRouteText">If the owner does not answer, the carrier forwards the call.</p></div>
+          <div class="cp-flow-step"><div class="cp-flow-num">3</div><b data-cp-en="Ava answers" data-cp-fr="Ava répond">Ava answers</b><p data-cp-en="A dedicated CallPilot routing number identifies the business and loads its rules." data-cp-fr="Un numéro de routage CallPilot dédié identifie l’entreprise et charge ses règles.">A dedicated CallPilot routing number identifies the business and loads its rules.</p></div>
+          <div class="cp-flow-step"><div class="cp-flow-num">4</div><b data-cp-en="Book or notify" data-cp-fr="Réserver ou aviser">Book or notify</b><p id="cpCalendarText">Without a calendar, Ava captures the preferred time and sends the owner the complete request.</p></div>
+        </div>
+
+        <div class="cp-note-grid">
+          <div class="cp-note"><strong data-cp-en="Existing number stays" data-cp-fr="Le numéro existant reste">Existing number stays</strong><span data-cp-en="No need to advertise a new customer-facing number." data-cp-fr="Pas besoin d’annoncer un nouveau numéro aux clients.">No need to advertise a new customer-facing number.</span></div>
+          <div class="cp-note"><strong data-cp-en="No website required" data-cp-fr="Aucun site requis">No website required</strong><span data-cp-en="CallPilot works from the phone flow; a website is optional." data-cp-fr="CallPilot fonctionne avec le parcours téléphonique; un site web est optionnel.">CallPilot works from the phone flow; a website is optional.</span></div>
+          <div class="cp-note"><strong data-cp-en="Calendar optional" data-cp-fr="Calendrier optionnel">Calendar optional</strong><span data-cp-en="Connect one for live booking, or simply receive the lead." data-cp-fr="Connectez-en un pour réserver en direct, ou recevez simplement le prospect.">Connect one for live booking, or simply receive the lead.</span></div>
+          <div class="cp-note"><strong data-cp-en="One profile per business" data-cp-fr="Un profil par entreprise">One profile per business</strong><span data-cp-en="Each paying customer gets separate greetings, rules and routing." data-cp-fr="Chaque client payant a ses propres messages d’accueil, règles et routage.">Each paying customer gets separate greetings, rules and routing.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cp-card cp-dash">
+      <h3 data-cp-en="3. Owner dashboard demo" data-cp-fr="3. Démo du tableau de bord">3. Owner dashboard demo</h3>
+      <div class="cp-muted" data-cp-en="What the contractor could see after Ava handles calls." data-cp-fr="Ce que l’entrepreneur pourrait voir après qu’Ava a traité les appels.">What the contractor could see after Ava handles calls.</div>
+      <div class="cp-stats">
+        <div class="cp-stat"><b>12</b><span data-cp-en="calls handled today" data-cp-fr="appels traités aujourd’hui">calls handled today</span></div>
+        <div class="cp-stat"><b>5</b><span data-cp-en="appointments booked" data-cp-fr="rendez-vous réservés">appointments booked</span></div>
+        <div class="cp-stat"><b>2</b><span data-cp-en="urgent calls" data-cp-fr="appels urgents">urgent calls</span></div>
+        <div class="cp-stat"><b>7</b><span data-cp-en="missed calls recovered" data-cp-fr="appels manqués récupérés">missed calls recovered</span></div>
+      </div>
+      <div class="cp-leads">
+        <div class="cp-lead"><strong>Marie L.</strong><span>Kirkland</span><span class="cp-tag urgent" data-cp-en="Emergency" data-cp-fr="Urgence">Emergency</span><span class="cp-outcome" data-cp-en="No heat — same-day dispatch requested" data-cp-fr="Pas de chauffage — intervention le jour même demandée">No heat — same-day dispatch requested</span></div>
+        <div class="cp-lead"><strong>John P.</strong><span>Pointe-Claire</span><span class="cp-tag" data-cp-en="Booked" data-cp-fr="Réservé">Booked</span><span class="cp-outcome" data-cp-en="Service appointment captured by Ava" data-cp-fr="Rendez-vous de service pris par Ava">Service appointment captured by Ava</span></div>
+        <div class="cp-lead"><strong>Alex R.</strong><span>Beaconsfield</span><span class="cp-tag" data-cp-en="New lead" data-cp-fr="Nouveau prospect">New lead</span><span class="cp-outcome" data-cp-en="Owner notified by SMS with full call summary" data-cp-fr="Propriétaire avisé par SMS avec le résumé complet">Owner notified by SMS with full call summary</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="pricing" class="section light">
   <div class="container">
     <div class="kicker">Packages</div>
@@ -694,6 +810,222 @@ if('speechSynthesis' in window)speechSynthesis.onvoiceschanged=()=>speechSynthes
 </footer>
 
 
+
+
+<script id="business-demo-script">
+(function(){
+  const tradeCopy={
+    hvac:{
+      en:"Thank you for calling {business}. I'm Ava. I can help with heating, cooling or service requests. Are you calling about an urgent problem or would you like to schedule service?",
+      fr:"Merci d'avoir appelé {business}. Je suis Ava. Je peux vous aider pour le chauffage, la climatisation ou une demande de service. Est-ce une urgence ou souhaitez-vous prendre rendez-vous?"
+    },
+    plumbing:{
+      en:"Thank you for calling {business}. I'm Ava. I can help with leaks, blocked drains, flooding or regular plumbing service. First, is there active flooding or an immediate danger?",
+      fr:"Merci d'avoir appelé {business}. Je suis Ava. Je peux vous aider pour une fuite, un drain bloqué, une inondation ou un service de plomberie. D'abord, y a-t-il une inondation active ou un danger immédiat?"
+    },
+    electrical:{
+      en:"Thank you for calling {business}. I'm Ava. I can help with outages, breakers, outlets or electrical service. Before we continue, are there sparks, smoke or any immediate safety concern?",
+      fr:"Merci d'avoir appelé {business}. Je suis Ava. Je peux vous aider pour une panne, un disjoncteur, une prise ou un service électrique. Avant de continuer, y a-t-il des étincelles, de la fumée ou un danger immédiat?"
+    },
+    roofing:{
+      en:"Thank you for calling {business}. I'm Ava. I can help with roof leaks, storm damage, missing shingles or inspections. Is water actively entering the property right now?",
+      fr:"Merci d'avoir appelé {business}. Je suis Ava. Je peux vous aider pour une fuite de toiture, des dommages de tempête, des bardeaux manquants ou une inspection. Est-ce que l'eau entre activement dans la propriété en ce moment?"
+    }
+  };
+  const labels={
+    hvac:{en:"HVAC",fr:"CVAC"}, plumbing:{en:"Plumbing",fr:"Plomberie"},
+    electrical:{en:"Electrical",fr:"Électricité"}, roofing:{en:"Roofing",fr:"Toiture"}
+  };
+  let trade="hvac", mode="missed";
+  const $=id=>document.getElementById(id);
+  function lang(){return (document.documentElement.lang||"en").toLowerCase().startsWith("fr")?"fr":"en";}
+  function copyElements(){
+    const l=lang();
+    document.querySelectorAll("[data-cp-en][data-cp-fr]").forEach(el=>{el.textContent=el.getAttribute("data-cp-"+l);});
+  }
+  function render(){
+    copyElements();
+    const l=lang(), business=$("cpBusinessName").value.trim()||"your business";
+    $("cpScript").textContent=tradeCopy[trade][l].replace("{business}",business);
+    const modeText={
+      missed:{en:"unanswered calls",fr:"appels sans réponse"},
+      after:{en:"after-hours calls",fr:"appels après les heures"},
+      overflow:{en:"busy / overflow calls",fr:"appels en débordement"}
+    }[mode][l];
+    $("cpConfigSummary").textContent=labels[trade][l]+" • "+modeText+" • "+($("cpCalendar").checked?(l==="fr"?"calendrier connecté":"calendar connected"):(l==="fr"?"calendrier optionnel":"calendar optional"));
+    const route={
+      missed:{en:"If the owner does not answer, the carrier forwards the call to Ava.",fr:"Si le propriétaire ne répond pas, le fournisseur téléphonique transfère l'appel à Ava."},
+      after:{en:"After business hours, calls forward to Ava automatically.",fr:"Après les heures d'ouverture, les appels sont transférés automatiquement à Ava."},
+      overflow:{en:"When the line is busy or the team cannot answer, overflow calls route to Ava.",fr:"Lorsque la ligne est occupée ou que l'équipe ne peut pas répondre, les appels en débordement sont acheminés vers Ava."}
+    }[mode][l];
+    $("cpRouteText").textContent=route;
+    const cal=$("cpCalendar").checked;
+    $("cpCalendarText").textContent=cal
+      ?(l==="fr"?"Avec un calendrier connecté, Ava peut voir les disponibilités et confirmer le rendez-vous pendant l'appel.":"With a connected calendar, Ava can see availability and confirm the appointment during the call.")
+      :(l==="fr"?"Sans calendrier, Ava recueille l'heure préférée et envoie la demande complète au propriétaire.":"Without a calendar, Ava captures the preferred time and sends the owner the complete request.");
+    const transfer=$("cpTransfer").checked;
+    $("cpOutcome").textContent=(l==="fr"
+      ?(cal?"✓ Réservation en direct activée. ":"✓ Demande et préférence d'heure captées. ")+(transfer?"Les urgences peuvent être transférées immédiatement au propriétaire.":"Les urgences suivent les règles de répartition sans transfert direct.")
+      :(cal?"✓ Live booking enabled. ":"✓ Request and preferred time captured. ")+(transfer?"Urgent calls can be transferred immediately to the owner.":"Urgent calls follow dispatch rules without a direct transfer."));
+  }
+  document.querySelectorAll("#cpTrades .cp-pill").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll("#cpTrades .cp-pill").forEach(x=>x.classList.remove("active"));b.classList.add("active");trade=b.dataset.trade;render();}));
+  document.querySelectorAll("#cpRouting .cp-pill").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll("#cpRouting .cp-pill").forEach(x=>x.classList.remove("active"));b.classList.add("active");mode=b.dataset.mode;render();}));
+  ["cpBusinessName","cpServiceArea"].forEach(id=>$(id).addEventListener("input",render));
+  ["cpCalendar","cpTransfer"].forEach(id=>$(id).addEventListener("change",render));
+  ["siteEn","siteFr"].forEach(id=>$(id)?.addEventListener("click",()=>setTimeout(render,0)));
+  setTimeout(render,0);
+})();
+</script>
+
+<script id="site-i18n">
+(function(){
+  const fr = {
+    "How it works":"Fonctionnement",
+    "Demo":"Démo",
+    "Try Ava":"Essayer Ava",
+    "Pricing":"Tarifs",
+    "Try Ava live":"Essayer Ava en direct",
+    "AI receptionist for contractors":"Réceptionniste IA pour entrepreneurs",
+    "Turn missed calls into":"Transformez les appels manqués en",
+    "booked jobs.":"rendez-vous confirmés.",
+    "CallPilot answers after-hours leads, qualifies the customer, identifies urgency, checks the service area and hands your team a clean job summary — in English or French.":"CallPilot répond aux prospects après les heures d’ouverture, qualifie le client, détermine le niveau d’urgence, vérifie la zone de service et remet à votre équipe un résumé clair — en français ou en anglais.",
+    "See the contractor demo":"Voir la démo pour entrepreneurs",
+    "View packages":"Voir les forfaits",
+    "missed-call coverage":"couverture des appels manqués",
+    "bilingual customer flow":"parcours client bilingue",
+    "lead summary delivered":"résumé du prospect livré",
+    "Incoming lead":"Nouveau prospect",
+    "No heat • Kirkland":"Pas de chauffage • Kirkland",
+    "Ava flags this as an emergency and checks for immediate danger.":"Ava classe l’appel comme une urgence et vérifie s’il y a un danger immédiat.",
+    "Job captured":"Demande captée",
+    "Customer qualified • technician ready to dispatch":"Client qualifié • technicien prêt à être dépêché",
+    "How CallPilot works":"Comment fonctionne CallPilot",
+    "A missed call becomes a structured job.":"Un appel manqué devient une demande de service structurée.",
+    "Instead of sending a caller to voicemail, Ava follows a contractor-specific flow and hands the owner the information they actually need.":"Au lieu d’envoyer l’appelant à la boîte vocale, Ava suit un parcours conçu pour les entrepreneurs et remet au propriétaire l’information dont il a réellement besoin.",
+    "Built around revenue recovery.":"Conçu pour récupérer les revenus perdus.",
+    "The goal isn’t “AI for AI’s sake.” It’s fewer lost leads and less time wasted chasing incomplete messages.":"L’objectif n’est pas d’utiliser l’IA pour le plaisir. C’est de perdre moins de prospects et de passer moins de temps à gérer des messages incomplets.",
+    "Answers the missed call":"Répond à l’appel manqué",
+    "Captures the customer before they move to the next contractor.":"Retient le client avant qu’il appelle le prochain entrepreneur.",
+    "Triages urgency":"Évalue l’urgence",
+    "Separates true emergencies from standard appointment requests.":"Distingue les vraies urgences des demandes de rendez-vous régulières.",
+    "Checks the service area":"Vérifie la zone de service",
+    "Confirms the city before dispatch time is wasted.":"Confirme la ville avant de mobiliser inutilement un technicien.",
+    "Creates a clean lead":"Crée un prospect complet",
+    "Name, issue, urgency, location and preferred appointment in one summary.":"Nom, problème, urgence, emplacement et préférence de rendez-vous dans un seul résumé.",
+    "No heat, no cooling, furnace failures, after-hours emergency triage.":"Absence de chauffage ou de climatisation, pannes de fournaise et triage des urgences après les heures.",
+    "Leaks, burst pipes, toilets, flooding and standard service requests.":"Fuites, tuyaux éclatés, toilettes, inondations et demandes de service régulières.",
+    "Breakers, outages, outlets, sparks and urgent electrical calls.":"Disjoncteurs, pannes, prises, étincelles et appels électriques urgents.",
+    "Storm damage, leaks, missing shingles and inspection requests.":"Dommages causés par les tempêtes, fuites, bardeaux manquants et demandes d’inspection.",
+    "Sales demo":"Démo de vente",
+    "Show the contractor exactly what Ava does.":"Montrez exactement à l’entrepreneur ce qu’Ava fait.",
+    "These are real visuals from the CallPilot flow — not empty placeholders.":"Ce sont de vrais visuels du parcours CallPilot — pas des espaces réservés.",
+    "Customer calls":"Le client appelle",
+    "Ava answers after hours and identifies the trade and problem.":"Ava répond après les heures et identifie le métier et le problème.",
+    "Ava qualifies":"Ava qualifie",
+    "Urgency, danger, service area, customer name and appointment preference.":"Urgence, danger, zone de service, nom du client et préférence de rendez-vous.",
+    "Contractor gets the lead":"L’entrepreneur reçoit le prospect",
+    "A clean summary appears ready for booking or dispatch.":"Un résumé clair est prêt pour la prise de rendez-vous ou l’envoi d’un technicien.",
+    "Interactive booking demo":"Démo interactive de prise de rendez-vous",
+    "Try Ava booking the job herself.":"Essayez Ava qui réserve elle-même le rendez-vous.",
+    "This is a free sales simulator. Tap the phone button, hear Ava, choose the customer's answers, and watch her book the appointment without handing the caller off.":"Ceci est un simulateur de vente gratuit. Appuyez sur le bouton d’appel, écoutez Ava, choisissez les réponses du client et regardez-la réserver le rendez-vous sans transférer l’appel.",
+    "LIVE VOICE DEMO • No real phone number or charge":"DÉMO VOCALE EN DIRECT • Aucun vrai numéro ni frais",
+    "Incoming test call":"Appel test entrant",
+    "FICTIONAL NUMBER":"NUMÉRO FICTIF",
+    "CallPilot Trades • AI receptionist":"CallPilot Trades • Réceptionniste IA",
+    "Ready to test":"Prêt à tester",
+    "Tap START CALL to begin.":"Appuyez sur DÉMARRER L’APPEL. Ava utilisera la langue du site.",
+    "Send":"Envoyer",
+    "Appointment booked":"Rendez-vous confirmé",
+    "Issue":"Problème",
+    "Urgency":"Urgence",
+    "City":"Ville",
+    "Name":"Nom",
+    "Appointment":"Rendez-vous",
+    "Status":"Statut",
+    "Confirmed":"Confirmé",
+    "AVA VOICE":"VOIX D’AVA",
+    "REPLAY":"RÉÉCOUTER",
+    "START CALL":"DÉMARRER L’APPEL",
+    "END CALL":"TERMINER L’APPEL",
+    "Tap START CALL to begin. Then use the answer buttons or type your reply.":"Appuyez sur DÉMARRER L’APPEL. Ava utilisera la langue du site. Utilisez ensuite les boutons de réponse ou écrivez votre réponse.",
+    "Packages":"Forfaits",
+    "Simple pricing for service businesses.":"Des tarifs simples pour les entreprises de service.",
+    "Three packages so a contractor can start small and add automation as call volume grows.":"Trois forfaits pour commencer simplement et ajouter de l’automatisation à mesure que le volume d’appels augmente.",
+    "Starter":"Essentiel",
+    "/month":"/mois",
+    "For smaller contractors who mainly need after-hours and missed-call coverage.":"Pour les petits entrepreneurs qui ont surtout besoin d’une couverture après les heures et des appels manqués.",
+    "After-hours AI answering":"Réponse IA après les heures",
+    "Missed-call SMS recovery":"Récupération des appels manqués par SMS",
+    "Lead summaries":"Résumés des prospects",
+    "100 AI minutes":"100 minutes IA",
+    "English + French":"Anglais + français",
+    "See demo":"Voir la démo",
+    "MOST POPULAR":"LE PLUS POPULAIRE",
+    "Growth":"Croissance",
+    "For busy service companies that want Ava to qualify, triage and help book jobs.":"Pour les entreprises de service occupées qui veulent qu’Ava qualifie, trie les urgences et aide à réserver les rendez-vous.",
+    "Everything in Starter":"Tout ce qui est inclus dans Essentiel",
+    "Emergency triage":"Triage des urgences",
+    "Booking + dispatch rules":"Règles de réservation + répartition",
+    "Service-area checks":"Vérification de la zone de service",
+    "Owner SMS alerts":"Alertes SMS au propriétaire",
+    "300 AI minutes":"300 minutes IA",
+    "See Growth demo":"Voir la démo Croissance",
+    "Multi-Tech":"Multi-tech",
+    "For larger contractors with multiple service lines, technicians or locations.":"Pour les plus grands entrepreneurs ayant plusieurs services, techniciens ou emplacements.",
+    "Multiple service lines":"Plusieurs lignes de service",
+    "Dispatch routing":"Routage des interventions",
+    "CRM + calendar integrations":"Intégrations CRM + calendrier",
+    "Priority setup":"Configuration prioritaire",
+    "Advanced reporting":"Rapports avancés",
+    "Stop sending good leads to voicemail.":"Arrêtez d’envoyer de bons prospects à la boîte vocale.",
+    "Use the demo with a contractor and walk them through one missed call. The value proposition is simple: if CallPilot recovers even one job that would have been lost, it can pay for itself.":"Utilisez la démo avec un entrepreneur et montrez-lui le parcours d’un appel manqué. La valeur est simple : si CallPilot récupère ne serait-ce qu’un seul travail qui aurait été perdu, il peut se rentabiliser.",
+    "Choose a package":"Choisir un forfait",
+    "Replay the demo":"Revoir la démo",
+    "CallPilot Trades • Demo concept • Contractor AI receptionist":"CallPilot Trades • Concept de démo • Réceptionniste IA pour entrepreneurs"
+  };
+
+  const refs=[];
+  const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{
+    acceptNode(node){
+      const p=node.parentElement;
+      if(!p || /^(SCRIPT|STYLE|NOSCRIPT)$/.test(p.tagName)) return NodeFilter.FILTER_REJECT;
+      const key=node.nodeValue.trim();
+      return fr[key] ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+    }
+  });
+  let n;
+  while((n=walker.nextNode())){
+    const raw=n.nodeValue, key=raw.trim();
+    refs.push({node:n,en:raw,fr:raw.replace(key,fr[key])});
+  }
+
+  const answer=document.getElementById('answer');
+  const attrRefs=[
+    answer ? {el:answer,attr:'placeholder',en:'Or type your answer…',fr:'Ou écrivez votre réponse…'} : null,
+    document.getElementById('replay') ? {el:document.getElementById('replay'),attr:'title',en:'Replay Ava',fr:'Réécouter Ava'} : null,
+    document.getElementById('start') ? {el:document.getElementById('start'),attr:'title',en:'Start call',fr:'Démarrer l’appel'} : null,
+    document.getElementById('end') ? {el:document.getElementById('end'),attr:'title',en:'End call',fr:'Terminer l’appel'} : null
+  ].filter(Boolean);
+
+  function apply(lang){
+    const useFr=lang==='fr';
+    document.documentElement.lang=useFr?'fr':'en';
+    refs.forEach(r=>r.node.nodeValue=useFr?r.fr:r.en);
+    attrRefs.forEach(r=>r.el.setAttribute(r.attr,useFr?r.fr:r.en));
+    const en=document.getElementById('siteEn'), frBtn=document.getElementById('siteFr');
+    if(en){en.classList.toggle('active',!useFr);en.setAttribute('aria-pressed',String(!useFr));}
+    if(frBtn){frBtn.classList.toggle('active',useFr);frBtn.setAttribute('aria-pressed',String(useFr));}
+    try{localStorage.setItem('callpilot-site-lang',useFr?'fr':'en');}catch(e){}
+  }
+
+  document.getElementById('siteEn')?.addEventListener('click',()=>apply('en'));
+  document.getElementById('siteFr')?.addEventListener('click',()=>apply('fr'));
+  let saved='en';
+  try{saved=localStorage.getItem('callpilot-site-lang')||'en';}catch(e){}
+  apply(saved==='fr'?'fr':'en');
+})();
+</script>
+
 <script id="approved-ava-loader">
 (async function(){
   try {
@@ -705,60 +1037,10 @@ if('speechSynthesis' in window)speechSynthesis.onvoiceschanged=()=>speechSynthes
     );
     const src='data:image/webp;base64,'+parts.join('').replace(/\s+/g,'');
     document.querySelectorAll('img.ava-approved').forEach(img => { img.src=src; });
-  } catch(e) { console.error('Could not load approved Ava image', e); }
-})();
-</script>
-
-<script>
-(function(){
-  const frMap = {"How it works":"Comment ça marche","Demo":"Démo","Try Ava":"Essayer Ava","Pricing":"Tarifs","Try Ava live":"Essayer Ava en direct","AI receptionist for contractors":"Réceptionniste IA pour entrepreneurs","Turn missed calls into":"Transformez les appels manqués en","booked jobs.":"rendez-vous confirmés.","CallPilot answers after-hours leads, qualifies the customer, identifies urgency, checks the service area and hands your team a clean job summary — in English or French.":"CallPilot répond aux appels après les heures d’ouverture, qualifie le client, détermine l’urgence, vérifie la zone de service et transmet à votre équipe un résumé clair — en français ou en anglais.","See the contractor demo":"Voir la démo entrepreneur","View packages":"Voir les forfaits","missed-call coverage":"couverture des appels manqués","bilingual customer flow":"parcours client bilingue","lead summary delivered":"résumé du prospect transmis","Incoming lead":"Nouveau prospect","No heat • Kirkland":"Pas de chauffage • Kirkland","Ava flags this as an emergency and checks for immediate danger.":"Ava identifie l’urgence et vérifie s’il existe un danger immédiat.","Job captured":"Demande captée","Customer qualified • technician ready to dispatch":"Client qualifié • technicien prêt à être dépêché","How CallPilot works":"Comment fonctionne CallPilot","A missed call becomes a structured job.":"Un appel manqué devient une demande structurée.","Instead of sending a caller to voicemail, Ava follows a contractor-specific flow and hands the owner the information they actually need.":"Au lieu d’envoyer l’appelant à la boîte vocale, Ava suit un parcours conçu pour les entrepreneurs et transmet les renseignements réellement nécessaires.","Built around revenue recovery.":"Conçu pour récupérer des revenus.","The goal isn’t “AI for AI’s sake.” It’s fewer lost leads and less time wasted chasing incomplete messages.":"Le but n’est pas d’utiliser l’IA pour le simple plaisir de l’IA. Le but est de perdre moins de prospects et de passer moins de temps à courir après des messages incomplets.","Answers the missed call":"Répond à l’appel manqué","Captures the customer before they move to the next contractor.":"Capte le client avant qu’il appelle un autre entrepreneur.","Triages urgency":"Évalue l’urgence","Separates true emergencies from standard appointment requests.":"Distingue les vraies urgences des demandes de rendez-vous régulières.","Checks the service area":"Vérifie la zone de service","Confirms the city before dispatch time is wasted.":"Confirme la ville avant de mobiliser inutilement un technicien.","Creates a clean lead":"Crée un prospect complet","Name, issue, urgency, location and preferred appointment in one summary.":"Nom, problème, urgence, emplacement et préférence de rendez-vous dans un seul résumé.","HVAC":"CVAC","No heat, no cooling, furnace failures, after-hours emergency triage.":"Pas de chauffage, pas de climatisation, panne de fournaise et triage des urgences après les heures d’ouverture.","Plumbing":"Plomberie","Leaks, burst pipes, toilets, flooding and standard service requests.":"Fuites, tuyaux éclatés, toilettes, dégâts d’eau et demandes de service régulières.","Electrical":"Électricité","Breakers, outages, outlets, sparks and urgent electrical calls.":"Disjoncteurs, pannes, prises, étincelles et appels électriques urgents.","Roofing":"Toiture","Storm damage, leaks, missing shingles and inspection requests.":"Dommages causés par les tempêtes, fuites, bardeaux manquants et demandes d’inspection.","Sales demo":"Démo de vente","Show the contractor exactly what Ava does.":"Montrez exactement à l’entrepreneur ce qu’Ava fait.","These are real visuals from the CallPilot flow — not empty placeholders.":"Ce sont de vrais visuels du parcours CallPilot — pas de simples espaces réservés.","Customer calls":"Le client appelle","Ava answers after hours and identifies the trade and problem.":"Ava répond après les heures d’ouverture et identifie le métier et le problème.","Ava qualifies":"Ava qualifie","Urgency, danger, service area, customer name and appointment preference.":"Urgence, danger, zone de service, nom du client et préférence de rendez-vous.","Contractor gets the lead":"L’entrepreneur reçoit le prospect","A clean summary appears ready for booking or dispatch.":"Un résumé clair est prêt pour la prise de rendez-vous ou l’envoi d’un technicien.","Interactive booking demo":"Démo interactive de prise de rendez-vous","Try Ava booking the job herself.":"Essayez Ava qui prend elle-même le rendez-vous.","This is a free sales simulator. Tap the phone button, hear Ava, choose the customer's answers, and watch her book the appointment without handing the caller off.":"Il s’agit d’un simulateur de vente gratuit. Touchez le bouton téléphone, écoutez Ava, choisissez les réponses du client et regardez-la prendre le rendez-vous sans transférer l’appel.","LIVE VOICE DEMO • No real phone number or charge":"DÉMO VOCALE EN DIRECT • Aucun vrai numéro de téléphone ni frais","Incoming test call":"Appel test entrant","FICTIONAL NUMBER":"NUMÉRO FICTIF","CallPilot Trades • AI receptionist":"CallPilot Trades • Réceptionniste IA","Ready to test":"Prêt pour le test","Tap START CALL, choose 1 for French or 2 for English, then continue with Ava.":"Touchez DÉMARRER L’APPEL, choisissez 1 pour le français ou 2 pour l’anglais, puis continuez avec Ava.","Send":"Envoyer","Appointment booked":"Rendez-vous confirmé","Issue":"Problème","Urgency":"Urgence","City":"Ville","Address":"Adresse","Phone":"Téléphone","Name":"Nom","Appointment":"Rendez-vous","Status":"Statut","Confirmed":"Confirmé","AVA VOICE":"VOIX D’AVA","REPLAY":"RÉÉCOUTER","START CALL":"DÉMARRER L’APPEL","END CALL":"TERMINER L’APPEL","Tap START CALL. Choose 1 for French or 2 for English. Then use the answer buttons or type your reply.":"Touchez DÉMARRER L’APPEL. Choisissez 1 pour le français ou 2 pour l’anglais. Utilisez ensuite les boutons de réponse ou écrivez votre réponse.","Packages":"Forfaits","Simple pricing for service businesses.":"Des tarifs simples pour les entreprises de service.","Three packages so a contractor can start small and add automation as call volume grows.":"Trois forfaits qui permettent de commencer simplement et d’ajouter de l’automatisation à mesure que le volume d’appels augmente.","/month":"/mois","For smaller contractors who mainly need after-hours and missed-call coverage.":"Pour les petits entrepreneurs qui ont surtout besoin d’une couverture après les heures d’ouverture et des appels manqués.","After-hours AI answering":"Réponse IA après les heures d’ouverture","Missed-call SMS recovery":"Récupération des appels manqués par SMS","Lead summaries":"Résumés des prospects","100 AI minutes":"100 minutes IA","English + French":"Français + anglais","See demo":"Voir la démo","MOST POPULAR":"LE PLUS POPULAIRE","For busy service companies that want Ava to qualify, triage and help book jobs.":"Pour les entreprises de service occupées qui veulent qu’Ava qualifie, trie les urgences et aide à prendre les rendez-vous.","Everything in Starter":"Tout le forfait Starter","Emergency triage":"Triage des urgences","Booking + dispatch rules":"Règles de réservation et d’envoi","Service-area checks":"Vérification de la zone de service","Owner SMS alerts":"Alertes SMS au propriétaire","300 AI minutes":"300 minutes IA","See Growth demo":"Voir la démo Growth","For larger contractors with multiple service lines, technicians or locations.":"Pour les entrepreneurs plus importants avec plusieurs services, techniciens ou emplacements.","Multiple service lines":"Plusieurs lignes de service","Dispatch routing":"Acheminement des interventions","CRM + calendar integrations":"Intégrations CRM + calendrier","Priority setup":"Configuration prioritaire","Advanced reporting":"Rapports avancés","Stop sending good leads to voicemail.":"Arrêtez d’envoyer de bons prospects à la boîte vocale.","Use the demo with a contractor and walk them through one missed call. The value proposition is simple: if CallPilot recovers even one job that would have been lost, it can pay for itself.":"Utilisez la démo avec un entrepreneur et montrez-lui un appel manqué de bout en bout. La proposition de valeur est simple : si CallPilot récupère ne serait-ce qu’un seul contrat qui aurait été perdu, il peut se rentabiliser.","Choose a package":"Choisir un forfait","Replay the demo":"Revoir la démo","CallPilot Trades • Demo concept • Contractor AI receptionist":"CallPilot Trades • Concept de démo • Réceptionniste IA pour entrepreneurs"};
-  const enMap = Object.fromEntries(Object.entries(frMap).map(([en,fr])=>[fr,en]));
-  function replaceTextNodes(root,map){
-    const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
-    const nodes=[];
-    while(walker.nextNode()) nodes.push(walker.currentNode);
-    nodes.forEach(node=>{
-      const raw=node.nodeValue||'';
-      const key=raw.trim();
-      if(!key || !map[key]) return;
-      const lead=(raw.match(/^\s*/)||[''])[0];
-      const trail=(raw.match(/\s*$/)||[''])[0];
-      node.nodeValue=lead+map[key]+trail;
-    });
+  } catch(e) {
+    console.error('Could not load approved Ava image', e);
   }
-  window.setSiteLanguage=function(lang){
-    const next=lang==='fr'?'fr':'en';
-    const current=(document.documentElement.lang||'en').toLowerCase().startsWith('fr')?'fr':'en';
-    if(current!==next) replaceTextNodes(document.body,next==='fr'?frMap:enMap);
-    document.documentElement.lang=next==='fr'?'fr-CA':'en';
-    document.title=next==='fr'?'CallPilot Trades — Réceptionniste IA':'CallPilot Trades — AI Receptionist';
-    const input=document.getElementById('answer');
-    if(input) input.placeholder=next==='fr'?'Ou écrivez votre réponse…':'Or type your answer…';
-    const replay=document.getElementById('replay'), start=document.getElementById('start'), end=document.getElementById('end');
-    if(replay) replay.title=next==='fr'?'Réécouter Ava':'Replay Ava';
-    if(start) start.title=next==='fr'?'Démarrer l’appel':'Start call';
-    if(end) end.title=next==='fr'?'Terminer l’appel':'End call';
-    const enBtn=document.getElementById('siteEn'), frBtn=document.getElementById('siteFr');
-    if(enBtn){enBtn.classList.toggle('active',next==='en');enBtn.setAttribute('aria-pressed',next==='en'?'true':'false');}
-    if(frBtn){frBtn.classList.toggle('active',next==='fr');frBtn.setAttribute('aria-pressed',next==='fr'?'true':'false');}
-    try{localStorage.setItem('callpilot-site-lang',next);}catch(e){}
-    const url=new URL(location.href);
-    url.searchParams.set('lang',next);
-    history.replaceState(null,'',url.pathname+url.search+url.hash);
-  };
-  const enBtn=document.getElementById('siteEn'), frBtn=document.getElementById('siteFr');
-  if(enBtn) enBtn.addEventListener('click',()=>setSiteLanguage('en'));
-  if(frBtn) frBtn.addEventListener('click',()=>setSiteLanguage('fr'));
-  let initial='en';
-  try{
-    const q=new URL(location.href).searchParams.get('lang');
-    const saved=localStorage.getItem('callpilot-site-lang');
-    if(q==='fr'||q==='en') initial=q;
-    else if(saved==='fr'||saved==='en') initial=saved;
-  }catch(e){}
-  if(initial==='fr') setSiteLanguage('fr'); else setSiteLanguage('en');
 })();
 </script>
-
 </body>
 </html>
