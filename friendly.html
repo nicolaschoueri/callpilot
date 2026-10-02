@@ -470,7 +470,7 @@ function speakSystem(text,lang,onDone,addLine=true){
 function playLanguageMenu(){
   quick.innerHTML='';
   status.textContent='Choisissez la langue';
-  const menuText='Pour le français, appuyez sur 1. Pour l’anglais, appuyez sur 2.';
+  const menuText='Pour le français, appuyez sur 1. For English, press 2.';
   add('AVA',menuText);
   const b1=document.createElement('button'); b1.className='choice'; b1.textContent='1 — Français'; b1.onclick=()=>chooseLanguage('fr');
   const b2=document.createElement('button'); b2.className='choice'; b2.textContent='2 — English'; b2.onclick=()=>chooseLanguage('en');
