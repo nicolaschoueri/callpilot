@@ -142,8 +142,8 @@ function setupStatus() {
   };
 }
 
-function routeId(req: express.Request) {
-  const value = routeId(req);
+function routeId(req: express.Request): string {
+  const value: string | string[] = req.params.id;
   return Array.isArray(value) ? String(value[0] || "") : String(value || "");
 }
 
