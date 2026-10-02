@@ -3,21 +3,51 @@ import WebSocket from "ws";
 import type { IncomingHttpHeaders } from "node:http";
 import { backendPrompt, livePrompt } from "./prompts.js";
 import { responseTools, executeToolIdempotently } from "./tools.js";
-import type { CallPilotStore } from "./store.js";
+import type { BusinessProfile, CallPilotStore } from "./store.js";
+import type { OwnerNotifier } from "./notifications.js";
 
 export type LiveConfig = {
   apiKey: string;
   webhookSecret: string;
-  businessName: string;
-  ownerFirstName: string;
-  ownerTransferUri?: string;
   store: CallPilotStore;
+  notifier?: OwnerNotifier;
+  defaultBusinessId?: string;
+  allowSingleBusinessFallback?: boolean;
 };
 
-function callerIdFromSipHeaders(headers: any[] | undefined) {
-  const from = headers?.find((h) => String(h?.name || "").toLowerCase() === "from")?.value;
-  const match = String(from || "").match(/\+\d{7,15}/);
+function phoneFromHeaderValue(value: unknown) {
+  const match = String(value || "").match(/\+\d{7,15}/);
   return match?.[0];
+}
+
+function phoneFromSipHeaders(headers: any[] | undefined, names: string[]) {
+  for (const name of names) {
+    const header = headers?.find(
+      (h) => String(h?.name || "").toLowerCase() === name.toLowerCase()
+    );
+    const number = phoneFromHeaderValue(header?.value);
+    if (number) return number;
+  }
+  return undefined;
+}
+
+function callerIdFromSipHeaders(headers: any[] | undefined) {
+  return phoneFromSipHeaders(headers, [
+    "P-Asserted-Identity",
+    "Remote-Party-ID",
+    "From"
+  ]);
+}
+
+function destinationFromSipHeaders(headers: any[] | undefined) {
+  // Twilio Elastic SIP Trunking guarantees the originally dialed Twilio
+  // number in Diversion on origination calls. P-Called-Party-ID and To
+  // are useful fallbacks for other providers.
+  return phoneFromSipHeaders(headers, [
+    "Diversion",
+    "P-Called-Party-ID",
+    "To"
+  ]);
 }
 
 export class CallPilotLive {
@@ -31,31 +61,68 @@ export class CallPilotLive {
   }
 
   verifyWebhook(rawBody: string, headers: IncomingHttpHeaders) {
-    return this.client.webhooks.unwrap(rawBody, headers as any, this.config.webhookSecret) as Promise<any>;
+    return this.client.webhooks.unwrap(
+      rawBody,
+      headers as any,
+      this.config.webhookSecret
+    ) as Promise<any>;
+  }
+
+  private resolveBusiness(destinationNumber: string | undefined) {
+    const direct = this.config.store.resolveBusinessByDestination(destinationNumber);
+    if (direct) return direct;
+
+    if (this.config.allowSingleBusinessFallback && this.config.defaultBusinessId) {
+      return this.config.store.getBusiness(this.config.defaultBusinessId);
+    }
+    return undefined;
   }
 
   async acceptIncoming(event: any) {
     if (event.type !== "live.transport.incoming" || event.data?.type !== "sip") {
-      return { handled: false as const };
+      return { handled: false as const, reason: "unsupported_event" };
     }
 
     const sessionId = String(event.data?.session_id || "");
     if (!sessionId) throw new Error("Missing Live session_id");
 
-    const callerId = callerIdFromSipHeaders(event.data?.sip_headers);
-    this.config.store.upsertCall(sessionId, callerId, event.id, "incoming");
+    const sipHeaders = event.data?.sip_headers as any[] | undefined;
+    const callerId = callerIdFromSipHeaders(sipHeaders);
+    const destinationNumber = destinationFromSipHeaders(sipHeaders);
+    const business = this.resolveBusiness(destinationNumber);
+
+    if (!business || !business.active) {
+      console.warn("CallPilot could not route incoming call", {
+        sessionId,
+        destinationNumber: destinationNumber || null
+      });
+      return {
+        handled: false as const,
+        reason: "business_not_found",
+        destinationNumber
+      };
+    }
+
+    this.config.store.upsertCall(
+      sessionId,
+      business.id,
+      callerId,
+      destinationNumber,
+      event.id,
+      "incoming"
+    );
 
     const body = {
       session: {
         type: "live",
         model: "gpt-live-1",
-        instructions: livePrompt(this.config.businessName, this.config.ownerFirstName, callerId),
+        instructions: livePrompt(business, callerId),
         audio: { output: { voice: "marin" } },
         delegation: {
           type: "responses",
           responses: {
             model: "gpt-6-luna",
-            instructions: backendPrompt(this.config.businessName),
+            instructions: backendPrompt(business),
             tools: responseTools,
             tool_choice: "auto",
             parallel_tool_calls: false
@@ -79,15 +146,23 @@ export class CallPilotLive {
     if (!response.ok) {
       const detail = await response.text();
       this.config.store.setCallStatus(sessionId, "accept_error");
-      throw new Error(`OpenAI Live accept failed (${response.status}): ${detail.slice(0, 300)}`);
+      throw new Error(
+        `OpenAI Live accept failed (${response.status}): ${detail.slice(0, 300)}`
+      );
     }
 
     this.config.store.setCallStatus(sessionId, "accepted");
-    this.attachSideband(sessionId);
-    return { handled: true as const, sessionId, callerId };
+    this.attachSideband(sessionId, business);
+    return {
+      handled: true as const,
+      sessionId,
+      callerId,
+      destinationNumber,
+      businessId: business.id
+    };
   }
 
-  private attachSideband(sessionId: string) {
+  private attachSideband(sessionId: string, business: BusinessProfile) {
     const ws = new WebSocket(
       `wss://api.openai.com/v1/live/sessions/${encodeURIComponent(sessionId)}/attach`,
       { headers: { Authorization: `Bearer ${this.config.apiKey}` } }
@@ -107,7 +182,10 @@ export class CallPilotLive {
 
       if (envelope.type === "response.event") {
         const inner = envelope.event;
-        if (inner?.type === "response.output_item.done" && inner?.item?.type === "function_call") {
+        if (
+          inner?.type === "response.output_item.done" &&
+          inner?.item?.type === "function_call"
+        ) {
           const item = inner.item;
           let args: any = {};
           try {
@@ -122,8 +200,14 @@ export class CallPilotLive {
             args,
             {
               sessionId,
+              business,
               store: this.config.store,
-              transfer: (reason) => this.transferToOwner(sessionId, reason)
+              transfer: (reason) =>
+                this.transferToOwner(sessionId, business, reason),
+              notifyOwner: this.config.notifier
+                ? (kind, details) =>
+                    this.config.notifier!.notify(business, kind, details)
+                : undefined
             }
           );
 
@@ -158,21 +242,31 @@ export class CallPilotLive {
       this.config.store.setCallStatus(sessionId, "sideband_error");
       console.error("GPT-Live sideband error", {
         sessionId,
+        businessId: business.id,
         message: String((error as Error)?.message || "websocket error").slice(0, 200)
       });
     });
 
     ws.on("close", () => {
-      const row = this.config.store.db
-        .prepare("SELECT status FROM calls WHERE session_id=?")
-        .get(sessionId) as { status: string } | undefined;
-      if (row && row.status !== "closed") this.config.store.setCallStatus(sessionId, "disconnected");
+      const row = this.config.store.getCall(sessionId) as { status?: string } | undefined;
+      if (row && row.status !== "closed") {
+        this.config.store.setCallStatus(sessionId, "disconnected");
+      }
     });
   }
 
-  async transferToOwner(sessionId: string, _reason: string) {
-    const target = this.config.ownerTransferUri;
-    if (!target) return { success: false, reason: "owner_transfer_unavailable" };
+  async transferToOwner(
+    sessionId: string,
+    business: BusinessProfile,
+    _reason: string
+  ) {
+    const target =
+      business.ownerTransferUri ||
+      (business.ownerPhone ? `tel:${business.ownerPhone}` : "");
+
+    if (!target) {
+      return { success: false, reason: "owner_transfer_unavailable" };
+    }
 
     const response = await fetch(
       `https://api.openai.com/v1/live/sessions/${encodeURIComponent(sessionId)}/refer`,
@@ -187,7 +281,11 @@ export class CallPilotLive {
     );
 
     if (!response.ok) {
-      return { success: false, reason: "transfer_failed", status: response.status };
+      return {
+        success: false,
+        reason: "transfer_failed",
+        status: response.status
+      };
     }
 
     return { success: true };
