@@ -78,6 +78,15 @@ h1{font-size:32px;letter-spacing:-.03em;margin:5px 0 5px}h2{font-size:20px;margi
 @media(max-width:1100px){.g4{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(2,1fr)}.board{grid-template-columns:repeat(2,1fr)}.playbooks{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:780px){.app{grid-template-columns:1fr}.sidebar{position:fixed;left:-260px;width:248px;transition:.2s}.sidebar.open{left:0}.mobile-nav{display:block}.topbar{padding:0 14px}.content{padding:18px 14px 34px}.g4,.g3,.g2,.form-grid,.playbooks,.board,.onboarding{grid-template-columns:1fr}.flow{grid-template-columns:1fr}.flow .box:not(:last-child):after{content:"↓";right:50%;bottom:-12px;top:auto}.calendar{grid-template-columns:repeat(2,1fr)}.day{min-height:85px}.sidebar-bottom{position:static;margin-top:20px}}
 </style>
+
+<style id="growth-automation-styles">
+.auto-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+.auto-card{background:#0a1622;border:1px solid rgba(255,255,255,.065);border-radius:14px;padding:14px}
+.auto-card .icon{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;background:#162a3b;margin-bottom:10px;font-size:18px}
+.auto-card b{display:block;font-size:13px}.auto-card p{margin:6px 0 0;color:var(--muted);font-size:10px;line-height:1.5}
+.auto-actions{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-top:12px}
+@media(max-width:1000px){.auto-grid{grid-template-columns:1fr 1fr}}@media(max-width:650px){.auto-grid{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
 <div class="app">
@@ -95,6 +104,7 @@ h1{font-size:32px;letter-spacing:-.03em;margin:5px 0 5px}h2{font-size:20px;margi
     <button data-page="analytics">Analytics</button>
     <button data-page="notifications">Notifications</button>
     <button data-page="integrations">Integrations</button>
+    <button data-page="automations">Growth Automations</button>
     <button data-page="billing">Billing</button>
     <button data-page="admin">CallPilot Admin</button>
   </div>
@@ -357,6 +367,24 @@ h1{font-size:32px;letter-spacing:-.03em;margin:5px 0 5px}h2{font-size:20px;margi
         <div class="integration"><div class="ico">H</div><div class="grow"><b>Housecall Pro</b><span>Field-service scheduling</span></div><span class="pill purple">Future</span></div>
         <div class="integration"><div class="ico">H</div><div class="grow"><b>HubSpot</b><span>Lead + customer sync</span></div><span class="pill purple">Future</span></div>
         <div class="integration"><div class="ico">＋</div><div class="grow"><b>Custom integration</b><span>API/webhook for larger customers</span></div><span class="pill blue">Advanced</span></div>
+      </div>
+    </div>
+
+
+    <div class="page" id="automations">
+      <div class="kicker">Growth automation lab</div><h1>More than answering the phone.</h1>
+      <div class="sub mb">These demo modules show where CallPilot can expand after the core missed-call receptionist is live. Items marked “Roadmap” are not production-connected yet.</div>
+      <div class="auto-grid">
+        <div class="auto-card"><div class="icon">🛡</div><b>Spam guard</b><p>Identify obvious robocalls and irrelevant solicitations before they consume owner attention.</p><div class="auto-actions"><span class="pill green">Demo ready</span><button class="ghost" onclick="demoToast('Spam rule tested')">Test</button></div></div>
+        <div class="auto-card"><div class="icon">👷</div><b>On-call rotation</b><p>Route urgent jobs to the right technician based on schedule, trade and escalation rules.</p><div class="auto-actions"><span class="pill gold">Demo</span><button class="ghost" onclick="demoToast('On-call rotation previewed')">Preview</button></div></div>
+        <div class="auto-card"><div class="icon">↗</div><b>Instant lead callback</b><p>Call back a new web lead quickly when a prospect submits a form but has not spoken to the business.</p><div class="auto-actions"><span class="pill purple">Roadmap</span><button class="ghost" onclick="demoToast('Outbound callback workflow previewed')">Preview</button></div></div>
+        <div class="auto-card"><div class="icon">★</div><b>Review request</b><p>After a completed job, send a polite review request only when the business marks the work complete.</p><div class="auto-actions"><span class="pill purple">Roadmap</span><button class="ghost" onclick="demoToast('Review request previewed')">Preview</button></div></div>
+        <div class="auto-card"><div class="icon">💬</div><b>Website chat handoff</b><p>Use the same business rules for website visitors, then hand qualified conversations into the lead pipeline.</p><div class="auto-actions"><span class="pill purple">Roadmap</span><button class="ghost" onclick="demoToast('Website chat handoff previewed')">Preview</button></div></div>
+        <div class="auto-card"><div class="icon">◎</div><b>Call recordings + transcripts</b><p>Searchable call history, summaries and configurable retention with appropriate notice and consent practices.</p><div class="auto-actions"><span class="pill gold">Demo</span><button class="ghost" onclick="go('calls')">Open transcript</button></div></div>
+      </div>
+      <div class="grid g2 mt">
+        <div class="card"><h2>Why this matters</h2><div class="sub">The core value remains simple: recover missed calls. These modules extend that same business profile into follow-up, dispatch, reputation and web lead workflows without forcing the owner to learn another complicated system.</div></div>
+        <div class="card"><h2>Production rule</h2><div class="notice">CallPilot should only label a feature “Live” after the external provider, permissions, consent requirements and end-to-end test are actually complete.</div></div>
       </div>
     </div>
 
