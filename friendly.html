@@ -190,7 +190,7 @@ footer{border-top:1px solid var(--line);padding:28px 0 38px;color:#8f8579;font-s
     <div class="navlinks">
       <a href="#how">How it works</a>
       <a href="#demo">Demo</a>
-      <a href="#live-demo">Try Ava</a><a href="#owner-demo">Owner demo</a><a href="#pricing">Pricing</a>
+      <a href="#live-demo">Try Ava</a><a href="#owner-demo" data-cp-en="Owner demo" data-cp-fr="Démo propriétaire">Owner demo</a><a href="#pricing">Pricing</a>
       <a class="navcta" href="#live-demo">Try Ava live</a>
       <div class="lang-switch" aria-label="Website language">
         <button type="button" id="siteEn" class="active" aria-pressed="true">EN</button>
@@ -873,7 +873,7 @@ if('speechSynthesis' in window)speechSynthesis.onvoiceschanged=()=>speechSynthes
   ["cpBusinessName","cpServiceArea"].forEach(id=>$(id).addEventListener("input",render));
   ["cpCalendar","cpTransfer"].forEach(id=>$(id).addEventListener("change",render));
   ["siteEn","siteFr"].forEach(id=>$(id)?.addEventListener("click",()=>setTimeout(render,0)));
-  render();
+  setTimeout(render,0);
 })();
 </script>
 
