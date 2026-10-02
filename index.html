@@ -182,13 +182,32 @@ footer{border-top:1px solid var(--line);padding:28px 0 38px;color:#8f8579;font-s
 @media(max-width:900px){.cp-owner-grid{grid-template-columns:1fr}.cp-flow,.cp-note-grid,.cp-stats{grid-template-columns:1fr 1fr}.cp-flow-step:nth-child(2):after{display:none}}
 @media(max-width:560px){.cp-business{padding:64px 0}.cp-flow,.cp-note-grid,.cp-stats{grid-template-columns:1fr}.cp-flow-step:after{display:none}.cp-lead{grid-template-columns:1fr 1fr}.cp-lead .cp-outcome{grid-column:1/-1}}
 </style>
+
+<style id="conversion-trust-styles">
+.cp-trust-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:28px}
+.cp-trust-item{background:#111b28;border:1px solid var(--line);border-radius:20px;padding:20px}
+.cp-trust-item .mark{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:rgba(213,173,99,.11);color:#e5ca8c;font-weight:950;margin-bottom:12px}
+.cp-trust-item h3{margin:0 0 7px;font-size:18px}.cp-trust-item p{margin:0;color:#9d9386;font-size:13px;line-height:1.5}
+.cp-demo-banner{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center;margin-top:22px;padding:20px;border:1px solid rgba(213,173,99,.25);background:rgba(213,173,99,.06);border-radius:20px}
+.cp-demo-banner strong{display:block;font-size:19px}.cp-demo-banner span{display:block;color:#9f9588;font-size:13px;line-height:1.5;margin-top:5px}
+.cp-roi{display:grid;grid-template-columns:.9fr 1.1fr;gap:18px;margin-top:30px;align-items:start}
+.cp-roi-controls,.cp-roi-results{background:#111b28;border:1px solid var(--line);border-radius:22px;padding:22px}
+.cp-roi-field{margin-top:14px}.cp-roi-field label{display:flex;justify-content:space-between;gap:12px;color:#d8cfc1;font-size:12px;font-weight:800;margin-bottom:7px}
+.cp-roi-field input,.cp-roi-field select{width:100%;border:1px solid rgba(255,255,255,.09);background:#08121e;color:#f7f1e6;border-radius:12px;padding:12px 13px;font:inherit}
+.cp-roi-metrics{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.cp-roi-metric{background:#0b1522;border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:16px}.cp-roi-metric span{display:block;color:#8f877c;font-size:11px}.cp-roi-metric b{display:block;font-size:27px;margin-top:5px}
+.cp-roi-note{margin-top:12px;color:#8f877c;font-size:11px;line-height:1.45}
+.cp-faq{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:28px}.cp-faq details{background:#111b28;border:1px solid var(--line);border-radius:16px;padding:16px}.cp-faq summary{cursor:pointer;font-weight:900}.cp-faq p{color:#9d9386;font-size:13px;line-height:1.55;margin:10px 0 0}
+.cp-footer-links{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px}.cp-footer-links a{color:#b9aa96;text-decoration:none}
+@media(max-width:900px){.cp-trust-grid{grid-template-columns:1fr 1fr}.cp-roi{grid-template-columns:1fr}.cp-demo-banner{grid-template-columns:1fr}.cp-faq{grid-template-columns:1fr}}
+@media(max-width:560px){.cp-trust-grid,.cp-roi-metrics{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
 <nav>
   <div class="container navbar">
     <div class="brand"><div class="logo"></div>CallPilot<span>Trades</span></div>
     <div class="navlinks">
-      <a href="#how">How it works</a><a href="#customer-journey" data-cp-en="Process" data-cp-fr="Processus">Process</a>
+      <a href="#how">How it works</a><a href="#trust" data-cp-en="Trust" data-cp-fr="Confiance">Trust</a><a href="#roi">ROI</a><a href="#customer-journey" data-cp-en="Process" data-cp-fr="Processus">Process</a>
       <a href="#demo">Demo</a>
       <a href="#live-demo">Try Ava</a><a href="#owner-demo" data-cp-en="Owner demo" data-cp-fr="Démo propriétaire">Owner demo</a><a href="#pricing">Pricing</a>
       <a class="navcta" href="#live-demo">Try Ava live</a>
@@ -754,6 +773,29 @@ if('speechSynthesis' in window)speechSynthesis.onvoiceschanged=()=>speechSynthes
 </section>
 
 
+
+<section id="trust" class="section light">
+  <div class="container">
+    <div class="kicker" data-cp-en="Why contractors can trust the process" data-cp-fr="Pourquoi les entrepreneurs peuvent faire confiance au processus">Why contractors can trust the process</div>
+    <h2 data-cp-en="Simple on the outside. Business-specific underneath." data-cp-fr="Simple pour le client. Personnalisé pour chaque entreprise.">Simple on the outside. Business-specific underneath.</h2>
+    <p class="lede" data-cp-en="CallPilot is designed around the way service businesses already work. The owner keeps the public number, decides when Ava answers, and controls the rules for each type of call." data-cp-fr="CallPilot est conçu autour de la façon dont les entreprises de service travaillent déjà. Le propriétaire garde son numéro public, décide quand Ava répond et contrôle les règles pour chaque type d'appel.">CallPilot is designed around the way service businesses already work. The owner keeps the public number, decides when Ava answers, and controls the rules for each type of call.</p>
+
+    <div class="cp-trust-grid">
+      <div class="cp-trust-item"><div class="mark">1</div><h3 data-cp-en="Keep your business number" data-cp-fr="Gardez votre numéro d'entreprise">Keep your business number</h3><p data-cp-en="Customers continue calling the number they already know. Call forwarding handles eligible missed, busy or after-hours calls." data-cp-fr="Les clients continuent d'appeler le numéro qu'ils connaissent déjà. Le transfert d'appel dirige les appels admissibles sans réponse, occupés ou hors heures.">Customers continue calling the number they already know. Call forwarding handles eligible missed, busy or after-hours calls.</p></div>
+      <div class="cp-trust-item"><div class="mark">2</div><h3 data-cp-en="You choose when Ava answers" data-cp-fr="Vous choisissez quand Ava répond">You choose when Ava answers</h3><p data-cp-en="Use Ava for missed calls, after-hours coverage, overflow, or a combination based on the business." data-cp-fr="Utilisez Ava pour les appels manqués, les appels hors heures, le débordement ou une combinaison selon l'entreprise.">Use Ava for missed calls, after-hours coverage, overflow, or a combination based on the business.</p></div>
+      <div class="cp-trust-item"><div class="mark">3</div><h3 data-cp-en="Calendar optional" data-cp-fr="Calendrier optionnel">Calendar optional</h3><p data-cp-en="Connect a calendar for live booking, or let Ava capture the preferred date and time and send a pending request." data-cp-fr="Connectez un calendrier pour réserver en direct, ou laissez Ava recueillir la date et l'heure préférées et envoyer une demande en attente.">Connect a calendar for live booking, or let Ava capture the preferred date and time and send a pending request.</p></div>
+      <div class="cp-trust-item"><div class="mark">4</div><h3 data-cp-en="English + French" data-cp-fr="Français + anglais">English + French</h3><p data-cp-en="The customer experience can be presented in either language, with the business rules staying the same." data-cp-fr="L'expérience client peut être offerte dans les deux langues, tout en conservant les mêmes règles d'entreprise.">The customer experience can be presented in either language, with the business rules staying the same.</p></div>
+      <div class="cp-trust-item"><div class="mark">5</div><h3 data-cp-en="Emergency rules are configurable" data-cp-fr="Les règles d'urgence sont configurables">Emergency rules are configurable</h3><p data-cp-en="Urgent jobs can trigger same-day options, owner alerts or transfers when configured. Immediate danger is directed to emergency services." data-cp-fr="Les demandes urgentes peuvent déclencher des options le jour même, des alertes ou des transferts lorsqu'ils sont configurés. Un danger immédiat est dirigé vers les services d'urgence.">Urgent jobs can trigger same-day options, owner alerts or transfers when configured. Immediate danger is directed to emergency services.</p></div>
+      <div class="cp-trust-item"><div class="mark">6</div><h3 data-cp-en="One profile per business" data-cp-fr="Un profil par entreprise">One profile per business</h3><p data-cp-en="Each business gets its own greeting, trade rules, service area, hours, calendar mode and routing profile." data-cp-fr="Chaque entreprise possède son propre accueil, ses règles métier, son territoire, ses heures, son mode calendrier et son profil de routage.">Each business gets its own greeting, trade rules, service area, hours, calendar mode and routing profile.</p></div>
+    </div>
+
+    <div class="cp-demo-banner">
+      <div><strong data-cp-en="Try Ava now in the browser" data-cp-fr="Essayez Ava maintenant dans le navigateur">Try Ava now in the browser</strong><span data-cp-en="The current website demo lets you walk through Ava's conversation and booking flow without a real phone number. A real callable phone demo will be added when the live telephony service is activated." data-cp-fr="La démo actuelle du site permet de parcourir la conversation et la réservation d'Ava sans vrai numéro de téléphone. Une démo téléphonique appelable sera ajoutée lorsque le service téléphonique sera activé.">The current website demo lets you walk through Ava's conversation and booking flow without a real phone number. A real callable phone demo will be added when the live telephony service is activated.</span></div>
+      <a class="btn primary" href="#live-demo" data-cp-en="Try Ava" data-cp-fr="Essayer Ava">Try Ava</a>
+    </div>
+  </div>
+</section>
+
 <section id="customer-journey" class="section">
   <div class="container">
     <div class="kicker" data-cp-en="Complete customer journey" data-cp-fr="Parcours client complet">Complete customer journey</div>
@@ -864,6 +906,49 @@ if('speechSynthesis' in window)speechSynthesis.onvoiceschanged=()=>speechSynthes
   </div>
 </section>
 
+
+<section id="roi" class="section">
+  <div class="container">
+    <div class="kicker" data-cp-en="Revenue recovery calculator" data-cp-fr="Calculateur de revenus récupérés">Revenue recovery calculator</div>
+    <h2 data-cp-en="What could one recovered job be worth?" data-cp-fr="Que pourrait valoir un seul travail récupéré?">What could one recovered job be worth?</h2>
+    <p class="lede" data-cp-en="Use your own numbers to estimate the value of recovering missed calls. This is a simple illustration, not a revenue guarantee." data-cp-fr="Utilisez vos propres chiffres pour estimer la valeur de la récupération des appels manqués. Il s'agit d'une illustration simple, et non d'une garantie de revenus.">Use your own numbers to estimate the value of recovering missed calls. This is a simple illustration, not a revenue guarantee.</p>
+    <div class="cp-roi">
+      <div class="cp-roi-controls">
+        <div class="cp-roi-field"><label><span data-cp-en="Average job value" data-cp-fr="Valeur moyenne d'un travail">Average job value</span><span>CAD</span></label><input id="roiJob" type="number" min="0" step="25" value="600"></div>
+        <div class="cp-roi-field"><label><span data-cp-en="Missed calls per month" data-cp-fr="Appels manqués par mois">Missed calls per month</span><span>#</span></label><input id="roiCalls" type="number" min="0" step="1" value="10"></div>
+        <div class="cp-roi-field"><label><span data-cp-en="Estimated calls recovered" data-cp-fr="Appels récupérés estimés">Estimated calls recovered</span><span>%</span></label><input id="roiRate" type="number" min="0" max="100" step="5" value="20"></div>
+        <div class="cp-roi-field"><label><span data-cp-en="CallPilot package" data-cp-fr="Forfait CallPilot">CallPilot package</span></label><select id="roiPlan"><option value="199">Starter — $199</option><option value="349" selected>Growth — $349</option><option value="599">Multi-Tech — $599</option></select></div>
+      </div>
+      <div class="cp-roi-results">
+        <h3 data-cp-en="Illustrative monthly result" data-cp-fr="Résultat mensuel illustratif">Illustrative monthly result</h3>
+        <div class="cp-roi-metrics">
+          <div class="cp-roi-metric"><span data-cp-en="Recovered jobs" data-cp-fr="Travaux récupérés">Recovered jobs</span><b id="roiJobs">2.0</b></div>
+          <div class="cp-roi-metric"><span data-cp-en="Recovered revenue" data-cp-fr="Revenus récupérés">Recovered revenue</span><b id="roiRevenue">$1,200</b></div>
+          <div class="cp-roi-metric"><span data-cp-en="Package cost" data-cp-fr="Coût du forfait">Package cost</span><b id="roiCost">$349</b></div>
+          <div class="cp-roi-metric"><span data-cp-en="Difference" data-cp-fr="Différence">Difference</span><b id="roiNet">$851</b></div>
+        </div>
+        <div class="cp-roi-note" data-cp-en="Illustrative only. Actual call volume, booking rate, job value, cancellations and operating costs vary by business." data-cp-fr="Illustration seulement. Le volume d'appels, le taux de réservation, la valeur des travaux, les annulations et les coûts d'exploitation varient selon l'entreprise.">Illustrative only. Actual call volume, booking rate, job value, cancellations and operating costs vary by business.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section id="faq" class="section light">
+  <div class="container">
+    <div class="kicker" data-cp-en="Questions contractors ask" data-cp-fr="Questions posées par les entrepreneurs">Questions contractors ask</div>
+    <h2 data-cp-en="The setup is meant to be simple." data-cp-fr="La configuration est conçue pour être simple.">The setup is meant to be simple.</h2>
+    <div class="cp-faq">
+      <details open><summary data-cp-en="Do I need to change my business phone number?" data-cp-fr="Dois-je changer mon numéro d'entreprise?">Do I need to change my business phone number?</summary><p data-cp-en="No. The intended production setup keeps your existing public number. Eligible calls are forwarded to the CallPilot routing number behind the scenes." data-cp-fr="Non. La configuration prévue conserve votre numéro public actuel. Les appels admissibles sont transférés en arrière-plan vers le numéro de routage CallPilot.">No. The intended production setup keeps your existing public number. Eligible calls are forwarded to the CallPilot routing number behind the scenes.</p></details>
+      <details><summary data-cp-en="What if I do not use a calendar?" data-cp-fr="Et si je n'utilise pas de calendrier?">What if I do not use a calendar?</summary><p data-cp-en="Ava can still collect the customer's preferred day and time and send the owner a complete pending request. She does not pretend the appointment is confirmed." data-cp-fr="Ava peut quand même recueillir le jour et l'heure préférés et envoyer au propriétaire une demande complète en attente. Elle ne prétend pas que le rendez-vous est confirmé.">Ava can still collect the customer's preferred day and time and send the owner a complete pending request. She does not pretend the appointment is confirmed.</p></details>
+      <details><summary data-cp-en="Can Ava answer only when I miss the call?" data-cp-fr="Ava peut-elle répondre seulement lorsque je manque l'appel?">Can Ava answer only when I miss the call?</summary><p data-cp-en="Yes. Missed-call, busy-line, overflow and after-hours routing can be configured separately." data-cp-fr="Oui. Le routage des appels manqués, des lignes occupées, du débordement et des appels hors heures peut être configuré séparément.">Yes. Missed-call, busy-line, overflow and after-hours routing can be configured separately.</p></details>
+      <details><summary data-cp-en="What does Ava collect from the caller?" data-cp-fr="Quelles informations Ava recueille-t-elle?">What does Ava collect from the caller?</summary><p data-cp-en="Typical fields include name, callback number, service request, urgency, city or address, and preferred date and time. The exact flow changes by trade and business rules." data-cp-fr="Les champs typiques comprennent le nom, le numéro de rappel, la demande de service, l'urgence, la ville ou l'adresse, ainsi que la date et l'heure préférées. Le parcours varie selon le métier et les règles de l'entreprise.">Typical fields include name, callback number, service request, urgency, city or address, and preferred date and time. The exact flow changes by trade and business rules.</p></details>
+      <details><summary data-cp-en="Can Ava handle urgent same-day calls?" data-cp-fr="Ava peut-elle gérer les appels urgents le jour même?">Can Ava handle urgent same-day calls?</summary><p data-cp-en="Yes, when the business enables that rule. Ava can offer configured same-day windows, notify the owner, or transfer the caller. Immediate safety threats are directed to emergency services." data-cp-fr="Oui, lorsque l'entreprise active cette règle. Ava peut proposer des plages configurées le jour même, aviser le propriétaire ou transférer l'appel. Les dangers immédiats sont dirigés vers les services d'urgence.">Yes, when the business enables that rule. Ava can offer configured same-day windows, notify the owner, or transfer the caller. Immediate safety threats are directed to emergency services.</p></details>
+      <details><summary data-cp-en="Is the payment on this website real?" data-cp-fr="Le paiement sur ce site est-il réel?">Is the payment on this website real?</summary><p data-cp-en="No. This is currently a sales demo. The checkout simulates package selection, processing and activation without charging a card or collecting real payment information." data-cp-fr="Non. Il s'agit actuellement d'une démo de vente. Le paiement simule le choix du forfait, le traitement et l'activation sans débiter de carte ni recueillir de vraies informations de paiement.">No. This is currently a sales demo. The checkout simulates package selection, processing and activation without charging a card or collecting real payment information.</p></details>
+    </div>
+  </div>
+</section>
+
 <section class="cta">
   <div class="container">
     <div class="cta-box">
@@ -879,7 +964,10 @@ if('speechSynthesis' in window)speechSynthesis.onvoiceschanged=()=>speechSynthes
 </section>
 
 <footer>
-  <div class="container">CallPilot Trades • Demo concept • Contractor AI receptionist</div>
+  <div class="container">
+    <div data-cp-en="CallPilot Trades • Demo concept • Contractor AI receptionist" data-cp-fr="CallPilot Trades • Concept de démo • Réceptionniste IA pour entrepreneurs">CallPilot Trades • Demo concept • Contractor AI receptionist</div>
+    <div class="cp-footer-links"><a href="privacy.html" data-cp-en="Privacy & data handling" data-cp-fr="Confidentialité et données">Privacy & data handling</a><a href="terms.html" data-cp-en="Demo terms" data-cp-fr="Conditions de la démo">Demo terms</a></div>
+  </div>
 </footer>
 
 
@@ -1113,6 +1201,28 @@ if('speechSynthesis' in window)speechSynthesis.onvoiceschanged=()=>speechSynthes
   } catch(e) {
     console.error('Could not load approved Ava image', e);
   }
+})();
+</script>
+
+<script id="roi-calculator-script">
+(function(){
+  const ids=["roiJob","roiCalls","roiRate","roiPlan"];
+  const fmt=n=>new Intl.NumberFormat(document.documentElement.lang&&document.documentElement.lang.startsWith("fr")?"fr-CA":"en-CA",{style:"currency",currency:"CAD",maximumFractionDigits:0}).format(n);
+  function calc(){
+    const job=Math.max(0,+document.getElementById("roiJob")?.value||0);
+    const calls=Math.max(0,+document.getElementById("roiCalls")?.value||0);
+    const rate=Math.min(100,Math.max(0,+document.getElementById("roiRate")?.value||0))/100;
+    const plan=Math.max(0,+document.getElementById("roiPlan")?.value||0);
+    const jobs=calls*rate, revenue=jobs*job, net=revenue-plan;
+    if(document.getElementById("roiJobs")) document.getElementById("roiJobs").textContent=jobs.toFixed(1);
+    if(document.getElementById("roiRevenue")) document.getElementById("roiRevenue").textContent=fmt(revenue);
+    if(document.getElementById("roiCost")) document.getElementById("roiCost").textContent=fmt(plan);
+    if(document.getElementById("roiNet")) document.getElementById("roiNet").textContent=fmt(net);
+  }
+  ids.forEach(id=>document.getElementById(id)?.addEventListener("input",calc));
+  document.getElementById("siteEn")?.addEventListener("click",()=>setTimeout(calc,0));
+  document.getElementById("siteFr")?.addEventListener("click",()=>setTimeout(calc,0));
+  calc();
 })();
 </script>
 </body>
