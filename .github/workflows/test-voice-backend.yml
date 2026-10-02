@@ -28,5 +28,7 @@ jobs:
         run: npm install
       - name: TypeScript build
         run: npm run build
+      - name: Provisioning script syntax
+        run: node --check scripts/twilio-setup.mjs
       - name: Tests
         run: npm test
