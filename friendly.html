@@ -734,15 +734,20 @@ if('speechSynthesis' in window)speechSynthesis.onvoiceschanged=()=>speechSynthes
     <div class="kicker">Packages</div>
     <h2>Simple pricing for service businesses.</h2>
     <p class="lede" data-cp-en="Start with missed-call coverage and add automation only when your business needs it." data-cp-fr="Commencez par la couverture des appels manqués et ajoutez de l'automatisation seulement lorsque votre entreprise en a besoin.">Start with missed-call coverage and add automation only when your business needs it.</p>
-    <div class="pricing">
+    <div id="trial-offer" style="margin:20px 0 18px;padding:16px 18px;border-radius:16px;background:rgba(213,173,99,.08);border:1px solid rgba(213,173,99,.22);display:flex;justify-content:space-between;gap:14px;align-items:center;flex-wrap:wrap">
+        <div><strong style="display:block;font-size:18px" data-cp-en="Try CallPilot free for 14 days" data-cp-fr="Essayez CallPilot gratuitement pendant 14 jours">Try CallPilot free for 14 days</strong><span style="display:block;color:#9f9588;font-size:12px;margin-top:4px" data-cp-en="$0 today • No setup fee • Cancel anytime • 100 trial AI minutes" data-cp-fr="0 $ aujourd'hui • Aucun frais d'installation • Annulez en tout temps • 100 minutes IA d'essai">$0 today • No setup fee • Cancel anytime • 100 trial AI minutes</span></div>
+        <a class="btn primary" href="payment-demo.html?plan=growth" data-cp-en="Start free trial" data-cp-fr="Commencer l'essai gratuit">Start free trial</a>
+      </div>
+      <div style="color:#7f766d;font-size:10px;line-height:1.45;margin:-8px 0 18px" data-cp-en="Trial ends after 14 days or 100 AI minutes, whichever comes first. Demo site: no real trial or charge starts here." data-cp-fr="L'essai prend fin après 14 jours ou 100 minutes IA, selon la première éventualité. Site de démo : aucun véritable essai ni débit ne commence ici.">Trial ends after 14 days or 100 AI minutes, whichever comes first. Demo site: no real trial or charge starts here.</div>
+      <div class="pricing">
       <div class="price">
         <h3>Starter</h3>
         <div class="amount">$199<span>/month</span></div>
         <div class="desc">For smaller contractors who mainly need after-hours and missed-call coverage.</div>
         <ul>
-          <li>After-hours AI answering</li><li>Missed-call SMS recovery</li><li>Lead summaries</li><li>100 AI minutes</li><li>English + French</li>
+          <li>After-hours AI answering</li><li>Missed-call SMS recovery</li><li>Lead summaries</li><li>500 AI minutes</li><li>English + French</li>
         </ul>
-        <a class="btn secondary" href="payment-demo.html?plan=starter" data-cp-en="Start demo checkout" data-cp-fr="Essayer le paiement démo">Start demo checkout</a>
+        <a class="btn secondary" href="payment-demo.html?plan=starter" data-cp-en="Start free trial" data-cp-fr="Essayer le paiement démo">Start free trial</a>
       </div>
       <div class="price popular">
         <div class="badge">MOST POPULAR</div>
@@ -750,18 +755,18 @@ if('speechSynthesis' in window)speechSynthesis.onvoiceschanged=()=>speechSynthes
         <div class="amount">$349<span>/month</span></div>
         <div class="desc">For busy service companies that want Ava to qualify, triage and help book jobs.</div>
         <ul>
-          <li>Everything in Starter</li><li>Emergency triage</li><li>Booking + dispatch rules</li><li>Service-area checks</li><li>Owner SMS alerts</li><li>300 AI minutes</li>
+          <li>Everything in Starter</li><li>Emergency triage</li><li>Booking + dispatch rules</li><li>Service-area checks</li><li>Owner SMS alerts</li><li>1,500 AI minutes</li>
         </ul>
-        <a class="btn primary" href="payment-demo.html?plan=growth" data-cp-en="Start demo checkout" data-cp-fr="Essayer le paiement démo">Start demo checkout</a>
+        <a class="btn primary" href="payment-demo.html?plan=growth" data-cp-en="Start free trial" data-cp-fr="Essayer le paiement démo">Start free trial</a>
       </div>
       <div class="price">
         <h3>Multi-Tech</h3>
         <div class="amount">$599<span>/month</span></div>
         <div class="desc">For larger contractors with multiple service lines, technicians or locations.</div>
         <ul>
-          <li>Multiple service lines</li><li>Dispatch routing</li><li>CRM + calendar integrations</li><li>Priority setup</li><li>Advanced reporting</li><li>English + French</li>
+          <li>Multiple service lines</li><li>Dispatch routing</li><li>CRM + calendar integrations</li><li>Priority setup</li><li>Advanced reporting</li><li>3,000 AI minutes</li><li>English + French</li>
         </ul>
-        <a class="btn secondary" href="payment-demo.html?plan=multi-tech" data-cp-en="Start demo checkout" data-cp-fr="Essayer le paiement démo">Start demo checkout</a>
+        <a class="btn secondary" href="payment-demo.html?plan=multi-tech" data-cp-en="Start free trial" data-cp-fr="Essayer le paiement démo">Start free trial</a>
       </div>
     </div>
 
@@ -928,7 +933,7 @@ if('speechSynthesis' in window)speechSynthesis.onvoiceschanged=()=>speechSynthes
     "After-hours AI answering":"Réponse IA après les heures",
     "Missed-call SMS recovery":"Récupération des appels manqués par SMS",
     "Lead summaries":"Résumés des prospects",
-    "100 AI minutes":"100 minutes IA",
+    "500 AI minutes":"500 minutes IA",
     "English + French":"Anglais + français",
     "See demo":"Voir la démo",
     "MOST POPULAR":"LE PLUS POPULAIRE",
@@ -939,7 +944,7 @@ if('speechSynthesis' in window)speechSynthesis.onvoiceschanged=()=>speechSynthes
     "Booking + dispatch rules":"Règles de réservation + répartition",
     "Service-area checks":"Vérification de la zone de service",
     "Owner SMS alerts":"Alertes SMS au propriétaire",
-    "300 AI minutes":"300 minutes IA",
+    "1,500 AI minutes":"1 500 minutes IA",
     "See Growth demo":"Voir la démo Croissance",
     "Multi-Tech":"Multi-tech",
     "For larger contractors with multiple service lines, technicians or locations.":"Pour les plus grands entrepreneurs ayant plusieurs services, techniciens ou emplacements.",
