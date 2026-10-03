@@ -1,0 +1,45 @@
+/* Shared CallPilot appearance for all pages and all dashboard views. */
+:root{color-scheme:light;--bg:#f7fafc;--bg2:#edf3f8;--navy:#f7fafc;--navy2:#edf3f8;--panel:#fff;--panel2:#edf3f8;--text:#203b54;--ivory:#203b54;--muted:#586e83;--line:rgba(24,48,70,.12);--accent-text:#886528;--gold:#d7b66e;--gold2:#ead299;--gold2-text:#886528;--teal:#98702c;--green:#2d806b;--ok:#2d806b;--danger:#ad354c;--red:#ad354c;--blue:#376e9f;--purple:#7250a5;--shadow:0 16px 45px rgba(24,48,70,.07)}
+html,body{background:#f7fafc;color:#203b54;-webkit-font-smoothing:antialiased}
+body{background:radial-gradient(ellipse at 90% 0,#e6eff6 0,transparent 55%),#f7fafc}
+nav,.sidebar,aside,.topbar{background:rgba(255,255,255,.96);border-color:#dfe8ef;color:#203b54}
+.card,.panel,.modal-card,.money-panel,.phone{background:#fff;border-color:#dfe8ef;box-shadow:var(--shadow)}
+.card,.panel,.money-panel{border-radius:22px}
+.table,.event,.call,.day,.playbook,.integration,.auto-card,.route,.ready-step,.saved-rule,.money-row,.col,.lead,.bubble,.plan,.fakecard,.screen,.cell,.summary,.note,.step{background:#f1f6fa;border-color:#dfe8ef;color:#314e68}
+.card,.panel{padding:22px}
+.card h1,.card h2,.card h3,.panel h2{color:#203b54;letter-spacing:-.025em}
+.nav button{color:#536b82;transition:background .15s,color .15s}
+.nav button:hover{background:#f0f5f9;color:#203b54}
+.nav button.active{background:#edf3f8;color:#203b54;box-shadow:inset 3px 0 #d7b66e}
+.lang,.lang-switch,.status-dot,.mode,.ghost,.smallbtn,.quick-rule,.choice,.replay,.close,.mobile-nav{background:#edf3f8;border-color:#d8e3ec;color:#314e68}
+.lang button,.lang-switch button{color:#536b82}
+.lang button.active,.lang-switch button.active,.primary,.pay,.save,.next,.start,.navcta{background:linear-gradient(125deg,#ead299,#d7b66e);color:#3e301a}
+.back,.home{color:#48637c;border-color:#d9e4ed}
+.brand span,.kicker,.eyebrow,.demo-badge,.gold,.price,.featured:before,.time,.number,.status,.speaker{color:#886528}
+.demo-badge,.notice,.note,.pill,.gold,.avail{border-color:#e5dac4;background:#f7f1e5;color:#886528}
+.notice{background:#edf5fb;color:#376487;border-color:#d5e5f1}
+.danger-note,.pill.red,.red{background:#faedf0;color:#a4374e;border-color:#efd6dd}
+.pill.green,.green,.appt,.step.done{background:#eaf5f0;color:#28745f;border-color:#d1e7dc}
+.blue{background:#eaf3fb;color:#376e9f;border-color:#d4e5f4}
+.purple{background:#f1edf8;color:#7250a5;border-color:#e0d8ee}
+.plan.active,.playbook.selected,.step.current{background:#faf5e9;border-color:#d7b66e;color:#6d5124}
+.row.head,.table th{background:#edf3f8;color:#587189}
+input:not([type="checkbox"]):not([type="radio"]),select,textarea,.field input,.field select,.field textarea,.money-input input,.money-input select,.teach-card textarea{background:#f8fafc;color:#243d56;border-color:#d7e2eb}
+input::placeholder,textarea::placeholder{color:#6b8094;opacity:1}
+input:focus,select:focus,textarea:focus,button:focus-visible,a:focus-visible{outline:3px solid rgba(47,126,105,.28);outline-offset:2px}
+.switch,.slider{background:#a8bac9}.switch i,.slider:after{background:white}
+.switch.on,.switch input:checked+.slider{background:#2d806b}
+.progress,.cp-progress-bar{background:#e2ebf2}.progress i{background:linear-gradient(90deg,#d7b66e,#ead299)}
+.msg.caller,.line.you{background:#e8f1f6;color:#314e68}
+.msg.ava,.line.avaLine,.bubble.ava{background:#f7f1e5;color:#51432c;border-color:#e5dac4}
+.circle,.integration .ico,.auto-card .icon{background:#e8f0f6;color:#314e68}
+.logo:after{border-color:#203b54;border-right-color:transparent}
+.end{background:#a4374e;color:white}
+.modal{background:rgba(24,48,70,.38)}
+.fine,.hint,.money-sub,.sub,.muted,.metric .label,.metric .delta,.section-title p,.toggle-row span,.calendar-box span,.route p,.plan small,.label,.ready-step span,.saved-rule,.price ul,.fr{color:#586e83}
+.metric .delta.good,.money-row b.good{color:#28745f}
+section[id]{scroll-margin-top:100px}
+button,a.btn{transition:box-shadow .18s,transform .18s}
+button:hover,a.btn:hover{box-shadow:0 5px 16px rgba(24,48,70,.08)}
+@media(max-width:680px){.card,.panel{padding:18px}.content{padding:18px 14px 34px}.topbar{gap:10px}}
+@media(prefers-reduced-motion:reduce){button,a.btn{transition:none}}
