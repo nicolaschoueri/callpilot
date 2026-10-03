@@ -782,7 +782,10 @@ function reply(text){
         if(active){status.textContent='Intervention d’urgence disponible aujourd’hui';showChoices(7);}
       });
     }else{
-      lastSpoken=emergencyText;lastAudioSrc='';add('AVA',emergencyText);status.textContent='Emergency dispatch available today';showChoices(7);
+      status.textContent='🔊 Ava is speaking…';
+      speakSystem(emergencyText,'en-CA',()=>{
+        if(active){status.textContent='Emergency dispatch available today';showChoices(7);}
+      },true);
     }
     return;
   }
