@@ -254,6 +254,13 @@ function setProgress(n){
   [1,2,3].forEach(i=>{const e=qs('#p'+i);e.className='pstep'+(i<n?' done':i===n?' on':'')});
 }
 function stage(big,small,ring=false){qs('#stage').innerHTML='<div class="big">'+big+'</div><div class="small">'+small+'</div>';qs('#phone').classList.toggle('ringing',ring)}
+function speakSystem(text,voiceLang,done){
+  add('AVA',text); status.textContent='Ava is speaking…';
+  if(!('speechSynthesis' in window)){done&&done();return;}
+  try{speechSynthesis.cancel();}catch(e){}
+  const u=new SpeechSynthesisUtterance(text);u.lang=voiceLang;u.rate=.92;u.onend=()=>done&&done();u.onerror=()=>done&&done();speechSynthesis.speak(u);
+}
+
 function play(src,text,done){
   add('AVA',text);status.textContent=lang==='fr'?'Ava parle…':'Ava is speaking…';
   try{audio.pause();audio.src=src;audio.currentTime=0;audio.load();const p=audio.play();audio.onended=()=>{status.textContent=lang==='fr'?'À vous':'Your turn';done&&done()};if(p&&p.catch)p.catch(()=>{status.textContent=lang==='fr'?'À vous':'Your turn';done&&done()})}catch(e){done&&done()}
@@ -327,7 +334,7 @@ function reply(text){
   if(step===4){data.phone=text;ask(5);return}
   if(step===5){
     data.name=text.replace(/^(my name is|it is|it's|je m'appelle|mon nom est)\s+/i,'');
-    if(data.urgency==='Emergency'){step=7;play(texts[lang].emergencyAudio,texts[lang].emergencyText,()=>showChoices(7));return}
+    if(data.urgency==='Emergency'){step=7;if(lang==='en'){speakSystem(texts.en.emergencyText,'en-CA',()=>showChoices(7));}else{play(texts.fr.emergencyAudio,texts.fr.emergencyText,()=>showChoices(7));}return}
     ask(6);return
   }
   if(step===6){data.appt=normalizeTime(text);finish();return}
