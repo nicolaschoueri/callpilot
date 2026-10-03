@@ -98,7 +98,7 @@ h1{font-size:32px;letter-spacing:-.03em;margin:5px 0 5px}h2{font-size:20px;margi
     <button data-page="dashboard" class="active">Overview</button>
     <button data-page="onboarding">Customer Onboarding</button>
     <button data-page="calls">Missed Calls</button>
-    <button data-page="calendar">CallPilot Calendar</button>
+    <button data-page="calendar">Appointments</button>
     <button data-page="leads">Lead Pipeline</button>
     <button data-page="ava">Ava Settings</button>
     <button data-page="phone">Phone Setup</button>
@@ -144,7 +144,7 @@ h1{font-size:32px;letter-spacing:-.03em;margin:5px 0 5px}h2{font-size:20px;margi
 
       <div class="grid g2 mt">
         <div class="card">
-          <div class="row"><div><h2>Today</h2><div class="sub">CallPilot built-in calendar</div></div><button class="ghost" onclick="go('calendar')">Open calendar</button></div>
+          <div class="row"><div><h2>Today</h2><div class="sub">Synced from the business calendar</div></div><button class="ghost" onclick="go('calendar')">Open appointments</button></div>
           <div class="timeline mt">
             <div class="event"><div class="time">10:30 AM</div><div><b>Furnace not heating</b><div class="sub">Marie G. • 45 Saint-Charles Blvd</div></div><span class="pill green">Booked</span></div>
             <div class="event"><div class="time">1–3 PM</div><div><b>Emergency pipe leak</b><div class="sub">Alex R. • Kirkland</div></div><span class="pill red">Emergency</span></div>
@@ -177,7 +177,7 @@ h1{font-size:32px;letter-spacing:-.03em;margin:5px 0 5px}h2{font-size:20px;margi
           <div class="step done">✓ 1. Business profile</div>
           <div class="step current">2. Choose trade</div>
           <div class="step">3. Service rules</div>
-          <div class="step">4. Availability</div>
+          <div class="step">4. Connect calendar</div>
           <div class="step">5. Ava greeting</div>
           <div class="step">6. Phone forwarding</div>
           <div class="step">7. Go live</div>
@@ -234,19 +234,27 @@ h1{font-size:32px;letter-spacing:-.03em;margin:5px 0 5px}h2{font-size:20px;margi
     </div>
 
     <div class="page" id="calendar">
-      <div class="kicker">Built-in scheduling</div><h1>No external calendar required.</h1>
-      <div class="row mb"><div class="sub">CallPilot can be the system of record. Google, Outlook and field-service integrations remain optional.</div><button class="primary" onclick="demoToast('New availability window added')">+ Add availability</button></div>
+      <div class="kicker">Connected scheduling</div><h1>Use the calendar you already have.</h1>
+      <div class="sub mb">Your business calendar stays the source of truth. Ava checks real availability, offers an open time and books the appointment back into that same calendar. If you do not use a digital calendar, Ava creates a booking request for you to confirm.</div>
       <div class="grid g3">
-        <div class="card stat"><div class="label">Available this week</div><div class="v">14</div><div class="delta">Open slots</div></div>
-        <div class="card stat"><div class="label">Booked</div><div class="v">9</div><div class="delta">64% utilized</div></div>
-        <div class="card stat"><div class="label">Emergency windows</div><div class="v">4</div><div class="delta">Same-day</div></div>
+        <div class="card"><h3>Google Calendar</h3><div class="sub">Two-way availability and booking sync.</div><button class="primary mt calendar-connect" data-provider="Google Calendar">Connect Google Calendar</button></div>
+        <div class="card"><h3>Microsoft Outlook / 365</h3><div class="sub">Use the business's existing Microsoft calendar.</div><button class="primary mt calendar-connect" data-provider="Microsoft Outlook">Connect Outlook</button></div>
+        <div class="card"><h3>I don't use a calendar</h3><div class="sub">Ava collects the customer's preferred date and time and sends a booking request to the owner.</div><button class="ghost mt" onclick="setNoCalendar()">Use booking requests</button></div>
+      </div>
+      <div class="card mt">
+        <div class="row"><div><h2>Calendar status</h2><div class="sub" id="calendarStatusText">Demo: Google Calendar connected • two-way sync enabled</div></div><span class="pill green" id="calendarStatusPill">Connected</span></div>
+      </div>
+      <div class="grid g3 mt">
+        <div class="card stat"><div class="label">Available this week</div><div class="v">14</div><div class="delta">From connected calendar</div></div>
+        <div class="card stat"><div class="label">Booked by Ava</div><div class="v">9</div><div class="delta">Written back to calendar</div></div>
+        <div class="card stat"><div class="label">Emergency windows</div><div class="v">4</div><div class="delta">Same-day rules</div></div>
       </div>
       <div class="card mt">
         <div class="row mb"><h2>October 2026</h2><span class="pill blue">America/Toronto</span></div>
         <div class="calendar" id="calendarGrid"></div>
       </div>
       <div class="grid g2 mt">
-        <div class="card"><h3>Default hours</h3><div class="sub">Monday–Friday: 8:00 AM–5:00 PM<br>Saturday: 9:00 AM–1:00 PM<br>Sunday: Closed</div></div>
+        <div class="card"><h3>Booking rules</h3><div class="sub">Ava only offers times that are free in the connected calendar and respects appointment duration, working hours and buffers.</div></div>
         <div class="card"><h3>Emergency windows</h3><div class="sub">1:00–3:00 PM and 3:00–5:00 PM • Owner approval optional per business rule.</div></div>
       </div>
     </div>
@@ -359,11 +367,11 @@ h1{font-size:32px;letter-spacing:-.03em;margin:5px 0 5px}h2{font-size:20px;margi
     </div>
 
     <div class="page" id="integrations">
-      <div class="kicker">Optional integrations</div><h1>CallPilot works even without them.</h1>
-      <div class="notice mb">Built-in scheduling is available by default. These integrations are optional extensions and are not connected in this demo.</div>
+      <div class="kicker">Business integrations</div><h1>Connect the tools you already use.</h1>
+      <div class="notice mb">Calendar connection is recommended because it lets Ava check real availability and confirm appointments during the call. The demo buttons below simulate connection only.</div>
       <div class="grid g2">
-        <div class="integration"><div class="ico">G</div><div class="grow"><b>Google Calendar</b><span>Two-way availability sync</span></div><span class="pill gold">Optional</span></div>
-        <div class="integration"><div class="ico">O</div><div class="grow"><b>Microsoft Outlook</b><span>Calendar sync</span></div><span class="pill gold">Optional</span></div>
+        <div class="integration"><div class="ico">G</div><div class="grow"><b>Google Calendar</b><span>Preferred • two-way availability + booking</span></div><button class="ghost calendar-connect" data-provider="Google Calendar">Connect</button></div>
+        <div class="integration"><div class="ico">O</div><div class="grow"><b>Microsoft Outlook / 365</b><span>Two-way availability + booking</span></div><button class="ghost calendar-connect" data-provider="Microsoft Outlook">Connect</button></div>
         <div class="integration"><div class="ico">J</div><div class="grow"><b>Jobber</b><span>Jobs, customers and scheduling</span></div><span class="pill purple">Future</span></div>
         <div class="integration"><div class="ico">H</div><div class="grow"><b>Housecall Pro</b><span>Field-service scheduling</span></div><span class="pill purple">Future</span></div>
         <div class="integration"><div class="ico">H</div><div class="grow"><b>HubSpot</b><span>Lead + customer sync</span></div><span class="pill purple">Future</span></div>
@@ -467,6 +475,9 @@ const calls=[
 ];
 function loadCall(i){const c=calls[i];document.getElementById('callTitle').textContent=c.title;document.getElementById('callMeta').textContent=c.meta;const p=document.getElementById('callPill');p.textContent=c.pill;p.className='pill '+c.cls;document.getElementById('transcript').innerHTML=c.msgs.map(m=>'<div class="msg '+m[0]+'">'+m[1]+'</div>').join('')}
 const cal=document.getElementById('calendarGrid');for(let d=1;d<=31;d++){const e=document.createElement('div');e.className='day';let inner='<div class="n">'+d+'</div>';if([2,5,7,9,12,15,19,22,26,29].includes(d))inner+='<div class="appt">10:30 • Service job</div>';if([2,3,6,8,10,13,16,20,23,27,30].includes(d))inner+='<div class="avail">2:00 • Available</div>';e.innerHTML=inner;cal.appendChild(e)}
+function setCalendarProvider(provider){document.getElementById('calendarStatusText').textContent='Demo: '+provider+' connected • two-way sync enabled';const p=document.getElementById('calendarStatusPill');p.textContent='Connected';p.className='pill green';document.querySelectorAll('.calendar-connect').forEach(b=>b.textContent=b.dataset.provider===provider?'Connected ✓':(b.dataset.provider==='Google Calendar'?'Connect Google Calendar':'Connect Outlook'));demoToast(provider+' connected')}
+function setNoCalendar(){document.getElementById('calendarStatusText').textContent='No calendar connected • Ava will create booking requests for owner confirmation';const p=document.getElementById('calendarStatusPill');p.textContent='Booking requests';p.className='pill gold';document.querySelectorAll('.calendar-connect').forEach(b=>b.textContent=b.dataset.provider==='Google Calendar'?'Connect Google Calendar':'Connect Outlook');demoToast('No-calendar fallback selected')}
+document.querySelectorAll('.calendar-connect').forEach(b=>b.onclick=()=>setCalendarProvider(b.dataset.provider));
 let fr=false;document.getElementById('langBtn').onclick=()=>{fr=!fr;document.getElementById('langBtn').textContent=fr?'EN':'FR';demoToast(fr?'French interface preview':'English interface preview')};
 </script>
 </body>
