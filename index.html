@@ -775,7 +775,7 @@ function reply(text){
     step=7;
     const emergencyText=selectedLang==='fr'
       ?'Je comprends. Comme il s’agit d’une urgence, je peux envoyer un technicien aujourd’hui. J’ai une plage de 13 h à 15 h, de 15 h à 17 h, ou je peux envoyer le premier technicien disponible. Que préférez-vous?'
-      :'I understand. Since this is an emergency, I can dispatch a technician today. I have a 1 to 3 P.M. window, a 3 to 5 P.M. window, or I can send the first available technician. Which would you prefer?';
+      :'I understand. Since this is an emergency, what time would you like the technician dispatched today? I currently have a 1 to 3 P.M. window, a 3 to 5 P.M. window, or the first available technician today. Which would you prefer?';
     if(selectedLang==='fr'){
       status.textContent='🔊 Ava parle…';
       playAvaAudio(frEmergencyAudio,emergencyText,()=>{
