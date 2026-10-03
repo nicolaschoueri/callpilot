@@ -1,5 +1,6 @@
 import "dotenv/config";
 import express from "express";
+import crypto from "node:crypto";
 import {
   CallPilotStore,
   type BusinessInput,
@@ -198,6 +199,30 @@ function businessFromBody(
   };
 }
 
+
+const PUBLIC_BASE_URL = String(process.env.PUBLIC_BASE_URL || "").replace(/\/$/, "");
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID || "";
+const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET || "";
+const MICROSOFT_CLIENT_ID = process.env.MICROSOFT_CLIENT_ID || "";
+const MICROSOFT_CLIENT_SECRET = process.env.MICROSOFT_CLIENT_SECRET || "";
+const MICROSOFT_TENANT = process.env.MICROSOFT_TENANT || "common";
+const oauthStates = new Map<string, { businessId: string; provider: "google" | "microsoft"; createdAt: number }>();
+
+function baseUrl(req: express.Request) {
+  return PUBLIC_BASE_URL || req.protocol + "://" + req.get("host");
+}
+function newOAuthState(businessId: string, provider: "google" | "microsoft") {
+  const state = crypto.randomUUID();
+  oauthStates.set(state, { businessId, provider, createdAt: Date.now() });
+  return state;
+}
+function takeOAuthState(state: string, provider: "google" | "microsoft") {
+  const entry = oauthStates.get(state);
+  oauthStates.delete(state);
+  if (!entry || entry.provider !== provider || Date.now() - entry.createdAt > 10 * 60 * 1000) return null;
+  return entry;
+}
+
 const app = express();
 
 app.post(
@@ -250,6 +275,63 @@ app.post(
 );
 
 app.use(express.json({ limit: "256kb" }));
+
+
+app.get("/api/calendar/google/connect", requireAdmin, (req, res) => {
+  const businessId = String(req.query.business_id || DEFAULT_BUSINESS_ID);
+  if (!store.getBusiness(businessId)) return void res.status(404).json({ error: "unknown_business" });
+  if (!GOOGLE_CLIENT_ID || !GOOGLE_CLIENT_SECRET) return void res.status(503).json({ error: "google_oauth_not_configured" });
+  const state = newOAuthState(businessId, "google");
+  const redirectUri = baseUrl(req) + "/api/calendar/google/callback";
+  const params = new URLSearchParams({
+    client_id: GOOGLE_CLIENT_ID, redirect_uri: redirectUri, response_type: "code",
+    access_type: "offline", prompt: "consent", include_granted_scopes: "true", state,
+    scope: "https://www.googleapis.com/auth/calendar.events https://www.googleapis.com/auth/calendar.freebusy"
+  });
+  res.redirect("https://accounts.google.com/o/oauth2/v2/auth?" + params);
+});
+
+app.get("/api/calendar/google/callback", async (req, res) => {
+  const entry = takeOAuthState(String(req.query.state || ""), "google");
+  if (!entry || !req.query.code) return void res.status(400).send("Invalid or expired Google authorization.");
+  const redirectUri = baseUrl(req) + "/api/calendar/google/callback";
+  const tokenRes = await fetch("https://oauth2.googleapis.com/token", {
+    method: "POST", headers: { "content-type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({ code: String(req.query.code), client_id: GOOGLE_CLIENT_ID, client_secret: GOOGLE_CLIENT_SECRET, redirect_uri: redirectUri, grant_type: "authorization_code" })
+  });
+  if (!tokenRes.ok) return void res.status(502).send("Google calendar connection failed.");
+  const token: any = await tokenRes.json();
+  // TODO production persistence: encrypt refresh_token/access_token in a dedicated secrets store keyed by business.
+  res.redirect("/platform-demo.html?calendar=google&business_id=" + encodeURIComponent(entry.businessId));
+});
+
+app.get("/api/calendar/microsoft/connect", requireAdmin, (req, res) => {
+  const businessId = String(req.query.business_id || DEFAULT_BUSINESS_ID);
+  if (!store.getBusiness(businessId)) return void res.status(404).json({ error: "unknown_business" });
+  if (!MICROSOFT_CLIENT_ID || !MICROSOFT_CLIENT_SECRET) return void res.status(503).json({ error: "microsoft_oauth_not_configured" });
+  const state = newOAuthState(businessId, "microsoft");
+  const redirectUri = baseUrl(req) + "/api/calendar/microsoft/callback";
+  const params = new URLSearchParams({
+    client_id: MICROSOFT_CLIENT_ID, response_type: "code", redirect_uri: redirectUri, response_mode: "query",
+    scope: "openid profile offline_access Calendars.ReadWrite", state
+  });
+  res.redirect("https://login.microsoftonline.com/" + encodeURIComponent(MICROSOFT_TENANT) + "/oauth2/v2.0/authorize?" + params);
+});
+
+app.get("/api/calendar/microsoft/callback", async (req, res) => {
+  const entry = takeOAuthState(String(req.query.state || ""), "microsoft");
+  if (!entry || !req.query.code) return void res.status(400).send("Invalid or expired Microsoft authorization.");
+  const redirectUri = baseUrl(req) + "/api/calendar/microsoft/callback";
+  const tokenRes = await fetch("https://login.microsoftonline.com/" + encodeURIComponent(MICROSOFT_TENANT) + "/oauth2/v2.0/token", {
+    method: "POST", headers: { "content-type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({ code: String(req.query.code), client_id: MICROSOFT_CLIENT_ID, client_secret: MICROSOFT_CLIENT_SECRET, redirect_uri: redirectUri, grant_type: "authorization_code", scope: "openid profile offline_access Calendars.ReadWrite" })
+  });
+  if (!tokenRes.ok) return void res.status(502).send("Microsoft calendar connection failed.");
+  const token: any = await tokenRes.json();
+  // TODO production persistence: encrypt refresh_token/access_token in a dedicated secrets store keyed by business.
+  res.redirect("/platform-demo.html?calendar=microsoft&business_id=" + encodeURIComponent(entry.businessId));
+});
+
 
 app.get("/health", (_req, res) => {
   res.json({
