@@ -43,3 +43,43 @@ button,a.btn{transition:box-shadow .18s,transform .18s}
 button:hover,a.btn:hover{box-shadow:0 5px 16px rgba(24,48,70,.08)}
 @media(max-width:680px){.card,.panel{padding:18px}.content{padding:18px 14px 34px}.topbar{gap:10px}}
 @media(prefers-reduced-motion:reduce){button,a.btn{transition:none}}
+
+/* Warm ivory, navy, muted teal and champagne gold across every page. */
+:root{--bg:#f7f5f0!important;--bg2:#f0eee7!important;--panel:#fff!important;--panel2:#f2f1ec!important;--navy:#f7f5f0!important;--navy2:#f0eee7!important;--text:#183247!important;--ivory:#183247!important;--muted:#596a72!important;--teal:#287d78!important;--gold:#d6ba80!important;--gold2:#e8d9b6!important;--accent-text:#876b37!important;--line:rgba(24,50,71,.12)!important;--shadow:0 18px 48px rgba(24,50,71,.07)!important}
+html,body{background:#f7f5f0!important;color:#183247!important}
+body{background:radial-gradient(ellipse at 90% 0,rgba(214,186,128,.10),transparent 55%),#f7f5f0!important}
+section.hero{background:radial-gradient(ellipse at 92% 25%,rgba(40,125,120,.07),transparent 55%),linear-gradient(135deg,#fdfcf9,#f7f5f0)!important;border-color:#e6e3da!important}
+.section.light{background:#f0eee7!important}
+nav,.sidebar,aside,.topbar{background:rgba(255,255,255,.96)!important;border-color:#e6e3da!important}
+h1,h2,h3,.big,.amount,.metric .value,.stat .v,.money-hero,.cp-preview-brand{color:#183247!important}
+h1 span{color:#287d78!important}
+.hero-copy p,.lede,.sub,.muted,.role,.notice,.hint{color:#596a72}
+.card,.panel,.money-panel,.modal-card,.phone,.image-card,.trade,.price,.step,.feature-card,.cp-builder,.cp-preview,.cp-trust-item,.cp-roi-controls,.cp-roi-results,.cp-faq details,.float-card{background:#fff!important;border-color:#e6e3da!important}
+.avatar-stage{background:#fff!important;border-color:#e6e3da!important}
+.avatar-stage:after{background:linear-gradient(180deg,transparent 48%,#f7f5f0 76%)!important}
+.cp-preview{border-top-color:#d6ba80!important}
+.ava-demo-shell{background:linear-gradient(150deg,#eeeee6,#f7f5f0)!important}
+.cta-box{background:linear-gradient(125deg,#f0f3ef,#fff)!important;border-color:#e0e5de!important}
+.table,.event,.call,.day,.playbook,.integration,.auto-card,.route,.ready-step,.saved-rule,.money-row,.col,.lead,.bubble,.plan,.fakecard,.screen,.cell,.summary,.feature,.cp-script-card,.cp-check,.cp-roi-metric{background:#f4f3ee!important;border-color:#e6e3da!important}
+input:not([type="checkbox"]):not([type="radio"]),select,textarea{background:#faf9f6!important;color:#183247!important;border-color:#dedfd7!important}
+.btn.primary,.primary,.pay,.save,.next,.start,.navcta{background:#287d78!important;color:#fff!important;border-color:#287d78!important;box-shadow:0 8px 20px rgba(40,125,120,.14)!important}
+.btn.primary:hover,.primary:hover,.pay:hover,.save:hover,.next:hover,.navcta:hover{background:#226a66!important}
+.btn.secondary,.choice,.replay,.ghost,.smallbtn,.mode,.quick-rule,.cp-voice-btn,.close,.mobile-nav{background:#fff!important;color:#287d78!important;border-color:#c8d9d3!important}
+.nav button.active{background:#e9f2ef!important;color:#226a66!important;box-shadow:inset 3px 0 #287d78!important}
+.nav button:hover{background:#eff4ef!important}
+.lang,.lang-switch,.status-dot{background:#f4f3ee!important;border-color:#e6e3da!important}
+.lang button.active,.lang-switch button.active{background:#287d78!important;color:#fff!important}
+.cp-value-item{background:#fff!important;border-color:#e6e3da!important;color:#52646d!important}
+.cp-trade-chip,.circle,.integration .ico,.auto-card .icon{background:#eeeee7!important;color:#52646d!important}
+.eyebrow,.demo-badge,.badge,.num,.icon,.smallcap,.kicker{color:#876b37!important}
+.eyebrow,.demo-badge,.badge,.num,.icon{background:#f4ecd9!important;border-color:#e8dcc1!important}
+.logo{background:linear-gradient(135deg,#e8d9b6,#d6ba80)!important}
+.logo:after{border-color:#183247!important;border-right-color:transparent!important}
+.brand span{color:#876b37!important}
+.price.popular,.featured,.plan.active,.playbook.selected{border-color:#d6ba80!important}
+.plan.active,.playbook.selected{background:#faf5e9!important}
+.live,.live .dot,.cp-check.ready:before{color:#287d78!important}
+.live .dot,.cp-progress-fill,.progress i{background:#287d78!important}
+.row.head,.table th{background:#efeee7!important;color:#596a72!important}
+.switch:has(input){background:transparent!important}
+footer{background:#fff!important;border-color:#e6e3da!important;color:#596a72!important}
