@@ -538,6 +538,7 @@ const frAudioFiles=[
   'audio/fr4.mp3?v=20261001u',
   'audio/fr-time.mp3?v=20261001t'
 ];
+const enEmergencyAudio='audio/lux-emergency.mp3?v=20261003e';
 const frEmergencyAudio='audio/fr-emergency.mp3?v=20261001u';
 const frFinalAudioFiles={
   'Vendredi 2 oct. • 10 h 30':'audio/fr-final-1030.mp3?v=20261001u',
@@ -783,9 +784,9 @@ function reply(text){
       });
     }else{
       status.textContent='🔊 Ava is speaking…';
-      speakSystem(emergencyText,'en-CA',()=>{
+      playAvaAudio(enEmergencyAudio,emergencyText,()=>{
         if(active){status.textContent='Emergency dispatch available today';showChoices(7);}
-      },true);
+      });
     }
     return;
   }
