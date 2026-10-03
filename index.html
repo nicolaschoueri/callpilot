@@ -297,6 +297,7 @@ input:focus,select:focus,button:focus-visible,a:focus-visible{outline:3px solid 
       <a href="#pricing" data-cp-en="Pricing" data-cp-fr="Tarifs">Pricing</a>
       <a href="#roi">ROI</a>
       <a href="#faq">FAQ</a>
+      <a href="#trust" data-cp-en="Security" data-cp-fr="Sécurité">Security</a>
       <a href="portal.html" data-cp-en="Owner login" data-cp-fr="Connexion propriétaire">Owner login</a>
       <a class="navcta" href="#personalize" data-cp-en="Create my Ava" data-cp-fr="Créer mon Ava">Create my Ava</a>
       <div class="lang-switch" aria-label="Website language">
@@ -312,7 +313,7 @@ input:focus,select:focus,button:focus-visible,a:focus-visible{outline:3px solid 
     <div class="hero-copy">
       <div class="eyebrow"><span class="dot"></span> AI receptionist for contractors</div>
       <h1>Turn missed calls into <span style="color:var(--teal)">booked jobs.</span></h1>
-      <p>CallPilot answers after-hours leads, qualifies the customer, identifies urgency, checks the service area and hands your team a clean job summary — in English or French.</p>
+      <p>Your phone rings normally. If you can’t answer, Ava does — in English or French. She qualifies the customer, checks your connected calendar, books an available time and sends the complete lead to your CallPilot dashboard.</p>
       <div class="actions">
         <a class="btn primary" href="#personalize" data-cp-en="Create my Ava" data-cp-fr="Créer mon Ava">Create my Ava</a>
         <a class="btn secondary" href="#live-demo" data-cp-en="Try Ava demo" data-cp-fr="Essayer la démo Ava">Try Ava demo</a>
@@ -322,7 +323,7 @@ input:focus,select:focus,button:focus-visible,a:focus-visible{outline:3px solid 
         <span class="cp-value-item" data-cp-en="Your phone rings first" data-cp-fr="Votre téléphone sonne d'abord">Your phone rings first</span>
         <span class="cp-value-item" data-cp-en="Ava answers if you can't" data-cp-fr="Ava répond si vous ne pouvez pas">Ava answers if you can't</span>
         <span class="cp-value-item" data-cp-en="English + French" data-cp-fr="Anglais + français">English + French</span>
-        <span class="cp-value-item" data-cp-en="Calendar optional" data-cp-fr="Calendrier optionnel">Calendar optional</span>
+        <span class="cp-value-item" data-cp-en="Google + Outlook calendars" data-cp-fr="Calendriers Google + Outlook">Google + Outlook calendars</span>
       </div>
       <div class="cp-trades-inline"><strong data-cp-en="Built for trades:" data-cp-fr="Conçu pour les métiers :">Built for trades:</strong>
         <span class="cp-trade-chip">HVAC / CVAC</span><span class="cp-trade-chip" data-cp-en="Plumbing" data-cp-fr="Plomberie">Plumbing</span>
@@ -360,7 +361,7 @@ input:focus,select:focus,button:focus-visible,a:focus-visible{outline:3px solid 
         <div class="cp-builder-grid">
           <div class="cp-pfield full"><label data-cp-en="Business name" data-cp-fr="Nom de l'entreprise">Business name</label><input id="paBusiness" value="West Island Home Services"></div>
           <div class="cp-pfield"><label data-cp-en="Trade" data-cp-fr="Métier">Trade</label><select id="paTrade"><option value="hvac">HVAC / CVAC</option><option value="plumbing">Plumbing / Plomberie</option><option value="electrical">Electrical / Électricité</option><option value="roofing">Roofing / Toiture</option><option value="general">General service / Service général</option></select></div>
-          <div class="cp-pfield"><label data-cp-en="Calendar" data-cp-fr="Calendrier">Calendar</label><select id="paCalendar"><option value="no" data-cp-en="No calendar — capture request" data-cp-fr="Sans calendrier — capter la demande">No calendar — capture request</option><option value="yes" data-cp-en="Connected — book live" data-cp-fr="Connecté — réserver en direct">Connected — book live</option></select></div>
+          <div class="cp-pfield"><label data-cp-en="Calendar" data-cp-fr="Calendrier">Calendar</label><select id="paCalendar"><option value="google">Google Calendar</option><option value="outlook">Microsoft Outlook / 365</option><option value="no" data-cp-en="I don’t use a calendar — booking request" data-cp-fr="Je n’utilise pas de calendrier — demande de réservation">I don’t use a calendar — booking request</option></select></div>
           <div class="cp-pfield"><label data-cp-en="Service area" data-cp-fr="Zone de service">Service area</label><input id="paArea" value="West Island, Montreal"></div>
           <div class="cp-pfield"><label data-cp-en="Hours" data-cp-fr="Heures">Hours</label><input id="paHours" value="Mon–Fri 8 AM–5 PM"></div>
         </div>
@@ -426,6 +427,62 @@ input:focus,select:focus,button:focus-visible,a:focus-visible{outline:3px solid 
     </div>
   </div>
 </section>
+<section id="workflow" class="section">
+  <div class="container">
+    <div class="kicker" data-cp-en="One simple workflow" data-cp-fr="Un parcours simple">One simple workflow</div>
+    <h2 data-cp-en="From missed call to booked job — automatically." data-cp-fr="De l'appel manqué au rendez-vous confirmé — automatiquement.">From missed call to booked job — automatically.</h2>
+    <p class="lede" data-cp-en="CallPilot fits around the way your business already works. Keep your number, keep your calendar, and let Ava handle the call when you cannot." data-cp-fr="CallPilot s'adapte à votre façon de travailler. Gardez votre numéro, gardez votre calendrier et laissez Ava répondre lorsque vous ne pouvez pas.">CallPilot fits around the way your business already works. Keep your number, keep your calendar, and let Ava handle the call when you cannot.</p>
+    <div class="steps">
+      <div class="step"><div class="num">1</div><h3 data-cp-en="Customer calls" data-cp-fr="Le client appelle">Customer calls</h3><p data-cp-en="Your existing business number rings first." data-cp-fr="Votre numéro d'entreprise actuel sonne d'abord.">Your existing business number rings first.</p></div>
+      <div class="step"><div class="num">2</div><h3 data-cp-en="Ava answers" data-cp-fr="Ava répond">Ava answers</h3><p data-cp-en="If you miss the call, Ava answers and qualifies the request in English or French." data-cp-fr="Si vous manquez l'appel, Ava répond et qualifie la demande en français ou en anglais.">If you miss the call, Ava answers and qualifies the request in English or French.</p></div>
+      <div class="step"><div class="num">3</div><h3 data-cp-en="Checks your calendar" data-cp-fr="Vérifie votre calendrier">Checks your calendar</h3><p data-cp-en="With Google Calendar or Microsoft Outlook connected, Ava only offers times that are actually available." data-cp-fr="Avec Google Agenda ou Microsoft Outlook connecté, Ava propose uniquement les plages réellement disponibles.">With Google Calendar or Microsoft Outlook connected, Ava only offers times that are actually available.</p></div>
+      <div class="step"><div class="num">4</div><h3 data-cp-en="Books the job" data-cp-fr="Réserve le rendez-vous">Books the job</h3><p data-cp-en="The selected appointment is written back to your calendar. No calendar? Ava creates a booking request instead." data-cp-fr="Le rendez-vous choisi est ajouté à votre calendrier. Sans calendrier? Ava crée plutôt une demande de réservation.">The selected appointment is written back to your calendar. No calendar? Ava creates a booking request instead.</p></div>
+      <div class="step"><div class="num">5</div><h3 data-cp-en="You get the full lead" data-cp-fr="Vous recevez le prospect complet">You get the full lead</h3><p data-cp-en="Caller, issue, urgency, location, appointment and call summary appear in your owner dashboard." data-cp-fr="L'appelant, le problème, l'urgence, l'emplacement, le rendez-vous et le résumé apparaissent dans votre tableau de bord.">Caller, issue, urgency, location, appointment and call summary appear in your owner dashboard.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="dashboard-preview" class="section light">
+  <div class="container">
+    <div class="kicker" data-cp-en="Your command centre" data-cp-fr="Votre centre de contrôle">Your command centre</div>
+    <h2 data-cp-en="See every call, lead and booking in one place." data-cp-fr="Voyez chaque appel, prospect et rendez-vous au même endroit.">See every call, lead and booking in one place.</h2>
+    <p class="lede" data-cp-en="Ava doesn't just answer the phone. Every conversation becomes structured information your team can act on." data-cp-fr="Ava ne fait pas que répondre au téléphone. Chaque conversation devient de l'information structurée que votre équipe peut utiliser.">Ava doesn't just answer the phone. Every conversation becomes structured information your team can act on.</p>
+    <div class="cp-roi-metrics">
+      <div class="cp-roi-metric"><span data-cp-en="Missed calls answered" data-cp-fr="Appels manqués répondus">Missed calls answered</span><b>18</b></div>
+      <div class="cp-roi-metric"><span data-cp-en="New leads" data-cp-fr="Nouveaux prospects">New leads</span><b>12</b></div>
+      <div class="cp-roi-metric"><span data-cp-en="Jobs booked" data-cp-fr="Travaux réservés">Jobs booked</span><b>9</b></div>
+      <div class="cp-roi-metric"><span data-cp-en="Urgent calls" data-cp-fr="Appels urgents">Urgent calls</span><b>3</b></div>
+    </div>
+    <div class="cta-box" style="margin-top:22px"><div><h3 data-cp-en="Owner dashboard" data-cp-fr="Tableau de bord propriétaire">Owner dashboard</h3><p data-cp-en="Review call summaries, caller details, appointment status, emergencies and lead progress without digging through voicemail." data-cp-fr="Consultez les résumés d'appels, coordonnées, rendez-vous, urgences et suivi des prospects sans fouiller dans la boîte vocale.">Review call summaries, caller details, appointment status, emergencies and lead progress without digging through voicemail.</p></div><a class="btn secondary" href="portal.html" data-cp-en="Preview owner dashboard" data-cp-fr="Voir le tableau de bord">Preview owner dashboard</a></div>
+  </div>
+</section>
+
+<section id="trust" class="section">
+  <div class="container">
+    <div class="kicker" data-cp-en="Designed for trust" data-cp-fr="Conçu pour inspirer confiance">Designed for trust</div>
+    <h2 data-cp-en="Your phone and calendar stay yours." data-cp-fr="Votre téléphone et votre calendrier restent les vôtres.">Your phone and calendar stay yours.</h2>
+    <div class="steps">
+      <div class="step"><div class="num">✓</div><h3 data-cp-en="Keep your number" data-cp-fr="Gardez votre numéro">Keep your number</h3><p data-cp-en="Customers continue calling the number they already know. CallPilot receives only the calls you choose to forward." data-cp-fr="Vos clients continuent d'appeler le numéro qu'ils connaissent. CallPilot reçoit uniquement les appels que vous choisissez de transférer.">Customers continue calling the number they already know. CallPilot receives only the calls you choose to forward.</p></div>
+      <div class="step"><div class="num">✓</div><h3 data-cp-en="Secure calendar authorization" data-cp-fr="Autorisation sécurisée du calendrier">Secure calendar authorization</h3><p data-cp-en="Google and Microsoft connections use their authorization flow. You never give CallPilot your Google or Microsoft password." data-cp-fr="Les connexions Google et Microsoft utilisent leur processus d'autorisation. Vous ne donnez jamais votre mot de passe Google ou Microsoft à CallPilot.">Google and Microsoft connections use their authorization flow. You never give CallPilot your Google or Microsoft password.</p></div>
+      <div class="step"><div class="num">✓</div><h3 data-cp-en="Privacy controls" data-cp-fr="Contrôles de confidentialité">Privacy controls</h3><p data-cp-en="Call recording and transcript retention can be configured. Calendar access can be disconnected when you choose." data-cp-fr="L'enregistrement des appels et la conservation des transcriptions peuvent être configurés. L'accès au calendrier peut être déconnecté lorsque vous le souhaitez.">Call recording and transcript retention can be configured. Calendar access can be disconnected when you choose.</p></div>
+    </div>
+    <div class="actions"><a class="btn secondary" href="privacy.html" data-cp-en="Privacy & data handling" data-cp-fr="Confidentialité et données">Privacy & data handling</a></div>
+  </div>
+</section>
+
+<section id="setup" class="section light">
+  <div class="container">
+    <div class="kicker" data-cp-en="Simple onboarding" data-cp-fr="Mise en route simple">Simple onboarding</div>
+    <h2 data-cp-en="Set up Ava around your business." data-cp-fr="Configurez Ava selon votre entreprise.">Set up Ava around your business.</h2>
+    <div class="steps">
+      <div class="step"><div class="num">1</div><h3 data-cp-en="Business profile" data-cp-fr="Profil d'entreprise">Business profile</h3><p data-cp-en="Services, service area, hours, languages and emergency rules." data-cp-fr="Services, territoire, heures, langues et règles d'urgence.">Services, service area, hours, languages and emergency rules.</p></div>
+      <div class="step"><div class="num">2</div><h3 data-cp-en="Connect calendar" data-cp-fr="Connecter le calendrier">Connect calendar</h3><p data-cp-en="Google Calendar or Microsoft Outlook/365. Businesses without one can use booking requests." data-cp-fr="Google Agenda ou Microsoft Outlook/365. Sans calendrier, utilisez les demandes de réservation.">Google Calendar or Microsoft Outlook/365. Businesses without one can use booking requests.</p></div>
+      <div class="step"><div class="num">3</div><h3 data-cp-en="Forward missed calls" data-cp-fr="Transférer les appels manqués">Forward missed calls</h3><p data-cp-en="Your phone still rings first. Ava answers according to the rules you choose." data-cp-fr="Votre téléphone sonne toujours d'abord. Ava répond selon les règles que vous choisissez.">Your phone still rings first. Ava answers according to the rules you choose.</p></div>
+      <div class="step"><div class="num">4</div><h3 data-cp-en="Test and go live" data-cp-fr="Tester et activer">Test and go live</h3><p data-cp-en="Place a test call, review the result, then activate Ava when you're satisfied." data-cp-fr="Faites un appel test, vérifiez le résultat, puis activez Ava lorsque vous êtes satisfait.">Place a test call, review the result, then activate Ava when you're satisfied.</p></div>
+    </div>
+  </div>
+</section>
+
 <section id="live-demo" class="section">
   <div class="container">
     <div class="kicker">Interactive booking demo</div>
@@ -932,7 +989,7 @@ if('speechSynthesis' in window)speechSynthesis.onvoiceschanged=()=>speechSynthes
 <footer>
   <div class="container">
     <div data-cp-en="CallPilot Trades • Demo concept • Contractor AI receptionist" data-cp-fr="CallPilot Trades • Concept de démo • Réceptionniste IA pour entrepreneurs">CallPilot Trades • Demo concept • Contractor AI receptionist</div>
-    <div class="cp-footer-links"><a href="portal.html" data-cp-en="Owner login" data-cp-fr="Connexion propriétaire">Owner login</a><a href="phone-setup.html" data-cp-en="Phone setup" data-cp-fr="Configuration téléphonique">Phone setup</a><a href="privacy.html" data-cp-en="Privacy & data handling" data-cp-fr="Confidentialité et données">Privacy & data handling</a><a href="terms.html" data-cp-en="Demo terms" data-cp-fr="Conditions de la démo">Demo terms</a></div>
+    <div class="cp-footer-links"><a href="portal.html" data-cp-en="Owner login" data-cp-fr="Connexion propriétaire">Owner login</a><a href="phone-setup.html" data-cp-en="Phone setup" data-cp-fr="Configuration téléphonique">Phone setup</a><a href="privacy.html" data-cp-en="Privacy & data handling" data-cp-fr="Confidentialité et données">Privacy & data handling</a><a href="terms.html" data-cp-en="Demo terms" data-cp-fr="Conditions de la démo">Demo terms</a><a href="mailto:support@callpilot.ca" data-cp-en="Contact / Support" data-cp-fr="Contact / Soutien">Contact / Support</a></div>
   </div>
 </footer>
 <script id="site-i18n">
