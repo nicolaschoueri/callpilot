@@ -489,7 +489,7 @@ input:focus,select:focus,button:focus-visible,a:focus-visible{outline:3px solid 
     <h2>Try Ava booking the job herself.</h2>
     <p class="lede">This is a free sales simulator. Tap the phone button, hear Ava, choose the customer's answers, and watch her book the appointment without handing the caller off.</p>
     <div class="ava-demo-shell">
-      <div class="wrap"><div class="notice">LIVE VOICE DEMO • No real phone number or charge</div><div class="phone"><div class="top">Incoming test call<div class="number">+1 (514) 555-0142</div><div class="fake">FICTIONAL NUMBER</div></div><div class="hero"><div class="avatar"><img class="ava-approved" src="" alt="Ava"></div><div class="ava">Ava</div><div class="role">CallPilot Trades • AI receptionist</div><div id="status" class="status">Ready to test</div><div id="timer" class="timer">00:00</div></div><div class="screen"><div id="transcript" class="transcript"><div class="line avaLine"><span class="speaker">CallPilot</span>Tap START CALL to begin.</div></div><div id="quick" class="quick"></div><div class="inputrow"><input id="answer" placeholder="Or type your answer…"><button class="send" id="send">Send</button></div></div><div id="summary" class="summary"><h3>Appointment booked</h3><div class="grid"><div class="cell"><span>Issue</span><b id="sIssue">—</b></div><div class="cell"><span>Urgency</span><b id="sUrgency">—</b></div><div class="cell"><span>City</span><b id="sCity">—</b></div><div class="cell"><span>Address</span><b id="sAddress">—</b></div><div class="cell"><span>Phone</span><b id="sPhone">—</b></div><div class="cell"><span>Name</span><b id="sName">—</b></div><div class="cell"><span>Appointment</span><b id="sAppt">—</b></div><div class="cell"><span>Status</span><b id="sStatus">Confirmed</b></div></div></div><div id="audioPanel" style="display:block;margin:0 16px 10px;padding:10px 12px;border:1px solid rgba(213,173,99,.25);border-radius:14px;background:rgba(213,173,99,.06)"><div style="font-size:12px;color:#e6ce9a;font-weight:800;margin-bottom:6px">AVA VOICE</div><audio id="avaAudio" controls preload="auto" playsinline style="width:100%"></audio></div><div class="controls"><button class="round replay" id="replay" title="Replay Ava"><span>↻</span><span>REPLAY</span></button><button class="round start" id="start" title="Start call"><span>☎</span><span>START CALL</span></button><button class="round end" id="end" title="End call"><span>✕</span><span>END CALL</span></button></div><div class="hint">Tap START CALL to begin. Then use the answer buttons or type your reply.</div></div></div>
+      <div class="wrap"><div class="notice">LIVE VOICE DEMO • No real phone number or charge</div><div class="phone"><div class="top">Incoming test call<div class="number">+1 (514) 555-0142</div><div class="fake">FICTIONAL NUMBER</div></div><div class="hero"><div class="avatar"><img class="ava-approved" src="" alt="Ava"></div><div class="ava">Ava</div><div class="role">CallPilot Trades • AI receptionist</div><div id="status" class="status">Ready to test</div><div id="timer" class="timer">00:00</div></div><div class="screen"><div id="transcript" class="transcript"><div class="line avaLine"><span class="speaker">CallPilot</span>Tap START CALL to begin.</div></div><div id="quick" class="quick"></div><div class="inputrow"><input id="answer" placeholder="Or type your answer…"><button class="send" id="send">Send</button></div></div><div id="summary" class="summary"><h3 data-en="Service request summary" data-fr="Résumé de la demande de service">Service request summary</h3><div class="grid"><div class="cell"><span>Issue</span><b id="sIssue">—</b></div><div class="cell"><span>Urgency</span><b id="sUrgency">—</b></div><div class="cell"><span>City</span><b id="sCity">—</b></div><div class="cell"><span>Address</span><b id="sAddress">—</b></div><div class="cell"><span>Phone</span><b id="sPhone">—</b></div><div class="cell"><span>Name</span><b id="sName">—</b></div><div class="cell"><span>Appointment</span><b id="sAppt">—</b></div><div class="cell"><span>Status</span><b id="sStatus">Confirmed</b></div></div><div id="smsConfirmation" style="margin-top:14px;padding:14px;border-radius:14px;background:#f3f8f6;border:1px solid rgba(25,105,88,.18);display:none"><div id="smsSent" style="font-weight:800;color:#196958;margin-bottom:7px">✓ Confirmation SMS sent</div><div id="smsPreview" style="font-size:13px;line-height:1.45;color:#405568"></div><div style="font-size:10px;margin-top:7px;color:#7b8792">DEMO • No real SMS is sent</div></div></div><div id="audioPanel" style="display:block;margin:0 16px 10px;padding:10px 12px;border:1px solid rgba(213,173,99,.25);border-radius:14px;background:rgba(213,173,99,.06)"><div style="font-size:12px;color:#e6ce9a;font-weight:800;margin-bottom:6px">AVA VOICE</div><audio id="avaAudio" controls preload="auto" playsinline style="width:100%"></audio></div><div class="controls"><button class="round replay" id="replay" title="Replay Ava"><span>↻</span><span>REPLAY</span></button><button class="round start" id="start" title="Start call"><span>☎</span><span>START CALL</span></button><button class="round end" id="end" title="End call"><span>✕</span><span>END CALL</span></button></div><div class="hint">Tap START CALL to begin. Then use the answer buttons or type your reply.</div></div></div>
 <script>
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
@@ -538,7 +538,6 @@ const frAudioFiles=[
   'audio/fr4.mp3?v=20261001u',
   'audio/fr-time.mp3?v=20261001t'
 ];
-const enEmergencyAudio='audio/lux-emergency.mp3?v=20261003e';
 const frEmergencyAudio='audio/fr-emergency.mp3?v=20261001u';
 const frFinalAudioFiles={
   'Vendredi 2 oct. • 10 h 30':'audio/fr-final-1030.mp3?v=20261001u',
@@ -559,9 +558,91 @@ const frFinalTexts={
   generic:'Parfait. Votre rendez-vous est confirmé. Vous recevrez un message de confirmation avec les détails. Merci d’avoir appelé CallPilot Trades.'
 };
 
-let step=-1, active=false, selectedLang=null, startTime=0, timerInt=null, recognition=null, isListening=false;
+let step=-1, active=false, selectedLang=null, startTime=0, timerInt=null, recognition=null, isListening=false, voiceMode=false, micPrimed=false;
+let speechGeneration=0;
 let lastSpoken='', lastAudioSrc='', lastSpokenLang='en-CA';
 const data={issue:'—',urgency:'—',city:'—',address:'—',phone:'—',name:'—',appt:'—'};
+let adaptive=null;
+function adaptiveFresh(){return {type:null,pending:null,company:null,name:null,address:null,scope:null,urgency:null,time:null,phone:null,po:null,property:null,unit:null,access:null,authorization:null,impact:null};}
+function adaptiveDetectType(text){
+  const x=text.toLowerCase();
+  if(/contractor|construction|builder|entrepreneur|chantier|contracteur/.test(x))return 'contractor';
+  if(/property manager|property management|building manager|gestionnaire|immeuble|condo board|syndicat/.test(x))return 'property';
+  if(/commercial|restaurant|store|office|warehouse|business|commerce|bureau|entreprise/.test(x))return 'commercial';
+  if(/my house|my home|ma maison|chez moi|homeowner|propriétaire|résidence/.test(x))return 'homeowner';
+  return null;
+}
+function adaptiveAbsorb(text){
+  const x=text.trim(), low=x.toLowerCase(), p=adaptive.pending;
+  const detected=adaptiveDetectType(x); if(detected)adaptive.type=detected;
+  // Most important rule: an answer to Ava's current question fills that exact field.
+  if(p && p!=='type'){
+    if(p==='po' && /^(no|none|non|aucun|aucune|pas de|n\/a)$/i.test(x)) adaptive.po='none';
+    else adaptive[p]=x;
+    adaptive.pending=null;
+  }
+  // Also extract information volunteered before Ava asks for it.
+  if(!adaptive.company && (!p || p==='company')){
+    let m=x.match(/(?:from|de chez|pour|chez)\s+([A-ZÀ-Ÿ][A-Za-zÀ-ÿ0-9&.' -]{1,50})/i);
+    if(m)adaptive.company=m[1].trim();
+    else if(/\b(inc\.?|ltd\.?|construction|services|company|corp\.?|entreprise|plomberie)\b/i.test(x))adaptive.company=x;
+  }
+  if(!adaptive.name && (!p || p==='name')){const m=x.match(/\b(?:i'm|i am|this is|je suis|ici|je m'appelle)\s+([A-Za-zÀ-ÿ'-]+)/i);if(m && !/^(a|an|un|une|homeowner|contractor|entrepreneur|propriétaire|gestionnaire)$/i.test(m[1]))adaptive.name=m[1];}
+  if(!adaptive.address && (!p || p==='address') && /\b\d{1,6}\s+[A-Za-zÀ-ÿ0-9.' -]+\b(?:street|st\.?|road|rd\.?|avenue|ave\.?|boulevard|blvd\.?|rue|chemin|ch\.?|drive|dr\.?)\b/i.test(x))adaptive.address=x;
+  if(!adaptive.scope && /plumb|leak|pipe|drain|toilet|faucet|water|chauff|climat|electric|roof|fuite|tuyau|robinet|eau|élect|toit|fournaise|hvac/i.test(low))adaptive.scope=x;
+  if(!adaptive.urgency && /emergency|urgent|urgence|immédiat|asap|same.day|aujourd'hui|aujourd’hui/i.test(low))adaptive.urgency=x;
+  if(!adaptive.time && (!p || p==='time') && /tomorrow|morning|afternoon|evening|demain|matin|après-midi|soir|monday|tuesday|wednesday|thursday|friday|saturday|sunday|lundi|mardi|mercredi|jeudi|vendredi|samedi|dimanche|\b\d{1,2}:\d{2}\b|\b\d{1,2}\s*(am|pm|h)\b/i.test(low))adaptive.time=x;
+  if(!adaptive.phone && /(?:\+?1[-. ]?)?\(?\d{3}\)?[-. ]?\d{3}[-. ]?\d{4}/.test(x))adaptive.phone=x.match(/(?:\+?1[-. ]?)?\(?\d{3}\)?[-. ]?\d{3}[-. ]?\d{4}/)[0];
+}
+function adaptiveAsk(field,en,fr){adaptive.pending=field;return selectedLang==='fr'?fr:en;}
+function adaptiveNext(){
+  if(!adaptive.type)return adaptiveAsk('type','Are you calling about your home, a job site, a property you manage, or a business?','Appelez-vous pour votre résidence, un chantier, un immeuble que vous gérez ou une entreprise?');
+  if(adaptive.type==='contractor'){
+    if(!adaptive.company)return adaptiveAsk('company',"What's the name of your company?",'Quel est le nom de votre entreprise?');
+    if(!adaptive.name)return adaptiveAsk('name',"What's your name and role with "+adaptive.company+"?",'Quel est votre nom et votre rôle chez '+adaptive.company+'?');
+    if(!adaptive.address)return adaptiveAsk('address',"What's the full job-site address?",'Quelle est l’adresse complète du chantier?');
+    if(!adaptive.scope)return adaptiveAsk('scope',"Please describe the work you need done at the job site.",'Pouvez-vous décrire les travaux requis sur le chantier?');
+    if(!adaptive.urgency)return adaptiveAsk('urgency',"How urgent is this — do you need same-day service, or can it be scheduled?",'Quel est le niveau d’urgence — avez-vous besoin d’un service aujourd’hui ou peut-on le planifier?');
+    if(!adaptive.time)return adaptiveAsk('time',"What date and time would you like the technician on site?",'À quelle date et à quelle heure souhaitez-vous que le technicien soit sur place?');
+    if(!adaptive.phone)return adaptiveAsk('phone',"What's the best callback number for the site contact?",'Quel est le meilleur numéro pour joindre la personne-ressource du chantier?');
+    if(!adaptive.po)return adaptiveAsk('po',"Do you have a PO or job number for this request? You can say no.",'Avez-vous un numéro de bon de commande ou de projet pour cette demande? Vous pouvez dire non.');
+  } else if(adaptive.type==='property'){
+    if(!adaptive.name)return adaptiveAsk('name',"What's your name and property-management company?",'Quel est votre nom et le nom de votre société de gestion?');
+    if(!adaptive.property)return adaptiveAsk('property',"Which property or building is this for?",'Pour quel immeuble ou quelle propriété appelez-vous?');
+    if(!adaptive.unit)return adaptiveAsk('unit',"Is there a specific unit or suite number?",'Y a-t-il un numéro d’unité ou de local?');
+    if(!adaptive.scope)return adaptiveAsk('scope',"Please describe the service issue.",'Pouvez-vous décrire le problème de service?');
+    if(!adaptive.urgency)return adaptiveAsk('urgency',"Is this an emergency or can it be scheduled normally?",'S’agit-il d’une urgence ou peut-on planifier le service normalement?');
+    if(!adaptive.access)return adaptiveAsk('access',"How should the technician access the property or coordinate with the tenant?",'Comment le technicien doit-il accéder à la propriété ou coordonner l’accès avec le locataire?');
+    if(!adaptive.time)return adaptiveAsk('time',"What date and time works best?",'Quelle date et quelle heure vous conviennent le mieux?');
+    if(!adaptive.phone)return adaptiveAsk('phone',"What's the best callback number?",'Quel est le meilleur numéro pour vous joindre?');
+  } else if(adaptive.type==='commercial'){
+    if(!adaptive.company)return adaptiveAsk('company',"What's the business or company name?",'Quel est le nom de l’entreprise?');
+    if(!adaptive.name)return adaptiveAsk('name',"What's your name and role there?",'Quel est votre nom et votre rôle dans l’entreprise?');
+    if(!adaptive.address)return adaptiveAsk('address',"What's the service location address?",'Quelle est l’adresse du lieu de service?');
+    if(!adaptive.scope)return adaptiveAsk('scope',"Please describe the service you need.",'Pouvez-vous décrire le service dont vous avez besoin?');
+    if(!adaptive.impact)return adaptiveAsk('impact',"Is this affecting your operations or preventing the business from operating normally?",'Est-ce que ce problème affecte vos opérations ou empêche l’entreprise de fonctionner normalement?');
+    if(!adaptive.urgency)return adaptiveAsk('urgency',"How urgent is the service request?",'Quel est le niveau d’urgence de la demande?');
+    if(!adaptive.time)return adaptiveAsk('time',"When would you like a technician to come?",'Quand souhaitez-vous qu’un technicien se présente?');
+    if(!adaptive.phone)return adaptiveAsk('phone',"What's the best callback number?",'Quel est le meilleur numéro pour vous joindre?');
+  } else {
+    if(!adaptive.name)return adaptiveAsk('name',"May I have your name, please?",'Puis-je avoir votre nom, s’il vous plaît?');
+    if(!adaptive.address)return adaptiveAsk('address',"What's the full service address?",'Quelle est l’adresse complète du service?');
+    if(!adaptive.scope)return adaptiveAsk('scope',"Please tell me what's happening and what service you need.",'Pouvez-vous me décrire ce qui se passe et le service dont vous avez besoin?');
+    if(!adaptive.urgency)return adaptiveAsk('urgency',"Is this an emergency, or would a regular appointment work for you?",'S’agit-il d’une urgence ou un rendez-vous régulier vous conviendrait-il?');
+    if(!adaptive.time)return adaptiveAsk('time',"What day and time would work best for you?",'Quelle journée et quelle heure vous conviendraient le mieux?');
+    if(!adaptive.phone)return adaptiveAsk('phone',"What's the best callback number?",'Quel est le meilleur numéro pour vous joindre?');
+  }
+  return null;
+}
+function adaptiveReply(text){
+  adaptiveAbsorb(text);
+  const n=adaptiveNext();quick.innerHTML='';$('answer').value='';
+  if(n){speakSystem(n,selectedLang==='fr'?'fr-CA':'en-CA',()=>{if(active)status.textContent=selectedLang==='fr'?'Touchez 🎙 PARLER pour répondre':'Tap 🎙 TALK to answer';},true);return;}
+  data.name=adaptive.name||'—';data.address=adaptive.address||adaptive.property||'—';data.phone=adaptive.phone||'—';data.issue=adaptive.scope||'—';data.urgency=adaptive.urgency||'—';data.appt=adaptive.time||'—';
+  const done=selectedLang==='fr'?'Parfait, merci. J’ai tous les renseignements nécessaires. Votre demande est maintenant enregistrée et prête à être transmise à l’équipe de service.':'Perfect, thank you. I have everything I need. Your service request is now recorded and ready to be sent to the service team.';
+  speakSystem(done,selectedLang==='fr'?'fr-CA':'en-CA',finish,true);
+}
+
 const $=x=>document.getElementById(x);
 const tr=$('transcript'), quick=$('quick'), status=$('status');
 
@@ -594,16 +675,20 @@ function pickVoiceFor(lang){
 }
 
 function speakSystem(text,lang,onDone,addLine=true){
+  const token=++speechGeneration;
+  stopListening();
+  try{$('avaAudio').pause();}catch(e){}
+  const complete=()=>{if(token===speechGeneration && onDone)onDone();};
   lastSpoken=text; lastAudioSrc=''; lastSpokenLang=lang;
   if(addLine) add('AVA',text);
-  if(!('speechSynthesis' in window)){ if(onDone) onDone(); return; }
+  if(!('speechSynthesis' in window)){status.textContent=selectedLang==='fr'?'Voix indisponible sur ce navigateur':'Voice unavailable in this browser';return;}
   try{ speechSynthesis.cancel(); }catch(e){}
   const u=new SpeechSynthesisUtterance(text);
   u.lang=lang;
   const v=pickVoiceFor(lang); if(v) u.voice=v;
   u.rate=0.92; u.pitch=1.0;
-  u.onend=()=>{ if(onDone) onDone(); };
-  u.onerror=()=>{ if(onDone) onDone(); };
+  u.onend=complete;
+  u.onerror=()=>{if(token===speechGeneration)status.textContent=selectedLang==='fr'?'Touchez RÉÉCOUTER pour entendre Ava':'Tap REPLAY to hear Ava';};
   speechSynthesis.speak(u);
 }
 
@@ -662,6 +747,8 @@ function chooseLanguage(lang){
 }
 
 function playAvaAudio(src,text,onDone){
+  const token=++speechGeneration;stopListening();
+  try{speechSynthesis.cancel();}catch(e){}
   const a=$('avaAudio');
   $('audioPanel').style.display='block';
   lastSpoken=text; lastAudioSrc=src; lastSpokenLang='en-CA';
@@ -669,7 +756,7 @@ function playAvaAudio(src,text,onDone){
   status.textContent=selectedLang==='fr'?'🔊 Ava parle…':'🔊 Ava is speaking…';
   try{a.pause();a.currentTime=0;a.src=src;a.muted=false;a.volume=1;a.load();}catch(e){}
   let finished=false;
-  const done=()=>{if(finished)return;finished=true;if(typeof onDone==='function')onDone();};
+  const done=()=>{if(finished || token!==speechGeneration)return;finished=true;if(typeof onDone==='function')onDone();};
   a.onended=done;
   a.onerror=()=>{status.textContent='Audio could not load — tap REPLAY';done();};
   const p=a.play();
@@ -679,14 +766,14 @@ function playAvaAudio(src,text,onDone){
 function speak(text, after=true){
   if(!active && after) return;
   const prompts=selectedLang==='fr'?promptsFr:promptsEn;
-  const i=Math.max(0,prompts.indexOf(text));
+  const i=prompts.indexOf(text);
   const src=selectedLang==='fr'?frAudioFiles[i]:audioFiles[i];
   if(!src){
     status.textContent=selectedLang==='fr'?'🔊 Ava parle…':'🔊 Ava is speaking…';
     speakSystem(text,selectedLang==='fr'?'fr-CA':'en-CA',()=>{
       if(!active)return;
       if(after){
-        status.textContent=selectedLang==='fr'?'À vous — choisissez une réponse ou écrivez':'Your turn — tap a choice or type';
+        status.textContent=selectedLang==='fr'?'Touchez 🎙 PARLER pour répondre':'Tap 🎙 TALK to answer';
         showChoices(step);
       }
     },true);
@@ -695,33 +782,54 @@ function speak(text, after=true){
   playAvaAudio(src,text,()=>{
     if(!active)return;
     if(after){
-      status.textContent=selectedLang==='fr'?'À vous — choisissez une réponse ou écrivez':'Your turn — tap a choice or type';
+      status.textContent=selectedLang==='fr'?'Touchez PARLER pour répondre':'Tap TALK to answer';
       showChoices(step);
     }
   });
 }
 
-function startListening(){
+function startListening(fromUser=false){
+  ++speechGeneration;try{$('avaAudio').pause();speechSynthesis.cancel();}catch(e){}
   if(!active || !SpeechRecognition || !selectedLang) return;
+  if(!fromUser) return;
   try{
-    if(recognition){try{recognition.abort()}catch(e){}}
+    if(recognition){recognition.onend=null;try{recognition.abort()}catch(e){}}
     recognition=new SpeechRecognition();
     recognition.lang=selectedLang==='fr'?'fr-CA':'en-CA';
-    recognition.continuous=false; recognition.interimResults=true; recognition.maxAlternatives=1;
-    recognition.onstart=()=>{isListening=true;status.textContent=selectedLang==='fr'?'À l’écoute…':'Listening…';};
-    recognition.onresult=(e)=>{let finalText='';for(let i=e.resultIndex;i<e.results.length;i++){if(e.results[i].isFinal)finalText+=e.results[i][0].transcript;}if(finalText.trim())reply(finalText.trim());};
-    recognition.onerror=(e)=>{isListening=false;if(e.error==='not-allowed'||e.error==='service-not-allowed')status.textContent=selectedLang==='fr'?'Micro bloqué — autorisez le micro ou utilisez les boutons':'Microphone blocked — allow mic or use the buttons';};
+    recognition.continuous=false; recognition.interimResults=false; recognition.maxAlternatives=1;
+    recognition.onstart=()=>{isListening=true;micPrimed=true;status.textContent=selectedLang==='fr'?'🎙 À l’écoute… parlez maintenant':'🎙 Listening… speak now';};
+    recognition.onresult=(e)=>{if(!active || recognition!==e.target)return;const r=e.results[e.results.length-1];const t=r&&r[0]?r[0].transcript.trim():'';if(t){isListening=false;reply(t);}};
+    recognition.onerror=(e)=>{isListening=false;if(e.error==='not-allowed'||e.error==='service-not-allowed'){voiceMode=false;status.textContent=selectedLang==='fr'?'Micro bloqué — touchez PARLER et autorisez le micro':'Microphone blocked — tap TALK and allow microphone';}else if(e.error==='no-speech'&&voiceMode&&active){status.textContent=selectedLang==='fr'?'Je n’ai rien entendu — touchez PARLER':'I didn’t hear anything — tap TALK';}};
     recognition.onend=()=>{isListening=false;};
     recognition.start();
-  }catch(e){status.textContent=selectedLang==='fr'?'Choisissez une réponse ou écrivez':'Tap a choice or type your answer';}
+  }catch(e){isListening=false;status.textContent=selectedLang==='fr'?'Touchez PARLER pour répondre':'Tap TALK to answer';}
 }
 function stopListening(){if(recognition){try{recognition.abort()}catch(e){}}isListening=false;}
 
+function ensureMicButton(){
+  if(!SpeechRecognition || document.getElementById('cpMicButton')) return;
+  const row=document.querySelector('#live-demo .inputrow'); if(!row)return;
+  const b=document.createElement('button'); b.id='cpMicButton'; b.className='send'; b.type='button'; b.textContent='🎙 TALK';
+  b.style.whiteSpace='nowrap';
+  b.onclick=()=>{ if(isListening){stopListening();status.textContent=selectedLang==='fr'?'Micro arrêté':'Microphone stopped';} else {startListening(true);} };
+  row.insertBefore(b,row.firstChild);
+}
+ensureMicButton();
+document.getElementById('siteEn')?.addEventListener('click',()=>{const b=document.getElementById('cpMicButton');if(b)b.textContent='🎙 TALK';});
+document.getElementById('siteFr')?.addEventListener('click',()=>{const b=document.getElementById('cpMicButton');if(b)b.textContent='🎙 PARLER';});
+
 function showChoices(i){
   quick.innerHTML='';
+  if(adaptive){
+    const presets=selectedLang==='fr'
+      ?["Je suis propriétaire","Je suis entrepreneur","Je suis gestionnaire immobilier","J'appelle pour une entreprise"]
+      :["I'm a homeowner","I'm a contractor","I'm a property manager","I'm calling for a business"];
+    if(!adaptive.type){presets.forEach(t=>{const b=document.createElement('button');b.className='choice';b.textContent=t;b.onclick=()=>reply(t);quick.appendChild(b);});}
+    return;
+  }
   let arr=[];
   if(selectedLang==='fr'){
-    if(i===0)arr=['Ma fournaise ne fonctionne plus','J’ai une fuite de plomberie','Problème électrique','Fuite de toiture','Annuler un rendez-vous','Reporter un rendez-vous'];
+    if(i===0)arr=['Ma fournaise ne fonctionne plus','J’ai une fuite de plomberie','Problème électrique','Fuite de toiture'];
     if(i===1)arr=['C’est une urgence','Rendez-vous régulier'];
     if(i===2)arr=['Kirkland','Laval','Pointe-Claire','Montréal'];
     if(i===3)arr=['123 rue Main','45 boulevard Saint-Charles','789 avenue des Pins'];
@@ -730,7 +838,7 @@ function showChoices(i){
     if(i===6)arr=['Vendredi 2 oct. • 10 h 30','Vendredi 2 oct. • 14 h','Samedi 3 oct. • 9 h'];
     if(i===7)arr=['Aujourd’hui • 13 h–15 h','Aujourd’hui • 15 h–17 h','Premier technicien disponible aujourd’hui'];
   }else{
-    if(i===0)arr=['My furnace stopped working','I have a plumbing leak','Electrical problem','Roof leak','Cancel an appointment','Reschedule an appointment'];
+    if(i===0)arr=['My furnace stopped working','I have a plumbing leak','Electrical problem','Roof leak'];
     if(i===1)arr=['It’s an emergency','Regular appointment'];
     if(i===2)arr=['Kirkland','Laval','Pointe-Claire','Montréal'];
     if(i===3)arr=['123 Main Street','45 Saint-Charles Boulevard','789 Pine Avenue'];
@@ -759,7 +867,8 @@ function normalizeAppointment(text){
 function reply(text){
   if(!active||!String(text).trim()||!selectedLang)return;
   stopListening(); text=String(text).trim(); add('YOU',text);
-  if(step===0){data.issue=text; const t=text.toLowerCase(); if(t.includes('cancel')||t.includes('annuler')||t.includes('reschedule')||t.includes('reporter')){data.urgency='Appointment change'; data.appt=selectedLang==='fr'?'Demande reçue — confirmation de l’entreprise requise si aucun calendrier n’est connecté':'Request received — business confirmation required if no calendar is connected'; quick.innerHTML=''; $('answer').value=''; const msg=selectedLang==='fr'?'Bien sûr. Je peux vous aider à annuler ou reporter votre rendez-vous. Si le calendrier de l’entreprise est connecté, je peux effectuer le changement et le confirmer. Sinon, j’enverrai immédiatement votre demande à l’entreprise pour confirmation.':'Absolutely. I can help cancel or reschedule your appointment. If the business calendar is connected, I can complete the change and confirm it. If not, I’ll send the request to the business immediately for confirmation.'; add('AVA',msg); status.textContent=selectedLang==='fr'?'Demande de modification de rendez-vous':'Appointment change request'; setTimeout(finish,900); return; }}
+  if(adaptive){adaptiveReply(text);return;}
+  if(step===0)data.issue=text;
   if(step===1){
     const t=text.toLowerCase();
     data.urgency=(t.includes('emergency')||t.includes('urgent')||t.includes('danger')||t.includes('urgence'))?'Emergency':'Regular';
@@ -783,10 +892,7 @@ function reply(text){
         if(active){status.textContent='Intervention d’urgence disponible aujourd’hui';showChoices(7);}
       });
     }else{
-      status.textContent='🔊 Ava is speaking…';
-      playAvaAudio(enEmergencyAudio,emergencyText,()=>{
-        if(active){status.textContent='What time would you like the technician dispatched today?';showChoices(7);}
-      });
+      lastSpoken=emergencyText;lastAudioSrc='';add('AVA',emergencyText);status.textContent='Emergency dispatch available today';showChoices(7);
     }
     return;
   }
@@ -815,14 +921,17 @@ function playFinal(){
 }
 
 function startCall(){
+  ++speechGeneration;stopListening();try{speechSynthesis.cancel();}catch(e){}
+  voiceMode=false; micPrimed=false;
   const siteLang=(document.documentElement.lang||'en').toLowerCase().startsWith('fr')?'fr':'en';
 
   active=true;
   selectedLang=siteLang==='fr'?null:'en';
   step=siteLang==='fr'?-1:0;
 
-  tr.innerHTML=''; $('summary').style.display='none'; quick.innerHTML='';
+  tr.innerHTML=''; $('summary').style.display='none'; if($('smsConfirmation')) $('smsConfirmation').style.display='none'; quick.innerHTML='';
   Object.keys(data).forEach(k=>data[k]='—');
+  adaptive=adaptiveFresh();
   startTime=Date.now(); clearInterval(timerInt);
   timerInt=setInterval(()=>$('timer').textContent=fmt(Math.floor((Date.now()-startTime)/1000)),1000);
   $('timer').textContent='00:00';
@@ -833,6 +942,8 @@ function startCall(){
   }else{
     speak(promptsEn[0]);
   }
+  // Adaptive intake begins immediately after Ava's greeting. Do not show the legacy
+  // furnace/plumbing/electrical/roofing shortcuts, which force the old homeowner flow.
 }
 
 function finish(){
@@ -840,11 +951,19 @@ function finish(){
   $('summary').style.display='block';
   $('sIssue').textContent=data.issue; $('sUrgency').textContent=data.urgency; $('sCity').textContent=data.city;
   $('sAddress').textContent=data.address; $('sPhone').textContent=data.phone; $('sName').textContent=data.name; $('sAppt').textContent=data.appt;
-  $('sStatus').textContent=data.urgency==='Emergency'?(selectedLang==='fr'?'Intervention prioritaire confirmée':'Priority dispatch confirmed'):(selectedLang==='fr'?'Rendez-vous confirmé':'Booked & confirmed');
-  status.textContent=data.urgency==='Emergency'?(selectedLang==='fr'?'Technicien d’urgence envoyé aujourd’hui ✓':'Emergency technician dispatched today ✓'):(selectedLang==='fr'?'Rendez-vous confirmé ✓':'Appointment booked ✓');
+  $('sStatus').textContent=adaptive?(selectedLang==='fr'?'Demande simulée — confirmation requise':'Simulated request — confirmation required'):data.urgency==='Emergency'?(selectedLang==='fr'?'Intervention prioritaire confirmée':'Priority dispatch confirmed'):(selectedLang==='fr'?'Rendez-vous confirmé':'Booked & confirmed');
+  const smsPhone=data.phone==='—'?(selectedLang==='fr'?'votre numéro':'your number'):data.phone;
+  const smsAppt=data.appt==='—'?(selectedLang==='fr'?'votre heure demandée':'your requested time'):data.appt;
+  const smsName=data.name==='—'?'':data.name+', ';
+  $('smsSent').textContent=selectedLang==='fr'?'✓ Aperçu de confirmation démo pour '+smsPhone:'✓ Demo confirmation preview for '+smsPhone;
+  $('smsPreview').textContent=selectedLang==='fr'
+    ?'CallPilot : '+smsName+'votre demande de service concerne '+smsAppt+'. Adresse : '+data.address+'. Répondez à ce message si vous devez modifier votre demande.'
+    :'CallPilot: '+smsName+'your service request is for '+smsAppt+'. Address: '+data.address+'. Reply to this message if you need to make a change.';
+  $('smsConfirmation').style.display='block';
+  status.textContent=adaptive?(selectedLang==='fr'?'Demande simulée recueillie ✓':'Simulated request collected ✓'):data.urgency==='Emergency'?(selectedLang==='fr'?'Technicien d’urgence envoyé aujourd’hui ✓':'Emergency technician dispatched today ✓'):(selectedLang==='fr'?'Rendez-vous confirmé ✓':'Appointment booked ✓');
   tr.scrollTop=tr.scrollHeight;
 }
-function endCall(){active=false;selectedLang=null;stopListening();clearInterval(timerInt);try{$('avaAudio').pause();}catch(e){}try{speechSynthesis.cancel();}catch(e){}quick.innerHTML='';status.textContent='Call ended';}
+function endCall(){++speechGeneration;active=false;voiceMode=false;micPrimed=false;adaptive=null;selectedLang=null;stopListening();clearInterval(timerInt);try{$('avaAudio').pause();}catch(e){}try{speechSynthesis.cancel();}catch(e){}quick.innerHTML='';status.textContent='Call ended';}
 
 $('start').onclick=startCall;
 $('end').onclick=endCall;
@@ -1260,5 +1379,7 @@ if('speechSynthesis' in window)speechSynthesis.onvoiceschanged=()=>speechSynthes
   setTimeout(apply,0);
 })();
 </script>
-<!-- CALLPILOT-TRADE-PLATFORM-20261004 --><style>.cp-platform-update{width:min(1180px,calc(100% - 34px));margin:34px auto;padding:26px;border-radius:24px;background:#fff;border:1px solid rgba(23,47,74,.10);color:#172f4a;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}.cp-platform-update h2{margin:0 0 8px;font-size:28px}.cp-platform-update p{color:#52677e}.cp-trade-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}.cp-trade-card{padding:16px;border-radius:16px;background:#edf3f8}.cp-trade-card span{font-size:12px;color:#52677e}.cp-core{display:flex;gap:7px;flex-wrap:wrap;margin-top:16px}.cp-core span{font-size:11px;font-weight:800;padding:7px 9px;border-radius:999px;background:#f5ead5;color:#846019}@media(max-width:800px){.cp-trade-cards{grid-template-columns:1fr 1fr}}</style><section class="cp-platform-update"><h2 data-cp-en="One CallPilot. Different playbooks for every trade." data-cp-fr="Un seul CallPilot. Un fonctionnement adapté à chaque métier.">One CallPilot. Different playbooks for every trade.</h2><p data-cp-en="Plumbing is the first pilot workflow, not a separate product. Ava loads the right intake, safety questions, emergency rules and routing for each business." data-cp-fr="La plomberie est notre premier scénario pilote, mais CallPilot est conçu pour tous les métiers. Ava adapte l’accueil, les questions de sécurité, les règles d’urgence et l’acheminement des appels à chaque entreprise.">Plumbing is the first pilot workflow, not a separate product. Ava loads the right intake, safety questions, emergency rules and routing for each business.</p><div class="cp-trade-cards"><div class="cp-trade-card"><b data-cp-en="🔧 Plumbing" data-cp-fr="🔧 Plomberie">🔧 Plumbing</b><br><span data-cp-en="Leaks, flooding, burst pipes, sewage backup and service requests." data-cp-fr="Fuites, inondations, tuyaux éclatés, refoulements d’égout et demandes de service.">Leaks, flooding, burst pipes, sewage backup and service requests.</span></div><div class="cp-trade-card"><b data-cp-en="⚡ Electrical" data-cp-fr="⚡ Électricité">⚡ Electrical</b><br><span data-cp-en="Sparks, smoke, outages, panels, breakers and service requests." data-cp-fr="Étincelles, fumée, pannes, panneaux, disjoncteurs et demandes de service.">Sparks, smoke, outages, panels, breakers and service requests.</span></div><div class="cp-trade-card"><b data-cp-en="❄️ HVAC" data-cp-fr="❄️ CVAC">❄️ HVAC</b><br><span data-cp-en="No heat, no cooling, maintenance and urgent comfort calls." data-cp-fr="Absence de chauffage ou de climatisation, entretien et appels urgents.">No heat, no cooling, maintenance and urgent comfort calls.</span></div><div class="cp-trade-card"><b data-cp-en="🏠 Roofing" data-cp-fr="🏠 Toiture">🏠 Roofing</b><br><span data-cp-en="Active leaks, storm damage, inspections and estimates." data-cp-fr="Fuites actives, dommages causés par les tempêtes, inspections et estimations.">Active leaks, storm damage, inspections and estimates.</span></div></div><div class="cp-core"><span data-cp-en="FR + EN Ava" data-cp-fr="Ava en FR + EN">FR + EN Ava</span><span data-cp-en="Existing number" data-cp-fr="Numéro existant">Existing number</span><span data-cp-en="Missed-call recovery" data-cp-fr="Récupération des appels manqués">Missed-call recovery</span><span data-cp-en="Emergency escalation" data-cp-fr="Gestion des urgences">Emergency escalation</span><span data-cp-en="Owner SMS" data-cp-fr="SMS au propriétaire">Owner SMS</span><span data-cp-en="Customer confirmation" data-cp-fr="Confirmation au client">Customer confirmation</span><span data-cp-en="Optional calendar" data-cp-fr="Calendrier facultatif">Optional calendar</span><span data-cp-en="Book / reschedule / cancel" data-cp-fr="Réserver / reporter / annuler">Book / reschedule / cancel</span></div></section></body>
+<!-- CALLPILOT-TRADE-PLATFORM-20261004 --><style>.cp-platform-update{width:min(1180px,calc(100% - 34px));margin:34px auto;padding:26px;border-radius:24px;background:#fff;border:1px solid rgba(23,47,74,.10);color:#172f4a;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}.cp-platform-update h2{margin:0 0 8px;font-size:28px}.cp-platform-update p{color:#52677e}.cp-trade-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}.cp-trade-card{padding:16px;border-radius:16px;background:#edf3f8}.cp-trade-card span{font-size:12px;color:#52677e}.cp-core{display:flex;gap:7px;flex-wrap:wrap;margin-top:16px}.cp-core span{font-size:11px;font-weight:800;padding:7px 9px;border-radius:999px;background:#f5ead5;color:#846019}@media(max-width:800px){.cp-trade-cards{grid-template-columns:1fr 1fr}}</style><section class="cp-platform-update"><h2 data-cp-en="One CallPilot. Different playbooks for every trade." data-cp-fr="Un seul CallPilot. Un fonctionnement adapté à chaque métier.">One CallPilot. Different playbooks for every trade.</h2><p data-cp-en="Plumbing is the first pilot workflow, not a separate product. Ava loads the right intake, safety questions, emergency rules and routing for each business." data-cp-fr="La plomberie est notre premier scénario pilote, mais CallPilot est conçu pour tous les métiers. Ava adapte l’accueil, les questions de sécurité, les règles d’urgence et l’acheminement des appels à chaque entreprise.">Plumbing is the first pilot workflow, not a separate product. Ava loads the right intake, safety questions, emergency rules and routing for each business.</p><div class="cp-trade-cards"><div class="cp-trade-card"><b data-cp-en="🔧 Plumbing" data-cp-fr="🔧 Plomberie">🔧 Plumbing</b><br><span data-cp-en="Leaks, flooding, burst pipes, sewage backup and service requests." data-cp-fr="Fuites, inondations, tuyaux éclatés, refoulements d’égout et demandes de service.">Leaks, flooding, burst pipes, sewage backup and service requests.</span></div><div class="cp-trade-card"><b data-cp-en="⚡ Electrical" data-cp-fr="⚡ Électricité">⚡ Electrical</b><br><span data-cp-en="Sparks, smoke, outages, panels, breakers and service requests." data-cp-fr="Étincelles, fumée, pannes, panneaux, disjoncteurs et demandes de service.">Sparks, smoke, outages, panels, breakers and service requests.</span></div><div class="cp-trade-card"><b data-cp-en="❄️ HVAC" data-cp-fr="❄️ CVAC">❄️ HVAC</b><br><span data-cp-en="No heat, no cooling, maintenance and urgent comfort calls." data-cp-fr="Absence de chauffage ou de climatisation, entretien et appels urgents.">No heat, no cooling, maintenance and urgent comfort calls.</span></div><div class="cp-trade-card"><b data-cp-en="🏠 Roofing" data-cp-fr="🏠 Toiture">🏠 Roofing</b><br><span data-cp-en="Active leaks, storm damage, inspections and estimates." data-cp-fr="Fuites actives, dommages causés par les tempêtes, inspections et estimations.">Active leaks, storm damage, inspections and estimates.</span></div></div><div class="cp-core"><span data-cp-en="FR + EN Ava" data-cp-fr="Ava en FR + EN">FR + EN Ava</span><span data-cp-en="Existing number" data-cp-fr="Numéro existant">Existing number</span><span data-cp-en="Missed-call recovery" data-cp-fr="Récupération des appels manqués">Missed-call recovery</span><span data-cp-en="Emergency escalation" data-cp-fr="Gestion des urgences">Emergency escalation</span><span data-cp-en="Owner SMS" data-cp-fr="SMS au propriétaire">Owner SMS</span><span data-cp-en="Customer confirmation" data-cp-fr="Confirmation au client">Customer confirmation</span><span data-cp-en="Optional calendar" data-cp-fr="Calendrier facultatif">Optional calendar</span><span data-cp-en="Book / reschedule / cancel" data-cp-fr="Réserver / reporter / annuler">Book / reschedule / cancel</span></div></section><script src="assets/ava-voice-config.js"></script>
+<script src="assets/ava-realtime.js"></script>
+</body>
 </html>

@@ -352,7 +352,7 @@ footer{border-top:1px solid var(--line);padding:28px 0 38px;color:#886528;font-s
     <h2>Try Ava booking the job herself.</h2>
     <p class="lede">This is a free sales simulator. Tap the phone button, hear Ava, choose the customer's answers, and watch her book the appointment without handing the caller off.</p>
     <div class="ava-demo-shell">
-      <div class="wrap"><div class="notice">LIVE VOICE DEMO • Speak to Ava with your microphone • No real phone number or charge</div><div class="phone"><div class="top">Incoming test call<div class="number">+1 (514) 555-0142</div><div class="fake">FICTIONAL NUMBER</div></div><div class="hero"><div class="avatar"><img class="ava-approved" src="" alt="Ava"></div><div class="ava">Ava</div><div class="role">CallPilot Trades • AI receptionist</div><div id="status" class="status">Ready to test</div><div id="timer" class="timer">00:00</div></div><div class="screen"><div id="transcript" class="transcript"><div class="line avaLine"><span class="speaker">CallPilot</span>Tap START CALL to begin.</div></div><div id="quick" class="quick"></div><div class="inputrow"><input id="answer" placeholder="Or type your answer…"><button class="send" id="send">Send</button></div></div><div id="summary" class="summary"><h3>Appointment booked</h3><div class="grid"><div class="cell"><span>Issue</span><b id="sIssue">—</b></div><div class="cell"><span>Urgency</span><b id="sUrgency">—</b></div><div class="cell"><span>City</span><b id="sCity">—</b></div><div class="cell"><span>Address</span><b id="sAddress">—</b></div><div class="cell"><span>Phone</span><b id="sPhone">—</b></div><div class="cell"><span>Name</span><b id="sName">—</b></div><div class="cell"><span>Appointment</span><b id="sAppt">—</b></div><div class="cell"><span>Status</span><b id="sStatus">Confirmed</b></div></div><div id="smsConfirmation" style="margin-top:14px;padding:14px;border-radius:14px;background:#f3f8f6;border:1px solid rgba(25,105,88,.18);display:none"><div id="smsSent" style="font-weight:800;color:#196958;margin-bottom:7px">✓ Confirmation SMS sent</div><div id="smsPreview" style="font-size:13px;line-height:1.45;color:#405568"></div><div style="font-size:10px;margin-top:7px;color:#7b8792">DEMO • No real SMS is sent</div></div></div><div id="audioPanel" style="display:block;margin:0 16px 10px;padding:10px 12px;border:1px solid rgba(213,173,99,.25);border-radius:14px;background:rgba(213,173,99,.06)"><div style="font-size:12px;color:#886528;font-weight:800;margin-bottom:6px">AVA VOICE</div><audio id="avaAudio" controls preload="auto" playsinline style="width:100%"></audio></div><div class="controls"><button class="round replay" id="replay" title="Replay Ava"><span>↻</span><span>REPLAY</span></button><button class="round start" id="start" title="Start call"><span>☎</span><span>START CALL</span></button><button class="round end" id="end" title="End call"><span>✕</span><span>END CALL</span></button></div><div class="hint">Tap START CALL to begin. You can speak naturally using your microphone, or use the answer buttons/type your reply.</div></div></div>
+      <div class="wrap"><div class="notice">LIVE VOICE DEMO • Speak to Ava with your microphone • No real phone number or charge</div><div class="phone"><div class="top">Incoming test call<div class="number">+1 (514) 555-0142</div><div class="fake">FICTIONAL NUMBER</div></div><div class="hero"><div class="avatar"><img class="ava-approved" src="" alt="Ava"></div><div class="ava">Ava</div><div class="role">CallPilot Trades • AI receptionist</div><div id="status" class="status">Ready to test</div><div id="timer" class="timer">00:00</div></div><div class="screen"><div id="transcript" class="transcript"><div class="line avaLine"><span class="speaker">CallPilot</span>Tap START CALL to begin.</div></div><div id="quick" class="quick"></div><div class="inputrow"><input id="answer" placeholder="Or type your answer…"><button class="send" id="send">Send</button></div></div><div id="summary" class="summary"><h3 data-en="Service request summary" data-fr="Résumé de la demande de service">Service request summary</h3><div class="grid"><div class="cell"><span>Issue</span><b id="sIssue">—</b></div><div class="cell"><span>Urgency</span><b id="sUrgency">—</b></div><div class="cell"><span>City</span><b id="sCity">—</b></div><div class="cell"><span>Address</span><b id="sAddress">—</b></div><div class="cell"><span>Phone</span><b id="sPhone">—</b></div><div class="cell"><span>Name</span><b id="sName">—</b></div><div class="cell"><span>Appointment</span><b id="sAppt">—</b></div><div class="cell"><span>Status</span><b id="sStatus">Confirmed</b></div></div><div id="smsConfirmation" style="margin-top:14px;padding:14px;border-radius:14px;background:#f3f8f6;border:1px solid rgba(25,105,88,.18);display:none"><div id="smsSent" style="font-weight:800;color:#196958;margin-bottom:7px">✓ Confirmation SMS sent</div><div id="smsPreview" style="font-size:13px;line-height:1.45;color:#405568"></div><div style="font-size:10px;margin-top:7px;color:#7b8792">DEMO • No real SMS is sent</div></div></div><div id="audioPanel" style="display:block;margin:0 16px 10px;padding:10px 12px;border:1px solid rgba(213,173,99,.25);border-radius:14px;background:rgba(213,173,99,.06)"><div style="font-size:12px;color:#886528;font-weight:800;margin-bottom:6px">AVA VOICE</div><audio id="avaAudio" controls preload="auto" playsinline style="width:100%"></audio></div><div class="controls"><button class="round replay" id="replay" title="Replay Ava"><span>↻</span><span>REPLAY</span></button><button class="round start" id="start" title="Start call"><span>☎</span><span>START CALL</span></button><button class="round end" id="end" title="End call"><span>✕</span><span>END CALL</span></button></div><div class="hint">Tap START CALL to begin. You can speak naturally using your microphone, or use the answer buttons/type your reply.</div></div></div>
 <script>
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
@@ -422,6 +422,7 @@ const frFinalTexts={
 };
 
 let step=-1, active=false, selectedLang=null, startTime=0, timerInt=null, recognition=null, isListening=false, voiceMode=false, micPrimed=false;
+let speechGeneration=0;
 let lastSpoken='', lastAudioSrc='', lastSpokenLang='en-CA';
 const data={issue:'—',urgency:'—',city:'—',address:'—',phone:'—',name:'—',appt:'—'};
 let adaptive=null;
@@ -439,21 +440,21 @@ function adaptiveAbsorb(text){
   const detected=adaptiveDetectType(x); if(detected)adaptive.type=detected;
   // Most important rule: an answer to Ava's current question fills that exact field.
   if(p && p!=='type'){
-    if(p==='po' && /^(no|none|non|aucun|aucune|pas de|n/a)$/i.test(x)) adaptive.po='none';
+    if(p==='po' && /^(no|none|non|aucun|aucune|pas de|n\/a)$/i.test(x)) adaptive.po='none';
     else adaptive[p]=x;
     adaptive.pending=null;
   }
   // Also extract information volunteered before Ava asks for it.
-  if(!adaptive.company){
+  if(!adaptive.company && (!p || p==='company')){
     let m=x.match(/(?:from|de chez|pour|chez)\s+([A-ZÀ-Ÿ][A-Za-zÀ-ÿ0-9&.' -]{1,50})/i);
     if(m)adaptive.company=m[1].trim();
     else if(/\b(inc\.?|ltd\.?|construction|services|company|corp\.?|entreprise|plomberie)\b/i.test(x))adaptive.company=x;
   }
-  if(!adaptive.name){const m=x.match(/\b(?:i'm|i am|this is|je suis|ici|je m'appelle)\s+([A-Za-zÀ-ÿ'-]+)/i);if(m)adaptive.name=m[1];}
-  if(!adaptive.address && /\b\d{1,6}\s+[A-Za-zÀ-ÿ0-9.' -]+\b(?:street|st\.?|road|rd\.?|avenue|ave\.?|boulevard|blvd\.?|rue|chemin|ch\.?|drive|dr\.?)\b/i.test(x))adaptive.address=x;
+  if(!adaptive.name && (!p || p==='name')){const m=x.match(/\b(?:i'm|i am|this is|je suis|ici|je m'appelle)\s+([A-Za-zÀ-ÿ'-]+)/i);if(m && !/^(a|an|un|une|homeowner|contractor|entrepreneur|propriétaire|gestionnaire)$/i.test(m[1]))adaptive.name=m[1];}
+  if(!adaptive.address && (!p || p==='address') && /\b\d{1,6}\s+[A-Za-zÀ-ÿ0-9.' -]+\b(?:street|st\.?|road|rd\.?|avenue|ave\.?|boulevard|blvd\.?|rue|chemin|ch\.?|drive|dr\.?)\b/i.test(x))adaptive.address=x;
   if(!adaptive.scope && /plumb|leak|pipe|drain|toilet|faucet|water|chauff|climat|electric|roof|fuite|tuyau|robinet|eau|élect|toit|fournaise|hvac/i.test(low))adaptive.scope=x;
   if(!adaptive.urgency && /emergency|urgent|urgence|immédiat|asap|same.day|aujourd'hui|aujourd’hui/i.test(low))adaptive.urgency=x;
-  if(!adaptive.time && /today|tomorrow|morning|afternoon|evening|aujourd|demain|matin|après-midi|soir|\b\d{1,2}(:\d{2})?\s*(am|pm|h)?\b/i.test(low))adaptive.time=x;
+  if(!adaptive.time && (!p || p==='time') && /tomorrow|morning|afternoon|evening|demain|matin|après-midi|soir|monday|tuesday|wednesday|thursday|friday|saturday|sunday|lundi|mardi|mercredi|jeudi|vendredi|samedi|dimanche|\b\d{1,2}:\d{2}\b|\b\d{1,2}\s*(am|pm|h)\b/i.test(low))adaptive.time=x;
   if(!adaptive.phone && /(?:\+?1[-. ]?)?\(?\d{3}\)?[-. ]?\d{3}[-. ]?\d{4}/.test(x))adaptive.phone=x.match(/(?:\+?1[-. ]?)?\(?\d{3}\)?[-. ]?\d{3}[-. ]?\d{4}/)[0];
 }
 function adaptiveAsk(field,en,fr){adaptive.pending=field;return selectedLang==='fr'?fr:en;}
@@ -537,16 +538,20 @@ function pickVoiceFor(lang){
 }
 
 function speakSystem(text,lang,onDone,addLine=true){
+  const token=++speechGeneration;
+  stopListening();
+  try{$('avaAudio').pause();}catch(e){}
+  const complete=()=>{if(token===speechGeneration && onDone)onDone();};
   lastSpoken=text; lastAudioSrc=''; lastSpokenLang=lang;
   if(addLine) add('AVA',text);
-  if(!('speechSynthesis' in window)){ if(onDone) onDone(); return; }
+  if(!('speechSynthesis' in window)){status.textContent=selectedLang==='fr'?'Voix indisponible sur ce navigateur':'Voice unavailable in this browser';return;}
   try{ speechSynthesis.cancel(); }catch(e){}
   const u=new SpeechSynthesisUtterance(text);
   u.lang=lang;
   const v=pickVoiceFor(lang); if(v) u.voice=v;
   u.rate=0.92; u.pitch=1.0;
-  u.onend=()=>{ if(onDone) onDone(); };
-  u.onerror=()=>{ if(onDone) onDone(); };
+  u.onend=complete;
+  u.onerror=()=>{if(token===speechGeneration)status.textContent=selectedLang==='fr'?'Touchez RÉÉCOUTER pour entendre Ava':'Tap REPLAY to hear Ava';};
   speechSynthesis.speak(u);
 }
 
@@ -605,6 +610,8 @@ function chooseLanguage(lang){
 }
 
 function playAvaAudio(src,text,onDone){
+  const token=++speechGeneration;stopListening();
+  try{speechSynthesis.cancel();}catch(e){}
   const a=$('avaAudio');
   $('audioPanel').style.display='block';
   lastSpoken=text; lastAudioSrc=src; lastSpokenLang='en-CA';
@@ -612,7 +619,7 @@ function playAvaAudio(src,text,onDone){
   status.textContent=selectedLang==='fr'?'🔊 Ava parle…':'🔊 Ava is speaking…';
   try{a.pause();a.currentTime=0;a.src=src;a.muted=false;a.volume=1;a.load();}catch(e){}
   let finished=false;
-  const done=()=>{if(finished)return;finished=true;if(typeof onDone==='function')onDone();};
+  const done=()=>{if(finished || token!==speechGeneration)return;finished=true;if(typeof onDone==='function')onDone();};
   a.onended=done;
   a.onerror=()=>{status.textContent='Audio could not load — tap REPLAY';done();};
   const p=a.play();
@@ -622,7 +629,7 @@ function playAvaAudio(src,text,onDone){
 function speak(text, after=true){
   if(!active && after) return;
   const prompts=selectedLang==='fr'?promptsFr:promptsEn;
-  const i=Math.max(0,prompts.indexOf(text));
+  const i=prompts.indexOf(text);
   const src=selectedLang==='fr'?frAudioFiles[i]:audioFiles[i];
   if(!src){
     status.textContent=selectedLang==='fr'?'🔊 Ava parle…':'🔊 Ava is speaking…';
@@ -638,14 +645,14 @@ function speak(text, after=true){
   playAvaAudio(src,text,()=>{
     if(!active)return;
     if(after){
-      status.textContent=selectedLang==='fr'?'À l’écoute…':'Listening…';
+      status.textContent=selectedLang==='fr'?'Touchez PARLER pour répondre':'Tap TALK to answer';
       showChoices(step);
-      startListening();
     }
   });
 }
 
 function startListening(fromUser=false){
+  ++speechGeneration;try{$('avaAudio').pause();speechSynthesis.cancel();}catch(e){}
   if(!active || !SpeechRecognition || !selectedLang) return;
   if(!fromUser) return;
   try{
@@ -654,7 +661,7 @@ function startListening(fromUser=false){
     recognition.lang=selectedLang==='fr'?'fr-CA':'en-CA';
     recognition.continuous=false; recognition.interimResults=false; recognition.maxAlternatives=1;
     recognition.onstart=()=>{isListening=true;micPrimed=true;status.textContent=selectedLang==='fr'?'🎙 À l’écoute… parlez maintenant':'🎙 Listening… speak now';};
-    recognition.onresult=(e)=>{const r=e.results[e.results.length-1];const t=r&&r[0]?r[0].transcript.trim():'';if(t){isListening=false;reply(t);}};
+    recognition.onresult=(e)=>{if(!active || recognition!==e.target)return;const r=e.results[e.results.length-1];const t=r&&r[0]?r[0].transcript.trim():'';if(t){isListening=false;reply(t);}};
     recognition.onerror=(e)=>{isListening=false;if(e.error==='not-allowed'||e.error==='service-not-allowed'){voiceMode=false;status.textContent=selectedLang==='fr'?'Micro bloqué — touchez PARLER et autorisez le micro':'Microphone blocked — tap TALK and allow microphone';}else if(e.error==='no-speech'&&voiceMode&&active){status.textContent=selectedLang==='fr'?'Je n’ai rien entendu — touchez PARLER':'I didn’t hear anything — tap TALK';}};
     recognition.onend=()=>{isListening=false;};
     recognition.start();
@@ -777,6 +784,7 @@ function playFinal(){
 }
 
 function startCall(){
+  ++speechGeneration;stopListening();try{speechSynthesis.cancel();}catch(e){}
   voiceMode=false; micPrimed=false;
   const siteLang=(document.documentElement.lang||'en').toLowerCase().startsWith('fr')?'fr':'en';
 
@@ -806,19 +814,19 @@ function finish(){
   $('summary').style.display='block';
   $('sIssue').textContent=data.issue; $('sUrgency').textContent=data.urgency; $('sCity').textContent=data.city;
   $('sAddress').textContent=data.address; $('sPhone').textContent=data.phone; $('sName').textContent=data.name; $('sAppt').textContent=data.appt;
-  $('sStatus').textContent=data.urgency==='Emergency'?(selectedLang==='fr'?'Intervention prioritaire confirmée':'Priority dispatch confirmed'):(selectedLang==='fr'?'Rendez-vous confirmé':'Booked & confirmed');
+  $('sStatus').textContent=adaptive?(selectedLang==='fr'?'Demande simulée — confirmation requise':'Simulated request — confirmation required'):data.urgency==='Emergency'?(selectedLang==='fr'?'Intervention prioritaire confirmée':'Priority dispatch confirmed'):(selectedLang==='fr'?'Rendez-vous confirmé':'Booked & confirmed');
   const smsPhone=data.phone==='—'?(selectedLang==='fr'?'votre numéro':'your number'):data.phone;
   const smsAppt=data.appt==='—'?(selectedLang==='fr'?'votre heure demandée':'your requested time'):data.appt;
   const smsName=data.name==='—'?'':data.name+', ';
-  $('smsSent').textContent=selectedLang==='fr'?'✓ SMS de confirmation envoyé à '+smsPhone:'✓ Confirmation SMS sent to '+smsPhone;
+  $('smsSent').textContent=selectedLang==='fr'?'✓ Aperçu de confirmation démo pour '+smsPhone:'✓ Demo confirmation preview for '+smsPhone;
   $('smsPreview').textContent=selectedLang==='fr'
-    ?'CallPilot : '+smsName+'votre demande de service est confirmée pour '+smsAppt+'. Adresse : '+data.address+'. Répondez à ce message si vous devez modifier votre demande.'
-    :'CallPilot: '+smsName+'your service request is confirmed for '+smsAppt+'. Address: '+data.address+'. Reply to this message if you need to make a change.';
+    ?'CallPilot : '+smsName+'votre demande de service concerne '+smsAppt+'. Adresse : '+data.address+'. Répondez à ce message si vous devez modifier votre demande.'
+    :'CallPilot: '+smsName+'your service request is for '+smsAppt+'. Address: '+data.address+'. Reply to this message if you need to make a change.';
   $('smsConfirmation').style.display='block';
-  status.textContent=data.urgency==='Emergency'?(selectedLang==='fr'?'Technicien d’urgence envoyé aujourd’hui ✓':'Emergency technician dispatched today ✓'):(selectedLang==='fr'?'Rendez-vous confirmé ✓':'Appointment booked ✓');
+  status.textContent=adaptive?(selectedLang==='fr'?'Demande simulée recueillie ✓':'Simulated request collected ✓'):data.urgency==='Emergency'?(selectedLang==='fr'?'Technicien d’urgence envoyé aujourd’hui ✓':'Emergency technician dispatched today ✓'):(selectedLang==='fr'?'Rendez-vous confirmé ✓':'Appointment booked ✓');
   tr.scrollTop=tr.scrollHeight;
 }
-function endCall(){active=false;voiceMode=false;micPrimed=false;adaptive=null;selectedLang=null;stopListening();clearInterval(timerInt);try{$('avaAudio').pause();}catch(e){}try{speechSynthesis.cancel();}catch(e){}quick.innerHTML='';status.textContent='Call ended';}
+function endCall(){++speechGeneration;active=false;voiceMode=false;micPrimed=false;adaptive=null;selectedLang=null;stopListening();clearInterval(timerInt);try{$('avaAudio').pause();}catch(e){}try{speechSynthesis.cancel();}catch(e){}quick.innerHTML='';status.textContent='Call ended';}
 
 $('start').onclick=startCall;
 $('end').onclick=endCall;
@@ -1239,5 +1247,7 @@ if('speechSynthesis' in window)speechSynthesis.onvoiceschanged=()=>speechSynthes
  form.addEventListener("submit",e=>{e.preventDefault();const t=input.value.trim();if(!t)return;add(fr()?"Appelant":"Caller",t);absorb(t);if(/^(no|none|non|aucun|aucune)$/i.test(t)&&s.type==="contractor"&&s.phone)s.po=true;detected();add("Ava",next());input.value="";input.focus()});reset.addEventListener("click",start);document.getElementById("siteEn")?.addEventListener("click",()=>setTimeout(start,0));document.getElementById("siteFr")?.addEventListener("click",()=>setTimeout(start,0));start();
 })();
 </script>
+<script src="assets/ava-voice-config.js"></script>
+<script src="assets/ava-realtime.js"></script>
 </body>
 </html>

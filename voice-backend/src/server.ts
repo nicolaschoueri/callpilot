@@ -1,6 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import crypto from "node:crypto";
+import { browserVoiceRouter } from "./browser-voice.js";
 import {
   CallPilotStore,
   type BusinessInput,
@@ -224,6 +225,12 @@ function takeOAuthState(state: string, provider: "google" | "microsoft") {
 }
 
 const app = express();
+app.use("/api/demo/voice", browserVoiceRouter({
+  apiKey: OPENAI_API_KEY,
+  accessToken: process.env.DEMO_VOICE_TOKEN || "",
+  allowedOrigins: (process.env.DEMO_VOICE_ORIGINS || "https://nicolaschoueri.github.io,http://localhost:3000")
+    .split(",").map(value => value.trim()).filter(Boolean)
+}));
 
 app.post(
   "/webhooks/openai",

@@ -256,3 +256,24 @@ The code can be complete without these accounts, but a real customer cannot call
 4. Access to the contractor's carrier settings for conditional call forwarding
 
 No secret values belong in this repository.
+
+## Website voice demo
+
+The browser can use `POST /api/demo/voice/session` for a direct WebRTC
+speech-to-speech demo, independent of Twilio, SIP and telephone routing.
+Configure `OPENAI_API_KEY`, a private `DEMO_VOICE_TOKEN`, and the allowed
+`DEMO_VOICE_ORIGINS` on the host. Set `window.CALLPILOT_VOICE_ENDPOINT` in
+`assets/ava-voice-config.js` to the hosted endpoint. Never put keys or the
+access code in public source. The presenter enters the access code when
+starting the demo. It remains only in the current page's input field.
+
+The demo uses one voice for both languages, takes microphone audio directly,
+allows interruptions, and asks for service details and preferred date/time.
+It has no real booking, SMS or dispatch actions. The client ends each demo
+after five minutes; this is a UI limit, not a provider-side spending cap.
+Set provider-side project budgets/limits before sharing access.
+
+Tests mock the upstream voice service. A successful build or test does not
+establish microphone recognition, voice quality or live API availability.
+Activation is incomplete until a hosted endpoint and credentials are configured
+and a real English and French voice session has been verified.
