@@ -12,6 +12,8 @@ export function browserVoiceRouter(options: {
   apiKey: string;
   accessToken: string;
   allowedOrigins: string[];
+  // Only set after the original EN/FR voices have been matched and approved.
+  approvedVoices?: { en?: string; fr?: string };
   fetchImpl?: typeof fetch;
 }) {
   const router = express.Router();
@@ -41,6 +43,10 @@ export function browserVoiceRouter(options: {
     if (typeof req.body?.sdp !== "string" || !req.body.sdp.startsWith("v=0")) {
       res.status(400).json({ error: "Invalid voice connection offer" }); return;
     }
+    const voice = options.approvedVoices?.[req.body.lang === 'fr' ? 'fr' : 'en'];
+    if (!voice) {
+      res.status(503).json({ error: "The original Ava voice has not been connected" }); return;
+    }
     const now = Date.now();
     for (const [ip, times] of attempts) if (!times.some(t => now - t < 60_000)) attempts.delete(ip);
     const ip = req.ip || "unknown";
@@ -55,7 +61,7 @@ export function browserVoiceRouter(options: {
       max_output_tokens: 500,
       audio: {
         input: { transcription: { model: "gpt-4o-mini-transcribe", language: req.body.lang === "fr" ? "fr" : "en" }, turn_detection: { type: "semantic_vad", eagerness: "low", create_response: true, interrupt_response: true } },
-        output: { voice: "marin" }
+        output: { voice }
       }
     }));
     try {

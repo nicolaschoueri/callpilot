@@ -267,7 +267,9 @@ Configure `OPENAI_API_KEY`, a private `DEMO_VOICE_TOKEN`, and the allowed
 access code in public source. The presenter enters the access code when
 starting the demo. It remains only in the current page's input field.
 
-The demo uses one voice for both languages, takes microphone audio directly,
+The demo requires the previously approved English and French Ava voices to be
+matched and connected. It has no default replacement voice and refuses voice
+sessions until the selected original voice is configured. It takes microphone audio directly,
 allows interruptions, and asks for service details and preferred date/time.
 It has no real booking, SMS or dispatch actions. The client ends each demo
 after five minutes; this is a UI limit, not a provider-side spending cap.

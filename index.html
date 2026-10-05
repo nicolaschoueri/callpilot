@@ -655,41 +655,21 @@ function add(who,text){
 }
 function fmt(s){return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
 
-function pickVoiceFor(lang){
-  if(!('speechSynthesis' in window)) return null;
-  const voices=speechSynthesis.getVoices();
-  if(/^fr/i.test(lang)){
-    const preferredFr=['Amélie','Amelie','Marie','Audrey'];
-    for(const name of preferredFr){
-      const v=voices.find(x=>x.name.includes(name) && /^fr-CA/i.test(x.lang));
-      if(v) return v;
-    }
-    return voices.find(v=>/^fr-CA/i.test(v.lang) && !/Thomas/i.test(v.name)) || voices.find(v=>/^fr-CA/i.test(v.lang)) || voices.find(v=>/^fr/i.test(v.lang)) || voices[0];
-  }
-  const preferred=['Samantha','Ava','Serena','Karen','Moira','Tessa','Siri'];
-  for(const name of preferred){
-    const v=voices.find(x=>x.name.includes(name) && /^en/i.test(x.lang));
-    if(v) return v;
-  }
-  return voices.find(x=>/^en-CA/i.test(x.lang)) || voices.find(x=>/^en-US/i.test(x.lang)) || voices.find(x=>/^en/i.test(x.lang)) || voices[0];
-}
-
 function speakSystem(text,lang,onDone,addLine=true){
-  const token=++speechGeneration;
-  stopListening();
-  try{$('avaAudio').pause();}catch(e){}
-  const complete=()=>{if(token===speechGeneration && onDone)onDone();};
-  lastSpoken=text; lastAudioSrc=''; lastSpokenLang=lang;
-  if(addLine) add('AVA',text);
-  if(!('speechSynthesis' in window)){status.textContent=selectedLang==='fr'?'Voix indisponible sur ce navigateur':'Voice unavailable in this browser';return;}
-  try{ speechSynthesis.cancel(); }catch(e){}
-  const u=new SpeechSynthesisUtterance(text);
-  u.lang=lang;
-  const v=pickVoiceFor(lang); if(v) u.voice=v;
-  u.rate=0.92; u.pitch=1.0;
-  u.onend=complete;
-  u.onerror=()=>{if(token===speechGeneration)status.textContent=selectedLang==='fr'?'Touchez RÉÉCOUTER pour entendre Ava':'Tap REPLAY to hear Ava';};
-  speechSynthesis.speak(u);
+  // Preserve Ava's approved recordings. Never select a browser replacement voice.
+  const isFrench=/^fr/i.test(lang);
+  const prompts=isFrench?promptsFr:promptsEn;
+  const index=prompts.indexOf(text);
+  const src=index>=0?(isFrench?frAudioFiles[index]:audioFiles[index]):null;
+  if(src && addLine){playAvaAudio(src,text,onDone);return;}
+  ++speechGeneration;stopListening();
+  try{$('avaAudio').pause();speechSynthesis.cancel();}catch(e){}
+  lastSpoken=text;lastAudioSrc='';lastSpokenLang=lang;
+  if(addLine)add('AVA',text);
+  if(onDone)onDone();
+  status.textContent=isFrench
+    ?'Question affichée — voix originale d’Ava à connecter'
+    :'Question shown — original Ava voice needs connecting';
 }
 
 function playLanguageMenu(){

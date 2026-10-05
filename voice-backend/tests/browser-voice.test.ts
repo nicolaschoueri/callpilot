@@ -11,7 +11,7 @@ async function withServer(options: Parameters<typeof browserVoiceRouter>[0], run
   finally { await new Promise<void>(resolve => server.close(() => resolve())); }
 }
 const headers = { Origin: "https://nicolaschoueri.github.io", Authorization: "Bearer demo-code", "Content-Type": "application/json" };
-const options = { apiKey: "server-secret", accessToken: "demo-code", allowedOrigins: [headers.Origin] };
+const options = { apiKey: "server-secret", accessToken: "demo-code", allowedOrigins: [headers.Origin], approvedVoices: { en: "approved-en-test-fixture", fr: "approved-fr-test-fixture" } };
 
 describe("website voice connection", () => {
   it("does not call a paid service until configured and authenticated", async () => {
@@ -24,6 +24,9 @@ describe("website voice connection", () => {
       expect((await fetch(url, { method: "POST", headers: { ...headers, Authorization: "Bearer wrong" }, body: JSON.stringify({ sdp: "v=0" }) })).status).toBe(401);
       expect((await fetch(url, { method: "POST", headers: { ...headers, Origin: "https://other.example" }, body: JSON.stringify({ sdp: "v=0" }) })).status).toBe(403);
     });
+    await withServer({ ...options, approvedVoices: {}, fetchImpl }, async url => {
+      expect((await fetch(url, { method: "POST", headers, body: JSON.stringify({ sdp: "v=0" }) })).status).toBe(503);
+    });
     expect(calls).toBe(0);
   });
   it("keeps credentials server-side and uses the selected language with one voice", async () => {
@@ -32,7 +35,7 @@ describe("website voice connection", () => {
       const form = init!.body as FormData;
       const session = JSON.parse(String(form.get("session")));
       expect(session.instructions).toContain("natural Canadian French");
-      expect(session.audio.output.voice).toBe("marin");
+      expect(session.audio.output.voice).toBe("approved-fr-test-fixture");
       expect(session.audio.input.turn_detection.interrupt_response).toBe(true);
       return new Response("v=0\r\ns=answer\r\n");
     };
