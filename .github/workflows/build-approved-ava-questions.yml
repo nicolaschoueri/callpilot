@@ -35,6 +35,8 @@ jobs:
               clips = json.loads(Path('assets/ava-approved-questions.json').read_text())
               for clip in clips:
                   path = Path(clip['path'])
+                  if path.exists() and path.stat().st_size > 1000:
+                      continue
                   path.parent.mkdir(exist_ok=True)
                   voice, rate, pitch = profiles[clip['lang']]
                   for attempt in range(3):

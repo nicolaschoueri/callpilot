@@ -293,5 +293,245 @@
     "lang": "fr",
     "text": "Parfait, merci. J’ai tous les renseignements nécessaires. Votre demande est maintenant enregistrée et prête à être transmise à l’équipe de service.",
     "path": "audio/approved-fr-complete.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "What service do you need? You can also ask to cancel, reschedule, or speak to the owner.",
+    "path": "audio/approved-en-v3-issue.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "De quel service avez-vous besoin? Vous pouvez aussi demander d’annuler ou de reporter un rendez-vous, ou de parler au propriétaire.",
+    "path": "audio/approved-fr-v3-issue.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "Please describe the service problem or work you need.",
+    "path": "audio/approved-en-v3-scope.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "Veuillez décrire le problème ou les travaux dont vous avez besoin.",
+    "path": "audio/approved-fr-v3-scope.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "What's your role and who will be the on-site contact?",
+    "path": "audio/approved-en-v3-role.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "Quel est votre rôle et qui sera la personne-ressource sur place?",
+    "path": "audio/approved-fr-v3-role.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "Perfect. What city are you located in?",
+    "path": "audio/approved-en-v3-city.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "Parfait. Dans quelle ville êtes-vous situé?",
+    "path": "audio/approved-fr-v3-city.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "What's the full service address, including the street number and street name?",
+    "path": "audio/approved-en-v3-address.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "Quelle est l’adresse complète de service, incluant le numéro civique et le nom de la rue?",
+    "path": "audio/approved-fr-v3-address.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "Is there fire, smoke, a gas smell, electrical sparking, or any immediate danger?",
+    "path": "audio/approved-en-v3-safety.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "Y a-t-il un incendie, de la fumée, une odeur de gaz, des étincelles électriques ou un danger immédiat?",
+    "path": "audio/approved-fr-v3-safety.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "Is this an emergency requiring service today, or a regular service request?",
+    "path": "audio/approved-en-v3-urgency.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "S’agit-il d’une urgence nécessitant un service aujourd’hui ou d’une demande régulière?",
+    "path": "audio/approved-fr-v3-urgency.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "Are you authorized to request this work, or who needs to approve it?",
+    "path": "audio/approved-en-v3-authorization.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "Êtes-vous autorisé à demander ces travaux ou qui doit les approuver?",
+    "path": "audio/approved-fr-v3-authorization.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "What date would you prefer for the service?",
+    "path": "audio/approved-en-v3-date.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "Quelle date préférez-vous pour le service?",
+    "path": "audio/approved-fr-v3-date.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "What time or arrival window would you prefer?",
+    "path": "audio/approved-en-v3-time.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "Quelle heure ou quelle plage d’arrivée préférez-vous?",
+    "path": "audio/approved-fr-v3-time.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "For this urgent request, what dispatch time would you prefer today? The owner must confirm availability.",
+    "path": "audio/approved-en-v3-dispatch.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "Pour cette demande urgente, à quelle heure souhaitez-vous une intervention aujourd’hui? Le propriétaire doit confirmer les disponibilités.",
+    "path": "audio/approved-fr-v3-dispatch.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "What is the date and time of the appointment you want to change?",
+    "path": "audio/approved-en-v3-original.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "Quelle est la date et l’heure du rendez-vous que vous souhaitez modifier?",
+    "path": "audio/approved-fr-v3-original.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "What would you like the owner to know?",
+    "path": "audio/approved-en-v3-reason.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "Que souhaitez-vous communiquer au propriétaire?",
+    "path": "audio/approved-fr-v3-reason.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "Thank you for calling. I'm Ava. How can I help you today?",
+    "path": "audio/approved-en-v3-greeting.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "Merci d’avoir appelé. Ici Ava. Comment puis-je vous aider aujourd’hui?",
+    "path": "audio/approved-fr-v3-greeting.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "If there is immediate danger, move to a safe place and contact local emergency services. This demo cannot dispatch emergency assistance. I can collect a callback request for the business.",
+    "path": "audio/approved-en-v3-danger.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "En cas de danger immédiat, mettez-vous en sécurité et contactez les services d’urgence locaux. Cette démo ne peut pas envoyer de secours. Je peux recueillir une demande de rappel pour l’entreprise.",
+    "path": "audio/approved-fr-v3-danger.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "This location is outside the configured service area. I can record a request for the owner to review, but cannot promise service.",
+    "path": "audio/approved-en-v3-area.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "Cette adresse est à l’extérieur de la zone de service configurée. Je peux recueillir une demande à examiner par le propriétaire, sans promettre de service.",
+    "path": "audio/approved-fr-v3-area.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "The business is currently outside its configured hours. I can collect a callback request; the owner must confirm the response time.",
+    "path": "audio/approved-en-v3-hours.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "L’entreprise est actuellement fermée selon l’horaire configuré. Je peux recueillir une demande de rappel; le propriétaire doit confirmer le délai de réponse.",
+    "path": "audio/approved-fr-v3-hours.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "I can record your request for the owner to call you back. This website demo does not transfer a real phone call.",
+    "path": "audio/approved-en-v3-handoff.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "Je peux recueillir votre demande de rappel par le propriétaire. Cette démo sur le site ne transfère pas de véritable appel.",
+    "path": "audio/approved-fr-v3-handoff.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "I will classify this as a sales or spam call and keep it separate from customer service requests.",
+    "path": "audio/approved-en-v3-filter.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "Je vais classer cet appel comme sollicitation commerciale ou pourriel et le séparer des demandes de service.",
+    "path": "audio/approved-fr-v3-filter.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "Please review the details on screen, especially your address, phone number, date and time. You can correct any field before confirming.",
+    "path": "audio/approved-en-v3-review.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "Veuillez vérifier les détails à l’écran, surtout l’adresse, le téléphone, la date et l’heure. Vous pouvez corriger chaque champ avant de confirmer.",
+    "path": "audio/approved-fr-v3-review.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "Thank you. Your simulated request is saved in the demo portal for owner review. No real appointment, dispatch or text message has been sent.",
+    "path": "audio/approved-en-v3-complete.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "Merci. Votre demande simulée est enregistrée dans le portail démo pour examen par le propriétaire. Aucun vrai rendez-vous, envoi de technicien ou message texte n’a été effectué.",
+    "path": "audio/approved-fr-v3-complete.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "Please provide a ten-digit callback number, including the area code.",
+    "path": "audio/approved-en-v3-invalidPhone.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "Veuillez fournir un numéro de rappel de dix chiffres, incluant l’indicatif régional.",
+    "path": "audio/approved-fr-v3-invalidPhone.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "Please include the street number and street name in the service address.",
+    "path": "audio/approved-en-v3-invalidAddress.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "Veuillez inclure le numéro civique et le nom de la rue dans l’adresse de service.",
+    "path": "audio/approved-fr-v3-invalidAddress.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "Please choose homeowner, contractor, property manager or business.",
+    "path": "audio/approved-en-v3-unknownType.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "Veuillez choisir résidence, entrepreneur, gestionnaire immobilier ou entreprise.",
+    "path": "audio/approved-fr-v3-unknownType.mp3"
   }
 ]
