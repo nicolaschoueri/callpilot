@@ -1,0 +1,297 @@
+[
+  {
+    "lang": "en",
+    "text": "Are you calling for your own home, as a contractor, for a property you manage, or for a business?",
+    "path": "audio/approved-en-00-type.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "Appelez-vous pour votre résidence, comme entrepreneur, pour un immeuble que vous gérez ou pour une entreprise?",
+    "path": "audio/approved-fr-00-type.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "What's the name of your company?",
+    "path": "audio/approved-en-01-company.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "Quel est le nom de votre entreprise?",
+    "path": "audio/approved-fr-01-company.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "What's your name and role at the company?",
+    "path": "audio/approved-en-02-name.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "Quel est votre nom et votre rôle dans l’entreprise?",
+    "path": "audio/approved-fr-02-name.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "What's the full job-site address?",
+    "path": "audio/approved-en-03-address.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "Quelle est l’adresse complète du chantier?",
+    "path": "audio/approved-fr-03-address.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "Please describe the work you need done at the job site.",
+    "path": "audio/approved-en-04-scope.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "Pouvez-vous décrire les travaux requis sur le chantier?",
+    "path": "audio/approved-fr-04-scope.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "How urgent is this — do you need same-day service, or can it be scheduled?",
+    "path": "audio/approved-en-05-urgency.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "Quel est le niveau d’urgence — avez-vous besoin d’un service aujourd’hui ou peut-on le planifier?",
+    "path": "audio/approved-fr-05-urgency.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "What date and time would you like the technician on site?",
+    "path": "audio/approved-en-06-time.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "À quelle date et à quelle heure souhaitez-vous que le technicien soit sur place?",
+    "path": "audio/approved-fr-06-time.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "What's the best callback number for the site contact?",
+    "path": "audio/approved-en-07-phone.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "Quel est le meilleur numéro pour joindre la personne-ressource du chantier?",
+    "path": "audio/approved-fr-07-phone.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "Do you have a PO or job number for this request? You can say no.",
+    "path": "audio/approved-en-08-po.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "Avez-vous un numéro de bon de commande ou de projet pour cette demande? Vous pouvez dire non.",
+    "path": "audio/approved-fr-08-po.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "What's your name and property-management company?",
+    "path": "audio/approved-en-09-name.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "Quel est votre nom et le nom de votre société de gestion?",
+    "path": "audio/approved-fr-09-name.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "Which property or building is this for?",
+    "path": "audio/approved-en-10-property.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "Pour quel immeuble ou quelle propriété appelez-vous?",
+    "path": "audio/approved-fr-10-property.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "Is there a specific unit or suite number?",
+    "path": "audio/approved-en-11-unit.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "Y a-t-il un numéro d’unité ou de local?",
+    "path": "audio/approved-fr-11-unit.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "Please describe the service issue.",
+    "path": "audio/approved-en-12-scope.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "Pouvez-vous décrire le problème de service?",
+    "path": "audio/approved-fr-12-scope.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "Is this an emergency or can it be scheduled normally?",
+    "path": "audio/approved-en-13-urgency.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "S’agit-il d’une urgence ou peut-on planifier le service normalement?",
+    "path": "audio/approved-fr-13-urgency.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "How should the technician access the property or coordinate with the tenant?",
+    "path": "audio/approved-en-14-access.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "Comment le technicien doit-il accéder à la propriété ou coordonner l’accès avec le locataire?",
+    "path": "audio/approved-fr-14-access.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "What date and time works best?",
+    "path": "audio/approved-en-15-time.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "Quelle date et quelle heure vous conviennent le mieux?",
+    "path": "audio/approved-fr-15-time.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "What's the best callback number?",
+    "path": "audio/approved-en-16-phone.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "Quel est le meilleur numéro pour vous joindre?",
+    "path": "audio/approved-fr-16-phone.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "What's the business or company name?",
+    "path": "audio/approved-en-17-company.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "Quel est le nom de l’entreprise?",
+    "path": "audio/approved-fr-17-company.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "What's your name and role there?",
+    "path": "audio/approved-en-18-name.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "What's the service location address?",
+    "path": "audio/approved-en-19-address.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "Quelle est l’adresse du lieu de service?",
+    "path": "audio/approved-fr-19-address.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "Please describe the service you need.",
+    "path": "audio/approved-en-20-scope.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "Pouvez-vous décrire le service dont vous avez besoin?",
+    "path": "audio/approved-fr-20-scope.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "Is this affecting your operations or preventing the business from operating normally?",
+    "path": "audio/approved-en-21-impact.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "Est-ce que ce problème affecte vos opérations ou empêche l’entreprise de fonctionner normalement?",
+    "path": "audio/approved-fr-21-impact.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "How urgent is the service request?",
+    "path": "audio/approved-en-22-urgency.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "Quel est le niveau d’urgence de la demande?",
+    "path": "audio/approved-fr-22-urgency.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "When would you like a technician to come?",
+    "path": "audio/approved-en-23-time.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "Quand souhaitez-vous qu’un technicien se présente?",
+    "path": "audio/approved-fr-23-time.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "May I have your name, please?",
+    "path": "audio/approved-en-25-name.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "Puis-je avoir votre nom, s’il vous plaît?",
+    "path": "audio/approved-fr-25-name.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "What's the full service address?",
+    "path": "audio/approved-en-26-address.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "Quelle est l’adresse complète du service?",
+    "path": "audio/approved-fr-26-address.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "Please tell me what's happening and what service you need.",
+    "path": "audio/approved-en-27-scope.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "Pouvez-vous me décrire ce qui se passe et le service dont vous avez besoin?",
+    "path": "audio/approved-fr-27-scope.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "Is this an emergency, or would a regular appointment work for you?",
+    "path": "audio/approved-en-28-urgency.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "S’agit-il d’une urgence ou un rendez-vous régulier vous conviendrait-il?",
+    "path": "audio/approved-fr-28-urgency.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "What day and time would work best for you?",
+    "path": "audio/approved-en-29-time.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "Quelle journée et quelle heure vous conviendraient le mieux?",
+    "path": "audio/approved-fr-29-time.mp3"
+  },
+  {
+    "lang": "en",
+    "text": "Perfect, thank you. I have everything I need. Your service request is now recorded and ready to be sent to the service team.",
+    "path": "audio/approved-en-complete.mp3"
+  },
+  {
+    "lang": "fr",
+    "text": "Parfait, merci. J’ai tous les renseignements nécessaires. Votre demande est maintenant enregistrée et prête à être transmise à l’équipe de service.",
+    "path": "audio/approved-fr-complete.mp3"
+  }
+]

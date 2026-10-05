@@ -1,0 +1,72 @@
+name: Record questions in original Ava voices
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/build-approved-ava-questions.yml'
+      - 'assets/ava-approved-questions.json'
+permissions:
+  contents: write
+concurrency:
+  group: ava-approved-question-recordings
+  cancel-in-progress: false
+jobs:
+  record:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install existing voice generator
+        run: pip install edge-tts
+      - name: Generate with the original voice settings
+        run: |
+          python - <<'PY'
+          import asyncio, json
+          from pathlib import Path
+          import edge_tts
+          profiles = {
+              'en': ('en-US-AriaNeural', '-12%', '-6Hz'),
+              'fr': ('fr-CA-SylvieNeural', '-5%', '-2Hz'),
+          }
+          async def main():
+              clips = json.loads(Path('assets/ava-approved-questions.json').read_text())
+              for clip in clips:
+                  path = Path(clip['path'])
+                  path.parent.mkdir(exist_ok=True)
+                  voice, rate, pitch = profiles[clip['lang']]
+                  for attempt in range(3):
+                      try:
+                          await edge_tts.Communicate(clip['text'], voice, rate=rate, pitch=pitch).save(str(path))
+                          if path.stat().st_size < 1000:
+                              raise RuntimeError('Empty audio')
+                          break
+                      except Exception:
+                          if attempt == 2:
+                              raise
+                          await asyncio.sleep(2)
+                  print('Recorded', path)
+              for clip in clips:
+                  if Path(clip['path']).stat().st_size < 1000:
+                      raise RuntimeError('Missing recording')
+          asyncio.run(main())
+          PY
+      - name: Check that every recording decodes
+        run: |
+          python - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          for clip in json.loads(Path('assets/ava-approved-questions.json').read_text()):
+              subprocess.run(['ffmpeg', '-v', 'error', '-i', clip['path'], '-f', 'null', '-'], check=True)
+          PY
+      - name: Save original-voice recordings
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add audio/approved-*.mp3
+          git diff --cached --quiet && exit 0
+          git commit -m 'Add adaptive questions using original English and French Ava voices'
+          git pull --rebase origin main
+          git push
