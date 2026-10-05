@@ -212,6 +212,79 @@ main{padding:26px 28px 60px;min-width:0}.topbar{display:flex;justify-content:spa
 <div class="card" style="margin-top:14px"><h2 style="margin:0" data-en="Plumbing emergency rules" data-fr="Règles d’urgence plomberie">Plumbing emergency rules</h2><div class="notice" data-en="Flag active flooding, burst pipes, sewage backup, major uncontrolled leaks and other configured hazards as URGENT. Ava may attempt a transfer, but must never promise technician arrival unless the business has confirmed it." data-fr="Marquer les inondations actives, tuyaux éclatés, refoulements d’égout, fuites majeures non contrôlées et autres dangers configurés comme URGENTS. Ava peut tenter un transfert, mais ne doit jamais promettre l’arrivée d’un technicien sans confirmation de l’entreprise.">Flag active flooding, burst pipes, sewage backup, major uncontrolled leaks and other configured hazards as URGENT. Ava may attempt a transfer, but must never promise technician arrival unless the business has confirmed it.</div><div class="route-map"><div class="route"><b>1. Intake</b><p>Name, phone, address, problem</p></div><div class="route"><b>2. Triage</b><p>Urgency + safety + preferred time</p></div><div class="route"><b>3. Notify</b><p>Owner alert + customer confirmation</p></div><div class="route"><b>4. Follow-up</b><p>Book, reschedule, cancel or call back</p></div></div></div>
 <div class="card" style="margin-top:14px"><h2 style="margin:0" data-en="Lead inbox preview" data-fr="Aperçu des demandes">Lead inbox preview</h2><div class="table" style="margin-top:12px"><div class="row head"><span>Customer</span><span>Status</span><span>Priority</span><span>Issue</span><span>Action</span></div><div class="row"><strong>Marc D.</strong><span class="pill">New</span><span class="pill red">URGENT</span><span>Burst pipe</span><span class="wide">Transfer owner / SMS</span></div><div class="row"><strong>Sophie L.</strong><span class="pill green">Booked</span><span>Normal</span><span>Leaking faucet</span><span class="wide">Calendar confirmed</span></div></div><div class="notice" data-en="Calendar remains optional. Without one, Ava records the preferred time and tells the customer the business will confirm it. With a connected calendar, Ava can book, reschedule or cancel according to the company’s rules." data-fr="Le calendrier demeure optionnel. Sans calendrier, Ava note l’heure préférée et indique au client que l’entreprise la confirmera. Avec un calendrier connecté, Ava peut réserver, déplacer ou annuler selon les règles de l’entreprise.">Calendar remains optional. Without one, Ava records the preferred time and tells the customer the business will confirm it. With a connected calendar, Ava can book, reschedule or cancel according to the company’s rules.</div></div>
 </section>
+
+<section id="actionCenter" class="page active" style="display:block;margin-top:14px">
+  <div class="card">
+    <h2 style="margin:0" data-en="Needs attention" data-fr="À traiter">Needs attention</h2>
+    <p data-en="Everything that needs a decision or follow-up, in one place." data-fr="Tout ce qui demande une décision ou un suivi, au même endroit.">Everything that needs a decision or follow-up, in one place.</p>
+    <div class="table">
+      <div class="row head"><span data-en="Customer" data-fr="Client">Customer</span><span data-en="Status" data-fr="Statut">Status</span><span data-en="Priority" data-fr="Priorité">Priority</span><span data-en="Next step" data-fr="Prochaine étape">Next step</span><span data-en="Actions" data-fr="Actions">Actions</span></div>
+      <div class="row"><strong>Marc D.</strong><span class="pill" data-en="New" data-fr="Nouvelle">New</span><span class="pill red" data-en="Urgent" data-fr="Urgente">Urgent</span><span data-en="Assign technician" data-fr="Assigner un technicien">Assign technician</span><span class="wide" data-en="Call • Text • Assign" data-fr="Appeler • Texter • Assigner">Call • Text • Assign</span></div>
+      <div class="row"><strong>Alex R.</strong><span class="pill" data-en="Awaiting confirmation" data-fr="En attente de confirmation">Awaiting confirmation</span><span data-en="Normal" data-fr="Normale">Normal</span><span data-en="Confirm appointment" data-fr="Confirmer le rendez-vous">Confirm appointment</span><span class="wide" data-en="Call • Text • Book" data-fr="Appeler • Texter • Réserver">Call • Text • Book</span></div>
+    </div>
+  </div>
+
+  <div class="split" style="margin-top:14px">
+    <div class="card">
+      <h2 style="margin:0" data-en="Request workflow" data-fr="Suivi des demandes">Request workflow</h2>
+      <p data-en="Move every request from first contact to completion." data-fr="Suivez chaque demande, du premier contact jusqu’à sa fermeture.">Move every request from first contact to completion.</p>
+      <div class="notice" data-en="New → Contacted → Scheduled → Assigned → Completed / Cancelled" data-fr="Nouvelle → Client joint → Rendez-vous fixé → Assignée → Terminée / Annulée">New → Contacted → Scheduled → Assigned → Completed / Cancelled</div>
+      <div class="field"><label data-en="Assigned technician" data-fr="Technicien assigné">Assigned technician</label><select><option data-en="Unassigned" data-fr="Non assigné">Unassigned</option><option>Mike</option><option>Daniel</option></select></div>
+    </div>
+    <div class="card">
+      <h2 style="margin:0" data-en="Customer history" data-fr="Historique du client">Customer history</h2>
+      <p data-en="See previous calls, requests, appointments and notes before calling back." data-fr="Consultez les appels, demandes, rendez-vous et notes précédents avant de rappeler.">See previous calls, requests, appointments and notes before calling back.</p>
+      <div class="notice"><b>Marc D.</b><br><span data-en="2 previous calls • 1 completed job • Last service: Sep 18" data-fr="2 appels précédents • 1 intervention terminée • Dernier service : 18 sept.">2 previous calls • 1 completed job • Last service: Sep 18</span></div>
+    </div>
+  </div>
+
+  <div class="split" style="margin-top:14px">
+    <div class="card">
+      <h2 style="margin:0" data-en="Call recording & transcript" data-fr="Enregistrement et transcription">Call recording & transcript</h2>
+      <p data-en="Review what happened without listening to the entire call." data-fr="Voyez rapidement ce qui s’est passé sans réécouter tout l’appel.">Review what happened without listening to the entire call.</p>
+      <div class="notice" data-en="AI summary: Active burst pipe. Water shut off. Customer requests service today. Owner alert sent." data-fr="Résumé IA : Tuyau éclaté actif. Eau coupée. Le client demande une intervention aujourd’hui. Alerte envoyée au propriétaire.">AI summary: Active burst pipe. Water shut off. Customer requests service today. Owner alert sent.</div>
+      <button class="primary" type="button" data-en="▶ Play call" data-fr="▶ Écouter l’appel">▶ Play call</button>
+      <button class="secondary" type="button" data-en="View transcript" data-fr="Voir la transcription">View transcript</button>
+    </div>
+    <div class="card">
+      <h2 style="margin:0" data-en="Ava activity" data-fr="Activité d’Ava">Ava activity</h2>
+      <p data-en="A clear record of what Ava did during and after the call." data-fr="Un suivi clair des actions effectuées par Ava pendant et après l’appel.">A clear record of what Ava did during and after the call.</p>
+      <div class="saved-rule" data-en="✓ Answered the call and qualified the request" data-fr="✓ Appel pris en charge et demande qualifiée">✓ Answered the call and qualified the request</div>
+      <div class="saved-rule" data-en="✓ Urgency identified" data-fr="✓ Urgence identifiée">✓ Urgency identified</div>
+      <div class="saved-rule" data-en="✓ Owner SMS sent" data-fr="✓ SMS envoyé au propriétaire">✓ Owner SMS sent</div>
+      <div class="saved-rule" data-en="✓ Customer confirmation sent" data-fr="✓ Confirmation envoyée au client">✓ Customer confirmation sent</div>
+    </div>
+  </div>
+
+  <div class="split" style="margin-top:14px">
+    <div class="card">
+      <h2 style="margin:0" data-en="Availability & notifications" data-fr="Disponibilité et notifications">Availability & notifications</h2>
+      <div class="toggle-row"><div><b data-en="Emergency only" data-fr="Urgences seulement">Emergency only</b><span data-en="Ava accepts only configured urgent requests." data-fr="Ava accepte uniquement les demandes urgentes configurées.">Ava accepts only configured urgent requests.</span></div><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+      <div class="toggle-row"><div><b data-en="Fully booked today" data-fr="Complet aujourd’hui">Fully booked today</b><span data-en="Collect preferred times without promising an appointment." data-fr="Recueillir les préférences sans promettre de rendez-vous.">Collect preferred times without promising an appointment.</span></div><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+      <div class="toggle-row"><div><b data-en="SMS for urgent requests" data-fr="SMS pour les demandes urgentes">SMS for urgent requests</b><span data-en="Alert the emergency contact immediately." data-fr="Alerter immédiatement le contact d’urgence.">Alert the emergency contact immediately.</span></div><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+      <div class="toggle-row"><div><b data-en="Email for normal requests" data-fr="Courriel pour les demandes régulières">Email for normal requests</b><span data-en="Send the call summary to the configured inbox." data-fr="Envoyer le résumé de l’appel à l’adresse configurée.">Send the call summary to the configured inbox.</span></div><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+    </div>
+    <div class="card">
+      <h2 style="margin:0" data-en="Job outcome" data-fr="Résultat de l’intervention">Job outcome</h2>
+      <p data-en="Track actual results so CallPilot can separate estimated opportunity value from confirmed revenue." data-fr="Suivez les résultats réels afin de distinguer la valeur potentielle des revenus confirmés.">Track actual results so CallPilot can separate estimated opportunity value from confirmed revenue.</p>
+      <div class="field"><label data-en="Was this job won?" data-fr="Cette intervention a-t-elle été gagnée?">Was this job won?</label><select><option data-en="Not confirmed" data-fr="Non confirmé">Not confirmed</option><option data-en="Won" data-fr="Gagnée">Won</option><option data-en="Lost" data-fr="Perdue">Lost</option></select></div>
+      <div class="field"><label data-en="Actual invoice amount" data-fr="Montant réel de la facture">Actual invoice amount</label><input type="number" placeholder="$0"></div>
+      <button class="primary" type="button" data-en="Save outcome" data-fr="Enregistrer le résultat">Save outcome</button>
+      <div class="notice" style="margin-top:12px" data-en="Confirmed revenue is counted only after the business marks a job as won and enters the actual invoice amount." data-fr="Les revenus confirmés sont comptabilisés seulement lorsque l’entreprise indique que l’intervention est gagnée et inscrit le montant réel de la facture.">Confirmed revenue is counted only after the business marks a job as won and enters the actual invoice amount.</div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:14px">
+    <h2 style="margin:0" data-en="Performance" data-fr="Performance">Performance</h2>
+    <p data-en="Measure what CallPilot actually contributes to the business." data-fr="Mesurez la contribution réelle de CallPilot à l’entreprise.">Measure what CallPilot actually contributes to the business.</p>
+    <div class="route-map">
+      <div class="route"><b>31</b><p data-en="Calls answered" data-fr="Appels pris en charge">Calls answered</p></div>
+      <div class="route"><b>7</b><p data-en="Missed calls recovered" data-fr="Appels manqués récupérés">Missed calls recovered</p></div>
+      <div class="route"><b>5</b><p data-en="Jobs booked" data-fr="Interventions réservées">Jobs booked</p></div>
+      <div class="route"><b>$1,680</b><p data-en="Confirmed revenue" data-fr="Revenus confirmés">Confirmed revenue</p></div>
+    </div>
+  </div>
+</section>
 </main>
 </div>
 
