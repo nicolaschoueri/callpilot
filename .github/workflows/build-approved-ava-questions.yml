@@ -20,7 +20,7 @@ jobs:
         with:
           python-version: '3.12'
       - name: Install existing voice generator
-        run: pip install edge-tts
+        run: pip install edge-tts imageio-ffmpeg
       - name: Generate with the original voice settings
         run: |
           python - <<'PY'
@@ -56,10 +56,10 @@ jobs:
       - name: Check that every recording decodes
         run: |
           python - <<'PY'
-          import json, subprocess
+          import json, subprocess, imageio_ffmpeg
           from pathlib import Path
           for clip in json.loads(Path('assets/ava-approved-questions.json').read_text()):
-              subprocess.run(['ffmpeg', '-v', 'error', '-i', clip['path'], '-f', 'null', '-'], check=True)
+              subprocess.run([imageio_ffmpeg.get_ffmpeg_exe(), '-v', 'error', '-i', clip['path'], '-f', 'null', '-'], check=True)
           PY
       - name: Save original-voice recordings
         run: |
