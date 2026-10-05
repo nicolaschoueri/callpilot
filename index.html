@@ -1229,6 +1229,7 @@ if('speechSynthesis' in window)speechSynthesis.onvoiceschanged=()=>speechSynthes
   }
   document.getElementById("siteEn")?.addEventListener("click",()=>setTimeout(apply,0));
   document.getElementById("siteFr")?.addEventListener("click",()=>setTimeout(apply,0));
+  window.addEventListener("load",()=>setTimeout(apply,0));
   setTimeout(apply,0);
 })();
 </script>
