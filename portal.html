@@ -313,6 +313,18 @@ main{padding:26px 28px 60px;min-width:0}.topbar{display:flex;justify-content:spa
     </div>
     <div class="notice" data-en="Example: “Mike from ABC Construction” is handled as a contractor lead, not as a homeowner. Ava can capture the job-site details and route the request to the plumbing company’s normal workflow."
          data-fr="Exemple : « Mike d’ABC Construction » est traité comme une demande d’entrepreneur, et non comme un propriétaire résidentiel. Ava peut recueillir les détails du chantier et acheminer la demande selon le processus habituel de l’entreprise de plomberie.">Example: “Mike from ABC Construction” is handled as a contractor lead, not as a homeowner. Ava can capture the job-site details and route the request to the plumbing company’s normal workflow.</div>
+    <div id="avaIntakeDemo" style="margin-top:16px;padding:16px;border:1px solid rgba(24,48,70,.08);border-radius:16px;background:#edf3f8">
+      <div style="display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap">
+        <div><b data-en="Try the Ava conversation" data-fr="Essayez la conversation avec Ava">Try the Ava conversation</b><div style="color:#886528;font-size:11px;margin-top:4px" data-en="Type what the caller would say. Ava detects the caller type and asks only for missing details." data-fr="Écrivez ce que dirait l’appelant. Ava détecte le type d’appelant et demande seulement les renseignements manquants.">Type what the caller would say. Ava detects the caller type and asks only for missing details.</div></div>
+        <button class="smallbtn" type="button" id="avaDemoReset" data-en="Restart" data-fr="Recommencer">Restart</button>
+      </div>
+      <div id="avaDemoChat" class="transcript" style="margin-top:12px;max-height:330px;overflow:auto"></div>
+      <form id="avaDemoForm" style="display:flex;gap:8px;margin-top:10px">
+        <input id="avaDemoInput" style="flex:1;min-width:0;background:white;border:1px solid rgba(24,48,70,.12);color:#243d56;padding:11px 12px;border-radius:11px" autocomplete="off" data-placeholder-en="e.g. Hi, Mike from ABC Construction. We need a plumber tomorrow at 1250 René-Lévesque." data-placeholder-fr="ex. Bonjour, Mike d’ABC Construction. Nous avons besoin d’un plombier demain au 1250 René-Lévesque." placeholder="e.g. Hi, Mike from ABC Construction. We need a plumber tomorrow at 1250 René-Lévesque.">
+        <button class="save" type="submit" data-en="Send" data-fr="Envoyer">Send</button>
+      </form>
+      <div id="avaDemoDetected" class="notice" style="margin-bottom:0" data-en="Caller type: waiting for caller" data-fr="Type d’appelant : en attente">Caller type: waiting for caller</div>
+    </div>
     <div class="split" style="margin-top:14px">
       <div class="field"><label data-en="Caller type" data-fr="Type d’appelant">Caller type</label><select id="callerType"><option data-en="Homeowner" data-fr="Propriétaire résidentiel">Homeowner</option><option data-en="Contractor" data-fr="Entrepreneur" selected>Contractor</option><option data-en="Property manager" data-fr="Gestionnaire immobilier">Property manager</option><option data-en="Commercial client" data-fr="Client commercial">Commercial client</option></select></div>
       <div class="field"><label data-en="B2B account status" data-fr="Statut du compte B2B">B2B account status</label><select><option data-en="New contractor / account" data-fr="Nouvel entrepreneur / compte">New contractor / account</option><option data-en="Existing contractor / account" data-fr="Entrepreneur / compte existant">Existing contractor / account</option></select></div>
@@ -475,6 +487,59 @@ main{padding:26px 28px 60px;min-width:0}.topbar{display:flex;justify-content:spa
  document.getElementById("enBtn")?.addEventListener("click",()=>setTimeout(sync,0));
  document.getElementById("frBtn")?.addEventListener("click",()=>setTimeout(sync,0));
  sync();
+})();
+</script>
+<script id="ava-adaptive-intake-demo">
+(function(){
+ const chat=document.getElementById("avaDemoChat"),form=document.getElementById("avaDemoForm"),input=document.getElementById("avaDemoInput"),det=document.getElementById("avaDemoDetected"),reset=document.getElementById("avaDemoReset"),typeSel=document.getElementById("callerType");
+ if(!chat||!form||!input)return;
+ let state={type:null,company:false,name:false,address:false,scope:false,time:false,phone:false,po:false,turn:0};
+ const fr=()=>document.documentElement.lang==="fr";
+ const add=(who,text)=>{const d=document.createElement("div");d.className="bubble "+(who==="Ava"?"ava":"");const s=document.createElement("small");s.textContent=who;d.appendChild(s);d.appendChild(document.createTextNode(text));chat.appendChild(d);chat.scrollTop=chat.scrollHeight};
+ function detect(t){
+  const x=t.toLowerCase();
+  if(/contractor|construction|builder|general contractor|entrepreneur|chantier|construction|contracteur/.test(x))return"contractor";
+  if(/property manager|property management|building manager|gestionnaire|immeuble|condo board|syndicat/.test(x))return"property";
+  if(/business|restaurant|store|office|warehouse|commercial|entreprise|commerce|bureau/.test(x))return"commercial";
+  if(/my house|my home|chez moi|ma maison|homeowner|propriétaire/.test(x))return"homeowner";
+  return state.type;
+ }
+ function absorb(t){
+  const x=t.toLowerCase(); state.type=detect(t)||state.type;
+  if(/\b(inc\.?|ltd\.?|construction|plumbing|plomberie|services|company|corp\.?|entreprise)\b/i.test(t))state.company=true;
+  if(/\b(i'm|i am|this is|je suis|ici)\s+[a-zà-ÿ'-]+/i.test(t))state.name=true;
+  if(/\d{1,6}\s+[a-zà-ÿ0-9.' -]+(street|st\.?|road|rd\.?|avenue|ave\.?|boulevard|blvd\.?|rue|chemin|ch\.?)/i.test(t)||/\d{1,6}\s+[^,.]{3,}/.test(t))state.address=true;
+  if(/plumb|leak|pipe|drain|toilet|faucet|water|chauff|climat|electric|roof|fuite|tuyau|drain|toilette|robinet|eau|élect|toit/i.test(x))state.scope=true;
+  if(/today|tomorrow|morning|afternoon|evening|\b\d{1,2}(:\d{2})?\s*(am|pm)\b|aujourd|demain|matin|après-midi|soir/i.test(x))state.time=true;
+  if(/(?:\+?1[-. ]?)?\(?\d{3}\)?[-. ]?\d{3}[-. ]?\d{4}/.test(t))state.phone=true;
+  if(/\b(po|purchase order|job number|bon de commande|numéro de projet)\b/i.test(x))state.po=true;
+ }
+ function label(){const m={contractor:["Contractor","Entrepreneur"],property:["Property manager","Gestionnaire immobilier"],commercial:["Commercial client","Client commercial"],homeowner:["Homeowner","Propriétaire résidentiel"]};return state.type?m[state.type][fr()?1:0]:(fr()?"À déterminer":"To determine")}
+ function next(){
+  if(!state.type)return fr()?"Bien sûr. Appelez-vous pour votre résidence, pour une entreprise ou pour un chantier?":"Absolutely. Are you calling about your home, a business, or a job site?";
+  if(state.type==="contractor"){
+   if(!state.company)return fr()?"Parfait. Quel est le nom de votre entreprise?":"Got it. What's your company name?";
+   if(!state.name)return fr()?"Et quel est votre nom?":"And what's your name?";
+   if(!state.address)return fr()?"Quelle est l’adresse du chantier?":"What's the job-site address?";
+   if(!state.scope)return fr()?"Quel travail de plomberie est requis sur le chantier?":"What plumbing work do you need at the site?";
+   if(!state.time)return fr()?"Quand avez-vous besoin du plombier?":"When do you need the plumber there?";
+   if(!state.phone)return fr()?"Quel est le meilleur numéro pour vous joindre?":"What's the best callback number?";
+   if(!state.po)return fr()?"Avez-vous un numéro de bon de commande ou de projet à ajouter? Vous pouvez dire non.":"Do you have a PO or job number you'd like me to add? You can say no.";
+  } else {
+   if(!state.address)return fr()?"Quelle est l’adresse du service?":"What's the service address?";
+   if(!state.scope)return fr()?"Pouvez-vous me décrire le problème ou le service requis?":"Can you describe the issue or service you need?";
+   if(!state.time)return fr()?"Quand aimeriez-vous recevoir le service?":"When would you like service?";
+   if(!state.phone)return fr()?"Quel est le meilleur numéro pour vous joindre?":"What's the best callback number?";
+  }
+  return fr()?"Merci. J’ai les renseignements nécessaires. Je vais transmettre cette demande à l’entreprise avec les détails recueillis.":"Thanks. I have what I need. I'll send this request to the business with the details I've collected.";
+ }
+ function renderDetected(){det.textContent=(fr()?"Type d’appelant : ":"Caller type: ")+label();if(typeSel&&state.type){const idx={homeowner:0,contractor:1,property:2,commercial:3}[state.type];typeSel.selectedIndex=idx}}
+ function start(){state={type:null,company:false,name:false,address:false,scope:false,time:false,phone:false,po:false,turn:0};chat.innerHTML="";add("Ava",fr()?"Merci d’avoir appelé. Ici Ava. Comment puis-je vous aider?":"Thanks for calling. This is Ava. How can I help?");renderDetected();input.placeholder=fr()?input.dataset.placeholderFr:input.dataset.placeholderEn}
+ form.addEventListener("submit",e=>{e.preventDefault();const t=input.value.trim();if(!t)return;add(fr()?"Appelant":"Caller",t);absorb(t);if(/^(no|none|non|aucun|aucune)$/i.test(t)&&state.type==="contractor"&&state.phone)state.po=true;renderDetected();add("Ava",next());input.value="";input.focus()});
+ reset.addEventListener("click",start);
+ document.getElementById("enBtn")?.addEventListener("click",()=>setTimeout(()=>{input.placeholder=input.dataset.placeholderEn;renderDetected()},0));
+ document.getElementById("frBtn")?.addEventListener("click",()=>setTimeout(()=>{input.placeholder=input.dataset.placeholderFr;renderDetected()},0));
+ start();
 })();
 </script>
 </body>
