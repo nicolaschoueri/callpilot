@@ -79,7 +79,7 @@ main{padding:26px 28px 60px;min-width:0}.topbar{display:flex;justify-content:spa
       <div class="money-inputs">
         <div class="money-input"><label data-en="Recovered leads" data-fr="Demandes récupérées">Recovered leads</label><input id="mrLeads" type="number" min="0" value="7"></div>
         <div class="money-input"><label data-en="Avg. job value" data-fr="Valeur moyenne d’une intervention">Avg. job value</label><input id="mrJob" type="number" min="0" value="420"></div>
-        <div class="money-input"><label data-en="Monthly plan" data-fr="Forfait mensuel">Monthly plan</label><select id="mrPlan"><option value="199">Starter $199</option><option value="349" selected>Growth $349</option><option value="599">Multi-Tech $599</option></select></div>
+        <div class="money-input"><label data-en="Monthly plan" data-fr="Forfait mensuel">Monthly plan</label><select id="mrPlan"><option value="199">Starter $199</option><option value="349" selected>Growth $349</option><option value="599">Multi-Tech $599</option><option value="999">Business $999</option><option value="0">Enterprise — Custom</option></select></div>
       </div>
     </div>
     <div class="money-panel">
@@ -93,6 +93,34 @@ main{padding:26px 28px 60px;min-width:0}.topbar{display:flex;justify-content:spa
       <div class="notice" style="margin-bottom:0" data-en="Use the contractor's own average job value. Completed revenue should only be reported once the business confirms the job was actually won and completed." data-fr="Utilisez la valeur moyenne d’une intervention de l’entreprise. Les revenus réels ne doivent être comptabilisés qu’une fois l’intervention confirmée et terminée.">Use the contractor's own average job value. Completed revenue should only be reported once the business confirms the job was actually won and completed.</div>
     </div>
   </div>
+
+  <div class="card" id="usageBilling" style="margin-top:14px">
+    <div class="section-title" style="margin:0 0 12px">
+      <div><h2 data-en="AI minutes & billing" data-fr="Minutes IA et facturation">AI minutes & billing</h2>
+      <p data-en="Clear usage, limits and overage pricing for every plan." data-fr="Utilisation, limites et frais de dépassement clairement indiqués pour chaque forfait.">Clear usage, limits and overage pricing for every plan.</p></div>
+    </div>
+    <div class="table">
+      <div class="row head" style="grid-template-columns:1fr .8fr .8fr .8fr"><span data-en="Plan" data-fr="Forfait">Plan</span><span data-en="Monthly price" data-fr="Prix mensuel">Monthly price</span><span data-en="Included AI minutes" data-fr="Minutes IA incluses">Included AI minutes</span><span data-en="Overage" data-fr="Dépassement">Overage</span></div>
+      <div class="row" style="grid-template-columns:1fr .8fr .8fr .8fr"><strong>Starter</strong><span>$199</span><span>300 min</span><span>$0.60/min</span></div>
+      <div class="row" style="grid-template-columns:1fr .8fr .8fr .8fr"><strong>Growth</strong><span>$349</span><span>750 min</span><span>$0.50/min</span></div>
+      <div class="row" style="grid-template-columns:1fr .8fr .8fr .8fr"><strong>Multi-Tech</strong><span>$599</span><span>1,500 min</span><span>$0.40/min</span></div>
+      <div class="row" style="grid-template-columns:1fr .8fr .8fr .8fr"><strong>Business</strong><span>$999</span><span>3,000 min</span><span>$0.30/min</span></div>
+      <div class="row" style="grid-template-columns:1fr .8fr .8fr .8fr"><strong>Enterprise</strong><span data-en="Custom" data-fr="Sur mesure">Custom</span><span>5,000+ min</span><span data-en="Custom volume rate" data-fr="Tarif volume sur mesure">Custom volume rate</span></div>
+    </div>
+    <div class="notice">
+      <b data-en="How usage is counted" data-fr="Comment l’utilisation est calculée">How usage is counted</b><br>
+      <span data-en="AI time is billed by the second — no rounding up to the next minute. 30 seconds = 0.5 minute, 45 seconds = 0.75 minute, and 1 minute 20 seconds = 1.33 minutes. If you exceed your included minutes, Ava keeps answering normally and only the extra usage is billed at your plan’s overage rate."
+            data-fr="Le temps IA est facturé à la seconde — aucun arrondissement à la minute supérieure. 30 secondes = 0,5 minute, 45 secondes = 0,75 minute et 1 minute 20 secondes = 1,33 minute. Si vous dépassez les minutes incluses, Ava continue de répondre normalement et seules les minutes supplémentaires sont facturées au tarif de dépassement de votre forfait.">AI time is billed by the second — no rounding up to the next minute. 30 seconds = 0.5 minute, 45 seconds = 0.75 minute, and 1 minute 20 seconds = 1.33 minutes. If you exceed your included minutes, Ava keeps answering normally and only the extra usage is billed at your plan’s overage rate.</span>
+    </div>
+    <div class="money-breakdown" style="margin-top:12px">
+      <div class="money-row"><span data-en="Current plan" data-fr="Forfait actuel">Current plan</span><b id="usagePlan">Growth</b></div>
+      <div class="money-row"><span data-en="AI minutes used" data-fr="Minutes IA utilisées">AI minutes used</span><b id="usageMinutes">418 / 750</b></div>
+      <div class="money-row"><span data-en="Current overage" data-fr="Dépassement actuel">Current overage</span><b id="usageOverage">$0.00</b></div>
+    </div>
+    <div class="notice" data-en="We’ll notify you as you approach your monthly limit. You can upgrade at any time. Ava does not stop answering just because the included minutes have been reached."
+         data-fr="Nous vous aviserons à l’approche de votre limite mensuelle. Vous pouvez changer de forfait en tout temps. Ava ne cesse pas de répondre simplement parce que les minutes incluses ont été atteintes.">We’ll notify you as you approach your monthly limit. You can upgrade at any time. Ava does not stop answering just because the included minutes have been reached.</div>
+  </div>
+
   <div class="section-title"><div><h2 data-en="Recent Ava calls" data-fr="Appels récents d’Ava">Recent Ava calls</h2><p data-en="Every call becomes a structured lead." data-fr="Chaque appel devient une demande structurée.">Every call becomes a structured lead.</p></div></div>
   <div class="table">
     <div class="row head"><span>Customer</span><span>City</span><span>Priority</span><span>Service</span><span>Outcome</span></div>
@@ -385,7 +413,7 @@ main{padding:26px 28px 60px;min-width:0}.topbar{display:flex;justify-content:spa
 (function(){
  const map={
  "Customer":"Client","City":"Ville","Priority":"Priorité","Outcome":"Résultat","Status":"Statut","Issue":"Problème","Action":"Action",
- "Starter $199":"Départ 199 $","Growth $349":"Croissance 349 $","Multi-Tech $599":"Multi-Tech 599 $",
+ "Starter $199":"Départ 199 $","Growth $349":"Croissance 349 $","Multi-Tech $599":"Multi-Tech 599 $","Business $999":"Affaires 999 $","Enterprise — Custom":"Entreprise — Sur mesure",
  "Emergency":"Urgence","No heat":"Pas de chauffage","Same-day dispatch requested":"Intervention le jour même demandée",
  "Booked":"Réservé","Furnace service":"Entretien de fournaise","Appointment confirmed":"Rendez-vous confirmé","Lead":"Demande","AC issue":"Problème de climatisation","Owner notified by SMS":"Propriétaire avisé par SMS",
  "Customer phone":"Téléphone du client","Address":"Adresse","Preferred time":"Heure préférée","Ava transcript":"Transcription d’Ava",
@@ -407,5 +435,30 @@ main{padding:26px 28px 60px;min-width:0}.topbar{display:flex;justify-content:spa
  document.getElementById("enBtn")?.addEventListener("click",()=>setTimeout(apply,0));
  setTimeout(apply,0);
 })();
-</script></body>
+</script>
+<script id="callpilot-plan-usage-sync">
+(function(){
+ const plans={
+  "199":{name:"Starter",limit:300,rate:.60},
+  "349":{name:"Growth",limit:750,rate:.50},
+  "599":{name:"Multi-Tech",limit:1500,rate:.40},
+  "999":{name:"Business",limit:3000,rate:.30},
+  "0":{name:"Enterprise",limit:5000,rate:null}
+ };
+ const used=418;
+ function sync(){
+  const s=document.getElementById("mrPlan"), p=plans[s?.value]; if(!p)return;
+  const fr=(document.documentElement.lang||"en").startsWith("fr");
+  const plan=document.getElementById("usagePlan"), mins=document.getElementById("usageMinutes"), over=document.getElementById("usageOverage");
+  if(plan)plan.textContent=p.name;
+  if(mins)mins.textContent=used.toLocaleString(fr?"fr-CA":"en-CA")+" / "+(p.limit===5000?"5,000+":p.limit.toLocaleString("en-CA"));
+  if(over)over.textContent=p.rate===null?(fr?"Sur mesure":"Custom"):"$"+(Math.max(0,used-p.limit)*p.rate).toFixed(2);
+ }
+ document.getElementById("mrPlan")?.addEventListener("change",sync);
+ document.getElementById("enBtn")?.addEventListener("click",()=>setTimeout(sync,0));
+ document.getElementById("frBtn")?.addEventListener("click",()=>setTimeout(sync,0));
+ sync();
+})();
+</script>
+</body>
 </html>
