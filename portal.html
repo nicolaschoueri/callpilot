@@ -302,6 +302,23 @@ main{padding:26px 28px 60px;min-width:0}.topbar{display:flex;justify-content:spa
     </div>
   </div>
 
+  <div class="card" id="adaptiveIntake" style="margin-top:14px">
+    <h2 style="margin:0" data-en="Adaptive caller intake" data-fr="Accueil adaptatif selon l’appelant">Adaptive caller intake</h2>
+    <p data-en="Ava identifies who is calling and automatically uses the right questions and workflow." data-fr="Ava identifie le type d’appelant et utilise automatiquement les bonnes questions et le bon processus.">Ava identifies who is calling and automatically uses the right questions and workflow.</p>
+    <div class="route-map">
+      <div class="route"><b data-en="Homeowner" data-fr="Propriétaire résidentiel">Homeowner</b><p data-en="Service issue, safety, address, urgency and preferred time." data-fr="Problème de service, sécurité, adresse, urgence et heure préférée.">Service issue, safety, address, urgency and preferred time.</p></div>
+      <div class="route"><b data-en="Contractor" data-fr="Entrepreneur">Contractor</b><p data-en="Company, site contact, job-site address, scope, required date/time and PO/job number." data-fr="Entreprise, contact au chantier, adresse du chantier, portée des travaux, date/heure requise et numéro de bon de commande ou de projet.">Company, site contact, job-site address, scope, required date/time and PO/job number.</p></div>
+      <div class="route"><b data-en="Property manager" data-fr="Gestionnaire immobilier">Property manager</b><p data-en="Property/building, unit, tenant access, issue, authorization and scheduling." data-fr="Immeuble, unité, accès du locataire, problème, autorisation et planification.">Property/building, unit, tenant access, issue, authorization and scheduling.</p></div>
+      <div class="route"><b data-en="Commercial client" data-fr="Client commercial">Commercial client</b><p data-en="Business/site, contact, service need, operational impact, urgency and access instructions." data-fr="Entreprise/site, contact, besoin de service, impact sur les opérations, urgence et instructions d’accès.">Business/site, contact, service need, operational impact, urgency and access instructions.</p></div>
+    </div>
+    <div class="notice" data-en="Example: “Mike from ABC Construction” is handled as a contractor lead, not as a homeowner. Ava can capture the job-site details and route the request to the plumbing company’s normal workflow."
+         data-fr="Exemple : « Mike d’ABC Construction » est traité comme une demande d’entrepreneur, et non comme un propriétaire résidentiel. Ava peut recueillir les détails du chantier et acheminer la demande selon le processus habituel de l’entreprise de plomberie.">Example: “Mike from ABC Construction” is handled as a contractor lead, not as a homeowner. Ava can capture the job-site details and route the request to the plumbing company’s normal workflow.</div>
+    <div class="split" style="margin-top:14px">
+      <div class="field"><label data-en="Caller type" data-fr="Type d’appelant">Caller type</label><select id="callerType"><option data-en="Homeowner" data-fr="Propriétaire résidentiel">Homeowner</option><option data-en="Contractor" data-fr="Entrepreneur" selected>Contractor</option><option data-en="Property manager" data-fr="Gestionnaire immobilier">Property manager</option><option data-en="Commercial client" data-fr="Client commercial">Commercial client</option></select></div>
+      <div class="field"><label data-en="B2B account status" data-fr="Statut du compte B2B">B2B account status</label><select><option data-en="New contractor / account" data-fr="Nouvel entrepreneur / compte">New contractor / account</option><option data-en="Existing contractor / account" data-fr="Entrepreneur / compte existant">Existing contractor / account</option></select></div>
+    </div>
+  </div>
+
   <div class="card" style="margin-top:14px">
     <h2 style="margin:0" data-en="Performance" data-fr="Performance">Performance</h2>
     <p data-en="Measure what CallPilot actually contributes to the business." data-fr="Mesurez la contribution réelle de CallPilot à l’entreprise.">Measure what CallPilot actually contributes to the business.</p>
