@@ -1132,6 +1132,14 @@ if('speechSynthesis' in window)speechSynthesis.onvoiceschanged=()=>speechSynthes
     document.documentElement.lang=useFr?'fr':'en';
     refs.forEach(r=>r.node.nodeValue=useFr?r.fr:r.en);
     attrRefs.forEach(r=>r.el.setAttribute(r.attr,useFr?r.fr:r.en));
+    document.querySelectorAll("[data-cp-en][data-cp-fr]").forEach(el=>{
+      const v=el.getAttribute(useFr?"data-cp-fr":"data-cp-en");
+      if(v!==null) el.textContent=v;
+    });
+    document.querySelectorAll("[data-en][data-fr]").forEach(el=>{
+      const v=el.getAttribute(useFr?"data-fr":"data-en");
+      if(v!==null) el.textContent=v;
+    });
     const en=document.getElementById('siteEn'), frBtn=document.getElementById('siteFr');
     if(en){en.classList.toggle('active',!useFr);en.setAttribute('aria-pressed',String(!useFr));}
     if(frBtn){frBtn.classList.toggle('active',useFr);frBtn.setAttribute('aria-pressed',String(useFr));}
