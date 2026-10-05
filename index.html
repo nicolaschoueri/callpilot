@@ -85,7 +85,7 @@ border:1px solid rgba(23,47,74,.12);overflow:hidden;box-shadow:var(--shadow)}
 .num{width:32px;height:32px;border-radius:10px;background:#f2eadb;display:grid;place-items:center;color:#846019;font-weight:900}
 .step h3{margin:14px 0 8px}
 .step p{margin:0;color:#465b73;font-size:14px;line-height:1.5}
-.pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:34px}
+.pricing{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:34px}
 .price{position:relative;background:#edf3f9;border:1px solid var(--line);border-radius:24px;padding:26px}
 .price.popular{border-color:rgba(213,173,99,.58);transform:translateY(-7px);box-shadow:0 24px 70px rgba(23,47,74,.10)}
 .badge{position:absolute;right:18px;top:16px;background:linear-gradient(135deg,#d5ad63,#f0d79c);color:#846019;font-size:10px;font-weight:900;padding:6px 9px;border-radius:999px}
@@ -911,13 +911,32 @@ if('speechSynthesis' in window)speechSynthesis.onvoiceschanged=()=>speechSynthes
         </ul>
         <a class="btn secondary" href="payment-demo.html?plan=multi-tech" data-cp-en="Start free trial" data-cp-fr="Commencer l’essai gratuit">Start free trial</a>
       </div>
+      <div class="price">
+        <div class="badge" data-cp-en="HIGH VOLUME" data-cp-fr="VOLUME ÉLEVÉ">HIGH VOLUME</div>
+        <h3>Business</h3>
+        <div class="amount">$999<span>/month</span></div>
+        <div class="desc" data-cp-en="For high-volume service companies with a central line, large field teams and simultaneous callers." data-cp-fr="Pour les entreprises de service à volume élevé avec une ligne centrale, de grandes équipes terrain et plusieurs appels simultanés.">For high-volume service companies with a central line, large field teams and simultaneous callers.</div>
+        <ul>
+          <li data-cp-en="Everything in Multi-Tech" data-cp-fr="Tout ce qui est inclus dans Multi-Tech">Everything in Multi-Tech</li>
+          <li data-cp-en="One central business line" data-cp-fr="Une ligne d’entreprise centrale">One central business line</li>
+          <li data-cp-en="Up to 20 simultaneous Ava calls*" data-cp-fr="Jusqu’à 20 appels Ava simultanés*">Up to 20 simultaneous Ava calls*</li>
+          <li data-cp-en="Advanced dispatch routing" data-cp-fr="Acheminement avancé des interventions">Advanced dispatch routing</li>
+          <li data-cp-en="Team + location workflows" data-cp-fr="Flux de travail par équipe et emplacement">Team + location workflows</li>
+          <li data-cp-en="3,000 AI minutes included" data-cp-fr="3 000 minutes IA incluses">3,000 AI minutes included</li>
+          <li data-cp-en="$0.30/min overage" data-cp-fr="0,30 $/min supplémentaire">$0.30/min overage</li>
+          <li data-cp-en="Priority onboarding + support" data-cp-fr="Mise en route et soutien prioritaires">Priority onboarding + support</li>
+          <li data-cp-en="English + French" data-cp-fr="Anglais + français">English + French</li>
+        </ul>
+        <a class="btn secondary" href="payment-demo.html?plan=business" data-cp-en="Start free trial" data-cp-fr="Commencer l’essai gratuit">Start free trial</a>
+      </div>
     </div>
+    <div style="margin-top:12px;color:#7f766d;font-size:10px;line-height:1.45" data-cp-en="*Simultaneous-call capacity depends on the activated production voice/telephony configuration. Business includes 3,000 AI minutes; additional usage is billed at $0.30/minute." data-cp-fr="*La capacité d’appels simultanés dépend de la configuration voix/téléphonie activée en production. Business comprend 3 000 minutes IA; l’utilisation supplémentaire est facturée à 0,30 $/minute.">*Simultaneous-call capacity depends on the activated production voice/telephony configuration. Business includes 3,000 AI minutes; additional usage is billed at $0.30/minute.</div>
 
     <div class="steps" style="margin-top:22px">
       <div class="step">
         <div class="num">1</div>
         <h3 data-cp-en="Choose a package" data-cp-fr="Choisir un forfait">Choose a package</h3>
-        <p data-cp-en="Select Starter, Growth or Multi-Tech from the website." data-cp-fr="Sélectionnez Starter, Growth ou Multi-Tech directement sur le site.">Select Starter, Growth or Multi-Tech from the website.</p>
+        <p data-cp-en="Select Starter, Growth, Multi-Tech or Business from the website." data-cp-fr="Sélectionnez Starter, Growth, Multi-Tech ou Business directement sur le site.">Select Starter, Growth or Multi-Tech from the website.</p>
       </div>
       <div class="step">
         <div class="num">2</div>
@@ -944,7 +963,7 @@ if('speechSynthesis' in window)speechSynthesis.onvoiceschanged=()=>speechSynthes
         <div class="cp-roi-field"><label><span data-cp-en="Average job value" data-cp-fr="Valeur moyenne d'un travail">Average job value</span><span>CAD</span></label><input id="roiJob" type="number" min="0" step="25" value="600"></div>
         <div class="cp-roi-field"><label><span data-cp-en="Missed calls per month" data-cp-fr="Appels manqués par mois">Missed calls per month</span><span>#</span></label><input id="roiCalls" type="number" min="0" step="1" value="10"></div>
         <div class="cp-roi-field"><label><span data-cp-en="Estimated calls recovered" data-cp-fr="Appels récupérés estimés">Estimated calls recovered</span><span>%</span></label><input id="roiRate" type="number" min="0" max="100" step="5" value="20"></div>
-        <div class="cp-roi-field"><label><span data-cp-en="CallPilot package" data-cp-fr="Forfait CallPilot">CallPilot package</span></label><select id="roiPlan"><option value="199">Starter — $199</option><option value="349" selected>Growth — $349</option><option value="599">Multi-Tech — $599</option></select></div>
+        <div class="cp-roi-field"><label><span data-cp-en="CallPilot package" data-cp-fr="Forfait CallPilot">CallPilot package</span></label><select id="roiPlan"><option value="199">Starter — $199</option><option value="349" selected>Growth — $349</option><option value="599">Multi-Tech — $599</option><option value="999">Business — $999</option></select></div>
       </div>
       <div class="cp-roi-results">
         <h3 data-cp-en="Illustrative monthly result" data-cp-fr="Résultat mensuel illustratif">Illustrative monthly result</h3>
