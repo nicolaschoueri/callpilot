@@ -599,6 +599,13 @@ document.getElementById('siteFr')?.addEventListener('click',()=>{const b=documen
 
 function showChoices(i){
   quick.innerHTML='';
+  if(adaptive){
+    const presets=selectedLang==='fr'
+      ?["Je suis propriétaire","Je suis entrepreneur","Je suis gestionnaire immobilier","J'appelle pour une entreprise"]
+      :["I'm a homeowner","I'm a contractor","I'm a property manager","I'm calling for a business"];
+    if(!adaptive.type){presets.forEach(t=>{const b=document.createElement('button');b.className='choice';b.textContent=t;b.onclick=()=>reply(t);quick.appendChild(b);});}
+    return;
+  }
   let arr=[];
   if(selectedLang==='fr'){
     if(i===0)arr=['Ma fournaise ne fonctionne plus','J’ai une fuite de plomberie','Problème électrique','Fuite de toiture'];
@@ -712,6 +719,8 @@ function startCall(){
   }else{
     speak(promptsEn[0]);
   }
+  // Adaptive intake begins immediately after Ava's greeting. Do not show the legacy
+  // furnace/plumbing/electrical/roofing shortcuts, which force the old homeowner flow.
 }
 
 function finish(){
