@@ -359,5 +359,27 @@ main{padding:26px 28px 60px;min-width:0}.topbar{display:flex;justify-content:spa
   money();ph();
 })();
 </script>
+
+<script id="callpilot-interactive-demo">
+(function(){
+  const lang=()=>document.documentElement.lang==="fr"?"fr":"en";
+  const toast=(en,fr)=>{let t=document.getElementById("cpDemoToast");if(!t){t=document.createElement("div");t.id="cpDemoToast";t.style.cssText="position:fixed;right:20px;bottom:20px;z-index:9999;background:#123b43;color:white;padding:12px 16px;border-radius:12px;box-shadow:0 8px 30px #0003;font:600 13px system-ui";document.body.appendChild(t)}t.textContent=lang()==="fr"?fr:en;t.style.display="block";clearTimeout(t._x);t._x=setTimeout(()=>t.style.display="none",1800)};
+  const center=document.getElementById("actionCenter"); if(!center)return;
+  const buttons=[...center.querySelectorAll("button")];
+  buttons.forEach(b=>b.addEventListener("click",()=>{
+    const s=b.textContent.toLowerCase();
+    if(s.includes("play")||s.includes("écouter")) toast("Demo call playback opened","Lecture de l’appel démo");
+    else if(s.includes("transcript")||s.includes("transcription")) toast("Demo transcript opened","Transcription démo ouverte");
+    else if(s.includes("outcome")||s.includes("résultat")) toast("Demo outcome saved","Résultat démo enregistré");
+  }));
+  center.querySelectorAll("select").forEach(s=>s.addEventListener("change",()=>toast("Demo updated","Démo mise à jour")));
+  center.querySelectorAll('input[type="checkbox"]').forEach(x=>x.addEventListener("change",()=>toast("Demo setting updated","Paramètre démo mis à jour")));
+  const demo=document.createElement("div");demo.className="notice";demo.style.marginBottom="14px";
+  demo.setAttribute("data-en","Interactive demo — sample customer data only. Calls, texts, technician assignments and revenue shown here are simulated until production services are connected.");
+  demo.setAttribute("data-fr","Démo interactive — données clients fictives seulement. Les appels, textos, assignations de techniciens et revenus affichés ici sont simulés jusqu’à la connexion des services de production.");
+  demo.textContent="Interactive demo — sample customer data only. Calls, texts, technician assignments and revenue shown here are simulated until production services are connected.";
+  center.insertBefore(demo,center.firstElementChild);
+})();
+</script>
 </body>
 </html>
