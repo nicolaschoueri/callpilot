@@ -421,7 +421,7 @@ const frFinalTexts={
   generic:'Parfait. Votre rendez-vous est confirmé. Vous recevrez un message de confirmation avec les détails. Merci d’avoir appelé CallPilot Trades.'
 };
 
-let step=-1, active=false, selectedLang=null, startTime=0, timerInt=null, recognition=null, isListening=false;
+let step=-1, active=false, selectedLang=null, startTime=0, timerInt=null, recognition=null, isListening=false, voiceMode=false, micPrimed=false;
 let lastSpoken='', lastAudioSrc='', lastSpokenLang='en-CA';
 const data={issue:'—',urgency:'—',city:'—',address:'—',phone:'—',name:'—',appt:'—'};
 let adaptive=null;
@@ -571,19 +571,20 @@ function speak(text, after=true){
   });
 }
 
-function startListening(){
+function startListening(fromUser=false){
   if(!active || !SpeechRecognition || !selectedLang) return;
+  if(!fromUser && !voiceMode) return;
   try{
-    if(recognition){try{recognition.abort()}catch(e){}}
+    if(recognition){recognition.onend=null;try{recognition.abort()}catch(e){}}
     recognition=new SpeechRecognition();
     recognition.lang=selectedLang==='fr'?'fr-CA':'en-CA';
-    recognition.continuous=false; recognition.interimResults=true; recognition.maxAlternatives=1;
-    recognition.onstart=()=>{isListening=true;status.textContent=selectedLang==='fr'?'À l’écoute…':'Listening…';};
-    recognition.onresult=(e)=>{let finalText='';for(let i=e.resultIndex;i<e.results.length;i++){if(e.results[i].isFinal)finalText+=e.results[i][0].transcript;}if(finalText.trim())reply(finalText.trim());};
-    recognition.onerror=(e)=>{isListening=false;if(e.error==='not-allowed'||e.error==='service-not-allowed')status.textContent=selectedLang==='fr'?'Micro bloqué — autorisez le micro ou utilisez les boutons':'Microphone blocked — allow mic or use the buttons';};
+    recognition.continuous=false; recognition.interimResults=false; recognition.maxAlternatives=1;
+    recognition.onstart=()=>{isListening=true;micPrimed=true;voiceMode=true;status.textContent=selectedLang==='fr'?'🎙 À l’écoute… parlez maintenant':'🎙 Listening… speak now';};
+    recognition.onresult=(e)=>{const r=e.results[e.results.length-1];const t=r&&r[0]?r[0].transcript.trim():'';if(t){isListening=false;reply(t);}};
+    recognition.onerror=(e)=>{isListening=false;if(e.error==='not-allowed'||e.error==='service-not-allowed'){voiceMode=false;status.textContent=selectedLang==='fr'?'Micro bloqué — touchez PARLER et autorisez le micro':'Microphone blocked — tap TALK and allow microphone';}else if(e.error==='no-speech'&&voiceMode&&active){status.textContent=selectedLang==='fr'?'Je n’ai rien entendu — touchez PARLER':'I didn’t hear anything — tap TALK';}};
     recognition.onend=()=>{isListening=false;};
     recognition.start();
-  }catch(e){status.textContent=selectedLang==='fr'?'Choisissez une réponse ou écrivez':'Tap a choice or type your answer';}
+  }catch(e){isListening=false;status.textContent=selectedLang==='fr'?'Touchez PARLER pour répondre':'Tap TALK to answer';}
 }
 function stopListening(){if(recognition){try{recognition.abort()}catch(e){}}isListening=false;}
 
@@ -592,7 +593,7 @@ function ensureMicButton(){
   const row=document.querySelector('#live-demo .inputrow'); if(!row)return;
   const b=document.createElement('button'); b.id='cpMicButton'; b.className='send'; b.type='button'; b.textContent='🎙 TALK';
   b.style.whiteSpace='nowrap';
-  b.onclick=()=>{ if(isListening){stopListening();status.textContent=selectedLang==='fr'?'Micro arrêté':'Microphone stopped';} else {startListening();} };
+  b.onclick=()=>{ if(isListening){voiceMode=false;stopListening();status.textContent=selectedLang==='fr'?'Micro arrêté':'Microphone stopped';} else {voiceMode=true;startListening(true);} };
   row.insertBefore(b,row.firstChild);
 }
 ensureMicButton();
@@ -702,6 +703,7 @@ function playFinal(){
 }
 
 function startCall(){
+  voiceMode=false; micPrimed=false;
   const siteLang=(document.documentElement.lang||'en').toLowerCase().startsWith('fr')?'fr':'en';
 
   active=true;
@@ -742,7 +744,7 @@ function finish(){
   status.textContent=data.urgency==='Emergency'?(selectedLang==='fr'?'Technicien d’urgence envoyé aujourd’hui ✓':'Emergency technician dispatched today ✓'):(selectedLang==='fr'?'Rendez-vous confirmé ✓':'Appointment booked ✓');
   tr.scrollTop=tr.scrollHeight;
 }
-function endCall(){active=false;adaptive=null;selectedLang=null;stopListening();clearInterval(timerInt);try{$('avaAudio').pause();}catch(e){}try{speechSynthesis.cancel();}catch(e){}quick.innerHTML='';status.textContent='Call ended';}
+function endCall(){active=false;voiceMode=false;micPrimed=false;adaptive=null;selectedLang=null;stopListening();clearInterval(timerInt);try{$('avaAudio').pause();}catch(e){}try{speechSynthesis.cancel();}catch(e){}quick.innerHTML='';status.textContent='Call ended';}
 
 $('start').onclick=startCall;
 $('end').onclick=endCall;
