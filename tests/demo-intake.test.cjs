@@ -3,9 +3,11 @@ for(const page of ['index.html','friendly.html']){
  const html=fs.readFileSync(page,'utf8');
  for(const match of html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g))new vm.Script(match[1]);
  const intake=html.slice(html.indexOf('function adaptiveFresh()'),html.indexOf('function adaptiveReply(text)'));
+ const approved=JSON.parse(fs.readFileSync('assets/ava-approved-questions.json','utf8'));
  const c=vm.createContext({adaptive:null,selectedLang:'en'});vm.runInContext(intake,c);
  function reset(lang){c.selectedLang=lang;vm.runInContext('adaptive=adaptiveFresh()',c)}
- function answer(text){c.text=text;vm.runInContext('adaptiveAbsorb(text)',c);return vm.runInContext('adaptiveNext()',c)}
+ function answer(text){c.text=text;vm.runInContext('adaptiveAbsorb(text)',c);const question=vm.runInContext('adaptiveNext()',c);if(question)assert(approved.some(clip=>clip.lang===c.selectedLang && clip.text===question), 'Missing original-voice recording for '+question);return question}
+ reset('en');assert.match(answer('Personal'),/name/);assert.equal(c.adaptive.type,'homeowner');
  reset('en');
  assert.match(answer("I'm a homeowner"),/name/);assert.equal(c.adaptive.name,null);
  answer('Nick');answer('45 Main Street');answer('My kitchen sink leaks');

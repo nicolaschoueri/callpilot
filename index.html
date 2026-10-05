@@ -490,6 +490,7 @@ input:focus,select:focus,button:focus-visible,a:focus-visible{outline:3px solid 
     <p class="lede">This is a free sales simulator. Tap the phone button, hear Ava, choose the customer's answers, and watch her book the appointment without handing the caller off.</p>
     <div class="ava-demo-shell">
       <div class="wrap"><div class="notice">LIVE VOICE DEMO • No real phone number or charge</div><div class="phone"><div class="top">Incoming test call<div class="number">+1 (514) 555-0142</div><div class="fake">FICTIONAL NUMBER</div></div><div class="hero"><div class="avatar"><img class="ava-approved" src="" alt="Ava"></div><div class="ava">Ava</div><div class="role">CallPilot Trades • AI receptionist</div><div id="status" class="status">Ready to test</div><div id="timer" class="timer">00:00</div></div><div class="screen"><div id="transcript" class="transcript"><div class="line avaLine"><span class="speaker">CallPilot</span>Tap START CALL to begin.</div></div><div id="quick" class="quick"></div><div class="inputrow"><input id="answer" placeholder="Or type your answer…"><button class="send" id="send">Send</button></div></div><div id="summary" class="summary"><h3 data-en="Service request summary" data-fr="Résumé de la demande de service">Service request summary</h3><div class="grid"><div class="cell"><span>Issue</span><b id="sIssue">—</b></div><div class="cell"><span>Urgency</span><b id="sUrgency">—</b></div><div class="cell"><span>City</span><b id="sCity">—</b></div><div class="cell"><span>Address</span><b id="sAddress">—</b></div><div class="cell"><span>Phone</span><b id="sPhone">—</b></div><div class="cell"><span>Name</span><b id="sName">—</b></div><div class="cell"><span>Appointment</span><b id="sAppt">—</b></div><div class="cell"><span>Status</span><b id="sStatus">Confirmed</b></div></div><div id="smsConfirmation" style="margin-top:14px;padding:14px;border-radius:14px;background:#f3f8f6;border:1px solid rgba(25,105,88,.18);display:none"><div id="smsSent" style="font-weight:800;color:#196958;margin-bottom:7px">✓ Confirmation SMS sent</div><div id="smsPreview" style="font-size:13px;line-height:1.45;color:#405568"></div><div style="font-size:10px;margin-top:7px;color:#7b8792">DEMO • No real SMS is sent</div></div></div><div id="audioPanel" style="display:block;margin:0 16px 10px;padding:10px 12px;border:1px solid rgba(213,173,99,.25);border-radius:14px;background:rgba(213,173,99,.06)"><div style="font-size:12px;color:#e6ce9a;font-weight:800;margin-bottom:6px">AVA VOICE</div><audio id="avaAudio" controls preload="auto" playsinline style="width:100%"></audio></div><div class="controls"><button class="round replay" id="replay" title="Replay Ava"><span>↻</span><span>REPLAY</span></button><button class="round start" id="start" title="Start call"><span>☎</span><span>START CALL</span></button><button class="round end" id="end" title="End call"><span>✕</span><span>END CALL</span></button></div><div class="hint">Tap START CALL to begin. Then use the answer buttons or type your reply.</div></div></div>
+<script src="assets/ava-approved-questions.js"></script>
 <script>
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
@@ -569,7 +570,7 @@ function adaptiveDetectType(text){
   if(/contractor|construction|builder|entrepreneur|chantier|contracteur/.test(x))return 'contractor';
   if(/property manager|property management|building manager|gestionnaire|immeuble|condo board|syndicat/.test(x))return 'property';
   if(/commercial|restaurant|store|office|warehouse|business|commerce|bureau|entreprise/.test(x))return 'commercial';
-  if(/my house|my home|ma maison|chez moi|homeowner|propriétaire|résidence/.test(x))return 'homeowner';
+  if(/my house|my home|own home|personal|personnel|particulier|ma maison|chez moi|homeowner|propriétaire|résidence/.test(x))return 'homeowner';
   return null;
 }
 function adaptiveAbsorb(text){
@@ -596,10 +597,10 @@ function adaptiveAbsorb(text){
 }
 function adaptiveAsk(field,en,fr){adaptive.pending=field;return selectedLang==='fr'?fr:en;}
 function adaptiveNext(){
-  if(!adaptive.type)return adaptiveAsk('type','Are you calling about your home, a job site, a property you manage, or a business?','Appelez-vous pour votre résidence, un chantier, un immeuble que vous gérez ou une entreprise?');
+  if(!adaptive.type)return adaptiveAsk('type','Are you calling for your own home, as a contractor, for a property you manage, or for a business?','Appelez-vous pour votre résidence, comme entrepreneur, pour un immeuble que vous gérez ou pour une entreprise?');
   if(adaptive.type==='contractor'){
     if(!adaptive.company)return adaptiveAsk('company',"What's the name of your company?",'Quel est le nom de votre entreprise?');
-    if(!adaptive.name)return adaptiveAsk('name',"What's your name and role with "+adaptive.company+"?",'Quel est votre nom et votre rôle chez '+adaptive.company+'?');
+    if(!adaptive.name)return adaptiveAsk('name',"What's your name and role at the company?",'Quel est votre nom et votre rôle dans l’entreprise?');
     if(!adaptive.address)return adaptiveAsk('address',"What's the full job-site address?",'Quelle est l’adresse complète du chantier?');
     if(!adaptive.scope)return adaptiveAsk('scope',"Please describe the work you need done at the job site.",'Pouvez-vous décrire les travaux requis sur le chantier?');
     if(!adaptive.urgency)return adaptiveAsk('urgency',"How urgent is this — do you need same-day service, or can it be scheduled?",'Quel est le niveau d’urgence — avez-vous besoin d’un service aujourd’hui ou peut-on le planifier?');
@@ -660,7 +661,7 @@ function speakSystem(text,lang,onDone,addLine=true){
   const isFrench=/^fr/i.test(lang);
   const prompts=isFrench?promptsFr:promptsEn;
   const index=prompts.indexOf(text);
-  const src=index>=0?(isFrench?frAudioFiles[index]:audioFiles[index]):null;
+  const src=(window.CALLPILOT_APPROVED_QUESTIONS||{})[isFrench?'fr':'en']?.[text] || (index>=0?(isFrench?frAudioFiles[index]:audioFiles[index]):null);
   if(src && addLine){playAvaAudio(src,text,onDone);return;}
   ++speechGeneration;stopListening();
   try{$('avaAudio').pause();speechSynthesis.cancel();}catch(e){}
