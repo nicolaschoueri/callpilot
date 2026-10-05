@@ -206,6 +206,7 @@ footer{border-top:1px solid var(--line);padding:28px 0 38px;color:#886528;font-s
 </style>
 <link rel="stylesheet" href="assets/callpilot-theme.css?v=20261002-ivory-teal">
 <link rel="stylesheet" href="assets/callpilot-public.css?v=20261002-all">
+<link rel="stylesheet" href="assets/callpilot-demo.css">
 </head>
 <body>
 <nav>
@@ -280,9 +281,9 @@ footer{border-top:1px solid var(--line);padding:28px 0 38px;color:#886528;font-s
         <div class="cp-builder-grid">
           <div class="cp-pfield full"><label data-cp-en="Business name" data-cp-fr="Nom de l'entreprise">Business name</label><input id="paBusiness" value="West Island Home Services"></div>
           <div class="cp-pfield"><label data-cp-en="Trade" data-cp-fr="Métier">Trade</label><select id="paTrade"><option value="hvac">HVAC / CVAC</option><option value="plumbing">Plumbing / Plomberie</option><option value="electrical">Electrical / Électricité</option><option value="roofing">Roofing / Toiture</option><option value="general">General service / Service général</option></select></div>
-          <div class="cp-pfield"><label data-cp-en="Calendar" data-cp-fr="Calendrier">Calendar</label><select id="paCalendar"><option value="no" data-cp-en="No calendar — capture request" data-cp-fr="Sans calendrier — capter la demande">No calendar — capture request</option><option value="yes" data-cp-en="Connected — book live" data-cp-fr="Connecté — réserver en direct">Connected — book live</option></select></div>
-          <div class="cp-pfield"><label data-cp-en="Service area" data-cp-fr="Zone de service">Service area</label><input id="paArea" value="West Island, Montreal"></div>
-          <div class="cp-pfield"><label data-cp-en="Hours" data-cp-fr="Heures">Hours</label><input id="paHours" value="Mon–Fri 8 AM–5 PM"></div>
+          <div class="cp-pfield"><label data-cp-en="Calendar" data-cp-fr="Calendrier">Calendar</label><select id="paCalendar"><option value="no" data-cp-en="No calendar — capture request" data-cp-fr="Sans calendrier — capter la demande">No calendar — capture request</option><option value="yes" data-cp-en="Demo calendar — owner confirms" data-cp-fr="Calendrier démo — confirmation du propriétaire">Demo calendar — owner confirms</option></select></div>
+          <div class="cp-pfield"><label data-cp-en="Service area" data-cp-fr="Zone de service">Service area</label><input id="paArea" value="" placeholder="Montreal, Kirkland, Pointe-Claire"></div>
+          <div class="cp-pfield"><label data-cp-en="Hours" data-cp-fr="Heures">Hours</label><input id="paHours" value="Mon,Tue,Wed,Thu,Fri 08:00-17:00"></div>
         </div>
         <div class="cp-builder-note" data-cp-en="This personalization runs entirely inside the demo. It does not create a live account or change your phone service." data-cp-fr="Cette personnalisation fonctionne uniquement dans la démo. Elle ne crée pas de vrai compte et ne modifie pas votre service téléphonique.">This personalization runs entirely inside the demo. It does not create a live account or change your phone service.</div>
       </div>
@@ -958,19 +959,7 @@ if('speechSynthesis' in window)speechSynthesis.onvoiceschanged=()=>speechSynthes
     <div data-cp-en="CallPilot Trades • Demo concept • Contractor AI receptionist" data-cp-fr="CallPilot Trades • Concept de démo • Réceptionniste IA pour entrepreneurs">CallPilot Trades • Demo concept • Contractor AI receptionist</div>
     <div class="cp-footer-links"><a href="portal.html" data-cp-en="Owner login" data-cp-fr="Connexion propriétaire">Owner login</a><a href="phone-setup.html" data-cp-en="Phone setup" data-cp-fr="Configuration téléphonique">Phone setup</a><a href="privacy.html" data-cp-en="Privacy & data handling" data-cp-fr="Confidentialité et données">Privacy & data handling</a><a href="terms.html" data-cp-en="Demo terms" data-cp-fr="Conditions de la démo">Demo terms</a></div>
   </div>
-<section class="section light" id="adaptive-demo">
-  <div class="container">
-    <div class="kicker" data-cp-en="SMART CALLER ROUTING" data-cp-fr="ACHEMINEMENT INTELLIGENT">SMART CALLER ROUTING</div>
-    <h2 data-cp-en="Ava adapts to who is calling." data-cp-fr="Ava s’adapte à la personne qui appelle.">Ava adapts to who is calling.</h2>
-    <p class="lede" data-cp-en="Try it below. Ava can recognize a homeowner, contractor, property manager or commercial client and ask only for the details still missing." data-cp-fr="Essayez ci-dessous. Ava peut reconnaître un propriétaire, un entrepreneur, un gestionnaire immobilier ou un client commercial et demander seulement les renseignements manquants.">Try it below. Ava can recognize a homeowner, contractor, property manager or commercial client and ask only for the details still missing.</p>
-    <div class="cp-adaptive-demo">
-      <div class="cp-adaptive-head"><div><strong data-cp-en="Interactive Ava intake" data-cp-fr="Accueil interactif avec Ava">Interactive Ava intake</strong><span data-cp-en="Simulation — no real call is placed." data-cp-fr="Simulation — aucun appel réel n’est effectué.">Simulation — no real call is placed.</span></div><button type="button" id="cpAdaptiveReset" data-cp-en="Restart" data-cp-fr="Recommencer">Restart</button></div>
-      <div class="cp-detected" id="cpAdaptiveDetected">Caller type: waiting for caller</div>
-      <div class="cp-adaptive-chat" id="cpAdaptiveChat"></div>
-      <form class="cp-adaptive-form" id="cpAdaptiveForm"><input id="cpAdaptiveInput" autocomplete="off" placeholder="Hi, Mike from ABC Construction. We need a plumber tomorrow at 1250 René-Lévesque."><button type="submit" data-cp-en="Send" data-cp-fr="Envoyer">Send</button></form>
-    </div>
-  </div>
-</section>
+
 <style id="cp-adaptive-public-style">
 .cp-adaptive-demo{margin-top:28px;background:#fff;border:1px solid rgba(24,48,70,.09);border-radius:24px;padding:20px;color:#243d56;box-shadow:0 20px 55px rgba(0,0,0,.10)}
 .cp-adaptive-head{display:flex;justify-content:space-between;gap:12px;align-items:center}.cp-adaptive-head strong{display:block;font-size:19px}.cp-adaptive-head span{display:block;color:#526b82;font-size:12px;margin-top:4px}.cp-adaptive-head button{border:1px solid rgba(24,48,70,.1);background:#edf3f8;color:#526b82;border-radius:11px;padding:10px 12px;font-weight:800;cursor:pointer}.cp-detected{margin-top:14px;padding:9px 11px;border-radius:10px;background:#f5ead5;color:#846019;font-size:12px;font-weight:850}.cp-adaptive-chat{margin-top:12px;display:grid;gap:8px;max-height:330px;overflow:auto}.cp-adaptive-msg{padding:11px 12px;border-radius:14px;background:#edf3f8;font-size:13px;line-height:1.45}.cp-adaptive-msg.ava{background:#f8f1e5;border:1px solid rgba(213,173,99,.18)}.cp-adaptive-msg small{display:block;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:#886528;font-weight:900;margin-bottom:4px}.cp-adaptive-form{display:flex;gap:8px;margin-top:12px}.cp-adaptive-form input{flex:1;min-width:0;border:1px solid rgba(24,48,70,.12);background:#fff;color:#243d56;border-radius:12px;padding:12px;font-size:16px}.cp-adaptive-form button{border:0;border-radius:12px;padding:12px 16px;background:linear-gradient(135deg,#d5ad63,#f0d79c);color:#243d56;font-weight:900}@media(max-width:560px){.cp-adaptive-head{align-items:flex-start}.cp-adaptive-form{flex-direction:column}.cp-adaptive-form button{min-height:44px}}
@@ -1230,5 +1219,7 @@ if('speechSynthesis' in window)speechSynthesis.onvoiceschanged=()=>speechSynthes
 </script>
 <script src="assets/ava-voice-config.js"></script>
 <script src="assets/ava-realtime.js"></script>
+<script src="assets/callpilot-demo-core.js"></script>
+<script src="assets/callpilot-demo-live.js"></script>
 </body>
 </html>
