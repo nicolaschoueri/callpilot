@@ -1365,5 +1365,23 @@ if('speechSynthesis' in window)speechSynthesis.onvoiceschanged=()=>speechSynthes
 <script src="assets/ava-realtime.js"></script>
 <script src="assets/callpilot-demo-core.js?v=20261005-complete"></script>
 <script src="assets/callpilot-demo-live.js?v=20261005-complete"></script>
-</body>
+<script id="cp-platform-fr-complete">
+(function(){
+ const pairs={
+ "One CallPilot. Different playbooks for every trade.":"Un seul CallPilot. Un parcours adapté à chaque métier.",
+ "Plumbing is the first pilot workflow, not a separate product. Ava loads the right intake, safety questions, emergency rules and routing for each business.":"La plomberie est le premier parcours pilote, et non un produit distinct. Ava adapte la prise en charge, les questions de sécurité, les règles d’urgence et l’acheminement à chaque entreprise.",
+ "Plumbing":"Plomberie","Leaks, flooding, burst pipes, sewage backup and service requests.":"Fuites, inondations, tuyaux éclatés, refoulements d’égout et demandes de service.",
+ "Electrical":"Électricité","Sparks, smoke, outages, panels, breakers and service requests.":"Étincelles, fumée, pannes, panneaux, disjoncteurs et demandes de service.",
+ "HVAC":"CVAC","No heat, no cooling, maintenance and urgent comfort calls.":"Absence de chauffage ou de climatisation, entretien et appels urgents.",
+ "Roofing":"Toiture","Active leaks, storm damage, inspections and estimates.":"Fuites actives, dommages causés par les intempéries, inspections et estimations.",
+ "FR + EN Ava":"Ava en français et en anglais","Existing number":"Numéro existant","Missed-call recovery":"Récupération des appels manqués","Emergency escalation":"Escalade des urgences","Owner SMS":"SMS au propriétaire","Customer confirmation":"Confirmation au client","Optional calendar":"Calendrier facultatif","Book / reschedule / cancel":"Réserver / reporter / annuler"
+ };
+ let refs=[];
+ function scan(){refs=[];document.querySelectorAll(".cp-platform-update *").forEach(el=>{[...el.childNodes].filter(n=>n.nodeType===3).forEach(n=>{const k=n.nodeValue.trim();if(pairs[k])refs.push({n,en:n.nodeValue,fr:n.nodeValue.replace(k,pairs[k])})})})}
+ function apply(){if(!refs.length)scan();const fr=(document.documentElement.lang||"en").startsWith("fr");refs.forEach(r=>r.n.nodeValue=fr?r.fr:r.en)}
+ document.getElementById("siteEn")?.addEventListener("click",()=>setTimeout(apply,0));
+ document.getElementById("siteFr")?.addEventListener("click",()=>setTimeout(apply,0));
+ setTimeout(apply,0);
+})();
+</script></body>
 </html>
